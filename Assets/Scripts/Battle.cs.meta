@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+guid: 1abe4b3d2b9171141b97b76e344da8b1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - DaniPrefab: {fileID: 4646048799911148421, guid: c8d4be9dedeb0eb4695b81179a926be8, type: 3}
+  - ErebusPrefab: {fileID: 7349630781697477199, guid: f2202a2f89810a74980a34386130024f, type: 3}
+  - PhoebePrefab: {fileID: 206860306369477236, guid: 930d5cb52a73dfc4eab74e8edb37595f, type: 3}
+  - TristanPrefab: {fileID: 7383520769527709757, guid: 651688e8e50b5064aa391ba299a7ecc1, type: 3}
+  - SophiePrefab: {fileID: 1240733256356684476, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - TheoPrefab: {fileID: 5229248018598742710, guid: dc44c6ea2985cbb4c9aa66c8fd87e83d, type: 3}
+  - player1BattleStation: {instanceID: 0}
+  - player2BattleStation: {instanceID: 0}
+  - player3BattleStation: {instanceID: 0}
+  - player4BattleStation: {instanceID: 0}
+  - BattleStation1: {instanceID: 0}
+  - BattleStation2: {instanceID: 0}
+  - BattleStation3: {instanceID: 0}
+  - BattleStation4: {instanceID: 0}
+  - transParticle: {instanceID: 0}
+  - charmsParticle: {instanceID: 0}
+  - potionsParticle: {instanceID: 0}
+  - physicalParticle: {instanceID: 0}
+  - darkArtsParticle: {instanceID: 0}
+  - ancientParticle: {instanceID: 0}
+  - partyAttackParticle: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
