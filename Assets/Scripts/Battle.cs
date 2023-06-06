@@ -30,9 +30,12 @@ public class Battle : MonoBehaviour
     public List<GameObject> playersInThisFight = new List<GameObject>();
     public List<GameObject> enemiesInFight = new List<GameObject>();
 
+    List<GameObject> deadCharacters = new List<GameObject>();
+
     float totalExperienceAwarded;
-    int currentCombatant;
-    int deadPlayers;
+    int currentCombatant, deadPlayers;
+
+    int enemyCountForKnockedOut, playerCountForKnockedOut;
 
     void Start()
     {
@@ -221,7 +224,26 @@ public class Battle : MonoBehaviour
                 }
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfResurrection)
                 {
-                    //Come back to this
+                    for (int i = 0; i < playersInThisFight.Count; i++)
+                    {
+                        if (playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                            deadCharacters.Add(playersInThisFight[i]);
+                    }
+
+                    if (deadCharacters.Count > 0)
+                    {
+                        int deadPlayerChosen = Random.Range(0, deadCharacters.Count);
+                        deadCharacters[deadPlayerChosen].GetComponent<Unit>().characterIsDead = false;
+                        deadCharacters[deadPlayerChosen].GetComponent<Unit>().CurrentHP = (deadCharacters[deadPlayerChosen].GetComponent<Unit>().MaxHP * .5f);
+                        Combatants.Add(deadCharacters[deadPlayerChosen]);
+
+                        deadCharacters.Clear();
+                    }
+                    else
+                    {
+                        print("No suitable target for resurrection, choose a different attack");
+                        Combatants[currentCombatant].GetComponent<Unit>().RedoAttack();
+                    }
                 }
             }
         }
@@ -303,7 +325,26 @@ public class Battle : MonoBehaviour
                 }
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfResurrection)
                 {
-                    //Come back to this
+                    for (int i = 0; i < enemiesInFight.Count; i++)
+                    {
+                        if (enemiesInFight[i].GetComponent<Unit>().characterIsDead)
+                            deadCharacters.Add(enemiesInFight[i]);
+                    }
+
+                    if (deadCharacters.Count > 0)
+                    {
+                        int deadPlayerChosen = Random.Range(0, deadCharacters.Count);
+                        deadCharacters[deadPlayerChosen].GetComponent<Unit>().characterIsDead = false;
+                        deadCharacters[deadPlayerChosen].GetComponent<Unit>().CurrentHP = (deadCharacters[deadPlayerChosen].GetComponent<Unit>().MaxHP * .5f);
+                        Combatants.Add(deadCharacters[deadPlayerChosen]);
+
+                        deadCharacters.Clear();
+                    }
+                    else
+                    {
+                        print("No suitable target for resurrection, choose a different attack");
+                        Combatants[currentCombatant].GetComponent<Unit>().RedoAttack();
+                    }
                 }
             }
         }
@@ -314,6 +355,45 @@ public class Battle : MonoBehaviour
         }
     }
 
+    public void CheckIfAllMembersKnockedDown()
+    {
+        //If an enemy knocks down a player
+        for (int i = 0; i < enemiesInFight.Count; i++)
+        {
+            if (enemiesInFight[i].GetComponent<Unit>().hasBeenKnockedDown)
+            {
+                playerCountForKnockedOut++;
+            }
+        }
+
+        if (playerCountForKnockedOut == playersInThisFight.Count && !Combatants[currentCombatant].GetComponent<Unit>().isAPlayer && enemiesInFight.Count >= 2)
+        {
+            print("Enemy All Out Attack");
+
+            //All players take damage based on who is still standing on the enemy side
+            //Check if players are alive
+            //players stand back up
+            //clear playerCountForKnockedOut
+        }
+        //If a player knocks down an enemy
+        for (int i = 0; i < playersInThisFight.Count; i++)
+        {
+            if (playersInThisFight[i].GetComponent<Unit>().hasBeenKnockedDown)
+            {
+                enemyCountForKnockedOut++;
+            }
+        }
+
+        if (enemyCountForKnockedOut == enemiesInFight.Count && Combatants[currentCombatant].GetComponent<Unit>().isAPlayer && playersInThisFight.Count >= 2)
+        {
+            print("Enemy All Out Attack");
+
+            //All players take damage based on who is still standing on the enemy side
+            //Check if players are alive
+            //players stand back up
+            //clear enemyCountForKnockedOut
+        }
+    }
     public void ExperienceAndDeathCollection()
     {
         for (int i = 0; i < Combatants.Count; i++)

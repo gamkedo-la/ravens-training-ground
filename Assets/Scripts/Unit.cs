@@ -32,6 +32,8 @@ public class Unit : MonoBehaviour
     public bool characterIsDead;
     public float experienceEarned;
 
+    public bool hasBeenKnockedDown;
+
     //Cost
     int deductCost;
     public int tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 15, tier5 = 18, tier6 = 21;
@@ -49,6 +51,12 @@ public class Unit : MonoBehaviour
     {
         if (!characterIsDead)
         {
+            if (hasBeenKnockedDown)
+            {
+                //Play animation to get up/stand up
+                hasBeenKnockedDown = false;
+            }
+            
             if (attackBonusTurnCount > 0)
                 attackBonusTurnCount--;
             else
@@ -75,7 +83,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void RedoAttack()
+    public void RedoAttack()
     {
         if (isOnAuto)
         {
@@ -541,14 +549,16 @@ public class Unit : MonoBehaviour
             {
                 damage = damage * 2;
                 print("Weak!");
-                print("Enemy Knocked Down");
+                print("Knocked Down");
+                battle.CheckIfAllMembersKnockedDown();
             }
 
             else if(chanceForCritial <= criticalChance)
             {
                 damage = damage * 2;
                 print("Critical!");
-                print("Enemy Knocked Down");
+                print("Knocked Down");
+                battle.CheckIfAllMembersKnockedDown();
             }
 
             CurrentHP -= (damage * defenseMultiplier);
