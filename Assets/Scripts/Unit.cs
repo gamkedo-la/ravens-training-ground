@@ -34,6 +34,8 @@ public class Unit : MonoBehaviour
 
     public bool hasBeenKnockedDown;
 
+    public Animator anim;
+
     //Cost
     int deductCost;
     public int tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 15, tier5 = 18, tier6 = 21;
@@ -406,13 +408,13 @@ public class Unit : MonoBehaviour
     {
         if (CurrentMP >= tier4)
         {
-            deductCost = tier4;
-            CurrentMP -= deductCost;
-
             potionOfResurrection = true;
             isAHeal = true;
 
             battle.ResolvingATurn();
+
+            deductCost = tier4;
+            CurrentMP -= deductCost;
         }
         else
             RedoAttack();

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7565241810428810190}
   - component: {fileID: 5663428089257255560}
   - component: {fileID: 5639614867345195378}
+  - component: {fileID: 7252631141173869994}
   m_Layer: 0
   m_Name: Erebus
   m_TagString: Untagged
@@ -98,6 +99,27 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &7252631141173869994
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689284409563436149}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 1c9f36abf9a19d34a8627da3110801da, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7349630781697477199
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,5 +208,14 @@ MonoBehaviour:
   healthToRecover: 0
   characterIsDead: 0
   experienceEarned: 0
+  hasBeenKnockedDown: 0
+  anim: {fileID: 7252631141173869994}
+  tier0: 0
+  tier1: 4
+  tier2: 8
+  tier3: 12
+  tier4: 15
+  tier5: 18
+  tier6: 21
   KnownSkills:
   - BasicCast

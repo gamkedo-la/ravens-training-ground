@@ -88,6 +88,15 @@ MonoBehaviour:
   healthToRecover: 0
   characterIsDead: 0
   experienceEarned: 0
+  hasBeenKnockedDown: 0
+  anim: {fileID: 6232864397214564084}
+  tier0: 0
+  tier1: 4
+  tier2: 8
+  tier3: 12
+  tier4: 15
+  tier5: 18
+  tier6: 21
   KnownSkills:
   - FierelloDeflectus
   - OrbemPardonti
@@ -162,6 +171,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f32f56f85942574489147ea1f58cce7f, type: 3}
+--- !u!1 &1565298518829508138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f32f56f85942574489147ea1f58cce7f, type: 3}
+  m_PrefabInstance: {fileID: 1835330528460020603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6232864397214564084
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565298518829508138}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 89014175c1623374c889d8f4a8a11d37, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &2230088965480217744 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f32f56f85942574489147ea1f58cce7f, type: 3}

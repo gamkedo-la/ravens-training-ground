@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: squonk
+  m_Controller: {fileID: 9100000, guid: 30691f8be331be748a0ea31ab637b16f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 4723146814002874508, guid: 3b1da4bcbc9b283478b936f9cbbef85c, type: 3}
+    m_OverrideClip: {fileID: 4723146814002874508, guid: 85a31314c4705fe40a81144712dec235, type: 3}
+  - m_OriginalClip: {fileID: -8945691123924629249, guid: 3b1da4bcbc9b283478b936f9cbbef85c, type: 3}
+    m_OverrideClip: {fileID: -8945691123924629249, guid: 85a31314c4705fe40a81144712dec235, type: 3}
+  - m_OriginalClip: {fileID: 8032047112750320540, guid: 3b1da4bcbc9b283478b936f9cbbef85c, type: 3}
+    m_OverrideClip: {fileID: 8032047112750320540, guid: 85a31314c4705fe40a81144712dec235, type: 3}

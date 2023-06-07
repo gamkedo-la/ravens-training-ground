@@ -88,6 +88,15 @@ MonoBehaviour:
   healthToRecover: 0
   characterIsDead: 0
   experienceEarned: 0
+  hasBeenKnockedDown: 0
+  anim: {fileID: 6788834430447032640}
+  tier0: 0
+  tier1: 4
+  tier2: 8
+  tier3: 12
+  tier4: 15
+  tier5: 18
+  tier6: 21
   KnownSkills:
   - BasicCast
   - Ajei
@@ -112,6 +121,7 @@ GameObject:
   - component: {fileID: 923961803643282673}
   - component: {fileID: 2565123155420214201}
   - component: {fileID: 5416497609418751512}
+  - component: {fileID: 6788834430447032640}
   m_Layer: 0
   m_Name: Dani
   m_TagString: Untagged
@@ -198,3 +208,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &6788834430447032640
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8712656367150944964}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 5e08d04514b1fa746824e294f8eb6fb0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
