@@ -35,6 +35,7 @@ public class Unit : MonoBehaviour
     public bool hasBeenKnockedDown;
 
     public Animator anim;
+    public GameObject deathParticle;
 
     //Cost
     int deductCost;
@@ -541,6 +542,8 @@ public class Unit : MonoBehaviour
         }
         else
         {
+            anim.SetTrigger("TakeDamage");
+
             if (charms && StrC || physical && StrP || darkArts && StrD || transfiguration && StrT || ancient && StrA)
             {
                 damage = damage / 2;
@@ -571,6 +574,8 @@ public class Unit : MonoBehaviour
             }
             else
             {
+                //  anim.SetTrigger("isDead");
+                Instantiate(deathParticle, transform.position, transform.rotation);
                 characterIsDead = true;
                 battle.ExperienceAndDeathCollection();
                 return true;

@@ -140,6 +140,8 @@ public class Battle : MonoBehaviour
 
     public void ResolvingATurn()
     {
+        Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Attack");
+
         if (Combatants[currentCombatant].GetComponent<Unit>().isAPlayer)
         {
             if (Combatants[currentCombatant].GetComponent<Unit>().isASoloAttack)

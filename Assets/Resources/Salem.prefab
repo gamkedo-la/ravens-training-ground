@@ -90,6 +90,7 @@ MonoBehaviour:
   experienceEarned: 0
   hasBeenKnockedDown: 0
   anim: {fileID: 6669218805597894469}
+  deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   tier0: 0
   tier1: 4
   tier2: 8
