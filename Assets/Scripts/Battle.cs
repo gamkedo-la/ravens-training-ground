@@ -132,7 +132,11 @@ public class Battle : MonoBehaviour
     void NextTurn()
     {
         if (currentCombatant >= Combatants.Count)
+        {
+            Combatants = Combatants.OrderByDescending(x => x.GetComponent<Unit>().Agility).ToList();
             currentCombatant = 0;
+        }
+
 
         print("Currently Up: " + Combatants[currentCombatant].GetComponent<Unit>().Name + " Agility: " + Combatants[currentCombatant].GetComponent<Unit>().Agility + " CurrentHP: " + Combatants[currentCombatant].GetComponent<Unit>().CurrentHP);
         Combatants[currentCombatant].GetComponent<Unit>().TakingUnitTurn();
@@ -238,6 +242,8 @@ public class Battle : MonoBehaviour
                         deadCharacters[deadPlayerChosen].GetComponent<Unit>().characterIsDead = false;
                         deadCharacters[deadPlayerChosen].GetComponent<Unit>().CurrentHP = (deadCharacters[deadPlayerChosen].GetComponent<Unit>().MaxHP * .5f);
                         Combatants.Add(deadCharacters[deadPlayerChosen]);
+
+                        Instantiate(deadCharacters[deadPlayerChosen].GetComponent<Unit>().deathParticle, transform.position + new Vector3(0, 3, 0), transform.rotation);
 
                         deadCharacters.Clear();
                     }

@@ -1361,10 +1361,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press 'Space' to advance turn
+  m_text: Press Space to advance turn
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: efe84e24547d23548ace043de2218bf2, type: 2}
-  m_sharedMaterial: {fileID: -4575840738901875470, guid: efe84e24547d23548ace043de2218bf2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d197cfb9180427d499defc380939493e, type: 2}
+  m_sharedMaterial: {fileID: 9024743969796584795, guid: d197cfb9180427d499defc380939493e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
