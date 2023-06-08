@@ -238,14 +238,7 @@ public class Battle : MonoBehaviour
 
                     if (deadCharacters.Count > 0)
                     {
-                        int deadPlayerChosen = Random.Range(0, deadCharacters.Count);
-                        deadCharacters[deadPlayerChosen].GetComponent<Unit>().characterIsDead = false;
-                        deadCharacters[deadPlayerChosen].GetComponent<Unit>().CurrentHP = (deadCharacters[deadPlayerChosen].GetComponent<Unit>().MaxHP * .5f);
-                        Combatants.Add(deadCharacters[deadPlayerChosen]);
-
-                        Instantiate(deadCharacters[deadPlayerChosen].GetComponent<Unit>().deathParticle, transform.position + new Vector3(0, 3, 0), transform.rotation);
-
-                        deadCharacters.Clear();
+                        Reincarnation();
                     }
                     else
                     {
@@ -341,12 +334,7 @@ public class Battle : MonoBehaviour
 
                     if (deadCharacters.Count > 0)
                     {
-                        int deadPlayerChosen = Random.Range(0, deadCharacters.Count);
-                        deadCharacters[deadPlayerChosen].GetComponent<Unit>().characterIsDead = false;
-                        deadCharacters[deadPlayerChosen].GetComponent<Unit>().CurrentHP = (deadCharacters[deadPlayerChosen].GetComponent<Unit>().MaxHP * .5f);
-                        Combatants.Add(deadCharacters[deadPlayerChosen]);
-
-                        deadCharacters.Clear();
+                        Reincarnation();
                     }
                     else
                     {
@@ -361,6 +349,23 @@ public class Battle : MonoBehaviour
         {
             Combatants[i].GetComponent<Unit>().CleanUp();
         }
+    }
+
+    public void Reincarnation()
+    {
+        int deadPlayerChosen = Random.Range(0, deadCharacters.Count);
+        deadCharacters[deadPlayerChosen].GetComponent<Unit>().characterIsDead = false;
+        deadCharacters[deadPlayerChosen].GetComponent<Unit>().CurrentHP = (deadCharacters[deadPlayerChosen].GetComponent<Unit>().MaxHP * .5f);
+        Combatants.Add(deadCharacters[deadPlayerChosen]);
+
+        Instantiate(deadCharacters[deadPlayerChosen].GetComponent<Unit>().deathParticle, transform.position, transform.rotation);
+
+        foreach (Transform child in Combatants[deadPlayerChosen].transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+
+        deadCharacters.Remove(deadCharacters[deadPlayerChosen]);
     }
 
     public void CheckIfAllMembersKnockedDown()
