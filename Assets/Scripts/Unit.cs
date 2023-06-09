@@ -44,6 +44,7 @@ public class Unit : MonoBehaviour
     Battle battle;
 
     public List<string> KnownSkills = new List<string>();
+    public List<AttackBase> attacks;
 
     private void Start()
     {
