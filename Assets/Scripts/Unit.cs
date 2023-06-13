@@ -12,6 +12,7 @@ public class Unit : MonoBehaviour
 
     public string Name;
     public float CurrentLevel = 1, CurrentHP = 25, MaxHP = 20, CurrentMP = 30, MaxMP = 25, Magic = 10, Physical = 9, Agility = 15, Finesse = 20;
+
     public float MagicEquipment, PhysicalEquipment, AgilityEquipment, FinesseEquipment;
 
     public bool StrT, StrC, StrP, StrD, StrA;
@@ -51,6 +52,12 @@ public class Unit : MonoBehaviour
     public TMP_Text characterName, affinityText;
     public Slider healthBar;
 
+    public int chanceOfMetallic = 75;
+    public bool isMetallic;
+    public Material metallic;
+
+    public bool canFlee;
+
     private void Start()
     {
         battle = GameObject.Find("Battle").GetComponent<Battle>();
@@ -58,7 +65,32 @@ public class Unit : MonoBehaviour
         if (!isAPlayer && characterName.text != null)
         {
             characterName.text = Name;
+
+            int percentOfMetallic = Random.Range(0, 100);
+            if (percentOfMetallic <= chanceOfMetallic && Name != "Cherufe")
+                isMetallic = true;
+
+            if (isMetallic)
+            {
+               Renderer[] children = GetComponentsInChildren<Renderer>();
+                foreach (Renderer rend in children)
+                {
+                    var mats = new Material[rend.materials.Length];
+                    for (var j = 0; j < rend.materials.Length; j++)
+                    {
+                        mats[j] = metallic;
+                    }
+                    rend.materials = mats;
+                }
+
+                CurrentHP = 5;
+                Agility = 80;
+                Finesse = 80;
+                experienceEarned *= 5; 
+                canFlee = true;
+            }
         }
+        
     }
 
     public void TakingUnitTurn()
@@ -91,9 +123,29 @@ public class Unit : MonoBehaviour
     {
         if (isOnAuto)
         {
-            int randomAttack = Random.Range(0, KnownSkills.Count);
-            Invoke(KnownSkills[randomAttack], 0f);
-            print(KnownSkills[randomAttack]);
+            int fleeThisTurn = Random.Range(0, 100);
+
+            if (fleeThisTurn >= 50 && canFlee)
+            {
+                print("Character Fled");
+                experienceEarned = 0;
+                CurrentHP = 0;
+
+                affinityText.color = Color.black;
+                affinityText.text = "Fled";
+                StartCoroutine(ClearText());
+
+                Instantiate(deathParticle, transform.position, transform.rotation);
+                characterIsDead = true;
+                battle.ExperienceAndDeathCollection();
+                //character fled
+            }
+            else
+            {
+                int randomAttack = Random.Range(0, KnownSkills.Count);
+                Invoke(KnownSkills[randomAttack], 0f);
+                print(KnownSkills[randomAttack]);
+            }
         }
     }
 

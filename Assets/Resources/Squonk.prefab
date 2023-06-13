@@ -2056,6 +2056,10 @@ MonoBehaviour:
   characterName: {fileID: 5592187641885875993}
   affinityText: {fileID: 6612648942649581481}
   healthBar: {fileID: 4898511359450293355}
+  chanceOfMetallic: 5
+  isMetallic: 0
+  metallic: {fileID: 2100000, guid: 790319bf0c6e31645bb3b939171774ee, type: 2}
+  canFlee: 0
 --- !u!1 &4969067674065681699
 GameObject:
   m_ObjectHideFlags: 0
