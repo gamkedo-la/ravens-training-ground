@@ -93,8 +93,17 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689284409563436149}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -174,7 +183,7 @@ MonoBehaviour:
   CurrentMP: 31
   MaxMP: 31
   Magic: 12
-  Physical: 7
+  Physical: 30
   Agility: 17
   Finesse: 20
   MagicEquipment: 10
@@ -220,3 +229,7 @@ MonoBehaviour:
   tier6: 21
   KnownSkills:
   - BasicCast
+  attacks: []
+  characterName: {fileID: 0}
+  affinityText: {fileID: 0}
+  healthBar: {fileID: 0}

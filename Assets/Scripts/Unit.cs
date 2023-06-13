@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -46,9 +48,17 @@ public class Unit : MonoBehaviour
     public List<string> KnownSkills = new List<string>();
     public List<AttackBase> attacks;
 
+    public TMP_Text characterName, affinityText;
+    public Slider healthBar;
+
     private void Start()
     {
         battle = GameObject.Find("Battle").GetComponent<Battle>();
+
+        if (!isAPlayer && characterName.text != null)
+        {
+            characterName.text = Name;
+        }
     }
 
     public void TakingUnitTurn()
@@ -538,7 +548,9 @@ public class Unit : MonoBehaviour
 
         if (chanceForAttackToLand <= (Agility + AgilityEquipment + (CurrentLevel * 1.25f)))
         {
-            print("Attack Dodged");
+            affinityText.color = Color.white;
+            affinityText.text = "Dodge";
+            StartCoroutine(ClearText());
             return false;
         }
         else
@@ -548,13 +560,25 @@ public class Unit : MonoBehaviour
             if (charms && StrC || physical && StrP || darkArts && StrD || transfiguration && StrT || ancient && StrA)
             {
                 damage = damage / 2;
-                print("Resist!");
+
+                if (!isAPlayer)
+                {
+                    affinityText.color = Color.black;
+                    affinityText.text = "Resist";
+                    StartCoroutine(ClearText());
+                }
             }
 
             else if (charms && WeakC || physical && WeakP || darkArts && WeakD || transfiguration && WeakT || ancient && WeakA)
             {
                 damage = damage * 2;
-                print("Weak!");
+
+                if (!isAPlayer)
+                {
+                    affinityText.color = Color.yellow;
+                    affinityText.text = "Weak";
+                    StartCoroutine(ClearText());
+                }
                 print("Knocked Down");
                 battle.CheckIfAllMembersKnockedDown();
             }
@@ -562,12 +586,21 @@ public class Unit : MonoBehaviour
             else if(chanceForCritial <= criticalChance)
             {
                 damage = damage * 2;
-                print("Critical!");
+
+                if (!isAPlayer)
+                {
+                    affinityText.color = Color.red;
+                    affinityText.text = "Critical";
+                    StartCoroutine(ClearText());
+                }
                 print("Knocked Down");
                 battle.CheckIfAllMembersKnockedDown();
             }
 
             CurrentHP -= (damage * defenseMultiplier);
+
+            if (!isAPlayer) 
+                healthBar.value = CurrentHP / MaxHP;
 
             if (CurrentHP >= 0)
             {
@@ -582,6 +615,12 @@ public class Unit : MonoBehaviour
                 return true;
             }         
         }
+    }
+
+    IEnumerator ClearText()
+    {
+        yield return new WaitForSeconds(1.5f);
+        affinityText.text = "";
     }
 
     public void CleanUp()
