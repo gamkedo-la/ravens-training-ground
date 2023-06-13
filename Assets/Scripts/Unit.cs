@@ -84,6 +84,7 @@ public class Unit : MonoBehaviour
                 }
 
                 CurrentHP = 5;
+                MaxHP = 5;
                 Agility = 80;
                 Finesse = 80;
                 experienceEarned *= 5; 
@@ -600,9 +601,13 @@ public class Unit : MonoBehaviour
 
         if (chanceForAttackToLand <= (Agility + AgilityEquipment + (CurrentLevel * 1.25f)))
         {
-            affinityText.color = Color.white;
-            affinityText.text = "Dodge";
-            StartCoroutine(ClearText());
+            if (!isAPlayer)
+            {
+                affinityText.color = Color.white;
+                affinityText.text = "Dodge";
+                StartCoroutine(ClearText());
+            }
+            print("Dodge");
             return false;
         }
         else
@@ -648,6 +653,9 @@ public class Unit : MonoBehaviour
                 print("Knocked Down");
                 battle.CheckIfAllMembersKnockedDown();
             }
+
+            if (isMetallic)
+                damage = 1;
 
             CurrentHP -= (damage * defenseMultiplier);
 
