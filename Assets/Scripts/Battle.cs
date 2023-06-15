@@ -37,6 +37,14 @@ public class Battle : MonoBehaviour
 
     int enemyCountForKnockedOut, playerCountForKnockedOut;
 
+    //UI for Players
+    public List<Slider> healthUI = new List<Slider>();
+    public List<Slider> manaUI = new List<Slider>();
+    public List<TMP_Text> healthText = new List<TMP_Text>();
+    public List<TMP_Text> manaText = new List<TMP_Text>();
+    public List<Image> icons = new List<Image>();
+    public List<Image> triangles = new List<Image>();
+
     void Start()
     {
         if (floor1)
@@ -117,6 +125,7 @@ public class Battle : MonoBehaviour
         Combatants = Combatants.OrderByDescending(x => x.GetComponent<Unit>().Agility).ToList();
         #endregion
 
+        UpdatePlayerHealthManaUI();
         NextTurn();
     }
 
@@ -345,6 +354,8 @@ public class Battle : MonoBehaviour
             }
         }
 
+        UpdatePlayerHealthManaUI();
+
         for (int i = 0; i < Combatants.Count; i++)
         {
             Combatants[i].GetComponent<Unit>().CleanUp();
@@ -450,6 +461,20 @@ public class Battle : MonoBehaviour
         {
             state = StateOfBattle.LOST;
             EndBattle();
+        }
+    }
+
+    public void UpdatePlayerHealthManaUI()
+    {
+
+        for (int i = 0; i < playersInThisFight.Count; i++)
+        {
+            triangles[i].color = GameManager.colorsInParty[i];
+            icons[i].sprite = Resources.Load<Sprite>("PlayerIcons/" + playersInThisFight[i].GetComponent<Unit>().Name);
+            healthUI[i].value = playersInThisFight[i].GetComponent<Unit>().CurrentHP / playersInThisFight[i].GetComponent<Unit>().MaxHP;
+            manaUI[i].value = playersInThisFight[i].GetComponent<Unit>().CurrentMP / playersInThisFight[i].GetComponent<Unit>().MaxMP;
+            healthText[i].text = playersInThisFight[i].GetComponent<Unit>().CurrentHP.ToString("F0");
+            manaText[i].text = playersInThisFight[i].GetComponent<Unit>().CurrentMP.ToString("F0");
         }
     }
 

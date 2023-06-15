@@ -659,8 +659,10 @@ public class Unit : MonoBehaviour
 
             CurrentHP -= (damage * defenseMultiplier);
 
-            if (!isAPlayer) 
+            if (!isAPlayer)
                 healthBar.value = CurrentHP / MaxHP;
+            else
+                battle.UpdatePlayerHealthManaUI();
 
             if (CurrentHP >= 0)
             {
