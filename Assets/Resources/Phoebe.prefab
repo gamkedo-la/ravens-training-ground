@@ -49,8 +49,8 @@ MonoBehaviour:
   isAPlayer: 1
   Name: Phoebe
   CurrentLevel: 1
-  CurrentHP: 60
-  MaxHP: 20
+  CurrentHP: 5
+  MaxHP: 30
   CurrentMP: 27
   MaxMP: 27
   Magic: 15
@@ -108,6 +108,14 @@ MonoBehaviour:
   - VerticalSlice
   - PlayfulShove
   - EssenceOfPride
+  attacks: []
+  characterName: {fileID: 0}
+  affinityText: {fileID: 0}
+  healthBar: {fileID: 0}
+  chanceOfMetallic: 75
+  isMetallic: 0
+  metallic: {fileID: 0}
+  canFlee: 0
 --- !u!1 &254161153222476328
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,8 +209,17 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254161153222476328}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1

@@ -469,11 +469,25 @@ public class Battle : MonoBehaviour
 
         for (int i = 0; i < playersInThisFight.Count; i++)
         {
-            triangles[i].color = GameManager.colorsInParty[i];
-            icons[i].sprite = Resources.Load<Sprite>("PlayerIcons/" + playersInThisFight[i].GetComponent<Unit>().Name);
-            healthUI[i].value = playersInThisFight[i].GetComponent<Unit>().CurrentHP / playersInThisFight[i].GetComponent<Unit>().MaxHP;
+            if (playersInThisFight[i].GetComponent<Unit>().CurrentHP <= 0)
+            {
+                healthText[i].text = "0";
+                healthUI[i].value = 0;
+
+                triangles[i].color = Color.black;
+                icons[i].color = Color.black;
+            }
+
+            else
+            {
+                healthUI[i].value = playersInThisFight[i].GetComponent<Unit>().CurrentHP / playersInThisFight[i].GetComponent<Unit>().MaxHP;
+                healthText[i].text = playersInThisFight[i].GetComponent<Unit>().CurrentHP.ToString("F0");
+
+                triangles[i].color = GameManager.colorsInParty[i];
+                icons[i].color = Color.white;
+                icons[i].sprite = Resources.Load<Sprite>("PlayerIcons/" + playersInThisFight[i].GetComponent<Unit>().Name);
+            }
             manaUI[i].value = playersInThisFight[i].GetComponent<Unit>().CurrentMP / playersInThisFight[i].GetComponent<Unit>().MaxMP;
-            healthText[i].text = playersInThisFight[i].GetComponent<Unit>().CurrentHP.ToString("F0");
             manaText[i].text = playersInThisFight[i].GetComponent<Unit>().CurrentMP.ToString("F0");
         }
     }

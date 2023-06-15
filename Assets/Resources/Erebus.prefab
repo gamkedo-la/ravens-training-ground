@@ -178,8 +178,8 @@ MonoBehaviour:
   isAPlayer: 1
   Name: Erebus
   CurrentLevel: 1
-  CurrentHP: 60
-  MaxHP: 21
+  CurrentHP: 5
+  MaxHP: 30
   CurrentMP: 31
   MaxMP: 31
   Magic: 12
@@ -233,3 +233,7 @@ MonoBehaviour:
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}
+  chanceOfMetallic: 75
+  isMetallic: 0
+  metallic: {fileID: 0}
+  canFlee: 0
