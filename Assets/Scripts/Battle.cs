@@ -45,6 +45,8 @@ public class Battle : MonoBehaviour
     public List<Image> icons = new List<Image>();
     public List<Image> triangles = new List<Image>();
 
+    public GameObject powerUpParticle;
+
     void Start()
     {
         if (floor1)
@@ -163,12 +165,14 @@ public class Battle : MonoBehaviour
                 int randAttack = Random.Range(0, 100);
                 if (randAttack < 50)
                 {
+                    Combatants[currentCombatant].transform.LookAt(enemiesInFight[0].transform);
                     enemiesInFight[0].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
                 }
                 else
                 {
                     int opponentToAttack = Random.Range(0, enemiesInFight.Count);
                     enemiesInFight[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                    Combatants[currentCombatant].transform.LookAt(enemiesInFight[opponentToAttack].transform);
                 }
             }
 
@@ -186,6 +190,7 @@ public class Battle : MonoBehaviour
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
                     {
+                        Instantiate(powerUpParticle, playersInThisFight[i].transform.position, playersInThisFight[i].transform.rotation);
                         playersInThisFight[i].GetComponent<Unit>().attackMultiplier = 1.5f;
                         playersInThisFight[i].GetComponent<Unit>().defenseMultiplier = .5f;
 
@@ -197,6 +202,7 @@ public class Battle : MonoBehaviour
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
                     {
+                        Instantiate(powerUpParticle, playersInThisFight[i].transform.position, playersInThisFight[i].transform.rotation);
                         playersInThisFight[i].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
                         if (playersInThisFight[i].GetComponent<Unit>().CurrentHP >= playersInThisFight[i].GetComponent<Unit>().MaxHP)
                         {
@@ -206,6 +212,7 @@ public class Battle : MonoBehaviour
                 }
                 else if (Combatants[currentCombatant].GetComponent<Unit>().pillarOfStrength)
                 {
+                    Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
                     Combatants[currentCombatant].GetComponent<Unit>().defenseMultiplier = .5f;
                     Combatants[currentCombatant].GetComponent<Unit>().defenseBonusTurnCount = 3;
                 }
@@ -219,6 +226,7 @@ public class Battle : MonoBehaviour
                         playersInThisFight[0].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
                         if (playersInThisFight[0].GetComponent<Unit>().CurrentHP >= playersInThisFight[0].GetComponent<Unit>().MaxHP)
                         {
+                            Instantiate(powerUpParticle, playersInThisFight[0].transform.position, Combatants[currentCombatant].transform.rotation);
                             playersInThisFight[0].GetComponent<Unit>().CurrentHP = playersInThisFight[0].GetComponent<Unit>().MaxHP;
                         }
                     }
@@ -228,6 +236,7 @@ public class Battle : MonoBehaviour
                         playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
                         if (playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP >= playersInThisFight[personToHeal].GetComponent<Unit>().MaxHP)
                         {
+                            Instantiate(powerUpParticle, playersInThisFight[personToHeal].transform.position, playersInThisFight[personToHeal].transform.rotation);
                             playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP = playersInThisFight[personToHeal].GetComponent<Unit>().MaxHP;
                         }
                     }
@@ -266,6 +275,7 @@ public class Battle : MonoBehaviour
 
                 int playerToAttack = Random.Range(0, playersInThisFight.Count);
                 playersInThisFight[playerToAttack].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToAttack].transform);
             }
 
             else if (Combatants[currentCombatant].GetComponent<Unit>().isAGroupAttack)
@@ -282,6 +292,7 @@ public class Battle : MonoBehaviour
                 {
                     for (int i = 0; i < enemiesInFight.Count; i++)
                     {
+                        Instantiate(powerUpParticle, enemiesInFight[i].transform.position, enemiesInFight[i].transform.rotation);
                         enemiesInFight[i].GetComponent<Unit>().attackMultiplier = 1.5f;
                         enemiesInFight[i].GetComponent<Unit>().defenseMultiplier = .5f;
 
@@ -293,6 +304,7 @@ public class Battle : MonoBehaviour
                 {
                     for (int i = 0; i < enemiesInFight.Count; i++)
                     {
+                        Instantiate(powerUpParticle, enemiesInFight[i].transform.position, enemiesInFight[i].transform.rotation);
                         enemiesInFight[i].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
                         if (enemiesInFight[i].GetComponent<Unit>().CurrentHP >= enemiesInFight[i].GetComponent<Unit>().MaxHP)
                         {
@@ -302,6 +314,7 @@ public class Battle : MonoBehaviour
                 }
                 else if (Combatants[currentCombatant].GetComponent<Unit>().pillarOfStrength)
                 {
+                    Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
                     Combatants[currentCombatant].GetComponent<Unit>().defenseMultiplier = .5f;
                     Combatants[currentCombatant].GetComponent<Unit>().defenseBonusTurnCount = 3;
                 }
@@ -315,6 +328,7 @@ public class Battle : MonoBehaviour
                         enemiesInFight[0].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
                         if (enemiesInFight[0].GetComponent<Unit>().CurrentHP >= enemiesInFight[0].GetComponent<Unit>().MaxHP)
                         {
+                            Instantiate(powerUpParticle, enemiesInFight[0].transform.position, enemiesInFight[0].transform.rotation);
                             enemiesInFight[0].GetComponent<Unit>().CurrentHP = enemiesInFight[0].GetComponent<Unit>().MaxHP;
                         }
                     }
@@ -324,12 +338,14 @@ public class Battle : MonoBehaviour
                         enemiesInFight[enemyToHeal].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
                         if (enemiesInFight[enemyToHeal].GetComponent<Unit>().CurrentHP >= enemiesInFight[enemyToHeal].GetComponent<Unit>().MaxHP)
                         {
+                            Instantiate(powerUpParticle, enemiesInFight[enemyToHeal].transform.position, enemiesInFight[enemyToHeal].transform.rotation);
                             enemiesInFight[enemyToHeal].GetComponent<Unit>().CurrentHP = enemiesInFight[enemyToHeal].GetComponent<Unit>().MaxHP;
                         }
                     }
                 }
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionofResolve)
                 {
+                    Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
                     Combatants[currentCombatant].GetComponent<Unit>().attackMultiplier = 1.5f;
                     Combatants[currentCombatant].GetComponent<Unit>().attackBonusTurnCount = 3;
                 }
@@ -373,6 +389,7 @@ public class Battle : MonoBehaviour
 
         foreach (Transform child in Combatants[deadPlayerChosen].transform)
         {
+            Instantiate(powerUpParticle, Combatants[deadPlayerChosen].transform.position, Combatants[deadPlayerChosen].transform.rotation);
             child.gameObject.SetActive(true);
         }
 

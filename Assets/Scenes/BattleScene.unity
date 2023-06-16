@@ -3477,6 +3477,7 @@ MonoBehaviour:
   - {fileID: 704537881}
   - {fileID: 1854918145}
   - {fileID: 235061571}
+  powerUpParticle: {fileID: 491456095014668867, guid: fc9be9f0eb25be64ebad166211496532, type: 3}
 --- !u!1 &1000811461
 GameObject:
   m_ObjectHideFlags: 0
