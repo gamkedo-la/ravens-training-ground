@@ -1499,7 +1499,11 @@ MonoBehaviour:
   - EssenceOfPride
   - PotionOfHealing
   - Ajei
-  attacks: []
+  attacks:
+  - {fileID: 11400000, guid: 8101291718b5b1c47ae7e0d1cb456e55, type: 2}
+  - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
+  - {fileID: 11400000, guid: d4915714b74e71649a695510d9fc3c13, type: 2}
+  - {fileID: 11400000, guid: 9fb43ad457c431b43ba25b89b6794e60, type: 2}
   characterName: {fileID: 4776009407211216532}
   affinityText: {fileID: 2715731036314101311}
   healthBar: {fileID: 6267660940138493892}

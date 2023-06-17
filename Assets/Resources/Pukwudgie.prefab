@@ -3029,7 +3029,10 @@ MonoBehaviour:
   - AuraDEau
   - Ajei
   - ForcefulLunge
-  attacks: []
+  attacks:
+  - {fileID: 11400000, guid: 2aa710b8e25a76b4aa73ad4adf42d770, type: 2}
+  - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
+  - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
   characterName: {fileID: 8872551146290278993}
   affinityText: {fileID: 8135860352571404433}
   healthBar: {fileID: 4834009505881939516}

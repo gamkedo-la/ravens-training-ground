@@ -104,11 +104,25 @@ MonoBehaviour:
   - Charge
   - OrbemPardonti
   - Hookeeghan
+  attacks:
+  - {fileID: 11400000, guid: 27724c194178e9741ae64ee3f6f5e415, type: 2}
+  - {fileID: 11400000, guid: 69de7dada261ec24ab4d291b1d6115ce, type: 2}
+  - {fileID: 11400000, guid: a6b60d89678e4fd40ac55b042ca5df6e, type: 2}
+  - {fileID: 11400000, guid: 4d6804d652cb6e841aa6adf2a9c456b9, type: 2}
+  - {fileID: 11400000, guid: 54adb99eeec8b214ebb93c2f064a1487, type: 2}
+  characterName: {fileID: 0}
+  affinityText: {fileID: 0}
+  healthBar: {fileID: 0}
+  chanceOfMetallic: 75
+  isMetallic: 0
+  metallic: {fileID: 0}
+  canFlee: 0
 --- !u!1001 &2944355399490294778
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5955412174885144316}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3b1da4bcbc9b283478b936f9cbbef85c, type: 3}
@@ -172,6 +186,12 @@ PrefabInstance:
       value: cherufe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b1da4bcbc9b283478b936f9cbbef85c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1175915777}
   m_SourcePrefab: {fileID: 100100000, guid: 3b1da4bcbc9b283478b936f9cbbef85c, type: 3}
 --- !u!1 &2602265241636204203 stripped
 GameObject:

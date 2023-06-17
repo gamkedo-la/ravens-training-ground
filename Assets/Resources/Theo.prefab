@@ -237,7 +237,16 @@ MonoBehaviour:
   - ForcefulLunge
   - PlayfulShove
   - EssenceOfPride
-  attacks: []
+  attacks:
+  - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
+  - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
+  - {fileID: 11400000, guid: 1c0c20297e32df24e9a974642536bc8b, type: 2}
+  - {fileID: 11400000, guid: 9ab63710f58339c4cbe205faea1ee8a5, type: 2}
+  - {fileID: 11400000, guid: a400b13aa01717f4283ebefa251eff7e, type: 2}
+  - {fileID: 11400000, guid: 68f14292271b47943a7a47bb47c413c4, type: 2}
+  - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
+  - {fileID: 11400000, guid: 69de7dada261ec24ab4d291b1d6115ce, type: 2}
+  - {fileID: 11400000, guid: d4915714b74e71649a695510d9fc3c13, type: 2}
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}

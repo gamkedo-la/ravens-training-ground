@@ -237,7 +237,16 @@ MonoBehaviour:
   - ExpelindoElemicus
   - SellamTrahere
   - Ajei
-  attacks: []
+  attacks:
+  - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
+  - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
+  - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
+  - {fileID: 11400000, guid: 9ab63710f58339c4cbe205faea1ee8a5, type: 2}
+  - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
+  - {fileID: 11400000, guid: 9fb43ad457c431b43ba25b89b6794e60, type: 2}
+  - {fileID: 11400000, guid: 7100bd8896f520d41b56081045c03f38, type: 2}
+  - {fileID: 11400000, guid: b2fcbf246926b104d9e1ce5b70714fa2, type: 2}
+  - {fileID: 11400000, guid: d4915714b74e71649a695510d9fc3c13, type: 2}
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}

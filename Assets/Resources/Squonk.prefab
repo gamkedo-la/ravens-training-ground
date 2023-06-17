@@ -2052,7 +2052,10 @@ MonoBehaviour:
   - PillarOfStrength
   - SellamTrahere
   - ExpelindoElemicus
-  attacks: []
+  attacks:
+  - {fileID: 11400000, guid: 9ab63710f58339c4cbe205faea1ee8a5, type: 2}
+  - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
+  - {fileID: 11400000, guid: 9d94ae56618c924428d1b315dd44b8fa, type: 2}
   characterName: {fileID: 5592187641885875993}
   affinityText: {fileID: 6612648942649581481}
   healthBar: {fileID: 4898511359450293355}

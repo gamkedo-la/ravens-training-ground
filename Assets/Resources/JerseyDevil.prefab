@@ -103,11 +103,23 @@ MonoBehaviour:
   - OrbemPardonti
   - Deeza
   - PillarOfStrength
+  attacks:
+  - {fileID: 11400000, guid: 1c0c20297e32df24e9a974642536bc8b, type: 2}
+  - {fileID: 11400000, guid: a6b60d89678e4fd40ac55b042ca5df6e, type: 2}
+  - {fileID: 11400000, guid: 0e4b6da2b5fbc5248bdb4bb71c19471c, type: 2}
+  characterName: {fileID: 0}
+  affinityText: {fileID: 0}
+  healthBar: {fileID: 0}
+  chanceOfMetallic: 75
+  isMetallic: 0
+  metallic: {fileID: 0}
+  canFlee: 0
 --- !u!1001 &1835330528460020603
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 3971475092950407125}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f32f56f85942574489147ea1f58cce7f, type: 3}
@@ -171,6 +183,12 @@ PrefabInstance:
       value: jerseyDevil
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f32f56f85942574489147ea1f58cce7f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6232864397214564084}
   m_SourcePrefab: {fileID: 100100000, guid: f32f56f85942574489147ea1f58cce7f, type: 3}
 --- !u!1 &1565298518829508138 stripped
 GameObject:
