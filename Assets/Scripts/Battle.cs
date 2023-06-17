@@ -46,6 +46,7 @@ public class Battle : MonoBehaviour
     public List<Image> triangles = new List<Image>();
 
     public GameObject powerUpParticle;
+    int playerToAttack;
 
     void Start()
     {
@@ -301,19 +302,27 @@ public class Battle : MonoBehaviour
             if (Combatants[currentCombatant].GetComponent<Unit>().isASoloAttack)
             {
                 //i think this line can go away, it is to sort player's health if we want to structure it similar to the player where they target the weakest player
-               // playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+                // playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
 
-                int playerToAttack = Random.Range(0, playersInThisFight.Count);
-                playersInThisFight[playerToAttack].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
-                Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToAttack].transform);
+                for (int i = 0; i < playersInThisFight.Count; i++)
+                {
+                    if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                        playerToAttack++;
+                }
+
+                int playerToChoose = Random.Range(0, playerToAttack);
+                playersInThisFight[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToChoose].transform);
+                playerToAttack = 0;
             }
 
             //This is a group attack, attacking all players (who are alive)
             else if (Combatants[currentCombatant].GetComponent<Unit>().isAGroupAttack)
             {
-                for (int i = 0; i < playersInThisFight.Count; i++)
+               for (int i = 0; i < playersInThisFight.Count; i++)
                 {
-                    playersInThisFight[i].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                    if(!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                        playersInThisFight[i].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
                 }
             }
 
