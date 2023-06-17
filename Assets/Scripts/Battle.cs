@@ -49,6 +49,7 @@ public class Battle : MonoBehaviour
 
     void Start()
     {
+        //if player is on floor 1, this determines the percentage of chance for a certain number of enemies
         if (floor1)
         {
             int percent = Random.Range(1, 100);
@@ -67,14 +68,17 @@ public class Battle : MonoBehaviour
                 string currentNameChosen = enemiesFloor1[nameToChoose];
                 enemiesInThisFight.Add(currentNameChosen);
             }
-            
+          //floor 2 will go here
+          //floor 3 will contain 1 enemy - the final boss
         }
+
         StartCoroutine(SetUpBattle());
     }
     IEnumerator SetUpBattle()
     {
         yield return new WaitForSeconds(0.25f);
 
+        //This segment add players to the player list, enemies to the enemy list, and players/enemies to a combined 'combatants' list
         #region This Adds members to the Party as well as Sorts by Agility
         currentParty0 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[0]), BattleStation1.transform.position + platformOffset, BattleStation1.transform.rotation);
         Combatants.Add(currentParty0);
@@ -133,6 +137,7 @@ public class Battle : MonoBehaviour
 
     private void Update()
     {
+        //Pressing Space advances the turn - this is not permenant - just for testing
         if (Input.GetKeyDown(KeyCode.Space))
         {
             currentCombatant++;
@@ -142,6 +147,8 @@ public class Battle : MonoBehaviour
 
     void NextTurn()
     {
+        //The combatants list is sorted in order from largest to smallest incrementing by one. 
+        //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
         if (currentCombatant >= Combatants.Count)
         {
             Combatants = Combatants.OrderByDescending(x => x.GetComponent<Unit>().Agility).ToList();
@@ -155,12 +162,18 @@ public class Battle : MonoBehaviour
 
     public void ResolvingATurn()
     {
+        //The entire turn system occurs in here
+        //Currently this is all reliant on the pseudo automated system of pressing space
+        //The bones of this system will be used later for a 'Tactics' section as well as offering low level enemy AI options 
+        #region Player Turn
         Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Attack");
 
         if (Combatants[currentCombatant].GetComponent<Unit>().isAPlayer)
         {
+
+            //During a solo attack, the automated player has a 50% chance to hit the lowest HP target, then a 50% chance to randomly hit any other enemy (including the lowest)
             if (Combatants[currentCombatant].GetComponent<Unit>().isASoloAttack)
-            {
+            {         
                 enemiesInFight = enemiesInFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
                 int randAttack = Random.Range(0, 100);
                 if (randAttack < 50)
@@ -176,6 +189,7 @@ public class Battle : MonoBehaviour
                 }
             }
 
+            //Group attacks hit every enemy at the same time
             else if (Combatants[currentCombatant].GetComponent<Unit>().isAGroupAttack)
             {
                 for (int i = 0; i < enemiesInFight.Count; i++)
@@ -184,8 +198,10 @@ public class Battle : MonoBehaviour
                 }
             }
 
+            //This section talks about the different support 'attacks' [isAHeal is derived from 'Unit']
             else if (Combatants[currentCombatant].GetComponent<Unit>().isAHeal)
             {
+                //Essence Of Pride increases the party's attack by 50%, defense by 50%, and keeps those stats for 3 turns [this is hard coded to prevent stacking = 3 is different than += 3]
                 if (Combatants[currentCombatant].GetComponent<Unit>().essenceOfPride)
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
@@ -198,6 +214,8 @@ public class Battle : MonoBehaviour
                         playersInThisFight[i].GetComponent<Unit>().defenseBonusTurnCount = 3;
                     }
                 }
+
+                //Pestecus this slightly increases the health of all party members (that are alive)
                 else if(Combatants[currentCombatant].GetComponent<Unit>().pestectus)
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
@@ -210,12 +228,16 @@ public class Battle : MonoBehaviour
                         }
                     }
                 }
+
+                //Pillar of Strength this increases the defense of the current caster by 50% for 3 turns
                 else if (Combatants[currentCombatant].GetComponent<Unit>().pillarOfStrength)
                 {
                     Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
                     Combatants[currentCombatant].GetComponent<Unit>().defenseMultiplier = .5f;
                     Combatants[currentCombatant].GetComponent<Unit>().defenseBonusTurnCount = 3;
                 }
+
+                //Potion of Healing this slightly heals one party member. There is an 80% chance they heal the weakest party member, 20% chance it randomly heals another person in the party
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfHealing)
                 {
                     playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
@@ -241,11 +263,15 @@ public class Battle : MonoBehaviour
                         }
                     }
                 }
+
+                //Potion of Resolve increases the attack of the current caster by 50% for 3 turns
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionofResolve)
                 {
                     Combatants[currentCombatant].GetComponent<Unit>().attackMultiplier = 1.5f;
                     Combatants[currentCombatant].GetComponent<Unit>().attackBonusTurnCount = 3;
                 }
+
+                //Potion of Resurrection: 1)Brings one party member back to life 2) Sets that party member's health to 50% 3) adds them back into the turn order 
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfResurrection)
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
@@ -266,18 +292,23 @@ public class Battle : MonoBehaviour
                 }
             }
         }
-        
+        #endregion
+
+        #region Enemy Turn
         else
         {
+            //During a solo attack, [different from player] the enemy picks a random player to attack
             if (Combatants[currentCombatant].GetComponent<Unit>().isASoloAttack)
             {
-                playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+                //i think this line can go away, it is to sort player's health if we want to structure it similar to the player where they target the weakest player
+               // playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
 
                 int playerToAttack = Random.Range(0, playersInThisFight.Count);
                 playersInThisFight[playerToAttack].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
                 Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToAttack].transform);
             }
 
+            //This is a group attack, attacking all players (who are alive)
             else if (Combatants[currentCombatant].GetComponent<Unit>().isAGroupAttack)
             {
                 for (int i = 0; i < playersInThisFight.Count; i++)
@@ -286,8 +317,10 @@ public class Battle : MonoBehaviour
                 }
             }
 
+            //These are support 'attacks' [derived from Unit]
             else if (Combatants[currentCombatant].GetComponent<Unit>().isAHeal)
             {
+                //Essence Of Pride increases the party's attack by 50%, defense by 50%, and keeps those stats for 3 turns [this is hard coded to prevent stacking = 3 is different than += 3]
                 if (Combatants[currentCombatant].GetComponent<Unit>().essenceOfPride)
                 {
                     for (int i = 0; i < enemiesInFight.Count; i++)
@@ -300,6 +333,8 @@ public class Battle : MonoBehaviour
                         enemiesInFight[i].GetComponent<Unit>().defenseBonusTurnCount = 3;
                     }
                 }
+
+                //Pestecus this slightly increases the health of all party members (that are alive)
                 else if (Combatants[currentCombatant].GetComponent<Unit>().pestectus)
                 {
                     for (int i = 0; i < enemiesInFight.Count; i++)
@@ -312,12 +347,16 @@ public class Battle : MonoBehaviour
                         }
                     }
                 }
+
+                //Pillar of Strength this increases the defense of the current caster by 50% for 3 turns
                 else if (Combatants[currentCombatant].GetComponent<Unit>().pillarOfStrength)
                 {
                     Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
                     Combatants[currentCombatant].GetComponent<Unit>().defenseMultiplier = .5f;
                     Combatants[currentCombatant].GetComponent<Unit>().defenseBonusTurnCount = 3;
                 }
+
+                //Potion of Healing this slightly heals one party member. There is an 80% chance they heal the weakest party member, 20% chance it randomly heals another person in the party
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfHealing)
                 {
                     enemiesInFight = enemiesInFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
@@ -343,12 +382,16 @@ public class Battle : MonoBehaviour
                         }
                     }
                 }
+
+                //Potion of Resolve increases the attack of the current caster by 50% for 3 turns
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionofResolve)
                 {
                     Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
                     Combatants[currentCombatant].GetComponent<Unit>().attackMultiplier = 1.5f;
                     Combatants[currentCombatant].GetComponent<Unit>().attackBonusTurnCount = 3;
                 }
+
+                //Potion of Resurrection: 1)Brings one party member back to life 2) Sets that party member's health to 50% 3) adds them back into the turn order 
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfResurrection)
                 {
                     for (int i = 0; i < enemiesInFight.Count; i++)
@@ -369,9 +412,11 @@ public class Battle : MonoBehaviour
                 }
             }
         }
+        #endregion
 
         UpdatePlayerHealthManaUI();
 
+        //At the end of the turn, this cleans up/closes out any unnecessary value for all combatants
         for (int i = 0; i < Combatants.Count; i++)
         {
             Combatants[i].GetComponent<Unit>().CleanUp();
@@ -380,6 +425,7 @@ public class Battle : MonoBehaviour
 
     public void Reincarnation()
     {
+        //If reincarnated: 1) says they aren't dead 2} gives them 50% health 3)Adds them back to the combatants list 4) creates a particle effect 5) removes them from the deadCharacters list
         int deadPlayerChosen = Random.Range(0, deadCharacters.Count);
         deadCharacters[deadPlayerChosen].GetComponent<Unit>().characterIsDead = false;
         deadCharacters[deadPlayerChosen].GetComponent<Unit>().CurrentHP = (deadCharacters[deadPlayerChosen].GetComponent<Unit>().MaxHP * .5f);
@@ -398,6 +444,13 @@ public class Battle : MonoBehaviour
 
     public void CheckIfAllMembersKnockedDown()
     {
+        //There is a system that *will be* integrated. If you hit someone with a 'critical' or 'weak', you will knock them down until their next turn. 
+        //if you knock all the enemies (or players down) then you will launch an all-out attack
+        //All Out Attack does damage to every enemy with a math formula similar to [(player1damage + player2damage + player3damage + player4damage) * .75f ]
+        //all knocked down enemies are then no longer knocked down
+
+
+
         //If an enemy knocks down a player
         for (int i = 0; i < enemiesInFight.Count; i++)
         {
@@ -437,6 +490,9 @@ public class Battle : MonoBehaviour
     }
     public void ExperienceAndDeathCollection()
     {
+        //Experience and Death - this tracks: 1) who is left in the fight 2) has the player won or lost 
+
+        //This first part - if either a player or enemy is killed, they are removed from the Combatants list (their turn is skipped in battle)
         for (int i = 0; i < Combatants.Count; i++)
         {
             if (Combatants[i].GetComponent<Unit>().CurrentHP <= 0)
@@ -451,6 +507,7 @@ public class Battle : MonoBehaviour
             }
         }
 
+        //If an enemy is killed in battle, they are: 1) Removed from play 2) Removed from the list 3) their experience is added to a total number
         for (int i = 0; i < enemiesInFight.Count; i++)
         {
             if (enemiesInFight[i].GetComponent<Unit>().CurrentHP <= 0)
@@ -460,12 +517,15 @@ public class Battle : MonoBehaviour
             }
         }
 
+        //If there are no more enemies, the player has won
         if (enemiesInFight.Count <= 0)
         {
             state = StateOfBattle.WON;
             EndBattle();
         }
 
+        //If the player is killed, there is a possibility they can be added back so we can't fully remove them. 
+        //They are instead added to a dead players list (See Reincarnation() to come back)
         for (int i = 0; i < playersInThisFight.Count; i++)
         {
             if (playersInThisFight[i].GetComponent<Unit>().characterIsDead)
@@ -474,6 +534,8 @@ public class Battle : MonoBehaviour
             }
         }
 
+        //Current structure is to not remove players from the PlayersInThisFight list as they can be called back
+        //So right now, if the number of deadPlayers equals the number of players in the fight - everyone has been killed and the player loses
         if (deadPlayers >= playersInThisFight.Count)
         {
             state = StateOfBattle.LOST;
@@ -483,9 +545,11 @@ public class Battle : MonoBehaviour
 
     public void UpdatePlayerHealthManaUI()
     {
-
+        //This updates the player's UI in the bottom right hand corner (usually done at the end of the player's turn)
         for (int i = 0; i < playersInThisFight.Count; i++)
         {
+            //If player's health < 0 their icons are turned black
+            //This is hardcoded to be at 0 so the player doesn't see how negative their health is
             if (playersInThisFight[i].GetComponent<Unit>().CurrentHP <= 0)
             {
                 healthText[i].text = "0";
@@ -495,6 +559,7 @@ public class Battle : MonoBehaviour
                 icons[i].color = Color.black;
             }
 
+            //otherwise, the stats are updated to reflected current state
             else
             {
                 healthUI[i].value = playersInThisFight[i].GetComponent<Unit>().CurrentHP / playersInThisFight[i].GetComponent<Unit>().MaxHP;
@@ -511,6 +576,7 @@ public class Battle : MonoBehaviour
 
     void EndBattle()
     {
+        //this just prints states, but will be used for triggering Experience windows (if won) or losing screen (if lost)
         if (state == StateOfBattle.LOST)
         {
             print("Player Lost");
@@ -523,6 +589,7 @@ public class Battle : MonoBehaviour
 
     public void EndTurn()
     {
+        //this ends the turn and advances to the next one
         currentCombatant++;
         NextTurn();
     }
