@@ -207,6 +207,7 @@ public class Battle : MonoBehaviour
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
                     {
+                        playersInThisFight[i].GetComponent<Unit>().anim.SetTrigger("Charge");
                         Instantiate(powerUpParticle, playersInThisFight[i].transform.position, playersInThisFight[i].transform.rotation);
                         playersInThisFight[i].GetComponent<Unit>().attackMultiplier = 1.5f;
                         playersInThisFight[i].GetComponent<Unit>().defenseMultiplier = .5f;
@@ -221,6 +222,7 @@ public class Battle : MonoBehaviour
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
                     {
+                        playersInThisFight[i].GetComponent<Unit>().anim.SetTrigger("Charge");
                         Instantiate(powerUpParticle, playersInThisFight[i].transform.position, playersInThisFight[i].transform.rotation);
                         playersInThisFight[i].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
                         if (playersInThisFight[i].GetComponent<Unit>().CurrentHP >= playersInThisFight[i].GetComponent<Unit>().MaxHP)
@@ -233,6 +235,7 @@ public class Battle : MonoBehaviour
                 //Pillar of Strength this increases the defense of the current caster by 50% for 3 turns
                 else if (Combatants[currentCombatant].GetComponent<Unit>().pillarOfStrength)
                 {
+                    Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Charge");
                     Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
                     Combatants[currentCombatant].GetComponent<Unit>().defenseMultiplier = .5f;
                     Combatants[currentCombatant].GetComponent<Unit>().defenseBonusTurnCount = 3;
@@ -246,6 +249,7 @@ public class Battle : MonoBehaviour
                     int chanceOfPersonToHeal = Random.Range(0, 100);
                     if (chanceOfPersonToHeal <= 80)
                     {
+                        playersInThisFight[0].GetComponent<Unit>().anim.SetTrigger("Charge");
                         playersInThisFight[0].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
                         if (playersInThisFight[0].GetComponent<Unit>().CurrentHP >= playersInThisFight[0].GetComponent<Unit>().MaxHP)
                         {
@@ -256,6 +260,7 @@ public class Battle : MonoBehaviour
                     else
                     {
                         int personToHeal = Random.Range(0, playersInThisFight.Count);
+                        playersInThisFight[personToHeal].GetComponent<Unit>().anim.SetTrigger("Charge");
                         playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
                         if (playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP >= playersInThisFight[personToHeal].GetComponent<Unit>().MaxHP)
                         {
@@ -268,6 +273,7 @@ public class Battle : MonoBehaviour
                 //Potion of Resolve increases the attack of the current caster by 50% for 3 turns
                 else if (Combatants[currentCombatant].GetComponent<Unit>().potionofResolve)
                 {
+                    Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Charge");
                     Combatants[currentCombatant].GetComponent<Unit>().attackMultiplier = 1.5f;
                     Combatants[currentCombatant].GetComponent<Unit>().attackBonusTurnCount = 3;
                 }
@@ -447,7 +453,7 @@ public class Battle : MonoBehaviour
             Instantiate(powerUpParticle, Combatants[deadPlayerChosen].transform.position, Combatants[deadPlayerChosen].transform.rotation);
             child.gameObject.SetActive(true);
         }
-
+        deadCharacters[deadPlayerChosen].GetComponent<Unit>().anim.SetTrigger("Charge");
         deadCharacters.Remove(deadCharacters[deadPlayerChosen]);
     }
 
@@ -475,7 +481,10 @@ public class Battle : MonoBehaviour
 
             //All players take damage based on who is still standing on the enemy side
             //Check if players are alive
-            //players stand back up
+            for (int i = 0; i < playersInThisFight.Count; i++)
+            {
+                playersInThisFight[i].GetComponent<Unit>().anim.SetBool("knockedDown", false);
+            }
             //clear playerCountForKnockedOut
         }
         //If a player knocks down an enemy
@@ -592,6 +601,7 @@ public class Battle : MonoBehaviour
         }
         else
         {
+            Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Victory");
             print("Player Won");
         }
     }
