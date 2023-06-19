@@ -6,6 +6,22 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: tristan
-  m_Controller: {fileID: 9100000, guid: 30691f8be331be748a0ea31ab637b16f, type: 2}
-  m_Clips: []
+  m_Name: Tristan
+  m_Controller: {fileID: 9100000, guid: e0df727d4231b8040809a67bc0a15b01, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7399462096315819049, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+    m_OverrideClip: {fileID: 7399462096315819049, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  - m_OriginalClip: {fileID: 5607727450279090002, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+    m_OverrideClip: {fileID: 5607727450279090002, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  - m_OriginalClip: {fileID: -8945691123924629249, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+    m_OverrideClip: {fileID: -8945691123924629249, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  - m_OriginalClip: {fileID: 6438629279445262983, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+    m_OverrideClip: {fileID: 6438629279445262983, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  - m_OriginalClip: {fileID: -1228952814471920847, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+    m_OverrideClip: {fileID: -1228952814471920847, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  - m_OriginalClip: {fileID: 8032047112750320540, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+    m_OverrideClip: {fileID: 8032047112750320540, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  - m_OriginalClip: {fileID: -7551964380084998518, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+    m_OverrideClip: {fileID: -7551964380084998518, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  - m_OriginalClip: {fileID: 7121795369200602455, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+    m_OverrideClip: {fileID: 7121795369200602455, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
