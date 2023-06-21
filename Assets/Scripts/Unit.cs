@@ -100,7 +100,7 @@ public class Unit : MonoBehaviour
         {
             if (hasBeenKnockedDown)
             {
-                //Play animation to get up/stand up
+                anim.SetBool("knockedDown", false);
                 hasBeenKnockedDown = false;
             }
             
@@ -636,7 +636,10 @@ public class Unit : MonoBehaviour
                     affinityText.text = "Weak";
                     StartCoroutine(ClearText());
                 }
-                print("Knocked Down");
+                if (isAPlayer)
+                {
+                    anim.SetBool("knockedDown", true);
+                }
                 battle.CheckIfAllMembersKnockedDown();
             }
 
