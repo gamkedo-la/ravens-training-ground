@@ -11,7 +11,8 @@ public class Unit : MonoBehaviour
     public bool isAPlayer;
 
     public string Name;
-    public float CurrentLevel = 1, CurrentHP = 25, MaxHP = 20, CurrentMP = 30, MaxMP = 25, Magic = 10, Physical = 9, Agility = 15, Finesse = 20;
+    public float CurrentHP = 25, MaxHP = 20, CurrentMP = 30, MaxMP = 25, Magic = 10, Physical = 9, Agility = 15, Finesse = 20;
+    public int CurrentLevel = 1;
 
     public float MagicEquipment, PhysicalEquipment, AgilityEquipment, FinesseEquipment;
 
