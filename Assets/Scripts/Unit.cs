@@ -123,6 +123,9 @@ public class Unit : MonoBehaviour
 
     void DetermineAttack()
     {
+       // print(battle.characterNameHolder);
+       // battle.characterNameText.text = Name;
+
         if (isOnAuto)
         {
             int fleeThisTurn = Random.Range(0, 100);
@@ -147,6 +150,13 @@ public class Unit : MonoBehaviour
                 int randomAttack = Random.Range(0, KnownSkills.Count);
                 Invoke(KnownSkills[randomAttack], 0f);
                 print(KnownSkills[randomAttack]);
+            }
+        }
+        else
+        {
+            if (isAPlayer)
+            { 
+            //turn first menu on
             }
         }
     }

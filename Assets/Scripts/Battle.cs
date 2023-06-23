@@ -11,8 +11,8 @@ public class Battle : MonoBehaviour
 {
     public StateOfBattle state;
 
-    public GameObject informationTextHolder;
-    public TMP_Text informationText;
+    public GameObject informationTextHolder, characterNameHolder;
+    public TMP_Text informationText, characterNameText;
 
     public Transform BattleStation1, BattleStation2, BattleStation3, BattleStation4;
     public Transform enemyBattleStation1, enemyBattleStation2, enemyBattleStation3, enemyBattleStation4;
@@ -567,6 +567,27 @@ public class Battle : MonoBehaviour
             StartCoroutine(ClearInformationText(2f, "Unable to escape"));
         }
     }
+    //This has the current player spend their turn guarding, increasing their defense, with a little recovery;
+    public void GuardPlayer()
+    {
+        StartCoroutine(ClearInformationText(2f, "Guard"));
+        Combatants[currentCombatant].GetComponent<Unit>().defenseMultiplier = .5f;
+        Combatants[currentCombatant].GetComponent<Unit>().defenseBonusTurnCount = 2;
+        Combatants[currentCombatant].GetComponent<Unit>().CurrentHP += 3;
+        Combatants[currentCombatant].GetComponent<Unit>().CurrentMP += 3;
+        if (Combatants[currentCombatant].GetComponent<Unit>().CurrentHP >= Combatants[currentCombatant].GetComponent<Unit>().MaxHP)
+            Combatants[currentCombatant].GetComponent<Unit>().CurrentHP = Combatants[currentCombatant].GetComponent<Unit>().MaxHP;
+        if (Combatants[currentCombatant].GetComponent<Unit>().CurrentMP >= Combatants[currentCombatant].GetComponent<Unit>().MaxMP)
+            Combatants[currentCombatant].GetComponent<Unit>().CurrentMP = Combatants[currentCombatant].GetComponent<Unit>().MaxMP;
+
+        UpdatePlayerHealthManaUI();
+
+        //At the end of the turn, this cleans up/closes out any unnecessary value for all combatants
+        for (int i = 0; i < Combatants.Count; i++)
+        {
+            Combatants[i].GetComponent<Unit>().CleanUp();
+        }
+    }
 
     IEnumerator BattleCleanUp()
     {
@@ -581,6 +602,8 @@ public class Battle : MonoBehaviour
         informationText.text = message;
         yield return new WaitForSeconds(timer);
 
+        characterNameHolder.SetActive(false);
+        characterNameText.text = "";
         informationText.text = "";
         informationTextHolder.SetActive(false);
     }

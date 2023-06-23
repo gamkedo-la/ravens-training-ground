@@ -6,6 +6,7 @@ public class BattleMenu : MonoBehaviour
 {
     public GameObject firstMenu, tacticsMenu, fleeMenu, guardMenu, spellsMenu, itemsMenu;
     public GameObject tacticsMenuForLeader;
+    public GameObject characterName;
 
     Battle battle;
 
@@ -75,6 +76,12 @@ public class BattleMenu : MonoBehaviour
     {
         TurnOffAllMenus();
         battle.FleeChance();
+    }
+
+    public void GuardYes()
+    {
+        TurnOffAllMenus();
+        battle.GuardPlayer();
     }
 
     public void TurnOffAllMenus()
