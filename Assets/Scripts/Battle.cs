@@ -48,29 +48,44 @@ public class Battle : MonoBehaviour
     public GameObject powerUpParticle;
     int playerToAttack;
 
+    //REMINDER ACTION 'FLEE' needs to have the 'ClearGameManager() function to get rid of carryover data
+
     void Start()
     {
-        //if player is on floor 1, this determines the percentage of chance for a certain number of enemies
-        if (floor1)
+        if (GameManager.enemyCount > 0)
         {
-            int percent = Random.Range(1, 100);
-            if (percent < 30)
-                enemyCount = 1;
-            else if (percent >= 30 && percent < 60)
-                enemyCount = 2;
-            else if (percent >= 60 && percent < 89)
-                enemyCount = 3;
-            else 
-                enemyCount = 4;
+            enemyCount = GameManager.enemyCount;
 
             for (int i = 0; i < enemyCount; i++)
             {
-                int nameToChoose = Random.Range(0, enemiesFloor1.Count);
-                string currentNameChosen = enemiesFloor1[nameToChoose];
+                string currentNameChosen = GameManager.enemiesInThisFight[i];
                 enemiesInThisFight.Add(currentNameChosen);
             }
-          //floor 2 will go here
-          //floor 3 will contain 1 enemy - the final boss
+        }
+        else
+        {
+            //if player is on floor 1, this determines the percentage of chance for a certain number of enemies
+            if (floor1)
+            {
+                int percent = Random.Range(1, 100);
+                if (percent < 30)
+                    enemyCount = 1;
+                else if (percent >= 30 && percent < 60)
+                    enemyCount = 2;
+                else if (percent >= 60 && percent < 89)
+                    enemyCount = 3;
+                else
+                    enemyCount = 4;
+
+                for (int i = 0; i < enemyCount; i++)
+                {
+                    int nameToChoose = Random.Range(0, enemiesFloor1.Count);
+                    string currentNameChosen = enemiesFloor1[nameToChoose];
+                    enemiesInThisFight.Add(currentNameChosen);
+                }
+                //floor 2 will go here
+                //floor 3 will contain 1 enemy - the final boss
+            }
         }
 
         StartCoroutine(SetUpBattle());
@@ -591,13 +606,21 @@ public class Battle : MonoBehaviour
             manaText[i].text = playersInThisFight[i].GetComponent<Unit>().CurrentMP.ToString("F0");
         }
     }
+    public void EndTurn()
+    {
+        //this ends the turn and advances to the next one
+        currentCombatant++;
+        NextTurn();
+    }
 
     void EndBattle()
     {
+        ClearGameManager();
         //this just prints states, but will be used for triggering Experience windows (if won) or losing screen (if lost)
         if (state == StateOfBattle.LOST)
         {
             print("Player Lost");
+
         }
         else
         {
@@ -606,10 +629,11 @@ public class Battle : MonoBehaviour
         }
     }
 
-    public void EndTurn()
+    //This clears any leftover data from GameManager picked up from 'RoamingMonster.cs' or weird data from the fight
+    void ClearGameManager()
     {
-        //this ends the turn and advances to the next one
-        currentCombatant++;
-        NextTurn();
+        GameManager.enemyCount = 0;
+        GameManager.enemiesInThisFight.Clear();
     }
+
 }

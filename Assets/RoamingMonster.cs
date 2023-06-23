@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoamingMonster : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class RoamingMonster : MonoBehaviour
     public List<GameObject> enemiesInThisList = new List<GameObject>();
 
     int totalLevel;
+
+    bool isInArea;
+
+    public string sceneToLoad;
 
     // Start is called before the first frame update
     void Start()
@@ -37,9 +42,40 @@ public class RoamingMonster : MonoBehaviour
             print(enemiesInThisFight[i] + enemiesInThisList[i].GetComponent<Unit>().CurrentLevel);
         }
 
-        print(totalLevel);
-
-       
+        print(totalLevel);  
     }
 
+    private void Update()
+    {
+        //If the player is colliding with a wandering enemy and presses 'Space', the GameManager is populated with data to pass to 'Battle.cs', then the Battle scene is loaded.
+        if (Input.GetKeyDown(KeyCode.Space) && isInArea)
+        {
+            GameManager.enemyCount = 0;
+            GameManager.enemiesInThisFight.Clear();
+
+            GameManager.enemyCount = enemyCount;
+
+            for (int i = 0; i < enemiesInThisFight.Count; i++)
+                GameManager.enemiesInThisFight.Add(enemiesInThisFight[i]);
+
+            SceneManager.LoadScene(sceneToLoad);
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            isInArea = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            isInArea = false;
+        }
+    }
 }
