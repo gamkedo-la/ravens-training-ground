@@ -49,8 +49,6 @@ public class PlayerMovement : MonoBehaviour
         {
             playersInParty.Add(Resources.Load<GameObject>(GameManager.inCurrentParty[i]));
             totalPlayerLevel += playersInParty[i].GetComponent<Unit>().CurrentLevel;
-
-            print(playersInParty[i].GetComponent<Unit>().Name + " " + playersInParty[i].GetComponent<Unit>().CurrentLevel);
         }
         GameManager.avgPlayerLevelPerPlayerInParty = totalPlayerLevel / GameManager.inCurrentParty.Count;
     }
