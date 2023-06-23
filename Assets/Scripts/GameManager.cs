@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static List<Color> colorsInParty = new List<Color>();
     public static List<Color> colorsNotInParty = new List<Color>();
 
+    public static float avgPlayerLevelPerPlayerInParty;
     //These are collected from 'RoamingMonster.cs' when a player runs into a monster, it populates these lists and is cleared out at the end of 'Battle.cs'
     public static int enemyCount;
     public static List<string> enemiesInThisFight = new List<string>();

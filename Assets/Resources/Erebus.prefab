@@ -135,7 +135,6 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 1
   Name: Erebus
-  CurrentLevel: 1
   CurrentHP: 5
   MaxHP: 30
   CurrentMP: 31
@@ -144,6 +143,7 @@ MonoBehaviour:
   Physical: 30
   Agility: 17
   Finesse: 20
+  CurrentLevel: 2
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10

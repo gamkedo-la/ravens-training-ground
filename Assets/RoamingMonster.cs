@@ -12,8 +12,11 @@ public class RoamingMonster : MonoBehaviour
     public List<GameObject> enemiesInThisList = new List<GameObject>();
 
     int totalLevel;
+    float avgEnemyLevelPerEnemyInParty;
 
     bool isInArea;
+
+    public GameObject bparticle, gparticle, rparticle;
 
     public string sceneToLoad;
 
@@ -39,10 +42,7 @@ public class RoamingMonster : MonoBehaviour
             enemiesInThisList.Add(Resources.Load<GameObject>(enemiesInThisFight[i]));
 
             totalLevel += enemiesInThisList[i].GetComponent<Unit>().CurrentLevel;
-            print(enemiesInThisFight[i] + enemiesInThisList[i].GetComponent<Unit>().CurrentLevel);
-        }
-
-        print(totalLevel);  
+        } 
     }
 
     private void Update()
@@ -60,6 +60,37 @@ public class RoamingMonster : MonoBehaviour
 
             SceneManager.LoadScene(sceneToLoad);
         }
+
+        //This activates 'Ancient Vision' to tell the player how the current enemy compares to them on a challenge level
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            StartCoroutine(ShowAncientVision());
+        }
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            rparticle.SetActive(false);
+            gparticle.SetActive(false);
+            bparticle.SetActive(false);
+        }
+    }
+
+    IEnumerator ShowAncientVision()
+    {
+        //Waiting .1 seconds in order to allow for calculation from PlayerMovement.cs -> GameManager.cs to get player level
+        yield return new WaitForSeconds(.1f);
+        for (int i = 0; i < enemiesInThisList.Count; i++)
+        {
+            totalLevel += enemiesInThisList[i].GetComponent<Unit>().CurrentLevel;
+        }
+
+        avgEnemyLevelPerEnemyInParty = totalLevel / enemiesInThisList.Count;
+
+        if (avgEnemyLevelPerEnemyInParty >= (GameManager.avgPlayerLevelPerPlayerInParty * 3))
+            rparticle.SetActive(true);
+        else if (avgEnemyLevelPerEnemyInParty >= (GameManager.avgPlayerLevelPerPlayerInParty * 1.5f) && avgEnemyLevelPerEnemyInParty <= (GameManager.avgPlayerLevelPerPlayerInParty * 3))
+            gparticle.SetActive(true);
+        else
+            bparticle.SetActive(true);
     }
 
 

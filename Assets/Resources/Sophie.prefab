@@ -79,7 +79,6 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 1
   Name: Sophie
-  CurrentLevel: 1
   CurrentHP: 5
   MaxHP: 30
   CurrentMP: 30
@@ -88,6 +87,7 @@ MonoBehaviour:
   Physical: 17
   Agility: 12
   Finesse: 20
+  CurrentLevel: 2
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10

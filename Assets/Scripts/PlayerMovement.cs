@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
+    public List<GameObject> playersInParty = new List<GameObject>();
+    int totalPlayerLevel;
+
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -34,5 +37,21 @@ public class PlayerMovement : MonoBehaviour
         
         else
             anim.SetBool("isRunning", false);
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            CalculatePartyLevel();
+        }
+    }
+    void CalculatePartyLevel()
+    {
+        for (int i = 0; i < GameManager.inCurrentParty.Count; i++)
+        {
+            playersInParty.Add(Resources.Load<GameObject>(GameManager.inCurrentParty[i]));
+            totalPlayerLevel += playersInParty[i].GetComponent<Unit>().CurrentLevel;
+
+            print(playersInParty[i].GetComponent<Unit>().Name + " " + playersInParty[i].GetComponent<Unit>().CurrentLevel);
+        }
+        GameManager.avgPlayerLevelPerPlayerInParty = totalPlayerLevel / GameManager.inCurrentParty.Count;
     }
 }

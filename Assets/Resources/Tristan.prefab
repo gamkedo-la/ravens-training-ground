@@ -132,7 +132,6 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 1
   Name: Tristan
-  CurrentLevel: 1
   CurrentHP: 5
   MaxHP: 30
   CurrentMP: 25
@@ -141,6 +140,7 @@ MonoBehaviour:
   Physical: 8
   Agility: 7
   Finesse: 20
+  CurrentLevel: 1
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10

@@ -1444,7 +1444,6 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 0
   Name: Fresno Nightcrawler
-  CurrentLevel: 1
   CurrentHP: 60
   MaxHP: 60
   CurrentMP: 30
@@ -1453,6 +1452,7 @@ MonoBehaviour:
   Physical: 20
   Agility: 15
   Finesse: 20
+  CurrentLevel: 3
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
