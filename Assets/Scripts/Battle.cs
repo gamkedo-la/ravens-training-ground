@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine.UI;
 using TMPro;
 
-public enum StateOfBattle { Start, PC1, PC2, PC3, PC4, Party, EnemyTurn, WON, LOST }
+public enum StateOfBattle { Start, WON, LOST }
 
 public class Battle : MonoBehaviour
 {
@@ -33,7 +33,7 @@ public class Battle : MonoBehaviour
     List<GameObject> deadCharacters = new List<GameObject>();
 
     float totalExperienceAwarded;
-    int currentCombatant, deadPlayers;
+    public int currentCombatant, deadPlayers;
 
     int enemyCountForKnockedOut, playerCountForKnockedOut;
 
@@ -89,6 +89,7 @@ public class Battle : MonoBehaviour
         }
 
         StartCoroutine(SetUpBattle());
+        state = StateOfBattle.Start;
     }
     IEnumerator SetUpBattle()
     {
