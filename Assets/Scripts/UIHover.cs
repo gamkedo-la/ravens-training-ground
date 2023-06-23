@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -10,13 +11,23 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public float multiplier = 8;
     Vector3 minVect3, maxVect3, defaultVect3;
     bool grow, hover;
-
+    public bool isFlee;
     void Start()
     {
         grow = true;
         minVect3 = new Vector3(startingX * percentMin, startingY * percentMin, startingZ * percentMin);
         maxVect3 = new Vector3(startingX * percentMax, startingY * percentMax, startingZ * percentMax);
         defaultVect3 = new Vector3(startingX, startingY, startingZ);
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+        if (isFlee && sceneName == "Floor3")
+        {
+            GetComponent<Button>().interactable = false;
+            GetComponent<UIHover>().enabled = false;
+        }
+           
+            
     }
 
     void Update()
@@ -38,14 +49,11 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         hover = true;
-
-        Debug.Log("The cursor entered the selectable UI element.");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         hover = false;
         this.gameObject.transform.localScale = defaultVect3;
-        Debug.Log("Cursor has exited.");
     }
 }

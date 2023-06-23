@@ -11,6 +11,9 @@ public class Battle : MonoBehaviour
 {
     public StateOfBattle state;
 
+    public GameObject informationTextHolder;
+    public TMP_Text informationText;
+
     public Transform BattleStation1, BattleStation2, BattleStation3, BattleStation4;
     public Transform enemyBattleStation1, enemyBattleStation2, enemyBattleStation3, enemyBattleStation4;
 
@@ -47,8 +50,8 @@ public class Battle : MonoBehaviour
 
     public GameObject powerUpParticle;
     int playerToAttack;
-
-    //REMINDER ACTION 'FLEE' needs to have the 'ClearGameManager() function to get rid of carryover data
+    float chanceToLeave;
+    bool hasFled;
 
     void Start()
     {
@@ -159,6 +162,14 @@ public class Battle : MonoBehaviour
         {
             currentCombatant++;
             NextTurn();
+        }
+        if (hasFled)
+        {
+            for (int i = 0; i < playersInThisFight.Count; i++)
+            {
+                if(!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                    playersInThisFight[i].transform.position += transform.right * 3 * Time.deltaTime;
+            }
         }
     }
 
@@ -522,6 +533,58 @@ public class Battle : MonoBehaviour
             //clear enemyCountForKnockedOut
         }
     }
+
+    //Player has a chance to flee if they press the 'flee option'. This is done by taking a random # 0-100. For each downed enemy, add 25, then add agility and equipment. If chanceToLeave<=sum, leave
+    public void FleeChance()
+    {
+        int percentToLeave = Random.Range(0, 100);
+
+        for (int i = 0; i < enemiesInFight.Count; i++)
+        {
+            if (enemiesInFight[i].GetComponent<Unit>().hasBeenKnockedDown)
+                chanceToLeave += 25;
+        }
+
+        if (percentToLeave <= chanceToLeave + Combatants[currentCombatant].GetComponent<Unit>().Agility + Combatants[currentCombatant].GetComponent<Unit>().AgilityEquipment)
+        {
+            //player flees
+            for (int i = 0; i < playersInThisFight.Count; i++)
+            {
+                if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                {
+                    playersInThisFight[i].transform.Rotate(0,180,0);
+                    playersInThisFight[i].GetComponent<Unit>().anim.SetBool("isRunning", true);
+                    hasFled = true;
+                }
+            }
+            chanceToLeave = 0;
+            StartCoroutine(ClearInformationText(2f, "Party escaped"));
+            StartCoroutine(BattleCleanUp());
+        }
+        else
+        {
+            chanceToLeave = 0;
+            StartCoroutine(ClearInformationText(2f, "Unable to escape"));
+        }
+    }
+
+    IEnumerator BattleCleanUp()
+    {
+        yield return new WaitForSeconds(2f);
+        ExperienceAndDeathCollection();
+        ClearGameManager();
+    }
+
+    IEnumerator ClearInformationText(float timer, string message)
+    {
+        informationTextHolder.SetActive(true);
+        informationText.text = message;
+        yield return new WaitForSeconds(timer);
+
+        informationText.text = "";
+        informationTextHolder.SetActive(false);
+    }
+
     public void ExperienceAndDeathCollection()
     {
         //Experience and Death - this tracks: 1) who is left in the fight 2) has the player won or lost 

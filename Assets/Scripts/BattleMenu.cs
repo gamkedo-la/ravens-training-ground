@@ -9,6 +9,11 @@ public class BattleMenu : MonoBehaviour
 
     Battle battle;
 
+    private void Start()
+    {
+        battle = GameObject.Find("Battle").GetComponent<Battle>();
+    }
+
     //this is starting at every player turn, Tactics menu should be turned off for all but Dani.
     //Any 'Back' button goes to 'OpenFirstMenu'
     public void OpenFirstMenu()
@@ -64,5 +69,21 @@ public class BattleMenu : MonoBehaviour
         guardMenu.SetActive(false);
         spellsMenu.SetActive(false);
         itemsMenu.SetActive(true);
+    }
+
+    public void FleeYes()
+    {
+        TurnOffAllMenus();
+        battle.FleeChance();
+    }
+
+    public void TurnOffAllMenus()
+    {
+        firstMenu.SetActive(false);
+        tacticsMenu.SetActive(false);
+        fleeMenu.SetActive(false);
+        guardMenu.SetActive(false);
+        spellsMenu.SetActive(false);
+        itemsMenu.SetActive(false);
     }
 }
