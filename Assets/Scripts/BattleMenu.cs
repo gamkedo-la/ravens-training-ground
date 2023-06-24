@@ -6,9 +6,10 @@ public class BattleMenu : MonoBehaviour
 {
     public GameObject firstMenu, tacticsMenu, fleeMenu, guardMenu, spellsMenu, itemsMenu;
     public GameObject tacticsMenuForLeader;
-    public GameObject characterName;
 
     Battle battle;
+    public GameObject spellsUIPrefab;
+    public Transform spellsMenuHolder;
 
     private void Start()
     {
@@ -60,6 +61,8 @@ public class BattleMenu : MonoBehaviour
         guardMenu.SetActive(false);
         spellsMenu.SetActive(true);
         itemsMenu.SetActive(false);
+
+        PopulateSpellsMenu();
     }
 
     public void OpenItemsMenu()
@@ -92,5 +95,20 @@ public class BattleMenu : MonoBehaviour
         guardMenu.SetActive(false);
         spellsMenu.SetActive(false);
         itemsMenu.SetActive(false);
+    }
+
+    public void PopulateSpellsMenu()
+    {
+        //Destroy all child count before reloading this menu (that way it doesn't duplicate it)
+
+        Debug.Log(transform.childCount);
+
+
+        for (int i = 0; i < battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks.Count - 1; i++)
+        {
+            GameObject instantiatedPrefab = Instantiate(spellsUIPrefab, spellsMenuHolder.transform.position, spellsMenuHolder.transform.rotation) as GameObject;
+            instantiatedPrefab.transform.parent = spellsMenuHolder.transform;
+            instantiatedPrefab.transform.localScale = new Vector3(5, 0.4f, 1);
+        }
     }
 }

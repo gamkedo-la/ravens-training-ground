@@ -11,6 +11,7 @@ public enum AttackExcersion { LightAttack, MediumAttack, DefaultAttack }
 [CreateAssetMenu(fileName ="Attack",menuName ="Actions/Attack")]
 public class AttackBase : ScriptableObject
 {
+    public string AttackName;
     public AttackCosts cost;
     public CastType castType;
     public TargetType targetType;

@@ -43,6 +43,8 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 grow = false;
             if(this.gameObject.transform.localScale.x <= minVect3.x)
                 grow = true;
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+                hover = false;
         }
 
     }
