@@ -123,9 +123,6 @@ public class Unit : MonoBehaviour
 
     void DetermineAttack()
     {
-       // print(battle.characterNameHolder);
-       // battle.characterNameText.text = Name;
-
         if (isOnAuto)
         {
             int fleeThisTurn = Random.Range(0, 100);

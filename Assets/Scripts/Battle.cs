@@ -182,7 +182,8 @@ public class Battle : MonoBehaviour
             Combatants = Combatants.OrderByDescending(x => x.GetComponent<Unit>().Agility).ToList();
             currentCombatant = 0;
         }
-
+        characterNameHolder.SetActive(true);
+        characterNameText.text = Combatants[currentCombatant].GetComponent<Unit>().Name;
 
         print("Currently Up: " + Combatants[currentCombatant].GetComponent<Unit>().Name + " Agility: " + Combatants[currentCombatant].GetComponent<Unit>().Agility + " CurrentHP: " + Combatants[currentCombatant].GetComponent<Unit>().CurrentHP);
         Combatants[currentCombatant].GetComponent<Unit>().TakingUnitTurn();
