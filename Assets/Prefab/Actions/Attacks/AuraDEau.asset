@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b74d8730ef00c408257177426cee69, type: 3}
   m_Name: AuraDEau
   m_EditorClassIdentifier: 
+  AttackName: Aura D Eau
+  AttackDescription: Test
   cost: 4
   castType: 1
   targetType: 0

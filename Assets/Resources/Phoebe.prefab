@@ -100,7 +100,7 @@ MonoBehaviour:
   tier5: 18
   tier6: 21
   KnownSkills:
-  - BasicCast
+  - EssenceOfPride
   - Charge
   - Ajei
   - FuseeDeVent
@@ -108,9 +108,8 @@ MonoBehaviour:
   - ForcefulLunge
   - VerticalSlice
   - PlayfulShove
-  - EssenceOfPride
   attacks:
-  - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
+  - {fileID: 11400000, guid: d4915714b74e71649a695510d9fc3c13, type: 2}
   - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
   - {fileID: 11400000, guid: 56712b1160c18d746976fdf1f534d66c, type: 2}
   - {fileID: 11400000, guid: 1a7b169c43797c249b6297201e130e2f, type: 2}
@@ -118,7 +117,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27724c194178e9741ae64ee3f6f5e415, type: 2}
   - {fileID: 11400000, guid: 69de7dada261ec24ab4d291b1d6115ce, type: 2}
   - {fileID: 11400000, guid: 54adb99eeec8b214ebb93c2f064a1487, type: 2}
-  - {fileID: 11400000, guid: d4915714b74e71649a695510d9fc3c13, type: 2}
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}

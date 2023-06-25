@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class BattleMenu : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BattleMenu : MonoBehaviour
     Battle battle;
     public GameObject spellsUIPrefab;
     public Transform spellsMenuHolder;
+
+    public List<Sprite> icons = new List<Sprite>();
 
     private void Start()
     {
@@ -115,10 +118,32 @@ public class BattleMenu : MonoBehaviour
             instantiatedPrefab.transform.Find("SpellDesc").GetComponent<TextMeshProUGUI>().text = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].AttackDescription;
             instantiatedPrefab.transform.Find("SpellCost").GetComponent<TextMeshProUGUI>().text = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].cost.ToString();
 
-            if(battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].castType.ToString() == "Physical")
-                instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "HP";
-            else
+            if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Ancient")
+            {
+                instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[0];
                 instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
+            }
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "DarkArts")
+            {
+                instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[1];
+                instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
+            }
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Charms")
+            {
+                instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[2];
+                instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
+            }
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Transfiguration")
+            {
+                instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[3];
+            //    instantiatedPrefab.GetComponent<Button>().highlightedColor = new Color(238, 23, 33);
+                instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
+            }
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Physical")
+            {
+                instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[4];
+                instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "HP";
+            }
         }
     }
 }

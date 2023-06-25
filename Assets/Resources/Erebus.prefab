@@ -187,9 +187,9 @@ MonoBehaviour:
   tier5: 18
   tier6: 21
   KnownSkills:
-  - BasicCast
+  - AuraDEau
   attacks:
-  - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
+  - {fileID: 11400000, guid: 9d94ae56618c924428d1b315dd44b8fa, type: 2}
   - {fileID: 11400000, guid: a400b13aa01717f4283ebefa251eff7e, type: 2}
   - {fileID: 11400000, guid: a6b60d89678e4fd40ac55b042ca5df6e, type: 2}
   - {fileID: 11400000, guid: 68f14292271b47943a7a47bb47c413c4, type: 2}
@@ -197,7 +197,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1a7b169c43797c249b6297201e130e2f, type: 2}
   - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
   - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
-  - {fileID: 11400000, guid: 9d94ae56618c924428d1b315dd44b8fa, type: 2}
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}

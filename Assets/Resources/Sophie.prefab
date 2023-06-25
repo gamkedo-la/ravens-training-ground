@@ -131,7 +131,7 @@ MonoBehaviour:
   tier5: 18
   tier6: 21
   KnownSkills:
-  - BasicCast
+  - ManictomDotum
   - AuraDEau
   - CriDeGivre
   - FuseeDeVent
@@ -139,9 +139,8 @@ MonoBehaviour:
   - PillarOfStrength
   - ForcefulLunge
   - ExpelindoElemicus
-  - ManictomDotum
   attacks:
-  - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
+  - {fileID: 11400000, guid: 9d94ae56618c924428d1b315dd44b8fa, type: 2}
   - {fileID: 11400000, guid: 2aa710b8e25a76b4aa73ad4adf42d770, type: 2}
   - {fileID: 11400000, guid: 8101291718b5b1c47ae7e0d1cb456e55, type: 2}
   - {fileID: 11400000, guid: 56712b1160c18d746976fdf1f534d66c, type: 2}
@@ -149,7 +148,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
   - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
   - {fileID: 11400000, guid: a400b13aa01717f4283ebefa251eff7e, type: 2}
-  - {fileID: 11400000, guid: 9d94ae56618c924428d1b315dd44b8fa, type: 2}
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}
