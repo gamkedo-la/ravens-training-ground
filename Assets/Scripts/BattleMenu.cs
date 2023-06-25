@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BattleMenu : MonoBehaviour
 {
@@ -109,6 +110,15 @@ public class BattleMenu : MonoBehaviour
             GameObject instantiatedPrefab = Instantiate(spellsUIPrefab, spellsMenuHolder.transform.position, spellsMenuHolder.transform.rotation) as GameObject;
             instantiatedPrefab.transform.parent = spellsMenuHolder.transform;
             instantiatedPrefab.transform.localScale = new Vector3(5, 0.4f, 1);
+
+            instantiatedPrefab.transform.Find("SpellName").GetComponent<TextMeshProUGUI>().text = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].AttackName;
+            instantiatedPrefab.transform.Find("SpellDesc").GetComponent<TextMeshProUGUI>().text = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].AttackDescription;
+            instantiatedPrefab.transform.Find("SpellCost").GetComponent<TextMeshProUGUI>().text = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].cost.ToString();
+
+            if(battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].castType.ToString() == "Physical")
+                instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "HP";
+            else
+                instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
         }
     }
 }

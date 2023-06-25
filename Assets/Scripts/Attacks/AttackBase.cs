@@ -12,6 +12,7 @@ public enum AttackExcersion { LightAttack, MediumAttack, DefaultAttack }
 public class AttackBase : ScriptableObject
 {
     public string AttackName;
+    public string AttackDescription;
     public AttackCosts cost;
     public CastType castType;
     public TargetType targetType;
