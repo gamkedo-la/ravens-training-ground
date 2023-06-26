@@ -20,9 +20,15 @@ public class RoamingMonster : MonoBehaviour
 
     public string sceneToLoad;
 
+    bool isWalking, isRotating, isFollowing;
+    int angleSpeed;
+    Transform player;
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("monsterTarget").transform;
         int percent = Random.Range(1, 100);
         if (percent < 30)
             enemyCount = 1;
@@ -72,6 +78,53 @@ public class RoamingMonster : MonoBehaviour
             gparticle.SetActive(false);
             bparticle.SetActive(false);
         }
+
+        float dist = Vector3.Distance(player.position, transform.position);
+        print(dist);
+        print(isFollowing);
+
+        if (dist < 10 && dist > 3)
+            isFollowing = true;
+        else
+            isFollowing = false;
+        /*
+        if (dist <= 7.5f && dist >1)
+            isFollowing = true;
+        else if (dist <= 2.5f)
+        {
+            isFollowing = false;
+            anim.GetComponent<Animator>().SetTrigger("attack");
+        }
+        else
+            isFollowing = false;
+        */
+        if (!isFollowing)
+        {
+            if (dist > 10)
+            {
+                if (isWalking)
+                    transform.position += -transform.right * 1.25f * Time.deltaTime;
+                if (isRotating)
+                    transform.Rotate(Vector3.forward * Time.deltaTime * angleSpeed, Space.World);
+            }
+            else
+            {
+                anim.GetComponent<Animator>().SetBool("isChasing", false);
+                anim.GetComponent<Animator>().SetTrigger("attack");
+                transform.position += transform.forward * 3 * Time.deltaTime * 2;
+            }
+        }
+        else
+        {
+            float distance = Vector3.Distance(player.transform.position, transform.position);
+            Vector3 lookDir = player.transform.position - transform.position;
+
+            transform.rotation = Quaternion.Slerp(transform.rotation,
+                Quaternion.LookRotation(lookDir), 50 * Time.deltaTime);
+            anim.GetComponent<Animator>().SetBool("isChasing", true);
+
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * 3 * 1.5f);
+        }
     }
 
     IEnumerator ShowAncientVision()
@@ -108,5 +161,24 @@ public class RoamingMonster : MonoBehaviour
         {
             isInArea = false;
         }
+    }
+
+    public void StartMoving()
+    {
+        isWalking = true;
+        isRotating = false;
+    }
+
+    public void StopMoving()
+    {
+        isWalking = false;
+        StartCoroutine(timeForRotate(Random.Range(0, 1.2f)));
+    }
+
+    IEnumerator timeForRotate(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        isRotating = true;
+        angleSpeed = Random.Range(-180, 180);
     }
 }
