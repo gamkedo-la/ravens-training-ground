@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class RoamingMonster : MonoBehaviour
 {
@@ -20,14 +21,16 @@ public class RoamingMonster : MonoBehaviour
 
     public string sceneToLoad;
 
-    bool isWalking, isRotating, isFollowing;
+    bool isWalking, isRotating, isLunging;
     int angleSpeed;
     Transform player;
     public Animator anim;
+    NavMeshAgent nav;
 
     // Start is called before the first frame update
     void Start()
     {
+        nav = GetComponent<NavMeshAgent>();
         player = GameObject.Find("monsterTarget").transform;
         int percent = Random.Range(1, 100);
         if (percent < 30)
@@ -80,50 +83,30 @@ public class RoamingMonster : MonoBehaviour
         }
 
         float dist = Vector3.Distance(player.position, transform.position);
-        print(dist);
-        print(isFollowing);
 
-        if (dist < 10 && dist > 3)
-            isFollowing = true;
-        else
-            isFollowing = false;
-        /*
-        if (dist <= 7.5f && dist >1)
-            isFollowing = true;
-        else if (dist <= 2.5f)
+        if (dist > 10)
         {
-            isFollowing = false;
+            anim.GetComponent<Animator>().SetBool("isChasing", false);
+            isLunging = false;
+
+            if (isWalking)
+                transform.position += -transform.right * 1.25f * Time.deltaTime;
+            if (isRotating)
+                transform.Rotate(0, Time.deltaTime * angleSpeed, 0, Space.Self);
+        }
+        else if (dist < 2)
+        {
             anim.GetComponent<Animator>().SetTrigger("attack");
-        }
-        else
-            isFollowing = false;
-        */
-        if (!isFollowing)
-        {
-            if (dist > 10)
-            {
-                if (isWalking)
-                    transform.position += -transform.right * 1.25f * Time.deltaTime;
-                if (isRotating)
-                    transform.Rotate(Vector3.forward * Time.deltaTime * angleSpeed, Space.World);
-            }
-            else
-            {
-                anim.GetComponent<Animator>().SetBool("isChasing", false);
-                anim.GetComponent<Animator>().SetTrigger("attack");
-                transform.position += transform.forward * 3 * Time.deltaTime * 2;
-            }
+            isLunging = true;
         }
         else
         {
-            float distance = Vector3.Distance(player.transform.position, transform.position);
-            Vector3 lookDir = player.transform.position - transform.position;
+            isLunging = false;
+            nav.SetDestination(player.position);
+            transform.LookAt(player.transform);
+            transform.rotation *= Quaternion.Euler(0, 90, 0);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation,
-                Quaternion.LookRotation(lookDir), 50 * Time.deltaTime);
             anim.GetComponent<Animator>().SetBool("isChasing", true);
-
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * 3 * 1.5f);
         }
     }
 
@@ -152,6 +135,9 @@ public class RoamingMonster : MonoBehaviour
         if (other.tag == "Player")
         {
             isInArea = true;
+
+            if (isLunging)
+                print("enemy gets initiative");
         }
     }
 
@@ -159,7 +145,7 @@ public class RoamingMonster : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            isInArea = false;
+            isInArea = false;    
         }
     }
 
