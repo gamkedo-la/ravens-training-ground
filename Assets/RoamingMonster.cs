@@ -135,9 +135,6 @@ public class RoamingMonster : MonoBehaviour
         if (other.tag == "Player")
         {
             isInArea = true;
-
-            if (isLunging)
-                print("enemy gets initiative");
         }
     }
 

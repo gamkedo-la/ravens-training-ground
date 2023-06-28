@@ -67,13 +67,18 @@ public class PlayerMovement : MonoBehaviour
 
     void CreatePlayersInOverworld()
     {
-        print(GameManager.inCurrentParty.Count);
         for (int i = 0; i < GameManager.inCurrentParty.Count; i++)
         {
             if (i == 0)
-                print("skip this");
+                print("skip this - Dani in party already");
             else
                 Instantiate(Resources.Load<GameObject>("Overworld/" + GameManager.inCurrentParty[i]), this.transform.position + nearbyLocations[i], this.transform.rotation);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+            print("Enemy Initiative");
     }
 }
