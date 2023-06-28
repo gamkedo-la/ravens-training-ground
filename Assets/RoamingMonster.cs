@@ -27,11 +27,17 @@ public class RoamingMonster : MonoBehaviour
     public Animator anim;
     NavMeshAgent nav;
 
+    public bool frontContact, rearContact;
+
     // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
         player = GameObject.Find("monsterTarget").transform;
+
+        GameManager.initiativeSiezedByEnemy = false;
+        GameManager.initiativeSiezedByPlayer = false;
+
         int percent = Random.Range(1, 100);
         if (percent < 30)
             enemyCount = 1;
@@ -84,7 +90,33 @@ public class RoamingMonster : MonoBehaviour
 
         float dist = Vector3.Distance(player.position, transform.position);
 
-        if (dist > 10)
+        
+        if (frontContact)
+        {         
+            isLunging = false;
+            nav.SetDestination(player.position);
+            transform.LookAt(player.transform);
+            transform.rotation *= Quaternion.Euler(0, 90, 0);
+
+            anim.GetComponent<Animator>().SetBool("isChasing", true);
+
+            if (dist > 30)
+            {
+                frontContact = false;
+                rearContact = false;
+            }
+            if (dist < 3)
+            {
+                anim.GetComponent<Animator>().SetTrigger("attack");
+                isLunging = true;
+            }
+        }
+        else if (rearContact)
+        {
+            GameManager.initiativeSiezedByPlayer = true;
+            StartCoroutine(Waiting(1.5f));
+        }
+        else
         {
             anim.GetComponent<Animator>().SetBool("isChasing", false);
             isLunging = false;
@@ -93,20 +125,6 @@ public class RoamingMonster : MonoBehaviour
                 transform.position += -transform.right * 1.25f * Time.deltaTime;
             if (isRotating)
                 transform.Rotate(0, Time.deltaTime * angleSpeed, 0, Space.Self);
-        }
-        else if (dist < 2)
-        {
-            anim.GetComponent<Animator>().SetTrigger("attack");
-            isLunging = true;
-        }
-        else
-        {
-            isLunging = false;
-            nav.SetDestination(player.position);
-            transform.LookAt(player.transform);
-            transform.rotation *= Quaternion.Euler(0, 90, 0);
-
-            anim.GetComponent<Animator>().SetBool("isChasing", true);
         }
     }
 
@@ -163,5 +181,26 @@ public class RoamingMonster : MonoBehaviour
         yield return new WaitForSeconds(timer);
         isRotating = true;
         angleSpeed = Random.Range(-180, 180);
+    }
+    IEnumerator Waiting(float loadTime)
+    {
+        yield return new WaitForSeconds(loadTime);
+        SceneManager.LoadScene("BattleScene");
+    }
+
+
+    public void FrontEntered()
+    {
+        frontContact = true;
+    }
+
+    public void RearEntered()
+    {
+        rearContact = true;
+    }
+
+    public void RearLeft()
+    {
+        rearContact = false;
     }
 }

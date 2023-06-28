@@ -148,7 +148,27 @@ public class Battle : MonoBehaviour
             enemiesInFight.Add(currentEnemy3);
         }
 
-        Combatants = Combatants.OrderByDescending(x => x.GetComponent<Unit>().Agility).ToList();
+        //This stems from the overworld - the player attacked the enemy - player gets initiative, if enemy attacked player, enemy gets initiative
+        if (GameManager.initiativeSiezedByEnemy)
+        {
+            for (int i = 0; i < enemiesInFight.Count; i++)
+            {
+                enemiesInFight[i].GetComponent<Unit>().tempAgility += 70;
+                GameManager.initiativeSiezedByEnemy = false;
+                StartCoroutine(ClearInformationText(2f, "Surprise Attack Enemies Attacking"));
+            }
+        }
+
+        else
+        {
+            for (int i = 0; i < playersInThisFight.Count; i++)
+            {
+                playersInThisFight[i].GetComponent<Unit>().tempAgility += 70;
+                StartCoroutine(ClearInformationText(2f, "Surprise Round"));
+            }
+        }
+
+            Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().tempAgility)).ToList();
         #endregion
 
         UpdatePlayerHealthManaUI();
@@ -179,13 +199,18 @@ public class Battle : MonoBehaviour
         //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
         if (currentCombatant >= Combatants.Count)
         {
-            Combatants = Combatants.OrderByDescending(x => x.GetComponent<Unit>().Agility).ToList();
+            Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().tempAgility)).ToList();
             currentCombatant = 0;
+            for (int i = 0; i < Combatants.Count; i++)
+            {
+                Combatants[i].GetComponent<Unit>().tempAgility = 0;
+            }
         }
+
         characterNameHolder.SetActive(true);
         characterNameText.text = Combatants[currentCombatant].GetComponent<Unit>().Name;
 
-        print("Currently Up: " + Combatants[currentCombatant].GetComponent<Unit>().Name + " Agility: " + Combatants[currentCombatant].GetComponent<Unit>().Agility + " CurrentHP: " + Combatants[currentCombatant].GetComponent<Unit>().CurrentHP);
+        print("Currently Up: " + Combatants[currentCombatant].GetComponent<Unit>().Name + " Agility: " + (Combatants[currentCombatant].GetComponent<Unit>().Agility + Combatants[currentCombatant].GetComponent<Unit>().tempAgility) + " CurrentHP: " + Combatants[currentCombatant].GetComponent<Unit>().CurrentHP);
         Combatants[currentCombatant].GetComponent<Unit>().TakingUnitTurn();
     }
 
@@ -720,6 +745,7 @@ public class Battle : MonoBehaviour
     //This clears any leftover data from GameManager picked up from 'RoamingMonster.cs' or weird data from the fight
     void ClearGameManager()
     {
+        GameManager.initiativeSiezedByEnemy = false;
         GameManager.enemyCount = 0;
         GameManager.enemiesInThisFight.Clear();
     }

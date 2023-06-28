@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public static int enemyCount;
     public static List<string> enemiesInThisFight = new List<string>();
     //
+    public static bool initiativeSiezedByEnemy, initiativeSiezedByPlayer;
 
     public void Start()
     {

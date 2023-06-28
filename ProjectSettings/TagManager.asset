@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - FrontTrigger
+  - RearTrigger
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - UI
   - Ground
   - Player
-  - 
-  - 
+  - Front
+  - Rear
   - 
   - 
   - 
