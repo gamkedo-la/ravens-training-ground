@@ -13,9 +13,21 @@ public class PlayerMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
-    public List<GameObject> playersInParty = new List<GameObject>();
+    List<GameObject> playersInParty = new List<GameObject>();
     int totalPlayerLevel;
 
+    public List<Vector3> nearbyLocations = new List<Vector3>();
+
+    private void Start()
+    {
+        StartCoroutine(WaitForFrame());
+
+    }
+    IEnumerator WaitForFrame()
+    {
+        yield return new WaitForEndOfFrame();
+        CreatePlayersInOverworld();
+    }
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -51,5 +63,17 @@ public class PlayerMovement : MonoBehaviour
             totalPlayerLevel += playersInParty[i].GetComponent<Unit>().CurrentLevel;
         }
         GameManager.avgPlayerLevelPerPlayerInParty = totalPlayerLevel / GameManager.inCurrentParty.Count;
+    }
+
+    void CreatePlayersInOverworld()
+    {
+        print(GameManager.inCurrentParty.Count);
+        for (int i = 0; i < GameManager.inCurrentParty.Count; i++)
+        {
+            if (i == 0)
+                print("skip this");
+            else
+                Instantiate(Resources.Load<GameObject>("Overworld/" + GameManager.inCurrentParty[i]), this.transform.position + nearbyLocations[i], this.transform.rotation);
+        }
     }
 }
