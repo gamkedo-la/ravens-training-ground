@@ -99,12 +99,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.tag == "Enemy")
         {
-            if (other.GetComponent<Collider>().GetType() == typeof(SphereCollider))
+            print("here");
+            if (other.GetComponent<SphereCollider>().GetType() == typeof(SphereCollider))
             {
                 print("front");
                 other.gameObject.GetComponent<RoamingMonster>().FrontEntered();
             }
-            if (other.GetComponent<Collider>().GetType() == typeof(CapsuleCollider))
+            if (other.GetComponent<CapsuleCollider>().GetType() == typeof(CapsuleCollider))
             {
                 print("rear");
                 other.gameObject.GetComponent<RoamingMonster>().RearEntered();

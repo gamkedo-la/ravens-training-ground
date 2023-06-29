@@ -100,7 +100,7 @@ public class RoamingMonster : MonoBehaviour
 
             anim.GetComponent<Animator>().SetBool("isChasing", true);
 
-            if (dist > 30)
+            if (dist > 20)
             {
                 frontContact = false;
                 rearContact = false;
