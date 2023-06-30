@@ -10757,6 +10757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dani
       objectReference: {fileID: 0}
+    - target: {fileID: 4646048799911148421, guid: c8d4be9dedeb0eb4695b81179a926be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5920217333913091518, guid: c8d4be9dedeb0eb4695b81179a926be8, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -14313,7 +14317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2124918536
 MonoBehaviour:
   m_ObjectHideFlags: 0

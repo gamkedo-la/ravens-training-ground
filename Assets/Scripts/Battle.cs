@@ -172,7 +172,7 @@ public class Battle : MonoBehaviour
         #endregion
 
         UpdatePlayerHealthManaUI();
-        NextTurn();
+       // NextTurn();
     }
 
     private void Update()
@@ -354,6 +354,8 @@ public class Battle : MonoBehaviour
         }
         #endregion
 
+
+
         #region Enemy Turn
         else
         {
@@ -491,6 +493,91 @@ public class Battle : MonoBehaviour
         }
     }
 
+
+    public void ResolvingATurnModified(float damage)
+    {
+        Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Attack");
+
+        print(Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].castType.ToString());
+
+        //if you are attacking an enemy (not a support spell)
+        if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].castType.ToString() == "Enemy")
+        {
+            //if single target
+            if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].targetType.ToString() == "SingleTarget")
+            {
+                print("single target");
+                if (Combatants[currentCombatant].GetComponent<Unit>().isAPlayer)
+                {
+                    print("single target - player");
+                    enemiesInFight = enemiesInFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+                    int randAttack = Random.Range(0, 100);
+                    if (randAttack < 50)
+                    {
+                        Combatants[currentCombatant].transform.LookAt(enemiesInFight[0].transform);
+                        enemiesInFight[0].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                    }
+                    else
+                    {
+                        int opponentToAttack = Random.Range(0, enemiesInFight.Count);
+                        enemiesInFight[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                        Combatants[currentCombatant].transform.LookAt(enemiesInFight[opponentToAttack].transform);
+                    }
+                }
+                else
+                {
+                    print("single target - enemy");
+                    //i think this line can go away, it is to sort player's health if we want to structure it similar to the player where they target the weakest player
+                    // playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+
+                    for (int i = 0; i < playersInThisFight.Count; i++)
+                    {
+                        if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                            playerToAttack++;
+                    }
+
+                    int playerToChoose = Random.Range(0, playerToAttack);
+                    playersInThisFight[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                    Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToChoose].transform);
+                    playerToAttack = 0;
+                }
+            }
+            //if aoe
+            if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].targetType.ToString() == "AOE")
+            {
+                print("aoe");
+                if (Combatants[currentCombatant].GetComponent<Unit>().isAPlayer)
+                {
+                    print("aoe - player");
+                    for (int i = 0; i < enemiesInFight.Count; i++)
+                    {
+                        enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                    }
+                }
+                else
+                {
+                    print("aoe - enemy");
+                    for (int i = 0; i < playersInThisFight.Count; i++)
+                    {
+                        if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                            playersInThisFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                    }
+                }
+            }
+            
+        }
+
+        //if cast type support
+            //all of these are nestled in 'ResolvingATurn()'
+
+        UpdatePlayerHealthManaUI();
+
+        //At the end of the turn, this cleans up/closes out any unnecessary value for all combatants
+        for (int i = 0; i < Combatants.Count; i++)
+        {
+            Combatants[i].GetComponent<Unit>().CleanUp();
+        }
+    }
     public void Reincarnation()
     {
         //If reincarnated: 1) says they aren't dead 2} gives them 50% health 3)Adds them back to the combatants list 4) creates a particle effect 5) removes them from the deadCharacters list

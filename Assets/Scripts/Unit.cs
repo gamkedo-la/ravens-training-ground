@@ -59,6 +59,7 @@ public class Unit : MonoBehaviour
     public Material metallic;
 
     public bool canFlee;
+    public int randomAttack;
 
     private void Start()
     {
@@ -116,7 +117,8 @@ public class Unit : MonoBehaviour
             else
                 defenseMultiplier = 1;
 
-            DetermineAttack();
+            DetermineAttackFromList();
+           // DetermineAttack();
         }
         else
             print("Character is dead, you shouldn't reach here, something went wrong");
@@ -144,7 +146,7 @@ public class Unit : MonoBehaviour
             }
             else
             {
-                int randomAttack = Random.Range(0, KnownSkills.Count);
+                randomAttack = Random.Range(0, KnownSkills.Count);
                 attacks[randomAttack].AttemptAttack(this);
                 print(KnownSkills[randomAttack]);
             }
@@ -157,7 +159,7 @@ public class Unit : MonoBehaviour
             }
         }
     }
-    void DetermineAttack()
+ /*   void DetermineAttack()
     {
         if (isOnAuto)
         {
@@ -192,13 +194,14 @@ public class Unit : MonoBehaviour
             //turn first menu on
             }
         }
-    }
+    }*/
 
     public void RedoAttack()
     {
         if (isOnAuto)
         {
-            DetermineAttack();
+            DetermineAttackFromList();
+         //   DetermineAttack();
         }
         else
             print("Player doesn't have enough MP, choose a different attack");
@@ -209,7 +212,7 @@ public class Unit : MonoBehaviour
     //Breakdown: damage = {[ Square root of 'MagicEquipment' bonus * Square root of 'Magic' stat ] add (CurrentLevel * 25%) + Square root of 'Physical' stat } * Attack Multiplier from bonuses * Variance between 95-110% * LightAttack modifier
     // this was based on Persona 5's calculation of damage = [ Square Root of Skill Power * Square Root of Stat ] 
 
-    #region Full List of Attacks
+
     public void BasicCast()
     {
         if (CurrentMP >= tier0)
@@ -228,417 +231,418 @@ public class Unit : MonoBehaviour
         else
             RedoAttack();
     }
-
-    public void Ajei()
-    {
-        if (CurrentMP >= tier1)
+    #region Full List of Attacks
+    /*
+        public void Ajei()
         {
-            deductCost = tier1;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier1)
+            {
+                deductCost = tier1;
+                CurrentMP -= deductCost;
 
-            isASoloAttack = true;
-            ancient = true;
+                isASoloAttack = true;
+                ancient = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void Deeza()
-    {
-        if (CurrentMP >= tier2)
+        public void Deeza()
         {
-            deductCost = tier2;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier2)
+            {
+                deductCost = tier2;
+                CurrentMP -= deductCost;
 
-            isASoloAttack = true;
-            ancient = true;
+                isASoloAttack = true;
+                ancient = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void Hookeeghan()
-    {
-        if (CurrentMP >= tier5)
+        public void Hookeeghan()
         {
-            deductCost = tier5;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier5)
+            {
+                deductCost = tier5;
+                CurrentMP -= deductCost;
 
-            isAGroupAttack = true;
-            ancient = true;
+                isAGroupAttack = true;
+                ancient = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void AuraDEau()
-    {
-        if (CurrentMP >= tier1)
+        public void AuraDEau()
         {
-            deductCost = tier1;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier1)
+            {
+                deductCost = tier1;
+                CurrentMP -= deductCost;
 
-            isASoloAttack = true;
-            charms = true;
+                isASoloAttack = true;
+                charms = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void CriDeGivre()
-    {
-        if (CurrentMP >= tier2)
+        public void CriDeGivre()
         {
-            deductCost = tier2;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier2)
+            {
+                deductCost = tier2;
+                CurrentMP -= deductCost;
 
-            isASoloAttack = true;
-            charms = true;
+                isASoloAttack = true;
+                charms = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void FuseeDeVent()
-    {
-        if (CurrentMP >= tier5)
+        public void FuseeDeVent()
         {
-            deductCost = tier5;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier5)
+            {
+                deductCost = tier5;
+                CurrentMP -= deductCost;
 
-            isAGroupAttack = true;
-            charms = true;
+                isAGroupAttack = true;
+                charms = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void HomdomIritus()
-    {
-        if (CurrentMP >= tier3)
+        public void HomdomIritus()
         {
-            deductCost = tier3;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier3)
+            {
+                deductCost = tier3;
+                CurrentMP -= deductCost;
 
-            isAGroupAttack = true;
-            darkArts = true;
+                isAGroupAttack = true;
+                darkArts = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void ManictomDotum()
-    {
-        if (CurrentMP >= tier1)
+        public void ManictomDotum()
         {
-            deductCost = tier1;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier1)
+            {
+                deductCost = tier1;
+                CurrentMP -= deductCost;
 
-            isASoloAttack = true;
-            darkArts = true;
+                isASoloAttack = true;
+                darkArts = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void OrbemPardonti()
-    {
-        if (CurrentMP >= tier2)
+        public void OrbemPardonti()
         {
-            deductCost = tier2;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier2)
+            {
+                deductCost = tier2;
+                CurrentMP -= deductCost;
 
-            isASoloAttack = true;
-            darkArts = true;
+                isASoloAttack = true;
+                darkArts = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void ScoptumTalli()
-    {
-        if (CurrentMP >= tier4)
+        public void ScoptumTalli()
         {
-            deductCost = tier4;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier4)
+            {
+                deductCost = tier4;
+                CurrentMP -= deductCost;
 
-            isAGroupAttack = true;
-            darkArts = true;
+                isAGroupAttack = true;
+                darkArts = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
-            CurrentHP = 1;
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
+                CurrentHP = 1;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void Charge()
-    {
-        if (CurrentMP >= tier4)
+        public void Charge()
         {
-            deductCost = tier4;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier4)
+            {
+                deductCost = tier4;
+                CurrentMP -= deductCost;
 
-            isAHeal = true;
+                isAHeal = true;
 
-            //this is only for 1 turn, but the way the calcualtion is done, the turn will rollover from 2->1, the player will have a turn, then the next turn will be 1->0 which is normal
-            attackBonusTurnCount = 2;
-            attackMultiplier = 2;
+                //this is only for 1 turn, but the way the calcualtion is done, the turn will rollover from 2->1, the player will have a turn, then the next turn will be 1->0 which is normal
+                attackBonusTurnCount = 2;
+                attackMultiplier = 2;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void EssenceOfPride()
-    {
-        if (CurrentMP >= tier6)
+        public void EssenceOfPride()
         {
-            deductCost = tier6;
-            CurrentMP -= deductCost;
+            if (CurrentMP >= tier6)
+            {
+                deductCost = tier6;
+                CurrentMP -= deductCost;
 
-            isAHeal = true;
-            essenceOfPride = true;
+                isAHeal = true;
+                essenceOfPride = true;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
 
-    public void Pestectus()
-    {
-        deductCost = tier3;
-        CurrentMP -= deductCost;
-
-        if (CurrentMP >= tier3)
-        {
-            isAHeal = true;
-            pestectus = true;
-
-            healthToRecover = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * .25f;
-
-            battle.ResolvingATurn();
-        }
-        else
-            RedoAttack();
-    }
-
-    public void PillarOfStrength()
-    {
-        if (CurrentMP >= tier1)
-        {
-            deductCost = tier1;
-            CurrentMP -= deductCost;
-
-            pillarOfStrength = true;
-            isAHeal = true;
-
-            battle.ResolvingATurn();
-        }
-        else
-            RedoAttack();
-    }
-
-    public void PotionOfHealing()
-    {
-        if (CurrentMP >= tier2)
-        {
-            deductCost = tier2;
-            CurrentMP -= deductCost;
-
-            potionOfHealing = true;
-            isAHeal = true;
-
-            healthToRecover = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * .25f;
-
-            battle.ResolvingATurn();
-        }
-        else
-            RedoAttack();
-    }
-
-    public void PotionOfResolve()
-    {
-        if (CurrentMP >= tier1)
-        {
-            deductCost = tier1;
-            CurrentMP -= deductCost;
-
-            potionofResolve = true;
-            isAHeal = true;
-
-            battle.ResolvingATurn();
-        }
-        else
-            RedoAttack();
-    }
-
-    public void PotionOfResurrection()
-    {
-        if (CurrentMP >= tier4)
-        {
-            potionOfResurrection = true;
-            isAHeal = true;
-
-            battle.ResolvingATurn();
-
-            deductCost = tier4;
-            CurrentMP -= deductCost;
-        }
-        else
-            RedoAttack();
-    }
-    public void ForcefulLunge()
-    {
-        if (CurrentHP >= tier1)
-        {
-            deductCost = tier1;
-            CurrentHP -= deductCost;
-
-            isASoloAttack = true;
-            physical = true;
-
-            damage = ((Mathf.Sqrt(PhysicalEquipment) * Mathf.Sqrt(Physical)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Magic))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
-
-            battle.ResolvingATurn();
-        }
-        else
-            RedoAttack();
-    }
-    public void PlayfulShove()
-    {
-        if (CurrentHP >= tier3)
-        {
-            deductCost = tier3;
-            CurrentHP -= deductCost;
-
-            isAGroupAttack = true;
-            physical = true;
-
-            damage = ((Mathf.Sqrt(PhysicalEquipment) * Mathf.Sqrt(Physical)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Magic))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
-
-            battle.ResolvingATurn();
-        }
-        else
-            RedoAttack();
-    }
-
-    public void VerticalSlice()
-    {
-        if (CurrentHP >= tier2)
-        {
-            deductCost = tier2;
-            CurrentHP -= deductCost;
-
-            isASoloAttack = true;
-            physical = true;
-
-            damage = ((Mathf.Sqrt(PhysicalEquipment) * Mathf.Sqrt(Physical)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Magic))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
-
-            battle.ResolvingATurn();
-        }
-        else
-            RedoAttack();
-    }
-
-    public void ExpelindoElemicus()
-    {
-        if (CurrentMP >= tier1)
-        {
-            deductCost = tier1;
-            CurrentMP -= deductCost;
-
-            isASoloAttack = true;
-            transfiguration = true;
-
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
-
-            battle.ResolvingATurn();
-        }
-        else
-            RedoAttack();
-    }
-
-    public void FierelloDeflectus()
-    {
-        if (CurrentMP >= tier2)
-        {
-            deductCost = tier2;
-            CurrentMP -= deductCost;
-
-            isASoloAttack = true;
-            transfiguration = true;
-
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
-
-            battle.ResolvingATurn();
-        }
-        else
-            RedoAttack();
-    }
-
-    public void SellamTrahere()
-    {
-        if (CurrentMP >= tier3)
+        public void Pestectus()
         {
             deductCost = tier3;
             CurrentMP -= deductCost;
 
-            isAGroupAttack = true;
-            transfiguration = true;
+            if (CurrentMP >= tier3)
+            {
+                isAHeal = true;
+                pestectus = true;
 
-            damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
+                healthToRecover = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * .25f;
 
-            battle.ResolvingATurn();
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
         }
-        else
-            RedoAttack();
-    }
+
+        public void PillarOfStrength()
+        {
+            if (CurrentMP >= tier1)
+            {
+                deductCost = tier1;
+                CurrentMP -= deductCost;
+
+                pillarOfStrength = true;
+                isAHeal = true;
+
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
+        }
+
+        public void PotionOfHealing()
+        {
+            if (CurrentMP >= tier2)
+            {
+                deductCost = tier2;
+                CurrentMP -= deductCost;
+
+                potionOfHealing = true;
+                isAHeal = true;
+
+                healthToRecover = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * .25f;
+
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
+        }
+
+        public void PotionOfResolve()
+        {
+            if (CurrentMP >= tier1)
+            {
+                deductCost = tier1;
+                CurrentMP -= deductCost;
+
+                potionofResolve = true;
+                isAHeal = true;
+
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
+        }
+
+        public void PotionOfResurrection()
+        {
+            if (CurrentMP >= tier4)
+            {
+                potionOfResurrection = true;
+                isAHeal = true;
+
+                battle.ResolvingATurn();
+
+                deductCost = tier4;
+                CurrentMP -= deductCost;
+            }
+            else
+                RedoAttack();
+        }
+        public void ForcefulLunge()
+        {
+            if (CurrentHP >= tier1)
+            {
+                deductCost = tier1;
+                CurrentHP -= deductCost;
+
+                isASoloAttack = true;
+                physical = true;
+
+                damage = ((Mathf.Sqrt(PhysicalEquipment) * Mathf.Sqrt(Physical)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Magic))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
+
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
+        }
+        public void PlayfulShove()
+        {
+            if (CurrentHP >= tier3)
+            {
+                deductCost = tier3;
+                CurrentHP -= deductCost;
+
+                isAGroupAttack = true;
+                physical = true;
+
+                damage = ((Mathf.Sqrt(PhysicalEquipment) * Mathf.Sqrt(Physical)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Magic))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
+
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
+        }
+
+        public void VerticalSlice()
+        {
+            if (CurrentHP >= tier2)
+            {
+                deductCost = tier2;
+                CurrentHP -= deductCost;
+
+                isASoloAttack = true;
+                physical = true;
+
+                damage = ((Mathf.Sqrt(PhysicalEquipment) * Mathf.Sqrt(Physical)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Magic))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
+
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
+        }
+
+        public void ExpelindoElemicus()
+        {
+            if (CurrentMP >= tier1)
+            {
+                deductCost = tier1;
+                CurrentMP -= deductCost;
+
+                isASoloAttack = true;
+                transfiguration = true;
+
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
+
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
+        }
+
+        public void FierelloDeflectus()
+        {
+            if (CurrentMP >= tier2)
+            {
+                deductCost = tier2;
+                CurrentMP -= deductCost;
+
+                isASoloAttack = true;
+                transfiguration = true;
+
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * mediumAttack;
+
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
+        }
+
+        public void SellamTrahere()
+        {
+            if (CurrentMP >= tier3)
+            {
+                deductCost = tier3;
+                CurrentMP -= deductCost;
+
+                isAGroupAttack = true;
+                transfiguration = true;
+
+                damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
+
+                battle.ResolvingATurn();
+            }
+            else
+                RedoAttack();
+        }
+    */
     #endregion
 
     public bool DidAttackKillCharacter(float damageToTake, float criticalChance)
     {
-        damage = damageToTake;
         //Calculating Chance for Dodging the attack
         float chanceForAttackToLand = Random.Range(0, 100);
         float chanceForCritial = Random.Range(0, 100);
@@ -660,7 +664,7 @@ public class Unit : MonoBehaviour
 
             if (charms && StrC || physical && StrP || darkArts && StrD || transfiguration && StrT || ancient && StrA)
             {
-                damage = damage / 2;
+                damageToTake = damageToTake / 2;
 
                 if (!isAPlayer)
                 {
@@ -672,7 +676,7 @@ public class Unit : MonoBehaviour
 
             else if (charms && WeakC || physical && WeakP || darkArts && WeakD || transfiguration && WeakT || ancient && WeakA)
             {
-                damage = damage * 2;
+                damageToTake = damageToTake * 2;
 
                 if (!isAPlayer)
                 {
@@ -689,7 +693,7 @@ public class Unit : MonoBehaviour
 
             else if(chanceForCritial <= criticalChance)
             {
-                damage = damage * 2;
+                damageToTake = damageToTake * 2;
 
                 if (!isAPlayer)
                 {
@@ -702,9 +706,9 @@ public class Unit : MonoBehaviour
             }
 
             if (isMetallic)
-                damage = 1;
+                damageToTake = 1;
 
-            CurrentHP -= (damage * defenseMultiplier);
+            CurrentHP -= (damageToTake * defenseMultiplier);
 
             if (!isAPlayer)
                 healthBar.value = CurrentHP / MaxHP;
