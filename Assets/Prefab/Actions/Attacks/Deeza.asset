@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Deeza
   m_EditorClassIdentifier: 
   AttackName: Deeza
-  AttackDescription: Test
+  AttackDescription: 'Medium Ancient Damage to one enemy '
   cost: 8
+  resourceType: 0
   castType: 1
   targetType: 0
   effectType: 2

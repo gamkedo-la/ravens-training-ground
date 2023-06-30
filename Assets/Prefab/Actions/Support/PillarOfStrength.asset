@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b74d8730ef00c408257177426cee69, type: 3}
   m_Name: PillarOfStrength
   m_EditorClassIdentifier: 
-  cost: 0
+  AttackName: Pillar of Strength
+  AttackDescription: Increases Defense of self
+  cost: 4
+  resourceType: 0
   castType: 0
   targetType: 0
-  effectType: 0
+  effectType: 5
   attackExcersion: 0

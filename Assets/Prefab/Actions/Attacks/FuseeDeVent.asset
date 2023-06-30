@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b74d8730ef00c408257177426cee69, type: 3}
   m_Name: FuseeDeVent
   m_EditorClassIdentifier: 
-  AttackName: 
-  AttackDescription: Test
+  AttackName: Fusee De Vent
+  AttackDescription: Medium Charm Damage to all enemies
   cost: 18
+  resourceType: 0
   castType: 1
   targetType: 1
   effectType: 0

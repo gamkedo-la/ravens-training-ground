@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b74d8730ef00c408257177426cee69, type: 3}
   m_Name: PotionOfResolve
   m_EditorClassIdentifier: 
-  cost: 0
+  AttackName: Potion of Resolve
+  AttackDescription: Increases Attack of itself
+  cost: 4
+  resourceType: 0
   castType: 0
   targetType: 0
-  effectType: 0
+  effectType: 5
   attackExcersion: 0

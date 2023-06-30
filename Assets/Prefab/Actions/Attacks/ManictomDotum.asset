@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ManictomDotum
   m_EditorClassIdentifier: 
   AttackName: Manictom Dotum
-  AttackDescription: Test
+  AttackDescription: Light Dark damage to one enemy
   cost: 4
+  resourceType: 0
   castType: 1
   targetType: 0
   effectType: 2

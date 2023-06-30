@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: FierelloDeflectus
   m_EditorClassIdentifier: 
   AttackName: Fierello Deflectus
-  AttackDescription: Test
+  AttackDescription: Medium Trans damage to one enemy
   cost: 8
+  resourceType: 0
   castType: 1
   targetType: 0
   effectType: 3

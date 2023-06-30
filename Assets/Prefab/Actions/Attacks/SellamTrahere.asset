@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: SellamTrahere
   m_EditorClassIdentifier: 
   AttackName: Sellam Trahere
-  AttackDescription: Test
+  AttackDescription: Light Trans damage to all enemies
   cost: 12
+  resourceType: 0
   castType: 1
   targetType: 1
   effectType: 3

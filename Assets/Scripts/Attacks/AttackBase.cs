@@ -7,7 +7,7 @@ public enum AttackCosts { tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 1
 public enum ResourceType { Mana, Health }
 public enum CastType { Friendly, Enemy }
 public enum TargetType { SingleTarget, AOE }
-public enum EffectType { Charms, Physical, DarkArts, Transfiguration, Ancient, None }
+public enum EffectType { Charms, Physical, DarkArts, Transfiguration, Ancient, Potions, None }
 public enum AttackExcersion { LightAttack, MediumAttack, DefaultAttack }
 [CreateAssetMenu(fileName ="Attack",menuName ="Actions/Attack")]
 public class AttackBase : ScriptableObject
@@ -83,6 +83,8 @@ public class AttackBase : ScriptableObject
             case EffectType.Ancient:
                 return unit.Magic;
             case EffectType.None:
+                return unit.Magic;
+            case EffectType.Potions:
                 return unit.Magic;
             default:
                 Debug.Log("Missing Type");

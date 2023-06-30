@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ExpelindoElemicus
   m_EditorClassIdentifier: 
   AttackName: Expelindo Elemicus
-  AttackDescription: Test
+  AttackDescription: Light Trans damage to one enemy
   cost: 4
+  resourceType: 0
   castType: 1
   targetType: 0
   effectType: 3

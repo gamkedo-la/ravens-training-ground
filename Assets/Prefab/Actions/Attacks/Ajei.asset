@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Ajei
   m_EditorClassIdentifier: 
   AttackName: Ajei
-  AttackDescription: Test
+  AttackDescription: Low Ancient Damage to one enemy
   cost: 4
+  resourceType: 0
   castType: 1
   targetType: 0
   effectType: 2

@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b74d8730ef00c408257177426cee69, type: 3}
   m_Name: EssenceOfPride
   m_EditorClassIdentifier: 
-  cost: 0
+  AttackName: Essence of Pride
+  AttackDescription: Raises attack, defense of all allies
+  cost: 21
+  resourceType: 0
   castType: 0
-  targetType: 0
-  effectType: 0
+  targetType: 1
+  effectType: 5
   attackExcersion: 0

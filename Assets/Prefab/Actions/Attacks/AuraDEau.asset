@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: AuraDEau
   m_EditorClassIdentifier: 
   AttackName: Aura D Eau
-  AttackDescription: Test
+  AttackDescription: Light Charm damage to one enemy
   cost: 4
+  resourceType: 0
   castType: 1
   targetType: 0
   effectType: 0

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: CriDeGivre
   m_EditorClassIdentifier: 
   AttackName: Cri De Givre
-  AttackDescription: Test
+  AttackDescription: Medium Charm damage to one enemy
   cost: 8
+  resourceType: 0
   castType: 1
   targetType: 0
   effectType: 0

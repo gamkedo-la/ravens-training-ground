@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PlayfulShove
   m_EditorClassIdentifier: 
   AttackName: Playful Shove
-  AttackDescription: Test
+  AttackDescription: Light Physical damage to all enemies
   cost: 12
+  resourceType: 0
   castType: 1
   targetType: 1
   effectType: 1

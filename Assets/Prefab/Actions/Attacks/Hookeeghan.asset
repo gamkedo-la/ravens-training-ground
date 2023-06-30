@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Hookeeghan
   m_EditorClassIdentifier: 
   AttackName: Hookeeghan
-  AttackDescription: Test
+  AttackDescription: Medium ancient damage to all enemies
   cost: 18
+  resourceType: 0
   castType: 1
   targetType: 1
   effectType: 2
