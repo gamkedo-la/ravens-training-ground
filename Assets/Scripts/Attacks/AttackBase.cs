@@ -4,6 +4,7 @@ using UnityEngine;
 
 
 public enum AttackCosts { tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 15, tier5 = 18, tier6 = 21 }
+public enum ResourceType { Mana, Health }
 public enum CastType { Friendly, Enemy }
 public enum TargetType { SingleTarget, AOE }
 public enum EffectType { Charms, Physical, DarkArts, Transfiguration, Ancient, None }
@@ -14,27 +15,52 @@ public class AttackBase : ScriptableObject
     public string AttackName;
     public string AttackDescription;
     public AttackCosts cost;
+    public ResourceType resourceType;
     public CastType castType;
     public TargetType targetType;
     public EffectType effectType;
     public AttackExcersion attackExcersion;
     public void AttemptAttack(Unit unit)
     {
-        if (unit.CurrentMP >= (int)cost)
+        if(resourceType== ResourceType.Mana)
         {
-            int deductCost = (int)cost;
-            unit.CurrentMP -= deductCost;
 
-            float damageType = GetEffectModifier(unit);
-            float equipmentModifier = GetEquipmentModifier(unit);
-            float excersionModifier = GetAttackExcersersion();
 
-            //This attack costs nothing so it is only 60% base damage
-            float damage = (((Mathf.Sqrt(equipmentModifier) * Mathf.Sqrt(damageType)) + (unit.CurrentLevel * 1.25f)) * unit.attackMultiplier * Random.Range(.95f, 1.1f)) * excersionModifier;
+            if (unit.CurrentMP >= (int)cost)
+            {
+                int deductCost = (int)cost;
+                unit.CurrentMP -= deductCost;
 
+                Attack(unit);
+            }
+            else
+                return;
         }
+        else if(resourceType== ResourceType.Health)
+        {
+            if (unit.CurrentHP >= (int)cost)
+            {
+                int deductCost = (int)cost;
+                unit.CurrentHP -= deductCost;
 
+                Attack(unit);
+            }
+            else
+                return;
+        }
     }
+
+    void Attack(Unit unit)
+    {
+
+        float damageType = GetEffectModifier(unit);
+        float equipmentModifier = GetEquipmentModifier(unit);
+        float excersionModifier = GetAttackExcersersion();
+
+        //This attack costs nothing so it is only 60% base damage
+        float damage = (((Mathf.Sqrt(equipmentModifier) * Mathf.Sqrt(damageType)) + (unit.CurrentLevel * 1.25f)) * unit.attackMultiplier * Random.Range(.95f, 1.1f)) * excersionModifier;
+    }
+
 
     float GetEffectModifier(Unit unit)
     {
