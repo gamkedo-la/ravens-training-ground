@@ -121,7 +121,42 @@ public class Unit : MonoBehaviour
         else
             print("Character is dead, you shouldn't reach here, something went wrong");
     }
+    void DetermineAttackFromList()
+    {
+        if (isOnAuto)
+        {
+            int fleeThisTurn = Random.Range(0, 100);
 
+            if (fleeThisTurn >= 50 && canFlee)
+            {
+                print("Character Fled");
+                experienceEarned = 0;
+                CurrentHP = 0;
+
+                affinityText.color = Color.black;
+                affinityText.text = "Fled";
+                StartCoroutine(ClearText());
+
+                Instantiate(deathParticle, transform.position, transform.rotation);
+                characterIsDead = true;
+                battle.ExperienceAndDeathCollection();
+                //character fled
+            }
+            else
+            {
+                int randomAttack = Random.Range(0, KnownSkills.Count);
+                attacks[randomAttack].AttemptAttack(this);
+                print(KnownSkills[randomAttack]);
+            }
+        }
+        else
+        {
+            if (isAPlayer)
+            {
+                //turn first menu on
+            }
+        }
+    }
     void DetermineAttack()
     {
         if (isOnAuto)
