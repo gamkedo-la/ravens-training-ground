@@ -82,9 +82,9 @@ public class AttackBase : ScriptableObject
                 return unit.Magic;
             case EffectType.Ancient:
                 return unit.Magic;
-            case EffectType.None:
-                return unit.Magic;
             case EffectType.Potions:
+                return unit.Magic;
+            case EffectType.None:
                 return unit.Magic;
             default:
                 Debug.Log("Missing Type");
@@ -105,6 +105,8 @@ public class AttackBase : ScriptableObject
             case EffectType.Transfiguration:
                 return 0;
             case EffectType.Ancient:
+                return 0;
+            case EffectType.Potions:
                 return 0;
             case EffectType.None:
                 return 0;
