@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnAuto: 1
+  isOnAuto: 0
   isAPlayer: 1
   Name: Tristan
   CurrentHP: 5
@@ -142,6 +142,7 @@ MonoBehaviour:
   Agility: 7
   Finesse: 20
   CurrentLevel: 1
+  tempAgility: 0
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
@@ -208,6 +209,7 @@ MonoBehaviour:
   isMetallic: 0
   metallic: {fileID: 0}
   canFlee: 0
+  randomAttack: 0
 --- !u!54 &-1393977606469236529
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: VerticalSlice
   m_EditorClassIdentifier: 
   AttackName: Vertical Slice
-  AttackDescription: Medium Damage to 1 enemy
+  AttackDescription: Medium Damage to one enemy
   cost: 8
   resourceType: 0
   castType: 1

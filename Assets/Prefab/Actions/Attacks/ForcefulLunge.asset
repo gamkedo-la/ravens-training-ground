@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ForcefulLunge
   m_EditorClassIdentifier: 
   AttackName: Forceful Lunge
-  AttackDescription: Light Physical damage to 1 enemy
+  AttackDescription: Light Physical damage to one enemy
   cost: 4
   resourceType: 0
   castType: 1

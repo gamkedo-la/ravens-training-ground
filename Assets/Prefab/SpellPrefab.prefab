@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 2305915375191048570}
   - component: {fileID: 3182869816307234098}
   - component: {fileID: 4927516913281286685}
+  - component: {fileID: 5018278076820589037}
   m_Layer: 0
   m_Name: SpellPrefab
   m_TagString: Untagged
@@ -218,7 +219,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7685712881543682207}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5018278076820589037}
+        m_TargetAssemblyTypeName: SpellSelection, Assembly-CSharp
+        m_MethodName: SpellSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4927516913281286685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +251,18 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+--- !u!114 &5018278076820589037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3141710781650100546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f564a7b24b7e5ff4783d121109632955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4123763299034271664
 GameObject:
   m_ObjectHideFlags: 0

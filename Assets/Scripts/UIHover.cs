@@ -12,6 +12,7 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     Vector3 minVect3, maxVect3, defaultVect3;
     bool grow, hover;
     public bool isFlee;
+
     void Start()
     {
         grow = true;
@@ -48,6 +49,7 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
 
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         hover = true;

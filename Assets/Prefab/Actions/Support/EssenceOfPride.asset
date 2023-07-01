@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EssenceOfPride
   m_EditorClassIdentifier: 
   AttackName: Essence of Pride
-  AttackDescription: Raises attack, defense of all allies
+  AttackDescription: Raises attack and defense of all allies
   cost: 21
   resourceType: 0
   castType: 0

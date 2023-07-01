@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ScoptumTalli
   m_EditorClassIdentifier: 
   AttackName: Scoptum Talli
-  AttackDescription: 'Medium Dark magic to all enemies, users health lowers to 1 '
+  AttackDescription: Medium Dark magic to all enemies caster health drops to one
   cost: 15
   resourceType: 0
   castType: 1

@@ -58,6 +58,8 @@ public class Battle : MonoBehaviour
     public GameObject playerUICanvas;
     public Transform AoEView;
 
+    public string spellToStore;
+
     void Start()
     {
         if (GameManager.enemyCount > 0)
@@ -831,6 +833,17 @@ public class Battle : MonoBehaviour
             movingCamera.transform.rotation = AoEView.rotation;
         }
 
+    }
+
+    public void TurnOnIndividualAttackItems()
+    {
+        //move camera
+        //turn on particle system (based on attack)
+    }
+    public void TurnOffIndividualAttackItems()
+    {
+        //return camera
+        //turn off particle system 
     }
 
     public void AdvanceTurn()

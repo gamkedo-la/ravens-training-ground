@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class BattleMenu : MonoBehaviour
 {
-    public GameObject firstMenu, tacticsMenu, fleeMenu, guardMenu, spellsMenu, itemsMenu;
+    public GameObject firstMenu, tacticsMenu, fleeMenu, guardMenu, spellsMenu, itemsMenu, attackingMenu;
     public GameObject tacticsMenuForLeader;
 
     Battle battle;
     public GameObject spellsUIPrefab;
     public Transform spellsMenuHolder;
+    public bool isSpellBackButton;
 
     public List<Sprite> icons = new List<Sprite>();
 
@@ -65,8 +66,21 @@ public class BattleMenu : MonoBehaviour
         guardMenu.SetActive(false);
         spellsMenu.SetActive(true);
         itemsMenu.SetActive(false);
+        attackingMenu.SetActive(false);
 
         PopulateSpellsMenu();
+    }
+
+    public void OpenAttackingMenu()
+    {
+        //store string for attack
+
+        battle.TurnOnIndividualAttackItems();
+
+        //turn off all menus
+        TurnOffAllMenus();
+        //turn on attacking menu
+        attackingMenu.SetActive(true);
     }
 
     public void OpenItemsMenu()
@@ -99,14 +113,21 @@ public class BattleMenu : MonoBehaviour
         guardMenu.SetActive(false);
         spellsMenu.SetActive(false);
         itemsMenu.SetActive(false);
+        attackingMenu.SetActive(false);
+        //if cam position changed or particles are turn on, this resets it
+        battle.TurnOffIndividualAttackItems();
+        if (isSpellBackButton)
+            ClearStoredSpell();
+    }
+
+    void ClearStoredSpell()
+    {
+        battle.spellToStore = "";
     }
 
     public void PopulateSpellsMenu()
     {
         //Destroy all child count before reloading this menu (that way it doesn't duplicate it)
-
-        Debug.Log(transform.childCount);
-
 
         for (int i = 0; i < battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks.Count - 1; i++)
         {
@@ -143,6 +164,11 @@ public class BattleMenu : MonoBehaviour
             {
                 instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[4];
                 instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "HP";
+            }
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Potions")
+            {
+                instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[5];
+                instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
             }
         }
     }

@@ -156,7 +156,15 @@ public class Unit : MonoBehaviour
         {
             if (isAPlayer)
             {
-                //turn first menu on
+                print("do the spell:" + battle.spellToStore);
+
+                for (int i = 0; i < attacks.Count; i++)
+                {
+                    if (attacks[i].AttackName == battle.spellToStore)
+                    {
+                        attacks[i].AttemptAttack(this);
+                    }
+                }
             }
         }
     }
