@@ -63,7 +63,6 @@ public class AttackBase : ScriptableObject
 
         battle = GameObject.Find("Battle").GetComponent<Battle>();
 
-        Debug.LogWarning(damage);
         battle.ResolvingATurnModified(damage);
     }
 

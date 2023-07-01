@@ -101,6 +101,7 @@ public class Unit : MonoBehaviour
     {
         if (!characterIsDead)
         {
+            battle.MoveCamera();
             if (hasBeenKnockedDown)
             {
                 anim.SetBool("knockedDown", false);
@@ -728,6 +729,16 @@ public class Unit : MonoBehaviour
                 return true;
             }         
         }
+    }
+
+    public void RotateCamera()
+    {
+        battle.RotateCamera();
+    }
+
+    public void AdvanceTurn()
+    {
+        battle.AdvanceTurn();
     }
 
     IEnumerator ClearText()

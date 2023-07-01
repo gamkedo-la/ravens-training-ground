@@ -14,8 +14,8 @@ public class Battle : MonoBehaviour
     public GameObject informationTextHolder, characterNameHolder;
     public TMP_Text informationText, characterNameText;
 
-    public Transform BattleStation1, BattleStation2, BattleStation3, BattleStation4;
-    public Transform enemyBattleStation1, enemyBattleStation2, enemyBattleStation3, enemyBattleStation4;
+    public List<Transform> PlayerBattleStations = new List<Transform>();
+    public List<Transform> EnemyBattleStations = new List<Transform>();
 
     GameObject currentParty0, currentParty1, currentParty2, currentParty3;
     GameObject currentEnemy0, currentEnemy1, currentEnemy2, currentEnemy3;
@@ -52,6 +52,11 @@ public class Battle : MonoBehaviour
     int playerToAttack;
     float chanceToLeave;
     bool hasFled;
+    string tempStoreOfPlayer;
+
+    public GameObject movingCamera;
+    public GameObject playerUICanvas;
+    public Transform AoEView;
 
     void Start()
     {
@@ -100,50 +105,50 @@ public class Battle : MonoBehaviour
 
         //This segment add players to the player list, enemies to the enemy list, and players/enemies to a combined 'combatants' list
         #region This Adds members to the Party as well as Sorts by Agility
-        currentParty0 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[0]), BattleStation1.transform.position + platformOffset, BattleStation1.transform.rotation);
+        currentParty0 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[0]), PlayerBattleStations[0].transform.position + platformOffset, PlayerBattleStations[0].transform.rotation);
         Combatants.Add(currentParty0);
         playersInThisFight.Add(currentParty0);
 
         if (GameManager.inCurrentParty.Count > 0)
         {
-            currentParty1 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[1]), BattleStation2.transform.position + platformOffset, BattleStation2.transform.rotation);
+            currentParty1 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[1]), PlayerBattleStations[1].transform.position + platformOffset, PlayerBattleStations[1].transform.rotation);
             Combatants.Add(currentParty1);
             playersInThisFight.Add(currentParty1);
         }
         if (GameManager.inCurrentParty.Count > 1)
         {
-            currentParty2 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[2]), BattleStation3.transform.position + platformOffset, BattleStation3.transform.rotation);
+            currentParty2 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[2]), PlayerBattleStations[2].transform.position + platformOffset, PlayerBattleStations[2].transform.rotation);
             Combatants.Add(currentParty2);
             playersInThisFight.Add(currentParty2);
         }
 
         if (GameManager.inCurrentParty.Count > 2)
         {
-            currentParty3 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[3]), BattleStation4.transform.position + platformOffset, BattleStation4.transform.rotation);
+            currentParty3 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[3]), PlayerBattleStations[3].transform.position + platformOffset, PlayerBattleStations[3].transform.rotation);
             Combatants.Add(currentParty3);
             playersInThisFight.Add(currentParty3);
         }
 
-        currentEnemy0 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[0]), enemyBattleStation1.transform.position + platformOffset, enemyBattleStation1.transform.rotation);
+        currentEnemy0 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[0]), EnemyBattleStations[0].transform.position + platformOffset, EnemyBattleStations[0].transform.rotation);
         Combatants.Add(currentEnemy0);
         enemiesInFight.Add(currentEnemy0);
 
         if (enemyCount > 1)
         {
-            currentEnemy1 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[1]), enemyBattleStation2.transform.position + platformOffset, enemyBattleStation2.transform.rotation);
+            currentEnemy1 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[1]), EnemyBattleStations[1].transform.position + platformOffset, EnemyBattleStations[1].transform.rotation);
             Combatants.Add(currentEnemy1);
             enemiesInFight.Add(currentEnemy1);
         }
       
         if (enemyCount > 2)
         { 
-            currentEnemy2 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[2]), enemyBattleStation3.transform.position + platformOffset, enemyBattleStation3.transform.rotation);
+            currentEnemy2 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[2]), EnemyBattleStations[2].transform.position + platformOffset, EnemyBattleStations[2].transform.rotation);
             Combatants.Add(currentEnemy2);
             enemiesInFight.Add(currentEnemy2);
         }
         if (enemyCount > 3)
         {
-            currentEnemy3 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[3]), enemyBattleStation4.transform.position + platformOffset, enemyBattleStation4.transform.rotation);
+            currentEnemy3 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[3]), EnemyBattleStations[3].transform.position + platformOffset, EnemyBattleStations[3].transform.rotation);
             Combatants.Add(currentEnemy3);
             enemiesInFight.Add(currentEnemy3);
         }
@@ -539,6 +544,7 @@ public class Battle : MonoBehaviour
                     int playerToChoose = Random.Range(0, playerToAttack);
                     playersInThisFight[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
                     Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToChoose].transform);
+                    tempStoreOfPlayer = playersInThisFight[playerToChoose].GetComponent<Unit>().name;
                     playerToAttack = 0;
                 }
             }
@@ -774,6 +780,63 @@ public class Battle : MonoBehaviour
             state = StateOfBattle.LOST;
             EndBattle();
         }
+    }
+
+    public void MoveCamera()
+    {
+        if (Combatants[currentCombatant].GetComponent<Unit>().isAPlayer)
+        {
+            playerUICanvas.SetActive(true);
+            for (int i = 0; i < playersInThisFight.Count; i++)
+            {
+                if (Combatants[currentCombatant].GetComponent<Unit>().name == playersInThisFight[i].GetComponent<Unit>().name)
+                {
+                    movingCamera.transform.position = PlayerBattleStations[i].GetChild(0).transform.position;
+                    movingCamera.transform.rotation = PlayerBattleStations[i].GetChild(0).transform.rotation;
+                }
+            }
+        }
+        else
+        {
+            playerUICanvas.SetActive(false);
+
+            //THIS IS A PROBLEM - ENEMIES CAN BE NAMED THE SAME THING
+            for (int i = 0; i < enemiesInFight.Count; i++)
+            {
+                if (Combatants[currentCombatant].GetComponent<Unit>().name == enemiesInFight[i].GetComponent<Unit>().name)
+                {
+                    movingCamera.transform.position = EnemyBattleStations[i].GetChild(0).transform.position;
+                    movingCamera.transform.rotation = EnemyBattleStations[i].GetChild(0).transform.rotation;
+                }
+            }      
+        }       
+    }
+
+    public void RotateCamera()
+    {
+        if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].targetType.ToString() == "SingleTarget")
+        {
+            for (int i = 0; i < playersInThisFight.Count; i++)
+            {
+                if (tempStoreOfPlayer == playersInThisFight[i].GetComponent<Unit>().name)
+                {
+                    movingCamera.transform.LookAt(playersInThisFight[i].transform);
+                }
+            }
+            tempStoreOfPlayer = "";
+        }
+        else
+        {
+            movingCamera.transform.position = AoEView.transform.position;
+            movingCamera.transform.rotation = AoEView.rotation;
+        }
+
+    }
+
+    public void AdvanceTurn()
+    {
+        currentCombatant++;
+        NextTurn();
     }
 
     public void UpdatePlayerHealthManaUI()

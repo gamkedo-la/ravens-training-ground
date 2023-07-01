@@ -9,9 +9,9 @@ AnimatorOverrideController:
   m_Name: jersey
   m_Controller: {fileID: 9100000, guid: 30691f8be331be748a0ea31ab637b16f, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 4723146814002874508, guid: 3b1da4bcbc9b283478b936f9cbbef85c, type: 3}
-    m_OverrideClip: {fileID: 4723146814002874508, guid: f32f56f85942574489147ea1f58cce7f, type: 3}
   - m_OriginalClip: {fileID: -8945691123924629249, guid: 3b1da4bcbc9b283478b936f9cbbef85c, type: 3}
     m_OverrideClip: {fileID: -8945691123924629249, guid: f32f56f85942574489147ea1f58cce7f, type: 3}
   - m_OriginalClip: {fileID: 8032047112750320540, guid: 3b1da4bcbc9b283478b936f9cbbef85c, type: 3}
     m_OverrideClip: {fileID: 8032047112750320540, guid: f32f56f85942574489147ea1f58cce7f, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: d1eeebefe3e017a48817a466eb344a26, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 69934de4ac81db64bb9694fd038b29a8, type: 2}
