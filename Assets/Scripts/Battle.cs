@@ -277,21 +277,16 @@ public class Battle : MonoBehaviour
         #region Player Turn
         currentCombatantUnit.anim.SetTrigger("Attack");
 
-        if (currentCombatantUnit.isAPlayer)
-        {
+        if (currentCombatantUnit.isAPlayer) {
 
             //During a solo attack, the automated player has a 50% chance to hit the lowest HP target, then a 50% chance to randomly hit any other enemy (including the lowest)
-            if (currentCombatantUnit.isASoloAttack)
-            {         
+            if (currentCombatantUnit.isASoloAttack) {
                 enemiesInFight = enemiesInFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
                 int randAttack = Random.Range(0, 100);
-                if (randAttack < 50)
-                {
+                if (randAttack < 50) {
                     Combatants[currentCombatant].transform.LookAt(enemiesInFight[0].transform);
                     enemiesInFight[0].GetComponent<Unit>().DidAttackKillCharacter(currentCombatantUnit.damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
-                }
-                else
-                {
+                } else {
                     int opponentToAttack = Random.Range(0, enemiesInFight.Count);
                     enemiesInFight[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(currentCombatantUnit.damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
                     Combatants[currentCombatant].transform.LookAt(enemiesInFight[opponentToAttack].transform);
@@ -299,113 +294,12 @@ public class Battle : MonoBehaviour
             }
 
             //Group attacks hit every enemy at the same time
-            else if (currentCombatantUnit.isAGroupAttack)
-            {
-                for (int i = 0; i < enemiesInFight.Count; i++)
-                {
+            else if (currentCombatantUnit.isAGroupAttack) {
+                for (int i = 0; i < enemiesInFight.Count; i++) {
                     enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(currentCombatantUnit.damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
                 }
             }
-
-            //This section talks about the different support 'attacks' [isAHeal is derived from 'Unit']
-            else if (currentCombatantUnit.isAHeal)
-            {
-                //Essence Of Pride increases the party's attack by 50%, defense by 50%, and keeps those stats for 3 turns [this is hard coded to prevent stacking = 3 is different than += 3]
-                if (currentCombatantUnit.essenceOfPride)
-                {
-                    for (int i = 0; i < playersInThisFight.Count; i++)
-                    {
-                        playersInThisFight[i].GetComponent<Unit>().anim.SetTrigger("Charge");
-                        Instantiate(powerUpParticle, playersInThisFight[i].transform.position, playersInThisFight[i].transform.rotation);
-                        playersInThisFight[i].GetComponent<Unit>().attackMultiplier = 1.5f;
-                        playersInThisFight[i].GetComponent<Unit>().defenseMultiplier = .5f;
-
-                        playersInThisFight[i].GetComponent<Unit>().attackBonusTurnCount = 3;
-                        playersInThisFight[i].GetComponent<Unit>().defenseBonusTurnCount = 3;
-                    }
-                }
-
-                //Pestecus this slightly increases the health of all party members (that are alive)
-                else if(currentCombatantUnit.pestectus)
-                {
-                    for (int i = 0; i < playersInThisFight.Count; i++)
-                    {
-                        playersInThisFight[i].GetComponent<Unit>().anim.SetTrigger("Charge");
-                        Instantiate(powerUpParticle, playersInThisFight[i].transform.position, playersInThisFight[i].transform.rotation);
-                        playersInThisFight[i].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
-                        if (playersInThisFight[i].GetComponent<Unit>().CurrentHP >= playersInThisFight[i].GetComponent<Unit>().MaxHP)
-                        {
-                            playersInThisFight[i].GetComponent<Unit>().CurrentHP = playersInThisFight[i].GetComponent<Unit>().MaxHP;
-                        }
-                    }
-                }
-
-                //Pillar of Strength this increases the defense of the current caster by 50% for 3 turns
-                else if (currentCombatantUnit.pillarOfStrength)
-                {
-                    currentCombatantUnit.anim.SetTrigger("Charge");
-                    Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
-                    currentCombatantUnit.defenseMultiplier = .5f;
-                    currentCombatantUnit.defenseBonusTurnCount = 3;
-                }
-
-                //Potion of Healing this slightly heals one party member. There is an 80% chance they heal the weakest party member, 20% chance it randomly heals another person in the party
-                else if (currentCombatantUnit.potionOfHealing)
-                {
-                    playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
-
-                    int chanceOfPersonToHeal = Random.Range(0, 100);
-                    if (chanceOfPersonToHeal <= 80)
-                    {
-                        playersInThisFight[0].GetComponent<Unit>().anim.SetTrigger("Charge");
-                        playersInThisFight[0].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
-                        if (playersInThisFight[0].GetComponent<Unit>().CurrentHP >= playersInThisFight[0].GetComponent<Unit>().MaxHP)
-                        {
-                            Instantiate(powerUpParticle, playersInThisFight[0].transform.position, Combatants[currentCombatant].transform.rotation);
-                            playersInThisFight[0].GetComponent<Unit>().CurrentHP = playersInThisFight[0].GetComponent<Unit>().MaxHP;
-                        }
-                    }
-                    else
-                    {
-                        int personToHeal = Random.Range(0, playersInThisFight.Count);
-                        playersInThisFight[personToHeal].GetComponent<Unit>().anim.SetTrigger("Charge");
-                        playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
-                        if (playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP >= playersInThisFight[personToHeal].GetComponent<Unit>().MaxHP)
-                        {
-                            Instantiate(powerUpParticle, playersInThisFight[personToHeal].transform.position, playersInThisFight[personToHeal].transform.rotation);
-                            playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP = playersInThisFight[personToHeal].GetComponent<Unit>().MaxHP;
-                        }
-                    }
-                }
-
-                //Potion of Resolve increases the attack of the current caster by 50% for 3 turns
-                else if (currentCombatantUnit.potionofResolve)
-                {
-                    currentCombatantUnit.anim.SetTrigger("Charge");
-                    currentCombatantUnit.attackMultiplier = 1.5f;
-                    currentCombatantUnit.attackBonusTurnCount = 3;
-                }
-
-                //Potion of Resurrection: 1)Brings one party member back to life 2) Sets that party member's health to 50% 3) adds them back into the turn order 
-                else if (currentCombatantUnit.potionOfResurrection)
-                {
-                    for (int i = 0; i < playersInThisFight.Count; i++)
-                    {
-                        if (playersInThisFight[i].GetComponent<Unit>().characterIsDead)
-                            deadCharacters.Add(playersInThisFight[i]);
-                    }
-
-                    if (deadCharacters.Count > 0)
-                    {
-                        Reincarnation();
-                    }
-                    else
-                    {
-                        print("No suitable target for resurrection, choose a different attack");
-                        currentCombatantUnit.RedoAttack();
-                    }
-                }
-            }
+            HandleSupportAttacks(playersInThisFight);
         }
         #endregion
 
@@ -441,101 +335,7 @@ public class Battle : MonoBehaviour
                         playersInThisFight[i].GetComponent<Unit>().DidAttackKillCharacter(currentCombatantUnit.damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
                 }
             }
-
-            //These are support 'attacks' [derived from Unit]
-            else if (currentCombatantUnit.isAHeal)
-            {
-                //Essence Of Pride increases the party's attack by 50%, defense by 50%, and keeps those stats for 3 turns [this is hard coded to prevent stacking = 3 is different than += 3]
-                if (currentCombatantUnit.essenceOfPride)
-                {
-                    for (int i = 0; i < enemiesInFight.Count; i++)
-                    {
-                        Instantiate(powerUpParticle, enemiesInFight[i].transform.position, enemiesInFight[i].transform.rotation);
-                        enemiesInFight[i].GetComponent<Unit>().attackMultiplier = 1.5f;
-                        enemiesInFight[i].GetComponent<Unit>().defenseMultiplier = .5f;
-
-                        enemiesInFight[i].GetComponent<Unit>().attackBonusTurnCount = 3;
-                        enemiesInFight[i].GetComponent<Unit>().defenseBonusTurnCount = 3;
-                    }
-                }
-
-                //Pestecus this slightly increases the health of all party members (that are alive)
-                else if (currentCombatantUnit.pestectus)
-                {
-                    for (int i = 0; i < enemiesInFight.Count; i++)
-                    {
-                        Instantiate(powerUpParticle, enemiesInFight[i].transform.position, enemiesInFight[i].transform.rotation);
-                        enemiesInFight[i].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
-                        if (enemiesInFight[i].GetComponent<Unit>().CurrentHP >= enemiesInFight[i].GetComponent<Unit>().MaxHP)
-                        {
-                            enemiesInFight[i].GetComponent<Unit>().CurrentHP = enemiesInFight[i].GetComponent<Unit>().MaxHP;
-                        }
-                    }
-                }
-
-                //Pillar of Strength this increases the defense of the current caster by 50% for 3 turns
-                else if (currentCombatantUnit.pillarOfStrength)
-                {
-                    Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
-                    currentCombatantUnit.defenseMultiplier = .5f;
-                    currentCombatantUnit.defenseBonusTurnCount = 3;
-                }
-
-                //Potion of Healing this slightly heals one party member. There is an 80% chance they heal the weakest party member, 20% chance it randomly heals another person in the party
-                else if (currentCombatantUnit.potionOfHealing)
-                {
-                    enemiesInFight = enemiesInFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
-
-                    int chanceOfPersonToHeal = Random.Range(0, 100);
-                    if (chanceOfPersonToHeal <= 80)
-                    {
-                        enemiesInFight[0].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
-                        if (enemiesInFight[0].GetComponent<Unit>().CurrentHP >= enemiesInFight[0].GetComponent<Unit>().MaxHP)
-                        {
-                            Instantiate(powerUpParticle, enemiesInFight[0].transform.position, enemiesInFight[0].transform.rotation);
-                            enemiesInFight[0].GetComponent<Unit>().CurrentHP = enemiesInFight[0].GetComponent<Unit>().MaxHP;
-                        }
-                    }
-                    else
-                    {
-                        int enemyToHeal = Random.Range(0, enemiesInFight.Count);
-                        enemiesInFight[enemyToHeal].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
-                        if (enemiesInFight[enemyToHeal].GetComponent<Unit>().CurrentHP >= enemiesInFight[enemyToHeal].GetComponent<Unit>().MaxHP)
-                        {
-                            Instantiate(powerUpParticle, enemiesInFight[enemyToHeal].transform.position, enemiesInFight[enemyToHeal].transform.rotation);
-                            enemiesInFight[enemyToHeal].GetComponent<Unit>().CurrentHP = enemiesInFight[enemyToHeal].GetComponent<Unit>().MaxHP;
-                        }
-                    }
-                }
-
-                //Potion of Resolve increases the attack of the current caster by 50% for 3 turns
-                else if (currentCombatantUnit.potionofResolve)
-                {
-                    Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
-                    currentCombatantUnit.attackMultiplier = 1.5f;
-                    currentCombatantUnit.attackBonusTurnCount = 3;
-                }
-
-                //Potion of Resurrection: 1)Brings one party member back to life 2) Sets that party member's health to 50% 3) adds them back into the turn order 
-                else if (currentCombatantUnit.potionOfResurrection)
-                {
-                    for (int i = 0; i < enemiesInFight.Count; i++)
-                    {
-                        if (enemiesInFight[i].GetComponent<Unit>().characterIsDead)
-                            deadCharacters.Add(enemiesInFight[i]);
-                    }
-
-                    if (deadCharacters.Count > 0)
-                    {
-                        Reincarnation();
-                    }
-                    else
-                    {
-                        print("No suitable target for resurrection, choose a different attack");
-                        currentCombatantUnit.RedoAttack();
-                    }
-                }
-            }
+            HandleSupportAttacks(enemiesInFight);
         }
         #endregion
 
@@ -548,6 +348,115 @@ public class Battle : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This section talks about the different support 'attacks' [isAHeal is derived from 'Unit']
+    /// </summary>
+    /// <param name="affectedCombatantList"></param>
+    private void HandleSupportAttacks(List<GameObject> affectedCombatantList) {
+        if (currentCombatantUnit.isAHeal) {
+            HandleEssenceOfPride(affectedCombatantList);
+            HandlePestecus(affectedCombatantList);
+            HandlePillarOfStrength();
+            HandlePotionOfHealing(affectedCombatantList);
+            HandlePotionOfResolve();
+            HandlePotionOfResurrection(affectedCombatantList);
+        }
+    }
+
+    /// <summary>
+    /// 1) Brings one party member back to life 
+    /// 2) Sets that party member's health to 50% 
+    /// 3) adds them back into the turn order
+    /// </summary>
+    private void HandlePotionOfResurrection(List<GameObject> affectedCombatantList) {
+        if (currentCombatantUnit.potionOfResurrection) {
+            for (int i = 0; i < affectedCombatantList.Count; i++) {
+                if (affectedCombatantList[i].GetComponent<Unit>().characterIsDead)
+                    deadCharacters.Add(affectedCombatantList[i]);
+            }
+            if (deadCharacters.Count > 0) {
+                Reincarnation();
+            } else {
+                print("No suitable target for resurrection, choose a different attack");
+                currentCombatantUnit.RedoAttack();
+            }
+        }
+    }
+    /// <summary>
+    /// Potion of Resolve increases the attack of the current caster by 50% for 3 turns
+    /// </summary>
+    private void HandlePotionOfResolve() {
+        //Potion of Resolve increases the attack of the current caster by 50% for 3 turns
+        if (currentCombatantUnit.potionofResolve) {
+            Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
+            currentCombatantUnit.attackMultiplier = 1.5f;
+            currentCombatantUnit.attackBonusTurnCount = 3;
+        }
+    }
+    /// <summary>
+    /// Potion of Healing this slightly heals one party member. There is an 80% chance they heal the weakest party member, 20% chance it randomly heals another person in the party
+    /// </summary>
+    /// <param name="affectedCombatantList"></param>
+    private void HandlePotionOfHealing(List<GameObject> affectedCombatantList) {
+        if (currentCombatantUnit.potionOfHealing) {
+            List<GameObject> sortedAffectedCombatantList = affectedCombatantList.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+
+            int chanceOfPersonToHeal = Random.Range(0, 100);
+            if (chanceOfPersonToHeal <= 80) {
+                sortedAffectedCombatantList[0].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
+                if (sortedAffectedCombatantList[0].GetComponent<Unit>().CurrentHP >= sortedAffectedCombatantList[0].GetComponent<Unit>().MaxHP) {
+                    Instantiate(powerUpParticle, sortedAffectedCombatantList[0].transform.position, sortedAffectedCombatantList[0].transform.rotation);
+                    sortedAffectedCombatantList[0].GetComponent<Unit>().CurrentHP = sortedAffectedCombatantList[0].GetComponent<Unit>().MaxHP;
+                }
+            } else {
+                int enemyToHeal = Random.Range(0, sortedAffectedCombatantList.Count);
+                sortedAffectedCombatantList[enemyToHeal].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
+                if (sortedAffectedCombatantList[enemyToHeal].GetComponent<Unit>().CurrentHP >= sortedAffectedCombatantList[enemyToHeal].GetComponent<Unit>().MaxHP) {
+                    Instantiate(powerUpParticle, sortedAffectedCombatantList[enemyToHeal].transform.position, sortedAffectedCombatantList[enemyToHeal].transform.rotation);
+                    sortedAffectedCombatantList[enemyToHeal].GetComponent<Unit>().CurrentHP = sortedAffectedCombatantList[enemyToHeal].GetComponent<Unit>().MaxHP;
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// Pillar of Strength this increases the defense of the current caster by 50% for 3 turns
+    /// </summary>
+    private void HandlePillarOfStrength() {
+        if (currentCombatantUnit.pillarOfStrength) {
+            Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
+            currentCombatantUnit.defenseMultiplier = .5f;
+            currentCombatantUnit.defenseBonusTurnCount = 3;
+        }
+    }
+    /// <summary>
+    /// Pestecus this slightly increases the health of all party members (that are alive)
+    /// </summary>
+    private void HandlePestecus(List<GameObject> affectedCombatantList) {
+        if (currentCombatantUnit.pestectus) {
+            for (int i = 0; i < affectedCombatantList.Count; i++) {
+                Instantiate(powerUpParticle, affectedCombatantList[i].transform.position, affectedCombatantList[i].transform.rotation);
+                affectedCombatantList[i].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
+                if (affectedCombatantList[i].GetComponent<Unit>().CurrentHP >= affectedCombatantList[i].GetComponent<Unit>().MaxHP) {
+                    affectedCombatantList[i].GetComponent<Unit>().CurrentHP = affectedCombatantList[i].GetComponent<Unit>().MaxHP;
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// Essence Of Pride increases the party's attack by 50%, defense by 50%, and keeps those stats for 3 turns [this is hard coded to prevent stacking = 3 is different than += 3]
+    /// </summary>
+    private void HandleEssenceOfPride(List<GameObject> affectedCombatantList) {
+        if (currentCombatantUnit.essenceOfPride) {
+            for (int i = 0; i < affectedCombatantList.Count; i++) {
+                Instantiate(powerUpParticle, affectedCombatantList[i].transform.position, affectedCombatantList[i].transform.rotation);
+                affectedCombatantList[i].GetComponent<Unit>().attackMultiplier = 1.5f;
+                affectedCombatantList[i].GetComponent<Unit>().defenseMultiplier = .5f;
+
+                affectedCombatantList[i].GetComponent<Unit>().attackBonusTurnCount = 3;
+                affectedCombatantList[i].GetComponent<Unit>().defenseBonusTurnCount = 3;
+            }
+        }
+    }
 
     public void ResolvingATurnModified(float damage)
     {
