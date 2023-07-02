@@ -226,11 +226,7 @@ public class Battle : MonoBehaviour
         else
         {
             print("are you here? ");
-            for (int i = 0; i < enemiesInFight.Count; i++)
-            {
-                enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().canvas.SetActive(false);
-                enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().targetParticle.SetActive(false);
-            }
+            
         }
 
         //Pressing Space advances the turn - this is not permenant - just for testing
@@ -890,21 +886,17 @@ public class Battle : MonoBehaviour
         //turn on particle system (based on attack)
         for (int i = 0; i < Combatants[currentCombatant].GetComponent<Unit>().attacks.Count; i++)
         {
-           
-            print("getting list of attacks");
-            print(spellToStore);
-
             if (Combatants[currentCombatant].GetComponent<Unit>().attacks[i].ToString().Contains(spellToStore))
             {
-                print("comparing to stored spell");
                 if (Combatants[currentCombatant].GetComponent<Unit>().attacks[i].targetType.ToString() == "SingleTarget")
-                {
-                    print("comparing to aoe v single");
                     selectingOneTarget = true;
-                }
                 else
                 {
-                    print("comparing to aoe 2 v single");
+                    for (int j = 0; j < enemiesInFight.Count; j++)
+                    {
+                        enemiesInFight[j].GetComponent<Unit>().canvas.SetActive(false);
+                        enemiesInFight[j].GetComponent<Unit>().targetParticle.SetActive(false);
+                    }
                     TurnOnAllEnemyTargets();
                 }
             }
@@ -913,7 +905,7 @@ public class Battle : MonoBehaviour
 
     void TurnOnAllEnemyTargets()
     {
-        for (int i = 0; i <= enemiesInFight.Count; i++)
+        for (int i = 0; i < enemiesInFight.Count; i++)
         {
             enemiesInFight[i].GetComponent<Unit>().canvas.SetActive(true);
             enemiesInFight[i].GetComponent<Unit>().targetParticle.SetActive(true);
