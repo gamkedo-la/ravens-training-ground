@@ -34,7 +34,7 @@ public class AttackBase : ScriptableObject
                 unit.CurrentMP -= deductCost;
 
                 Attack(unit);
-            }
+            } 
             else
                 return;
         }

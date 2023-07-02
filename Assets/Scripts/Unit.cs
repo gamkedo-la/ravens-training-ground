@@ -20,7 +20,7 @@ public class Unit : MonoBehaviour
     public bool StrT, StrC, StrP, StrD, StrA;
     public bool WeakT, WeakC, WeakP, WeakD, WeakA;
 
-    public bool essenceOfPride, pestectus, pillarOfStrength, potionOfHealing, potionofResolve, potionOfResurrection;
+    // public bool essenceOfPride, pestectus, pillarOfStrength, potionOfHealing, potionofResolve, potionOfResurrection;
 
     float lightAttack = 1f, mediumAttack = 1.4f;
 
@@ -40,7 +40,7 @@ public class Unit : MonoBehaviour
     public bool hasBeenKnockedDown;
 
     public Animator anim;
-    public GameObject deathParticle, targetParticle, canvas;
+    public GameObject powerUpParticle, deathParticle, targetParticle, canvas;
 
     //Cost
     int deductCost;
@@ -48,7 +48,6 @@ public class Unit : MonoBehaviour
 
     Battle battle;
 
-    public List<string> KnownSkills = new List<string>();
     public List<AttackBase> attacks;
 
     public TMP_Text characterName, affinityText;
@@ -61,8 +60,17 @@ public class Unit : MonoBehaviour
     public bool canFlee;
     public int randomAttack;
 
+    public enum UnitState {
+        CASTINGSUPPORTSPELL,
+        CASTINGATTACKSPELL,
+        IDLE,
+    }
+
+    public UnitState currentState;
+
     private void Start()
     {
+        currentState = UnitState.IDLE;
         battle = GameObject.Find("Battle").GetComponent<Battle>();
 
         if (!isAPlayer && characterName.text != null)
@@ -147,9 +155,9 @@ public class Unit : MonoBehaviour
             }
             else
             {
-                randomAttack = Random.Range(0, KnownSkills.Count);
+                randomAttack = Random.Range(0, attacks.Count);
                 attacks[randomAttack].AttemptAttack(this);
-                print($"{name} is casting attack {KnownSkills[randomAttack]}");
+                print($"{name} is casting attack {attacks[randomAttack]}");
             }
         }
         else
@@ -221,7 +229,7 @@ public class Unit : MonoBehaviour
     //Breakdown: damage = {[ Square root of 'MagicEquipment' bonus * Square root of 'Magic' stat ] add (CurrentLevel * 25%) + Square root of 'Physical' stat } * Attack Multiplier from bonuses * Variance between 95-110% * LightAttack modifier
     // this was based on Persona 5's calculation of damage = [ Square Root of Skill Power * Square Root of Stat ] 
 
-
+    /*
     public void BasicCast()
     {
         if (CurrentMP >= tier0)
@@ -234,12 +242,12 @@ public class Unit : MonoBehaviour
 
             //This attack costs nothing so it is only 60% base damage
             damage = (((Mathf.Sqrt(PhysicalEquipment) * Mathf.Sqrt(Physical)) + (CurrentLevel * 1.25f)) * attackMultiplier * Random.Range(.95f, 1.1f)) * .6f;
-
             battle.ResolvingATurn();
         }
         else
             RedoAttack();
     }
+    */
     #region Full List of Attacks
     /*
         public void Ajei()
@@ -525,22 +533,21 @@ public class Unit : MonoBehaviour
             else
                 RedoAttack();
         }
-
+    
         public void PotionOfResurrection()
         {
             if (CurrentMP >= tier4)
             {
                 potionOfResurrection = true;
                 isAHeal = true;
-
                 battle.ResolvingATurn();
-
                 deductCost = tier4;
                 CurrentMP -= deductCost;
             }
             else
                 RedoAttack();
         }
+
         public void ForcefulLunge()
         {
             if (CurrentHP >= tier1)
@@ -761,12 +768,7 @@ public class Unit : MonoBehaviour
         isAGroupAttack = false;
         isAHeal = false;
 
-        essenceOfPride = false;
-        pestectus = false;
-        pillarOfStrength = false;
-        potionOfHealing = false;
-        potionofResolve = false;
-        potionOfResurrection = false;
+        // TODO : Resolve current status effects
 
         charms = false;
         physical = false;

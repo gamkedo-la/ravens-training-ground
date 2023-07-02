@@ -1469,12 +1469,6 @@ MonoBehaviour:
   WeakP: 1
   WeakD: 0
   WeakA: 0
-  essenceOfPride: 0
-  pestectus: 0
-  pillarOfStrength: 0
-  potionOfHealing: 0
-  potionofResolve: 0
-  potionOfResurrection: 0
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -1488,6 +1482,7 @@ MonoBehaviour:
   experienceEarned: 0
   hasBeenKnockedDown: 0
   anim: {fileID: 3069840491064068634}
+  powerUpParticle: {fileID: 491456095014668867, guid: fc9be9f0eb25be64ebad166211496532, type: 3}
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 5385987265257875818}
   canvas: {fileID: 5424060774806444623}
@@ -1498,11 +1493,6 @@ MonoBehaviour:
   tier4: 15
   tier5: 18
   tier6: 21
-  KnownSkills:
-  - CriDeGivre
-  - EssenceOfPride
-  - PotionOfHealing
-  - Ajei
   attacks:
   - {fileID: 11400000, guid: 8101291718b5b1c47ae7e0d1cb456e55, type: 2}
   - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
@@ -1516,6 +1506,7 @@ MonoBehaviour:
   metallic: {fileID: 2100000, guid: 790319bf0c6e31645bb3b939171774ee, type: 2}
   canFlee: 0
   randomAttack: 0
+  currentState: 0
 --- !u!1 &4991007045860329313
 GameObject:
   m_ObjectHideFlags: 0

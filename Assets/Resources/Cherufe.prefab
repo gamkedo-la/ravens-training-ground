@@ -48,7 +48,6 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 0
   Name: Cherufe
-  CurrentLevel: 1
   CurrentHP: 60
   MaxHP: 80
   CurrentMP: 300
@@ -57,6 +56,8 @@ MonoBehaviour:
   Physical: 30
   Agility: 20
   Finesse: 20
+  CurrentLevel: 1
+  tempAgility: 0
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
@@ -71,12 +72,6 @@ MonoBehaviour:
   WeakP: 0
   WeakD: 0
   WeakA: 0
-  essenceOfPride: 0
-  pestectus: 0
-  pillarOfStrength: 0
-  potionOfHealing: 0
-  potionofResolve: 0
-  potionOfResurrection: 0
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -90,7 +85,10 @@ MonoBehaviour:
   experienceEarned: 0
   hasBeenKnockedDown: 0
   anim: {fileID: 1175915777}
+  powerUpParticle: {fileID: 491456095014668867, guid: fc9be9f0eb25be64ebad166211496532, type: 3}
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
+  targetParticle: {fileID: 0}
+  canvas: {fileID: 0}
   tier0: 0
   tier1: 4
   tier2: 8
@@ -98,12 +96,6 @@ MonoBehaviour:
   tier4: 15
   tier5: 18
   tier6: 21
-  KnownSkills:
-  - VerticalSlice
-  - PlayfulShove
-  - Charge
-  - OrbemPardonti
-  - Hookeeghan
   attacks:
   - {fileID: 11400000, guid: 27724c194178e9741ae64ee3f6f5e415, type: 2}
   - {fileID: 11400000, guid: 69de7dada261ec24ab4d291b1d6115ce, type: 2}
@@ -117,6 +109,8 @@ MonoBehaviour:
   isMetallic: 0
   metallic: {fileID: 0}
   canFlee: 0
+  randomAttack: 0
+  currentState: 0
 --- !u!1001 &2944355399490294778
 PrefabInstance:
   m_ObjectHideFlags: 0

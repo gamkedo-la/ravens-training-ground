@@ -12006,8 +12006,9 @@ MonoBehaviour:
   Combatants: []
   playersInThisFight: []
   enemiesInFight: []
+  deadCharacters: []
   currentCombatant: 0
-  deadPlayers: 0
+  currentCombatantUnit: {fileID: 0}
   healthUI:
   - {fileID: 1076006883}
   - {fileID: 1143094247}
@@ -12043,6 +12044,7 @@ MonoBehaviour:
   playerUICanvas: {fileID: 2124918535}
   AoEView: {fileID: 1350250101}
   spellToStore: 
+  currentlySelectedEnemy: 0
 --- !u!1 &1000811461
 GameObject:
   m_ObjectHideFlags: 0

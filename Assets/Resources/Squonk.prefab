@@ -2023,12 +2023,6 @@ MonoBehaviour:
   WeakP: 0
   WeakD: 1
   WeakA: 0
-  essenceOfPride: 0
-  pestectus: 0
-  pillarOfStrength: 0
-  potionOfHealing: 0
-  potionofResolve: 0
-  potionOfResurrection: 0
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -2042,6 +2036,7 @@ MonoBehaviour:
   experienceEarned: 0
   hasBeenKnockedDown: 0
   anim: {fileID: 6809553747966772330}
+  powerUpParticle: {fileID: 491456095014668867, guid: fc9be9f0eb25be64ebad166211496532, type: 3}
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 8174198356778648913}
   canvas: {fileID: 7124090607936558271}
@@ -2052,10 +2047,6 @@ MonoBehaviour:
   tier4: 15
   tier5: 18
   tier6: 21
-  KnownSkills:
-  - PillarOfStrength
-  - SellamTrahere
-  - ExpelindoElemicus
   attacks:
   - {fileID: 11400000, guid: 9ab63710f58339c4cbe205faea1ee8a5, type: 2}
   - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
@@ -2068,6 +2059,7 @@ MonoBehaviour:
   metallic: {fileID: 2100000, guid: 790319bf0c6e31645bb3b939171774ee, type: 2}
   canFlee: 0
   randomAttack: 0
+  currentState: 0
 --- !u!1 &4969067674065681699
 GameObject:
   m_ObjectHideFlags: 0

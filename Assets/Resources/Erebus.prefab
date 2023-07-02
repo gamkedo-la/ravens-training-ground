@@ -160,12 +160,6 @@ MonoBehaviour:
   WeakP: 1
   WeakD: 0
   WeakA: 0
-  essenceOfPride: 0
-  pestectus: 0
-  pillarOfStrength: 0
-  potionOfHealing: 0
-  potionofResolve: 0
-  potionOfResurrection: 0
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -179,6 +173,7 @@ MonoBehaviour:
   experienceEarned: 0
   hasBeenKnockedDown: 0
   anim: {fileID: 1002761069404689601}
+  powerUpParticle: {fileID: 491456095014668867, guid: fc9be9f0eb25be64ebad166211496532, type: 3}
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 0}
   canvas: {fileID: 0}
@@ -189,8 +184,6 @@ MonoBehaviour:
   tier4: 15
   tier5: 18
   tier6: 21
-  KnownSkills:
-  - AuraDEau
   attacks:
   - {fileID: 11400000, guid: 9d94ae56618c924428d1b315dd44b8fa, type: 2}
   - {fileID: 11400000, guid: a400b13aa01717f4283ebefa251eff7e, type: 2}
@@ -208,6 +201,7 @@ MonoBehaviour:
   metallic: {fileID: 0}
   canFlee: 0
   randomAttack: 0
+  currentState: 0
 --- !u!54 &-8854307732156437234
 Rigidbody:
   m_ObjectHideFlags: 0
