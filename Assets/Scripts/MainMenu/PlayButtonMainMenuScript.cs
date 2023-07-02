@@ -7,6 +7,6 @@ public class PlayButtonMainMenuScript : MonoBehaviour
 {
     public void HandleClick()
     {
-        Debug.Log("how does the game start?");
+        SceneManager.LoadScene("Floor1");
     }
 }
