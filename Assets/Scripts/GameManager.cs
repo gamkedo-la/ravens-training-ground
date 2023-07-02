@@ -24,12 +24,12 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         inCurrentParty.Add("Dani");
-        inCurrentParty.Add("Phoebe");
+        inCurrentParty.Add("Erebus");
         inCurrentParty.Add("Sophie");
         inCurrentParty.Add("Theo");
 
         charactersNotInParty.Add("Tristan");
-        charactersNotInParty.Add("Erebus");
+        charactersNotInParty.Add("Phoebe");
 
         colorsInParty.Add(new Color(255,176,0));
         colorsInParty.Add(new Color(83, 0, 255));
