@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public enum UnitState { Alive, Unconcious, Dead}
 public class Unit : MonoBehaviour
 {
     //HP = Health, MP = Magic, Magic = damage through magic, Physical = damage through physical, agility = ability to dodge, finesse = critical chance
@@ -66,6 +65,9 @@ public class Unit : MonoBehaviour
         CASTINGSUPPORTSPELL,
         CASTINGATTACKSPELL,
         IDLE,
+        Alive,
+        Unconcious,
+        Dead
     }
 
     public UnitState currentState;
