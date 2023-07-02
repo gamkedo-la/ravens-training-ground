@@ -21,6 +21,7 @@ public class SpellSelection : MonoBehaviour
         {
             //going from the spell selection screen, then storing it into battle.cs
             battle.spellToStore = this.gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text;
+            battle.TurnOnIndividualAttackItems();
 
             playerUI.OpenAttackingMenu();
         }

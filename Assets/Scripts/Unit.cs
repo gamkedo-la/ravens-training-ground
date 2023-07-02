@@ -40,7 +40,7 @@ public class Unit : MonoBehaviour
     public bool hasBeenKnockedDown;
 
     public Animator anim;
-    public GameObject deathParticle;
+    public GameObject deathParticle, targetParticle, canvas;
 
     //Cost
     int deductCost;

@@ -73,13 +73,9 @@ public class PlayerMovement : MonoBehaviour
 
     void CreatePlayersInOverworld()
     {
-        for (int i = 0; i < GameManager.inCurrentParty.Count; i++)
-        {
-            if (i == 0)
-                print("skip this - Dani in party already");
-            else
+        if(GameManager.inCurrentParty.Count > 1)
+            for (int i = 1; i < GameManager.inCurrentParty.Count; i++)
                 Instantiate(Resources.Load<GameObject>("Overworld/" + GameManager.inCurrentParty[i]), this.transform.position + nearbyLocations[i], this.transform.rotation);
-        }
     }
 
     private void OnTriggerEnter(Collider other)

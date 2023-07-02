@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9b74d8730ef00c408257177426cee69, type: 3}
-  m_Name: FuseeDeVent
+  m_Name: Scoptum Talli
   m_EditorClassIdentifier: 
-  AttackName: Fusee De Vent
-  AttackDescription: Medium Charm Damage to all enemies
-  cost: 18
+  AttackName: Scoptum Talli
+  AttackDescription: Medium Dark magic to all enemies caster health drops to one
+  cost: 15
   resourceType: 0
   castType: 1
   targetType: 1
-  effectType: 0
+  effectType: 2
   attackExcersion: 1

@@ -59,6 +59,8 @@ public class Battle : MonoBehaviour
     public Transform AoEView;
 
     public string spellToStore;
+    int currentlySelectedEnemy;
+    bool selectingOneTarget;
 
     void Start()
     {
@@ -184,6 +186,53 @@ public class Battle : MonoBehaviour
 
     private void Update()
     {
+        if (selectingOneTarget)
+        {
+            print("what is going on");
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                for (int i = 0; i < enemiesInFight.Count; i++)
+                {
+                    enemiesInFight[i].GetComponent<Unit>().canvas.SetActive(false);
+                    enemiesInFight[i].GetComponent<Unit>().targetParticle.SetActive(false);
+                }
+
+                currentlySelectedEnemy--;
+
+                if (currentlySelectedEnemy < 0)
+                    currentlySelectedEnemy = enemiesInFight.Count - 1;
+
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                for (int i = 0; i < enemiesInFight.Count; i++)
+                {
+                    enemiesInFight[i].GetComponent<Unit>().canvas.SetActive(false);
+                    enemiesInFight[i].GetComponent<Unit>().targetParticle.SetActive(false);
+                }
+
+                currentlySelectedEnemy++;
+
+                if (currentlySelectedEnemy >= enemiesInFight.Count)
+                    currentlySelectedEnemy = 0;
+            }
+            
+            enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().canvas.SetActive(true);
+            enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().targetParticle.SetActive(true);          
+        }
+        else
+        {
+            print("are you here? ");
+            for (int i = 0; i < enemiesInFight.Count; i++)
+            {
+                enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().canvas.SetActive(false);
+                enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().targetParticle.SetActive(false);
+            }
+        }
+
         //Pressing Space advances the turn - this is not permenant - just for testing
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -839,11 +888,42 @@ public class Battle : MonoBehaviour
     {
         //move camera
         //turn on particle system (based on attack)
+        for (int i = 0; i < Combatants[currentCombatant].GetComponent<Unit>().attacks.Count; i++)
+        {
+           
+            print("getting list of attacks");
+            print(spellToStore);
+
+            if (Combatants[currentCombatant].GetComponent<Unit>().attacks[i].ToString().Contains(spellToStore))
+            {
+                print("comparing to stored spell");
+                if (Combatants[currentCombatant].GetComponent<Unit>().attacks[i].targetType.ToString() == "SingleTarget")
+                {
+                    print("comparing to aoe v single");
+                    selectingOneTarget = true;
+                }
+                else
+                {
+                    print("comparing to aoe 2 v single");
+                    TurnOnAllEnemyTargets();
+                }
+            }
+        }
+    }
+
+    void TurnOnAllEnemyTargets()
+    {
+        for (int i = 0; i <= enemiesInFight.Count; i++)
+        {
+            enemiesInFight[i].GetComponent<Unit>().canvas.SetActive(true);
+            enemiesInFight[i].GetComponent<Unit>().targetParticle.SetActive(true);
+        }
     }
     public void TurnOffIndividualAttackItems()
     {
         //return camera
-        //turn off particle system 
+        //turn off particle system
+ //       selectingOneTarget = false;
     }
 
     public void AdvanceTurn()

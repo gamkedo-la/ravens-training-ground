@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9b74d8730ef00c408257177426cee69, type: 3}
-  m_Name: ExpelindoElemicus
+  m_Name: Aura D Eau
   m_EditorClassIdentifier: 
-  AttackName: Expelindo Elemicus
-  AttackDescription: Light Trans damage to one enemy
+  AttackName: Aura D Eau
+  AttackDescription: Light Charm damage to one enemy
   cost: 4
   resourceType: 0
   castType: 1
   targetType: 0
-  effectType: 3
+  effectType: 0
   attackExcersion: 0

@@ -123,6 +123,7 @@ public class BattleMenu : MonoBehaviour
     void ClearStoredSpell()
     {
         battle.spellToStore = "";
+        battle.TurnOffIndividualAttackItems();
     }
 
     public void PopulateSpellsMenu()
