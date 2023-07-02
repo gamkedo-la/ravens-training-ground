@@ -33,10 +33,12 @@ public class Battle : MonoBehaviour
     public List<GameObject> playersInThisFight = new List<GameObject>();
     public List<GameObject> enemiesInFight = new List<GameObject>();
 
-    List<GameObject> deadCharacters = new List<GameObject>();
+    public List<GameObject> deadCharacters = new List<GameObject>();
 
     float totalExperienceAwarded;
-    public int currentCombatant, deadPlayers;
+    public int currentCombatant = 0;
+
+    public Unit currentCombatantUnit;
 
     int enemyCountForKnockedOut, playerCountForKnockedOut;
 
@@ -157,6 +159,7 @@ public class Battle : MonoBehaviour
             enemiesInFight.Add(currentEnemy3);
         }
 
+        currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
         //This stems from the overworld - the player attacked the enemy - player gets initiative, if enemy attacked player, enemy gets initiative
         if (GameManager.initiativeSiezedByEnemy)
         {
@@ -188,7 +191,6 @@ public class Battle : MonoBehaviour
     {
         if (selectingOneTarget)
         {
-            print("what is going on");
 
             if (Input.GetKeyDown(KeyCode.A))
             {
@@ -225,14 +227,14 @@ public class Battle : MonoBehaviour
         }
         else
         {
-            print("are you here? ");
-            
+            print("Not selectingOneTarget ");
         }
 
         //Pressing Space advances the turn - this is not permenant - just for testing
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            currentCombatant++;
+            currentCombatant = (currentCombatant + 1) % Combatants.Count;
+            currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
             NextTurn();
         }
         if (hasFled)
@@ -253,6 +255,7 @@ public class Battle : MonoBehaviour
         {
             Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().tempAgility)).ToList();
             currentCombatant = 0;
+            currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
             for (int i = 0; i < Combatants.Count; i++)
             {
                 Combatants[i].GetComponent<Unit>().tempAgility = 0;
@@ -260,10 +263,10 @@ public class Battle : MonoBehaviour
         }
 
         characterNameHolder.SetActive(true);
-        characterNameText.text = Combatants[currentCombatant].GetComponent<Unit>().Name;
+        characterNameText.text = currentCombatantUnit.Name;
 
-        print("Currently Up: " + Combatants[currentCombatant].GetComponent<Unit>().Name + " Agility: " + (Combatants[currentCombatant].GetComponent<Unit>().Agility + Combatants[currentCombatant].GetComponent<Unit>().tempAgility) + " CurrentHP: " + Combatants[currentCombatant].GetComponent<Unit>().CurrentHP);
-        Combatants[currentCombatant].GetComponent<Unit>().TakingUnitTurn();
+        print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCombatantUnit.Agility + currentCombatantUnit.tempAgility) + " CurrentHP: " + currentCombatantUnit.CurrentHP);
+        currentCombatantUnit.TakingUnitTurn();
     }
 
     public void ResolvingATurn()
@@ -272,43 +275,43 @@ public class Battle : MonoBehaviour
         //Currently this is all reliant on the pseudo automated system of pressing space
         //The bones of this system will be used later for a 'Tactics' section as well as offering low level enemy AI options 
         #region Player Turn
-        Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Attack");
+        currentCombatantUnit.anim.SetTrigger("Attack");
 
-        if (Combatants[currentCombatant].GetComponent<Unit>().isAPlayer)
+        if (currentCombatantUnit.isAPlayer)
         {
 
             //During a solo attack, the automated player has a 50% chance to hit the lowest HP target, then a 50% chance to randomly hit any other enemy (including the lowest)
-            if (Combatants[currentCombatant].GetComponent<Unit>().isASoloAttack)
+            if (currentCombatantUnit.isASoloAttack)
             {         
                 enemiesInFight = enemiesInFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
                 int randAttack = Random.Range(0, 100);
                 if (randAttack < 50)
                 {
                     Combatants[currentCombatant].transform.LookAt(enemiesInFight[0].transform);
-                    enemiesInFight[0].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                    enemiesInFight[0].GetComponent<Unit>().DidAttackKillCharacter(currentCombatantUnit.damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
                 }
                 else
                 {
                     int opponentToAttack = Random.Range(0, enemiesInFight.Count);
-                    enemiesInFight[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                    enemiesInFight[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(currentCombatantUnit.damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
                     Combatants[currentCombatant].transform.LookAt(enemiesInFight[opponentToAttack].transform);
                 }
             }
 
             //Group attacks hit every enemy at the same time
-            else if (Combatants[currentCombatant].GetComponent<Unit>().isAGroupAttack)
+            else if (currentCombatantUnit.isAGroupAttack)
             {
                 for (int i = 0; i < enemiesInFight.Count; i++)
                 {
-                    enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                    enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(currentCombatantUnit.damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
                 }
             }
 
             //This section talks about the different support 'attacks' [isAHeal is derived from 'Unit']
-            else if (Combatants[currentCombatant].GetComponent<Unit>().isAHeal)
+            else if (currentCombatantUnit.isAHeal)
             {
                 //Essence Of Pride increases the party's attack by 50%, defense by 50%, and keeps those stats for 3 turns [this is hard coded to prevent stacking = 3 is different than += 3]
-                if (Combatants[currentCombatant].GetComponent<Unit>().essenceOfPride)
+                if (currentCombatantUnit.essenceOfPride)
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
                     {
@@ -323,13 +326,13 @@ public class Battle : MonoBehaviour
                 }
 
                 //Pestecus this slightly increases the health of all party members (that are alive)
-                else if(Combatants[currentCombatant].GetComponent<Unit>().pestectus)
+                else if(currentCombatantUnit.pestectus)
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
                     {
                         playersInThisFight[i].GetComponent<Unit>().anim.SetTrigger("Charge");
                         Instantiate(powerUpParticle, playersInThisFight[i].transform.position, playersInThisFight[i].transform.rotation);
-                        playersInThisFight[i].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
+                        playersInThisFight[i].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
                         if (playersInThisFight[i].GetComponent<Unit>().CurrentHP >= playersInThisFight[i].GetComponent<Unit>().MaxHP)
                         {
                             playersInThisFight[i].GetComponent<Unit>().CurrentHP = playersInThisFight[i].GetComponent<Unit>().MaxHP;
@@ -338,16 +341,16 @@ public class Battle : MonoBehaviour
                 }
 
                 //Pillar of Strength this increases the defense of the current caster by 50% for 3 turns
-                else if (Combatants[currentCombatant].GetComponent<Unit>().pillarOfStrength)
+                else if (currentCombatantUnit.pillarOfStrength)
                 {
-                    Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Charge");
+                    currentCombatantUnit.anim.SetTrigger("Charge");
                     Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
-                    Combatants[currentCombatant].GetComponent<Unit>().defenseMultiplier = .5f;
-                    Combatants[currentCombatant].GetComponent<Unit>().defenseBonusTurnCount = 3;
+                    currentCombatantUnit.defenseMultiplier = .5f;
+                    currentCombatantUnit.defenseBonusTurnCount = 3;
                 }
 
                 //Potion of Healing this slightly heals one party member. There is an 80% chance they heal the weakest party member, 20% chance it randomly heals another person in the party
-                else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfHealing)
+                else if (currentCombatantUnit.potionOfHealing)
                 {
                     playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
 
@@ -355,7 +358,7 @@ public class Battle : MonoBehaviour
                     if (chanceOfPersonToHeal <= 80)
                     {
                         playersInThisFight[0].GetComponent<Unit>().anim.SetTrigger("Charge");
-                        playersInThisFight[0].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
+                        playersInThisFight[0].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
                         if (playersInThisFight[0].GetComponent<Unit>().CurrentHP >= playersInThisFight[0].GetComponent<Unit>().MaxHP)
                         {
                             Instantiate(powerUpParticle, playersInThisFight[0].transform.position, Combatants[currentCombatant].transform.rotation);
@@ -366,7 +369,7 @@ public class Battle : MonoBehaviour
                     {
                         int personToHeal = Random.Range(0, playersInThisFight.Count);
                         playersInThisFight[personToHeal].GetComponent<Unit>().anim.SetTrigger("Charge");
-                        playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
+                        playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
                         if (playersInThisFight[personToHeal].GetComponent<Unit>().CurrentHP >= playersInThisFight[personToHeal].GetComponent<Unit>().MaxHP)
                         {
                             Instantiate(powerUpParticle, playersInThisFight[personToHeal].transform.position, playersInThisFight[personToHeal].transform.rotation);
@@ -376,15 +379,15 @@ public class Battle : MonoBehaviour
                 }
 
                 //Potion of Resolve increases the attack of the current caster by 50% for 3 turns
-                else if (Combatants[currentCombatant].GetComponent<Unit>().potionofResolve)
+                else if (currentCombatantUnit.potionofResolve)
                 {
-                    Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Charge");
-                    Combatants[currentCombatant].GetComponent<Unit>().attackMultiplier = 1.5f;
-                    Combatants[currentCombatant].GetComponent<Unit>().attackBonusTurnCount = 3;
+                    currentCombatantUnit.anim.SetTrigger("Charge");
+                    currentCombatantUnit.attackMultiplier = 1.5f;
+                    currentCombatantUnit.attackBonusTurnCount = 3;
                 }
 
                 //Potion of Resurrection: 1)Brings one party member back to life 2) Sets that party member's health to 50% 3) adds them back into the turn order 
-                else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfResurrection)
+                else if (currentCombatantUnit.potionOfResurrection)
                 {
                     for (int i = 0; i < playersInThisFight.Count; i++)
                     {
@@ -399,7 +402,7 @@ public class Battle : MonoBehaviour
                     else
                     {
                         print("No suitable target for resurrection, choose a different attack");
-                        Combatants[currentCombatant].GetComponent<Unit>().RedoAttack();
+                        currentCombatantUnit.RedoAttack();
                     }
                 }
             }
@@ -412,7 +415,7 @@ public class Battle : MonoBehaviour
         else
         {
             //During a solo attack, [different from player] the enemy picks a random player to attack
-            if (Combatants[currentCombatant].GetComponent<Unit>().isASoloAttack)
+            if (currentCombatantUnit.isASoloAttack)
             {
                 //i think this line can go away, it is to sort player's health if we want to structure it similar to the player where they target the weakest player
                 // playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
@@ -424,26 +427,26 @@ public class Battle : MonoBehaviour
                 }
 
                 int playerToChoose = Random.Range(0, playerToAttack);
-                playersInThisFight[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                playersInThisFight[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(currentCombatantUnit.damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
                 Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToChoose].transform);
                 playerToAttack = 0;
             }
 
             //This is a group attack, attacking all players (who are alive)
-            else if (Combatants[currentCombatant].GetComponent<Unit>().isAGroupAttack)
+            else if (currentCombatantUnit.isAGroupAttack)
             {
                for (int i = 0; i < playersInThisFight.Count; i++)
                 {
                     if(!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
-                        playersInThisFight[i].GetComponent<Unit>().DidAttackKillCharacter(Combatants[currentCombatant].GetComponent<Unit>().damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                        playersInThisFight[i].GetComponent<Unit>().DidAttackKillCharacter(currentCombatantUnit.damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
                 }
             }
 
             //These are support 'attacks' [derived from Unit]
-            else if (Combatants[currentCombatant].GetComponent<Unit>().isAHeal)
+            else if (currentCombatantUnit.isAHeal)
             {
                 //Essence Of Pride increases the party's attack by 50%, defense by 50%, and keeps those stats for 3 turns [this is hard coded to prevent stacking = 3 is different than += 3]
-                if (Combatants[currentCombatant].GetComponent<Unit>().essenceOfPride)
+                if (currentCombatantUnit.essenceOfPride)
                 {
                     for (int i = 0; i < enemiesInFight.Count; i++)
                     {
@@ -457,12 +460,12 @@ public class Battle : MonoBehaviour
                 }
 
                 //Pestecus this slightly increases the health of all party members (that are alive)
-                else if (Combatants[currentCombatant].GetComponent<Unit>().pestectus)
+                else if (currentCombatantUnit.pestectus)
                 {
                     for (int i = 0; i < enemiesInFight.Count; i++)
                     {
                         Instantiate(powerUpParticle, enemiesInFight[i].transform.position, enemiesInFight[i].transform.rotation);
-                        enemiesInFight[i].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
+                        enemiesInFight[i].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
                         if (enemiesInFight[i].GetComponent<Unit>().CurrentHP >= enemiesInFight[i].GetComponent<Unit>().MaxHP)
                         {
                             enemiesInFight[i].GetComponent<Unit>().CurrentHP = enemiesInFight[i].GetComponent<Unit>().MaxHP;
@@ -471,22 +474,22 @@ public class Battle : MonoBehaviour
                 }
 
                 //Pillar of Strength this increases the defense of the current caster by 50% for 3 turns
-                else if (Combatants[currentCombatant].GetComponent<Unit>().pillarOfStrength)
+                else if (currentCombatantUnit.pillarOfStrength)
                 {
                     Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
-                    Combatants[currentCombatant].GetComponent<Unit>().defenseMultiplier = .5f;
-                    Combatants[currentCombatant].GetComponent<Unit>().defenseBonusTurnCount = 3;
+                    currentCombatantUnit.defenseMultiplier = .5f;
+                    currentCombatantUnit.defenseBonusTurnCount = 3;
                 }
 
                 //Potion of Healing this slightly heals one party member. There is an 80% chance they heal the weakest party member, 20% chance it randomly heals another person in the party
-                else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfHealing)
+                else if (currentCombatantUnit.potionOfHealing)
                 {
                     enemiesInFight = enemiesInFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
 
                     int chanceOfPersonToHeal = Random.Range(0, 100);
                     if (chanceOfPersonToHeal <= 80)
                     {
-                        enemiesInFight[0].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
+                        enemiesInFight[0].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
                         if (enemiesInFight[0].GetComponent<Unit>().CurrentHP >= enemiesInFight[0].GetComponent<Unit>().MaxHP)
                         {
                             Instantiate(powerUpParticle, enemiesInFight[0].transform.position, enemiesInFight[0].transform.rotation);
@@ -496,7 +499,7 @@ public class Battle : MonoBehaviour
                     else
                     {
                         int enemyToHeal = Random.Range(0, enemiesInFight.Count);
-                        enemiesInFight[enemyToHeal].GetComponent<Unit>().CurrentHP += Combatants[currentCombatant].GetComponent<Unit>().healthToRecover;
+                        enemiesInFight[enemyToHeal].GetComponent<Unit>().CurrentHP += currentCombatantUnit.healthToRecover;
                         if (enemiesInFight[enemyToHeal].GetComponent<Unit>().CurrentHP >= enemiesInFight[enemyToHeal].GetComponent<Unit>().MaxHP)
                         {
                             Instantiate(powerUpParticle, enemiesInFight[enemyToHeal].transform.position, enemiesInFight[enemyToHeal].transform.rotation);
@@ -506,15 +509,15 @@ public class Battle : MonoBehaviour
                 }
 
                 //Potion of Resolve increases the attack of the current caster by 50% for 3 turns
-                else if (Combatants[currentCombatant].GetComponent<Unit>().potionofResolve)
+                else if (currentCombatantUnit.potionofResolve)
                 {
                     Instantiate(powerUpParticle, Combatants[currentCombatant].transform.position, Combatants[currentCombatant].transform.rotation);
-                    Combatants[currentCombatant].GetComponent<Unit>().attackMultiplier = 1.5f;
-                    Combatants[currentCombatant].GetComponent<Unit>().attackBonusTurnCount = 3;
+                    currentCombatantUnit.attackMultiplier = 1.5f;
+                    currentCombatantUnit.attackBonusTurnCount = 3;
                 }
 
                 //Potion of Resurrection: 1)Brings one party member back to life 2) Sets that party member's health to 50% 3) adds them back into the turn order 
-                else if (Combatants[currentCombatant].GetComponent<Unit>().potionOfResurrection)
+                else if (currentCombatantUnit.potionOfResurrection)
                 {
                     for (int i = 0; i < enemiesInFight.Count; i++)
                     {
@@ -529,7 +532,7 @@ public class Battle : MonoBehaviour
                     else
                     {
                         print("No suitable target for resurrection, choose a different attack");
-                        Combatants[currentCombatant].GetComponent<Unit>().RedoAttack();
+                        currentCombatantUnit.RedoAttack();
                     }
                 }
             }
@@ -548,100 +551,48 @@ public class Battle : MonoBehaviour
 
     public void ResolvingATurnModified(float damage)
     {
-        Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Attack");
+        currentCombatantUnit.anim.SetTrigger("Attack");
 
-        print(Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].castType.ToString());
+        print($"{currentCombatantUnit.name} is using a cast type {currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].castType}");
 
-        if (Combatants[currentCombatant].GetComponent<Unit>().isOnAuto)
+        if (currentCombatantUnit.isOnAuto)
         {
             //if you are attacking an enemy (not a support spell)
-            if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].castType.ToString() == "Enemy")
-            {
-                //if single target
-                if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].targetType.ToString() == "SingleTarget")
-                {
-                    print("single target");
-                    if (Combatants[currentCombatant].GetComponent<Unit>().isAPlayer)
-                    {
-                        print("single target - player");
-                        enemiesInFight = enemiesInFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
-                        int randAttack = Random.Range(0, 100);
-                        if (randAttack < 50)
-                        {
-                            Combatants[currentCombatant].transform.LookAt(enemiesInFight[0].transform);
-                            enemiesInFight[0].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
-                        }
-                        else
-                        {
-                            int opponentToAttack = Random.Range(0, enemiesInFight.Count);
-                            enemiesInFight[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
-                            Combatants[currentCombatant].transform.LookAt(enemiesInFight[opponentToAttack].transform);
-                        }
-                    }
-                    else
-                    {
-                        print("single target - enemy");
-                        //i think this line can go away, it is to sort player's health if we want to structure it similar to the player where they target the weakest player
-                        // playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
-
-                        for (int i = 0; i < playersInThisFight.Count; i++)
-                        {
-                            if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
-                                playerToAttack++;
-                        }
-
-                        int playerToChoose = Random.Range(0, playerToAttack);
-                        playersInThisFight[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
-                        Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToChoose].transform);
-                        tempStoreOfPlayer = playersInThisFight[playerToChoose].GetComponent<Unit>().name;
-                        playerToAttack = 0;
-                    }
+            if (currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].castType == CastType.Enemy) {
+                var currentTargetType = currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].targetType;
+                print($"AUTOUNIT: {currentCombatantUnit.name} is using target type ${currentTargetType}");
+                switch(currentTargetType) {
+                    case TargetType.SingleTarget:
+                        HandleAutoSingleTargetAttack(damage);
+                        break;
+                    case TargetType.AOE:
+                        HandleAutoAoeAttack(damage);
+                        break;
+                    default:
+                        //
+                        break;
                 }
-                //if aoe
-                if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].targetType.ToString() == "AOE")
-                {
-                    print("aoe");
-                    if (Combatants[currentCombatant].GetComponent<Unit>().isAPlayer)
-                    {
-                        print("aoe - player");
-                        for (int i = 0; i < enemiesInFight.Count; i++)
-                        {
-                            enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
-                        }
-                    }
-                    else
-                    {
-                        print("aoe - enemy");
-                        for (int i = 0; i < playersInThisFight.Count; i++)
-                        {
-                            if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
-                                playersInThisFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
-                        }
-                    }
-                }
-
             }
-
             //if cast type support
             //all of these are nestled in 'ResolvingATurn()'
         }
-      
-        else
-        {  //if you are attacking an enemy (not a support spell)
-            if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].castType.ToString() == "Enemy")
+        else 
+        {  
+            //if you are attacking an enemy (not a support spell)
+            if (currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].castType == CastType.Enemy)
             {
-                //if single target
-                if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].targetType.ToString() == "SingleTarget")
-                {
-                    Combatants[currentCombatant].transform.LookAt(Combatants[currentlySelectedEnemy].transform);
-                    Combatants[currentlySelectedEnemy].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
-                    print("single target");
-                }
-                //if aoe
-                if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].targetType.ToString() == "AOE")
-                {
-                    for (int i = 0; i < enemiesInFight.Count; i++)
-                        enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (Combatants[currentCombatant].GetComponent<Unit>().Finesse + Combatants[currentCombatant].GetComponent<Unit>().FinesseEquipment));
+                var currentTargetType = currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].targetType;
+                print($"MANUALUNIT: {currentCombatantUnit.name} is using target type ${currentTargetType}");
+                switch(currentTargetType) {
+                    case TargetType.SingleTarget:
+                        HandleManualSingleTargetAttack(damage);
+                        break;
+                    case TargetType.AOE:
+                        HandleManualAoeAttack(damage);
+                        break;
+                    default:
+                        //
+                        break;
                 }
             }
             UpdatePlayerHealthManaUI();
@@ -650,6 +601,62 @@ public class Battle : MonoBehaviour
         for (int i = 0; i < Combatants.Count; i++)
         {
             Combatants[i].GetComponent<Unit>().CleanUp();
+        }
+    }
+
+    private void HandleManualAoeAttack(float damage) {
+        if (currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].targetType == TargetType.AOE) {
+            for (int i = 0; i < enemiesInFight.Count; i++)
+                enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+        }
+    }
+
+    private void HandleManualSingleTargetAttack(float damage) {
+        Combatants[currentCombatant].transform.LookAt(Combatants[currentlySelectedEnemy].transform);
+        Combatants[currentlySelectedEnemy].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+        print("single target");
+    }
+
+    private void HandleAutoAoeAttack(float damage) {
+        if (currentCombatantUnit.isAPlayer) {
+            for (int i = 0; i < enemiesInFight.Count; i++) {
+                enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+            }
+        } else {
+            for (int i = 0; i < playersInThisFight.Count; i++) {
+                if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead) {
+                    playersInThisFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+                }
+            }
+        }
+    }
+
+    private void HandleAutoSingleTargetAttack(float damage) {
+        if (currentCombatantUnit.isAPlayer) {
+            enemiesInFight = enemiesInFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+            int randAttack = Random.Range(0, 100);
+            if (randAttack < 50) {
+                Combatants[currentCombatant].transform.LookAt(enemiesInFight[0].transform);
+                enemiesInFight[0].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+            } else {
+                int opponentToAttack = Random.Range(0, enemiesInFight.Count);
+                enemiesInFight[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+                Combatants[currentCombatant].transform.LookAt(enemiesInFight[opponentToAttack].transform);
+            }
+        } else {
+            //i think this line can go away, it is to sort player's health if we want to structure it similar to the player where they target the weakest player
+            // playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+
+            for (int i = 0; i < playersInThisFight.Count; i++) {
+                if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                    playerToAttack++;
+            }
+
+            int playerToChoose = Random.Range(0, playerToAttack);
+            playersInThisFight[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+            Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToChoose].transform);
+            tempStoreOfPlayer = playersInThisFight[playerToChoose].GetComponent<Unit>().name;
+            playerToAttack = 0;
         }
     }
 
@@ -690,7 +697,7 @@ public class Battle : MonoBehaviour
             }
         }
 
-        if (playerCountForKnockedOut == playersInThisFight.Count && !Combatants[currentCombatant].GetComponent<Unit>().isAPlayer && enemiesInFight.Count >= 2)
+        if (playerCountForKnockedOut == playersInThisFight.Count && !currentCombatantUnit.isAPlayer && enemiesInFight.Count >= 2)
         {
             print("Enemy All Out Attack");
 
@@ -711,7 +718,7 @@ public class Battle : MonoBehaviour
             }
         }
 
-        if (enemyCountForKnockedOut == enemiesInFight.Count && Combatants[currentCombatant].GetComponent<Unit>().isAPlayer && playersInThisFight.Count >= 2)
+        if (enemyCountForKnockedOut == enemiesInFight.Count && currentCombatantUnit.isAPlayer && playersInThisFight.Count >= 2)
         {
             print("Enemy All Out Attack");
 
@@ -733,7 +740,7 @@ public class Battle : MonoBehaviour
                 chanceToLeave += 25;
         }
 
-        if (percentToLeave <= chanceToLeave + Combatants[currentCombatant].GetComponent<Unit>().Agility + Combatants[currentCombatant].GetComponent<Unit>().AgilityEquipment)
+        if (percentToLeave <= chanceToLeave + currentCombatantUnit.Agility + currentCombatantUnit.AgilityEquipment)
         {
             //player flees
             for (int i = 0; i < playersInThisFight.Count; i++)
@@ -759,14 +766,14 @@ public class Battle : MonoBehaviour
     public void GuardPlayer()
     {
         StartCoroutine(ClearInformationText(2f, "Guard"));
-        Combatants[currentCombatant].GetComponent<Unit>().defenseMultiplier = .5f;
-        Combatants[currentCombatant].GetComponent<Unit>().defenseBonusTurnCount = 2;
-        Combatants[currentCombatant].GetComponent<Unit>().CurrentHP += 3;
-        Combatants[currentCombatant].GetComponent<Unit>().CurrentMP += 3;
-        if (Combatants[currentCombatant].GetComponent<Unit>().CurrentHP >= Combatants[currentCombatant].GetComponent<Unit>().MaxHP)
-            Combatants[currentCombatant].GetComponent<Unit>().CurrentHP = Combatants[currentCombatant].GetComponent<Unit>().MaxHP;
-        if (Combatants[currentCombatant].GetComponent<Unit>().CurrentMP >= Combatants[currentCombatant].GetComponent<Unit>().MaxMP)
-            Combatants[currentCombatant].GetComponent<Unit>().CurrentMP = Combatants[currentCombatant].GetComponent<Unit>().MaxMP;
+        currentCombatantUnit.defenseMultiplier = .5f;
+        currentCombatantUnit.defenseBonusTurnCount = 2;
+        currentCombatantUnit.CurrentHP += 3;
+        currentCombatantUnit.CurrentMP += 3;
+        if (currentCombatantUnit.CurrentHP >= currentCombatantUnit.MaxHP)
+            currentCombatantUnit.CurrentHP = currentCombatantUnit.MaxHP;
+        if (currentCombatantUnit.CurrentMP >= currentCombatantUnit.MaxMP)
+            currentCombatantUnit.CurrentMP = currentCombatantUnit.MaxMP;
 
         UpdatePlayerHealthManaUI();
 
@@ -836,15 +843,18 @@ public class Battle : MonoBehaviour
         //They are instead added to a dead players list (See Reincarnation() to come back)
         for (int i = 0; i < playersInThisFight.Count; i++)
         {
-            if (playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+            var playerInstance = playersInThisFight[i];
+            if (playerInstance.GetComponent<Unit>().characterIsDead)
             {
-                deadPlayers++;
+                if (!deadCharacters.Contains(playerInstance)) {
+                    deadCharacters.Add(playerInstance);
+                }
             }
         }
 
         //Current structure is to not remove players from the PlayersInThisFight list as they can be called back
         //So right now, if the number of deadPlayers equals the number of players in the fight - everyone has been killed and the player loses
-        if (deadPlayers >= playersInThisFight.Count)
+        if (deadCharacters.Count >= playersInThisFight.Count)
         {
             state = StateOfBattle.LOST;
             EndBattle();
@@ -853,12 +863,12 @@ public class Battle : MonoBehaviour
 
     public void MoveCamera()
     {
-        if (Combatants[currentCombatant].GetComponent<Unit>().isAPlayer)
+        if (currentCombatantUnit.isAPlayer)
         {
             playerUICanvas.SetActive(true);
             for (int i = 0; i < playersInThisFight.Count; i++)
             {
-                if (Combatants[currentCombatant].GetComponent<Unit>().name == playersInThisFight[i].GetComponent<Unit>().name)
+                if (currentCombatantUnit.name == playersInThisFight[i].GetComponent<Unit>().name)
                 {
                     movingCamera.transform.position = PlayerBattleStations[i].GetChild(0).transform.position;
                     movingCamera.transform.rotation = PlayerBattleStations[i].GetChild(0).transform.rotation;
@@ -872,7 +882,7 @@ public class Battle : MonoBehaviour
             //THIS IS A PROBLEM - ENEMIES CAN BE NAMED THE SAME THING
             for (int i = 0; i < enemiesInFight.Count; i++)
             {
-                if (Combatants[currentCombatant].GetComponent<Unit>().name == enemiesInFight[i].GetComponent<Unit>().name)
+                if (currentCombatantUnit.name == enemiesInFight[i].GetComponent<Unit>().name)
                 {
                     movingCamera.transform.position = EnemyBattleStations[i].GetChild(0).transform.position;
                     movingCamera.transform.rotation = EnemyBattleStations[i].GetChild(0).transform.rotation;
@@ -883,7 +893,7 @@ public class Battle : MonoBehaviour
 
     public void RotateCamera()
     {
-        if (Combatants[currentCombatant].GetComponent<Unit>().attacks[Combatants[currentCombatant].GetComponent<Unit>().randomAttack].targetType.ToString() == "SingleTarget")
+        if (currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].targetType == TargetType.SingleTarget)
         {
             for (int i = 0; i < playersInThisFight.Count; i++)
             {
@@ -906,11 +916,11 @@ public class Battle : MonoBehaviour
     {
         //move camera
         //turn on particle system (based on attack)
-        for (int i = 0; i < Combatants[currentCombatant].GetComponent<Unit>().attacks.Count; i++)
+        for (int i = 0; i < currentCombatantUnit.attacks.Count; i++)
         {
-            if (Combatants[currentCombatant].GetComponent<Unit>().attacks[i].ToString().Contains(spellToStore))
+            if (currentCombatantUnit.attacks[i].ToString().Contains(spellToStore))
             {
-                if (Combatants[currentCombatant].GetComponent<Unit>().attacks[i].targetType.ToString() == "SingleTarget")
+                if (currentCombatantUnit.attacks[i].targetType == TargetType.SingleTarget)
                     selectingOneTarget = true;
                 else
                 {
@@ -942,7 +952,7 @@ public class Battle : MonoBehaviour
 
     public void AdvanceTurn()
     {
-        currentCombatant++;
+        currentCombatant = (currentCombatant + 1) % Combatants.Count;
         NextTurn();
     }
 
@@ -979,7 +989,7 @@ public class Battle : MonoBehaviour
     public void EndTurn()
     {
         //this ends the turn and advances to the next one
-        currentCombatant++;
+        currentCombatant = (currentCombatant + 1) % Combatants.Count;
         NextTurn();
     }
 
@@ -994,7 +1004,9 @@ public class Battle : MonoBehaviour
         }
         else
         {
-            Combatants[currentCombatant].GetComponent<Unit>().anim.SetTrigger("Victory");
+            currentCombatantUnit.anim.SetTrigger("Victory");
+            currentCombatant = 0;
+            currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
             print("Player Won");
         }
     }

@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnAuto: 0
+  isOnAuto: 1
   isAPlayer: 1
   Name: Sophie
   CurrentHP: 5
@@ -124,6 +124,8 @@ MonoBehaviour:
   hasBeenKnockedDown: 0
   anim: {fileID: 3484402040255959389}
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
+  targetParticle: {fileID: 0}
+  canvas: {fileID: 0}
   tier0: 0
   tier1: 4
   tier2: 8

@@ -93,6 +93,8 @@ MonoBehaviour:
   hasBeenKnockedDown: 0
   anim: {fileID: 6157627187511819553}
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
+  targetParticle: {fileID: 0}
+  canvas: {fileID: 0}
   tier0: 0
   tier1: 4
   tier2: 8

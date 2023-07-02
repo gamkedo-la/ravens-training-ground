@@ -149,7 +149,7 @@ public class Unit : MonoBehaviour
             {
                 randomAttack = Random.Range(0, KnownSkills.Count);
                 attacks[randomAttack].AttemptAttack(this);
-                print(KnownSkills[randomAttack]);
+                print($"{name} is casting attack {KnownSkills[randomAttack]}");
             }
         }
         else
@@ -710,7 +710,7 @@ public class Unit : MonoBehaviour
                     affinityText.text = "Critical";
                     StartCoroutine(ClearText());
                 }
-                print("Knocked Down");
+                print($"{name} was knocked down. ");
                 battle.CheckIfAllMembersKnockedDown();
             }
 
