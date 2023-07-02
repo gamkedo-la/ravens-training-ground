@@ -11,6 +11,9 @@ public class Battle : MonoBehaviour
 {
     public StateOfBattle state;
 
+    //check for which setup to use
+    public bool usesSetup2;
+
     public GameObject informationTextHolder, characterNameHolder;
     public TMP_Text informationText, characterNameText;
 
@@ -102,8 +105,35 @@ public class Battle : MonoBehaviour
             }
         }
 
-        StartCoroutine(SetUpBattle());
+        if(usesSetup2)
+            StartCoroutine(SetUpBattle2());
+        else
+            StartCoroutine(SetUpBattle());
+        
         state = StateOfBattle.Start;
+    }
+
+    IEnumerator SetUpBattle2()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        //iterate through each player in your party to add to the list
+        //spot index is for where party will be placed
+        int spotIndex = 0;
+        foreach(string member in GameManager.inCurrentParty)
+        {
+            GameObject tempMember = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[spotIndex]), PlayerBattleStations[spotIndex].transform.position + platformOffset, PlayerBattleStations[spotIndex].transform.rotation);
+            Combatants.Add(tempMember);
+            spotIndex++;
+        }
+
+        for(int i = 0; i<enemyCount;i++)
+        {
+            GameObject tempEnemy = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[i]), EnemyBattleStations[i].transform.position + platformOffset, EnemyBattleStations[i].transform.rotation);
+            Combatants.Add(tempEnemy);
+        }
+
+        OrderCombatants();
     }
     IEnumerator SetUpBattle()
     {
@@ -185,6 +215,32 @@ public class Battle : MonoBehaviour
 
         UpdatePlayerHealthManaUI();
        // NextTurn();
+    }
+
+    void OrderCombatants()
+    {
+        currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
+        //This stems from the overworld - the player attacked the enemy - player gets initiative, if enemy attacked player, enemy gets initiative
+
+        foreach (GameObject combatant in Combatants)
+        {
+            Unit combatantUnitProperties = combatant.GetComponent<Unit>();
+            if (!combatantUnitProperties.isAPlayer && GameManager.initiativeSiezedByEnemy)
+            {
+                combatantUnitProperties.tempAgility += 70;
+                StartCoroutine(ClearInformationText(2f, "Surprise Attack Enemies Attacking"));
+            }
+            else if (combatantUnitProperties.isAPlayer && GameManager.initiativeSiezedByPlayer)
+            {
+                combatantUnitProperties.tempAgility += 70;
+                StartCoroutine(ClearInformationText(2f, "Surprise Round"));
+            }
+        }
+
+
+        Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().tempAgility)).ToList();
+
+        UpdatePlayerHealthManaUI();
     }
 
     private void Update()
