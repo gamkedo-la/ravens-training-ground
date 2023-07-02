@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+public enum UnitState { Alive, Unconcious, Dead}
 public class Unit : MonoBehaviour
 {
     //HP = Health, MP = Magic, Magic = damage through magic, Physical = damage through physical, agility = ability to dodge, finesse = critical chance
@@ -11,6 +12,7 @@ public class Unit : MonoBehaviour
     public bool isAPlayer;
 
     public string Name;
+    public UnitState unitState=UnitState.Alive;
     public float CurrentHP = 25, MaxHP = 20, CurrentMP = 30, MaxMP = 25, Magic = 10, Physical = 9, Agility = 15, Finesse = 20;
     public int CurrentLevel = 1;
     public int tempAgility = 0;
