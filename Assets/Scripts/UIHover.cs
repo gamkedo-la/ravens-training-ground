@@ -12,6 +12,7 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     Vector3 minVect3, maxVect3, defaultVect3;
     bool grow, hover;
     public bool isFlee;
+    public string levelToLoad;
 
     void Start()
     {
@@ -59,5 +60,10 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         hover = false;
         this.gameObject.transform.localScale = defaultVect3;
+    }
+
+    public void IsContinue()
+    {
+        SceneManager.LoadScene(levelToLoad);
     }
 }

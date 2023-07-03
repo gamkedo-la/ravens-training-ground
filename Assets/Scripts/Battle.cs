@@ -66,6 +66,7 @@ public class Battle : MonoBehaviour
     public AttackBase selectedSpell;
     public int currentlySelectedEnemy;
     bool selectingOneTarget;
+    public GameObject victoryMenu;
 
     void Start()
     {
@@ -851,6 +852,7 @@ public class Battle : MonoBehaviour
 
     void EndBattle()
     {
+        playerUICanvas.SetActive(false);
         ClearGameManager();
         //this just prints states, but will be used for triggering Experience windows (if won) or losing screen (if lost)
         if (state == StateOfBattle.LOST)
@@ -865,19 +867,32 @@ public class Battle : MonoBehaviour
             for (int i = 0; i < playersInThisFight.Count; i++)
             {
                 if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                {
                     playersInThisFight[i].GetComponent<Unit>().anim.SetTrigger("battleWon");
+
+                    //Change colors of all materials to match party member color
+                    playersInThisFight[i].GetComponent<Unit>().objectToChangeMaterialOf.GetComponent<Renderer>().materials = playersInThisFight[i].GetComponent<Unit>().playerMaterial;
+                }
             }
 
             movingCamera.transform.position = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.position;
             movingCamera.transform.rotation = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.rotation;
             cameraView.GetComponent<Animator>().SetTrigger("victory");
-            //change colors 
+
+
             //open experience menu
+            StartCoroutine(OpenVictoryMenu());
             //open menu to return to lobby
             currentCombatant = 0;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
             print("Player Won");
         }
+    }
+
+    IEnumerator OpenVictoryMenu()
+    {
+        yield return new WaitForSeconds(1f);
+        victoryMenu.SetActive(true);
     }
 
     //This clears any leftover data from GameManager picked up from 'RoamingMonster.cs' or weird data from the fight

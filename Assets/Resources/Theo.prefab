@@ -64,7 +64,7 @@ Transform:
   - {fileID: 7356921785319479177}
   - {fileID: 5413773973500181583}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-4725255171092789864
 MonoBehaviour:
@@ -148,6 +148,11 @@ MonoBehaviour:
   canFlee: 0
   randomAttack: 0
   victoryPlacement: {fileID: 2901325042162696019}
+  objectToChangeMaterialOf: {fileID: 1821076686765486194}
+  playerMaterial:
+  - {fileID: 2100000, guid: 798ceb761ca610a43ad7d832ee63dd5c, type: 2}
+  - {fileID: 2100000, guid: 798ceb761ca610a43ad7d832ee63dd5c, type: 2}
+  - {fileID: 2100000, guid: 798ceb761ca610a43ad7d832ee63dd5c, type: 2}
   currentState: 0
 --- !u!54 &-3569345070492195997
 Rigidbody:
@@ -358,6 +363,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 430383139297920523}
   m_SourcePrefab: {fileID: 100100000, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+--- !u!1 &1821076686765486194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -516098083770646512, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+  m_PrefabInstance: {fileID: 7031157094354104418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3989679167318016241 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2968575774917529453, guid: 8f2b225745d82394c943fa56f4009416, type: 3}

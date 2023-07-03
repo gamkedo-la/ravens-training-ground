@@ -73,7 +73,12 @@ public class PlayerMovement : MonoBehaviour
 
     void CreatePlayersInOverworld()
     {
-        if(GameManager.inCurrentParty.Count > 1)
+        for (int i = 0; i < GameManager.inCurrentParty.Count; i++)
+        {
+            print(GameManager.inCurrentParty[i]);
+        }
+
+        if (GameManager.inCurrentParty.Count > 1)
             for (int i = 1; i < GameManager.inCurrentParty.Count; i++)
                 Instantiate(Resources.Load<GameObject>("Overworld/" + GameManager.inCurrentParty[i]), this.transform.position + nearbyLocations[i], this.transform.rotation);
     }

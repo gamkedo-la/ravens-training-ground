@@ -61,6 +61,8 @@ public class Unit : MonoBehaviour
     public bool canFlee;
     public int randomAttack;
     public GameObject victoryPlacement;
+    public GameObject objectToChangeMaterialOf;
+    public Material[] playerMaterial;
 
     public enum UnitState {
         CASTINGSUPPORTSPELL,
