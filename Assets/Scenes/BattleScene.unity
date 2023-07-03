@@ -11973,6 +11973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  usesSetup2: 0
   informationTextHolder: {fileID: 1442760901}
   characterNameHolder: {fileID: 1042042379}
   informationText: {fileID: 1114254898}
@@ -12043,7 +12044,7 @@ MonoBehaviour:
   movingCamera: {fileID: 963194225}
   playerUICanvas: {fileID: 2124918535}
   AoEView: {fileID: 1350250101}
-  spellToStore: 
+  selectedSpell: {fileID: 0}
   currentlySelectedEnemy: 0
 --- !u!1 &1000811461
 GameObject:

@@ -63,7 +63,7 @@ public class Battle : MonoBehaviour
     public GameObject playerUICanvas;
     public Transform AoEView;
 
-    public string spellToStore;
+    public AttackBase selectedSpell;
     public int currentlySelectedEnemy;
     bool selectingOneTarget;
 
@@ -132,6 +132,7 @@ public class Battle : MonoBehaviour
             GameObject tempEnemy = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[i]), EnemyBattleStations[i].transform.position + platformOffset, EnemyBattleStations[i].transform.rotation);
             Combatants.Add(tempEnemy);
         }
+        currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
 
         OrderCombatants();
     }
@@ -329,13 +330,22 @@ public class Battle : MonoBehaviour
     /// This section talks about the different support 'attacks' [isAHeal is derived from 'Unit']
     /// </summary>
     /// <param name="affectedCombatantList"></param>
-    private void HandleSupportAttacks(List<GameObject> affectedCombatantList) {
-        CastEssenceOfPride(affectedCombatantList);
+    private void HandleSupportAttacks(List<GameObject> affectedCombatantList, AttackBase selectedAttack) {
+        // TODO : Refactor without string dependency
+        switch (selectedAttack.name) {
+            case "EssenceOfPride":
+                CastEssenceOfPride();
+                break;
+            default:
+                break;
+        }
+        /*
         CastPestecus(affectedCombatantList);
         CastPillarsOfStrength();
         CastPotionOfHealing(affectedCombatantList);
         CastPotionOfResolve();
         CastPotionOfResurrection(affectedCombatantList);
+        */
     }
 
 
@@ -394,24 +404,27 @@ public class Battle : MonoBehaviour
     /// <summary>
     /// Essence Of Pride increases the party's attack by 50%, defense by 50%, and keeps those stats for 3 turns [this is hard coded to prevent stacking = 3 is different than += 3]
     /// </summary>
-    private void CastEssenceOfPride(List<GameObject> affectedCombatantList) {
-        for (int i = 0; i < affectedCombatantList.Count; i++) {
+    private void CastEssenceOfPride() {
+        // TODO : Get party members from game manager
+        for (int i = 0; i < playersInThisFight.Count; i++) {
             EssenceOfPride newCast = new EssenceOfPride();
-            newCast.ApplyEffect(affectedCombatantList[i].GetComponent<Unit>());
+            newCast.ApplyEffect(playersInThisFight[i].GetComponent<Unit>());
         }
     }
 
-    public void ResolvingATurnModified(float damage)
+    public void ResolvingATurn(float damage, AttackBase selectedAttack)
     {
+
         currentCombatantUnit.anim.SetTrigger("Attack");
 
-        print($"{currentCombatantUnit.name} is using a cast type {currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].castType}");
+        print($"{currentCombatantUnit.name} is using a cast type {selectedAttack.castType}");
 
         if (currentCombatantUnit.isOnAuto)
         {
+            selectedSpell = selectedAttack; // Need to set selectedspell here for later camera rotation
             //if you are attacking an enemy (not a support spell)
-            if (currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].castType == CastType.Enemy) {
-                var currentTargetType = currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].targetType;
+            if (selectedAttack.castType == CastType.Enemy) {
+                var currentTargetType = selectedAttack.targetType;
                 print($"AUTOUNIT: {currentCombatantUnit.name} is using target type ${currentTargetType}");
                 switch(currentTargetType) {
                     case TargetType.SingleTarget:
@@ -426,17 +439,17 @@ public class Battle : MonoBehaviour
                 }
             }
             //if cast type support
-            if (currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].castType == CastType.Friendly) {
-                HandleSupportAttacks(enemiesInFight);
+            if (selectedAttack.castType == CastType.Friendly) {
+                HandleSupportAttacks(enemiesInFight, selectedAttack);
             }
             //all of these are nestled in 'ResolvingATurn()'
         }
         else 
         {  
             //if you are attacking an enemy (not a support spell)
-            if (currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].castType == CastType.Enemy)
+            if (selectedAttack.castType == CastType.Enemy)
             {
-                var currentTargetType = currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].targetType;
+                var currentTargetType = selectedAttack.targetType;
                 print($"MANUALUNIT: {currentCombatantUnit.name} is using target type ${currentTargetType}");
                 switch(currentTargetType) {
                     case TargetType.SingleTarget:
@@ -450,6 +463,10 @@ public class Battle : MonoBehaviour
                         break;
                 }
             }
+            //if cast type support
+            if (selectedAttack.castType == CastType.Friendly) {
+                HandleSupportAttacks(enemiesInFight, selectedAttack);
+            }
             UpdatePlayerHealthManaUI();
         }
         //At the end of the turn, this cleans up/closes out any unnecessary value for all combatants
@@ -460,16 +477,14 @@ public class Battle : MonoBehaviour
     }
 
     private void HandleManualAoeAttack(float damage) {
-        if (currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].targetType == TargetType.AOE) {
-            for (int i = 0; i < enemiesInFight.Count; i++)
-                enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+        for (int i = 0; i < enemiesInFight.Count; i++) {
+            enemiesInFight[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
         }
     }
 
     private void HandleManualSingleTargetAttack(float damage) {
         Combatants[currentCombatant].transform.LookAt(Combatants[currentlySelectedEnemy].transform);
         Combatants[currentlySelectedEnemy].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
-        print("single target");
     }
 
     private void HandleAutoAoeAttack(float damage) {
@@ -508,8 +523,9 @@ public class Battle : MonoBehaviour
             }
 
             int playerToChoose = Random.Range(0, playersInThisFight.Count - 1);
-            playersInThisFight[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
             Combatants[currentCombatant].transform.LookAt(playersInThisFight[playerToChoose].transform);
+            bool playerWasKilled = playersInThisFight[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+
             tempStoreOfPlayer = playersInThisFight[playerToChoose].GetComponent<Unit>().name;
             playerToAttack = 0;
         }
@@ -730,7 +746,7 @@ public class Battle : MonoBehaviour
 
     public void RotateCamera()
     {
-        if (currentCombatantUnit.attacks[currentCombatantUnit.randomAttack].targetType == TargetType.SingleTarget)
+        if (selectedSpell.targetType == TargetType.SingleTarget) // TODO: Modify selectedSpell to not use global, this may be inaccurate during autoplay
         {
             for (int i = 0; i < playersInThisFight.Count; i++)
             {
@@ -755,7 +771,7 @@ public class Battle : MonoBehaviour
         //turn on particle system (based on attack)
         for (int i = 0; i < currentCombatantUnit.attacks.Count; i++)
         {
-            if (currentCombatantUnit.attacks[i].ToString().Contains(spellToStore))
+            if (currentCombatantUnit.attacks[i] == selectedSpell)
             {
                 if (currentCombatantUnit.attacks[i].targetType == TargetType.SingleTarget)
                     selectingOneTarget = true;

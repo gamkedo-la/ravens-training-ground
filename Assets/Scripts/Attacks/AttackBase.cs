@@ -20,11 +20,12 @@ public class AttackBase : ScriptableObject
     public TargetType targetType;
     public EffectType effectType;
     public AttackExcersion attackExcersion;
+
     Battle battle;
 
-    public void AttemptAttack(Unit unit)
+    public void AttemptAttack(Unit unit, AttackBase selectedAttack)
     {
-        if(resourceType== ResourceType.Mana)
+        if(resourceType == ResourceType.Mana)
         {
 
 
@@ -33,26 +34,26 @@ public class AttackBase : ScriptableObject
                 int deductCost = (int)cost;
                 unit.CurrentMP -= deductCost;
 
-                Attack(unit);
+                Attack(unit, selectedAttack);
             } 
             else
                 return;
         }
-        else if(resourceType== ResourceType.Health)
+        else if(resourceType == ResourceType.Health)
         {
             if (unit.CurrentHP >= (int)cost)
             {
                 int deductCost = (int)cost;
                 unit.CurrentHP -= deductCost;
 
-                Attack(unit);
+                Attack(unit, selectedAttack);
             }
             else
                 return;
         }
     }
 
-    void Attack(Unit unit)
+    void Attack(Unit unit, AttackBase selectedAttack)
     {
 
         float damageType = GetEffectModifier(unit);
@@ -60,10 +61,12 @@ public class AttackBase : ScriptableObject
         float excersionModifier = GetAttackExcersersion();
 
         float damage = (((Mathf.Sqrt(equipmentModifier) * Mathf.Sqrt(damageType)) + (unit.CurrentLevel * 1.25f)) * unit.attackMultiplier * Random.Range(.95f, 1.1f)) * excersionModifier;
-
+        if (selectedAttack.castType == CastType.Friendly) {
+            damage = 0;
+        }
         battle = GameObject.Find("Battle").GetComponent<Battle>();
 
-        battle.ResolvingATurnModified(damage);
+        battle.ResolvingATurn(damage, selectedAttack);
     }
 
 

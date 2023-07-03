@@ -10,6 +10,7 @@ public class SpellSelection : MonoBehaviour
 
     public bool isAttacking;
 
+
     private void Start()
     {
         battle = GameObject.Find("Battle").GetComponent<Battle>();
@@ -20,18 +21,18 @@ public class SpellSelection : MonoBehaviour
         if (!isAttacking)
         {
             //going from the spell selection screen, then storing it into battle.cs
-            battle.spellToStore = this.gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text;
+            battle.selectedSpell = this.gameObject.GetComponent<SpellPrefab>().associatedAttack;
             battle.TurnOnIndividualAttackItems();
 
             playerUI.OpenAttackingMenu();
         }
         else
         {
-            print(battle.spellToStore);
+            print($"Player selected spell {battle.selectedSpell.name}");
             //triggering the spell from the unit to perform the above listed spell
-            battle.Combatants[battle.currentCombatant].GetComponent<Unit>().TakingUnitTurn();
+            battle.Combatants[battle.currentCombatant].GetComponent<Unit>().TakingUnitTurn(battle.selectedSpell);
             playerUI.TurnOffAllMenus();
-            battle.spellToStore = "";
+            battle.selectedSpell = null;
         }
     }
 }

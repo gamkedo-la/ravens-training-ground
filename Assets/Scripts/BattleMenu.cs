@@ -122,7 +122,7 @@ public class BattleMenu : MonoBehaviour
 
     void ClearStoredSpell()
     {
-        battle.spellToStore = "";
+        battle.selectedSpell = null;
         battle.TurnOffIndividualAttackItems();
     }
 
@@ -132,13 +132,15 @@ public class BattleMenu : MonoBehaviour
 
         for (int i = 0; i < battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks.Count - 1; i++)
         {
-            GameObject instantiatedPrefab = Instantiate(spellsUIPrefab, spellsMenuHolder.transform.position, spellsMenuHolder.transform.rotation) as GameObject;
+            GameObject instantiatedPrefab = Instantiate(spellsUIPrefab, spellsMenuHolder.transform.position, spellsMenuHolder.transform.rotation);
             instantiatedPrefab.transform.parent = spellsMenuHolder.transform;
             instantiatedPrefab.transform.localScale = new Vector3(5, 0.4f, 1);
+            AttackBase associatedAttack = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i];
+            instantiatedPrefab.transform.Find("SpellName").GetComponent<TextMeshProUGUI>().text = associatedAttack.AttackName;
+            instantiatedPrefab.transform.Find("SpellDesc").GetComponent<TextMeshProUGUI>().text = associatedAttack.AttackDescription;
+            instantiatedPrefab.transform.Find("SpellCost").GetComponent<TextMeshProUGUI>().text = associatedAttack.cost.ToString();
+            instantiatedPrefab.GetComponent<SpellPrefab>().associatedAttack = associatedAttack;
 
-            instantiatedPrefab.transform.Find("SpellName").GetComponent<TextMeshProUGUI>().text = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].AttackName;
-            instantiatedPrefab.transform.Find("SpellDesc").GetComponent<TextMeshProUGUI>().text = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].AttackDescription;
-            instantiatedPrefab.transform.Find("SpellCost").GetComponent<TextMeshProUGUI>().text = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].cost.ToString();
 
             if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Ancient")
             {

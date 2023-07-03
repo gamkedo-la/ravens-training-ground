@@ -136,6 +136,7 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 1
   Name: Erebus
+  unitState: 3
   CurrentHP: 5
   MaxHP: 30
   CurrentMP: 31
@@ -185,6 +186,7 @@ MonoBehaviour:
   tier5: 18
   tier6: 21
   attacks:
+  - {fileID: 11400000, guid: d9517778e5be89f48b41bd291ae2e550, type: 2}
   - {fileID: 11400000, guid: 9d94ae56618c924428d1b315dd44b8fa, type: 2}
   - {fileID: 11400000, guid: a400b13aa01717f4283ebefa251eff7e, type: 2}
   - {fileID: 11400000, guid: a6b60d89678e4fd40ac55b042ca5df6e, type: 2}

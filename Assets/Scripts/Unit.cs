@@ -109,7 +109,7 @@ public class Unit : MonoBehaviour
         
     }
 
-    public void TakingUnitTurn()
+    public void TakingUnitTurn(AttackBase selectedAttack = null)
     {
         if (!characterIsDead)
         {
@@ -130,92 +130,91 @@ public class Unit : MonoBehaviour
             else
                 defenseMultiplier = 1;
 
-            DetermineAttackFromList();
+            DetermineAttackFromList(selectedAttack);
            // DetermineAttack();
         }
         else
             print("Character is dead, you shouldn't reach here, something went wrong");
     }
-    void DetermineAttackFromList()
+    void DetermineAttackFromList(AttackBase selectedAttack = null)
     {
-        if (isOnAuto)
-        {
-            int fleeThisTurn = Random.Range(0, 100);
-
-            if (fleeThisTurn >= 50 && canFlee)
-            {
-                print("Character Fled");
-                experienceEarned = 0;
-                CurrentHP = 0;
-
-                affinityText.color = Color.black;
-                affinityText.text = "Fled";
-                StartCoroutine(ClearText());
-
-                Instantiate(deathParticle, transform.position, transform.rotation);
-                characterIsDead = true;
-                battle.ExperienceAndDeathCollection();
-                //character fled
-            }
-            else
-            {
-                randomAttack = Random.Range(0, attacks.Count);
-                attacks[randomAttack].AttemptAttack(this);
-                print($"{name} is casting attack {attacks[randomAttack]}");
-            }
+        AttackBase attackToUse;
+        if (selectedAttack == null) {
+            attackToUse = attacks[Random.Range(0, attacks.Count - 1)];
+        } else {
+            attackToUse = selectedAttack;
         }
-        else
-        {
+        if (isOnAuto) {
+            if (DidNotFlee()) {
+                print($"{name} is casting attack {attackToUse.name}");
+                attackToUse.AttemptAttack(this, attackToUse);
+            }
+        } else {
             if (isAPlayer)
             {
-                print("do the spell:" + battle.spellToStore);
-
-                for (int i = 0; i < attacks.Count; i++)
-                {
-                    if (attacks[i].AttackName == battle.spellToStore)
-                    {
-                        attacks[i].AttemptAttack(this);
-                    }
-                }
+                print($"{name} is casting attack {attackToUse.name}");
+                attackToUse.AttemptAttack(this, attackToUse);
             }
         }
     }
- /*   void DetermineAttack()
-    {
-        if (isOnAuto)
-        {
-            int fleeThisTurn = Random.Range(0, 100);
 
-            if (fleeThisTurn >= 50 && canFlee)
-            {
-                print("Character Fled");
-                experienceEarned = 0;
-                CurrentHP = 0;
+    private bool DidNotFlee() {
+        int fleeThisTurn = Random.Range(0, 100);
 
-                affinityText.color = Color.black;
-                affinityText.text = "Fled";
-                StartCoroutine(ClearText());
+        if (fleeThisTurn >= 50 && canFlee) {
+            print("Character Fled");
+            experienceEarned = 0;
+            CurrentHP = 0;
 
-                Instantiate(deathParticle, transform.position, transform.rotation);
-                characterIsDead = true;
-                battle.ExperienceAndDeathCollection();
-                //character fled
-            }
-            else
-            {
-                int randomAttack = Random.Range(0, KnownSkills.Count);
-                Invoke(KnownSkills[randomAttack], 0f);
-                print(KnownSkills[randomAttack]);
-            }
+            affinityText.color = Color.black;
+            affinityText.text = "Fled";
+            StartCoroutine(ClearText());
+
+            Instantiate(deathParticle, transform.position, transform.rotation);
+            characterIsDead = true;
+            battle.ExperienceAndDeathCollection();
+            //character fled
+            return false;
         }
-        else
-        {
-            if (isAPlayer)
-            { 
-            //turn first menu on
-            }
-        }
-    }*/
+        return true;
+    }
+
+    /*   void DetermineAttack()
+  {
+      if (isOnAuto)
+      {
+          int fleeThisTurn = Random.Range(0, 100);
+
+          if (fleeThisTurn >= 50 && canFlee)
+          {
+              print("Character Fled");
+              experienceEarned = 0;
+              CurrentHP = 0;
+
+              affinityText.color = Color.black;
+              affinityText.text = "Fled";
+              StartCoroutine(ClearText());
+
+              Instantiate(deathParticle, transform.position, transform.rotation);
+              characterIsDead = true;
+              battle.ExperienceAndDeathCollection();
+              //character fled
+          }
+          else
+          {
+              int randomAttack = Random.Range(0, KnownSkills.Count);
+              Invoke(KnownSkills[randomAttack], 0f);
+              print(KnownSkills[randomAttack]);
+          }
+      }
+      else
+      {
+          if (isAPlayer)
+          { 
+          //turn first menu on
+          }
+      }
+  }*/
 
     public void RedoAttack()
     {

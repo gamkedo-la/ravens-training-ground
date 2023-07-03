@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Increases attack by 50%, defense by 50%, and keeps those stats for 3 turns
 /// </summary>
-public class EssenceOfPride : IStatusEffect
+public class EssenceOfPride : IStatusEffect 
 {
     public string StatusEffectName = "EssenceOfPride";
     public string StatusEffectDescription = "Increases health by amount to recover";
