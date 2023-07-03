@@ -218,7 +218,14 @@ public class Battle : MonoBehaviour
         UpdatePlayerHealthManaUI();
        // NextTurn();
     }
-
+    List<GameObject> GetEnemies()
+    {
+        return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == false ).ToList();
+    }
+    List<GameObject> GetPlayers()
+    {
+        return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == true).ToList();
+    }
     void OrderCombatants()
     {
         currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
