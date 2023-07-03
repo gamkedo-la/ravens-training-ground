@@ -31,8 +31,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1347724879544682025}
+  - {fileID: 310019201792806779}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1507063610130183861
 MonoBehaviour:
@@ -49,6 +50,7 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 1
   Name: Phoebe
+  unitState: 3
   CurrentHP: 5
   MaxHP: 30
   CurrentMP: 27
@@ -114,6 +116,7 @@ MonoBehaviour:
   metallic: {fileID: 0}
   canFlee: 0
   randomAttack: 0
+  victoryPlacement: {fileID: 5484801666670907914}
   currentState: 0
 --- !u!54 &6798552512911683087
 Rigidbody:
@@ -258,6 +261,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5484801666670907914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 310019201792806779}
+  m_Layer: 0
+  m_Name: VictoryPlacement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &310019201792806779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5484801666670907914}
+  m_LocalRotation: {x: -0.009462505, y: -0.9897857, z: 0.079159595, w: -0.11818911}
+  m_LocalPosition: {x: -0.14338328, y: 0.69273734, z: 2.4663455}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1344856994133667350}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -14.222, y: -43.002, z: -1.236}
 --- !u!1001 &1530852093731725762
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -62,8 +62,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2060371744137632761}
+  - {fileID: 2682125851404273125}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6070649036248793589
 MonoBehaviour:
@@ -80,6 +81,7 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 1
   Name: Sophie
+  unitState: 3
   CurrentHP: 5
   MaxHP: 30
   CurrentMP: 30
@@ -145,6 +147,7 @@ MonoBehaviour:
   metallic: {fileID: 0}
   canFlee: 0
   randomAttack: 0
+  victoryPlacement: {fileID: 1584590050889509745}
   currentState: 0
 --- !u!54 &-866191291645170898
 Rigidbody:
@@ -173,6 +176,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1584590050889509745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2682125851404273125}
+  m_Layer: 0
+  m_Name: VictoryPlacement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2682125851404273125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584590050889509745}
+  m_LocalRotation: {x: -0.009462505, y: -0.9897857, z: 0.079159595, w: -0.11818911}
+  m_LocalPosition: {x: -0.14338328, y: 0.69273734, z: 2.4663455}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2228828099864112908}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -14.222, y: -43.002, z: -1.236}
 --- !u!1 &5012062073081560837
 GameObject:
   m_ObjectHideFlags: 0

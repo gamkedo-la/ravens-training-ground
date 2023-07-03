@@ -59,7 +59,7 @@ public class Battle : MonoBehaviour
     bool hasFled;
     string tempStoreOfPlayer;
 
-    public GameObject movingCamera;
+    public GameObject movingCamera, cameraView;
     public GameObject playerUICanvas;
     public Transform AoEView;
 
@@ -282,10 +282,6 @@ public class Battle : MonoBehaviour
             enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().canvas.SetActive(true);
             enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().targetParticle.SetActive(true);          
         }
-        else
-        {
-            print("Not selectingOneTarget ");
-        }
 
         //Pressing Space advances the turn - this is not permenant - just for testing
         if (Input.GetKeyDown(KeyCode.Space))
@@ -301,6 +297,13 @@ public class Battle : MonoBehaviour
                 if(!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
                     playersInThisFight[i].transform.position += transform.right * 3 * Time.deltaTime;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            //this enters a victory state, TESTING, REMOVE EVENTUALLY
+            state = StateOfBattle.WON;
+            EndBattle();
         }
     }
 
@@ -858,6 +861,19 @@ public class Battle : MonoBehaviour
         else
         {
             currentCombatantUnit.anim.SetTrigger("Victory");
+
+            for (int i = 0; i < playersInThisFight.Count; i++)
+            {
+                if (!playersInThisFight[i].GetComponent<Unit>().characterIsDead)
+                    playersInThisFight[i].GetComponent<Unit>().anim.SetTrigger("battleWon");
+            }
+
+            movingCamera.transform.position = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.position;
+            movingCamera.transform.rotation = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.rotation;
+            cameraView.GetComponent<Animator>().SetTrigger("victory");
+            //change colors 
+            //open experience menu
+            //open menu to return to lobby
             currentCombatant = 0;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
             print("Player Won");

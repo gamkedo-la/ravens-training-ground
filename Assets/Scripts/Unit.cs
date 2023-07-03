@@ -60,6 +60,7 @@ public class Unit : MonoBehaviour
 
     public bool canFlee;
     public int randomAttack;
+    public GameObject victoryPlacement;
 
     public enum UnitState {
         CASTINGSUPPORTSPELL,

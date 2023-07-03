@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2815130061987072269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2214548057360832617}
+  m_Layer: 0
+  m_Name: VictoryPlacement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2214548057360832617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2815130061987072269}
+  m_LocalRotation: {x: -0.009462505, y: -0.9897857, z: 0.079159595, w: -0.11818911}
+  m_LocalPosition: {x: -0.14338328, y: 0.69273734, z: 2.4663455}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5920217333913091518}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -14.222, y: -43.002, z: -1.236}
 --- !u!1 &4646048799911148421
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,8 +62,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8569146206067648663}
+  - {fileID: 2214548057360832617}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5347537393173891232
 MonoBehaviour:
@@ -49,6 +81,7 @@ MonoBehaviour:
   isOnAuto: 0
   isAPlayer: 1
   Name: Dani
+  unitState: 3
   CurrentHP: 5
   MaxHP: 30
   CurrentMP: 24
@@ -116,6 +149,7 @@ MonoBehaviour:
   metallic: {fileID: 0}
   canFlee: 0
   randomAttack: 0
+  victoryPlacement: {fileID: 2815130061987072269}
   currentState: 0
 --- !u!54 &-800283866936015331
 Rigidbody:
