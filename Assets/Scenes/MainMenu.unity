@@ -343,8 +343,8 @@ Camera:
   m_GameObject: {fileID: 78817665}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.24705884, g: 0.25490198, b: 0.26666668, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -554,6 +554,7 @@ MonoBehaviour:
   percentMax: 1.1
   multiplier: 8
   isFlee: 0
+  levelToLoad: 
 --- !u!114 &126405874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1181,6 +1182,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
 --- !u!114 &302057750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,6 +1294,7 @@ MonoBehaviour:
   percentMax: 1.1
   multiplier: 8
   isFlee: 0
+  levelToLoad: 
 --- !u!1 &473189664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -1321,6 +1324,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
 --- !u!114 &473189668 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3722963889842574863, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -1801,9 +1805,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1095851166}
-    - targetCorrespondingSourceObject: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1095851165}
   m_SourcePrefab: {fileID: 100100000, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
 --- !u!1 &712491846 stripped
@@ -1835,6 +1836,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
 --- !u!114 &712491853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2901,20 +2903,6 @@ MonoBehaviour:
   mySlider: {fileID: 187925345}
   gameCamera: {fileID: 0}
   persistentDataObject: {fileID: 1089007003}
---- !u!114 &1095851166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095851163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 276bf68c6941b274791e737606a53dfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mySlider: {fileID: 187925345}
-  mainCameraAudioSource: {fileID: 78817669}
 --- !u!114 &1105797101 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7589736903911948648, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -2955,6 +2943,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
 --- !u!114 &1170546024 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3722963889842574863, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -3098,6 +3087,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
 --- !u!1 &1378744809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -3149,6 +3139,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
 --- !u!114 &1455507053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7792,6 +7783,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
 --- !u!1 &1536951616 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -7975,6 +7967,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
 --- !u!1 &1778662587
 GameObject:
   m_ObjectHideFlags: 0
@@ -8583,7 +8576,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -443, y: -115}
-  m_SizeDelta: {x: 3479.92, y: 2000}
+  m_SizeDelta: {x: 5000, y: 2000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1952115892
 MonoBehaviour:
@@ -8634,6 +8627,10 @@ PrefabInstance:
     - target: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_Name
       value: Volume_Section
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3267394940393673763, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_Pivot.x
@@ -8851,6 +8848,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
 --- !u!114 &2046773821 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3722963889842574863, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -9345,3 +9343,4 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
+  levelToLoad: 
