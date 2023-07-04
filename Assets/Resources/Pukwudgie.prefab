@@ -7819,7 +7819,7 @@ Transform:
   - {fileID: 5589787366707317098}
   - {fileID: 5483268103127907473}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8161330624317943825
 MonoBehaviour:
@@ -7836,6 +7836,7 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 0
   Name: Pukwudgie
+  unitState: 3
   CurrentHP: 60
   MaxHP: 60
   CurrentMP: 30
@@ -7896,6 +7897,9 @@ MonoBehaviour:
   metallic: {fileID: 2100000, guid: 790319bf0c6e31645bb3b939171774ee, type: 2}
   canFlee: 0
   randomAttack: 0
+  victoryPlacement: {fileID: 0}
+  objectToChangeMaterialOf: {fileID: 0}
+  playerMaterial: []
   currentState: 0
 --- !u!1 &7275965210484628570
 GameObject:
@@ -9129,7 +9133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9180591307380322273}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.002465248, y: -0.3080002, z: -0.026041627}
+  m_LocalPosition: {x: -0.002465248, y: -0.3080002, z: -0.02604163}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:

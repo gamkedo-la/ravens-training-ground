@@ -61,12 +61,13 @@ public class Battle : MonoBehaviour
 
     public GameObject movingCamera, cameraView;
     public GameObject playerUICanvas;
-    public Transform AoEView;
+    public Transform AoEView, AllEnemiesKnockedDownPOV;
 
     public AttackBase selectedSpell;
     public int currentlySelectedEnemy;
     bool selectingOneTarget;
     public GameObject victoryMenu;
+    public bool groupAttackHappening;
 
     void Start()
     {
@@ -290,6 +291,17 @@ public class Battle : MonoBehaviour
             enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().canvas.SetActive(true);
             enemiesInFight[currentlySelectedEnemy].GetComponent<Unit>().targetParticle.SetActive(true);          
         }
+        #region CHEATS REMOVE ONCE TESTING IS FINISHED
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            //knock down all enemies
+            for (int i = 0; i < enemiesInFight.Count; i++)
+            {
+                enemiesInFight[i].GetComponent<Unit>().hasBeenKnockedDown = true;
+                enemiesInFight[i].GetComponent<Unit>().anim.SetBool("knockedDown", true);
+            }
+            CheckIfAllMembersKnockedDown();
+        }
 
         //Pressing Space advances the turn - this is not permenant - just for testing
         if (Input.GetKeyDown(KeyCode.Space))
@@ -313,6 +325,7 @@ public class Battle : MonoBehaviour
             state = StateOfBattle.WON;
             EndBattle();
         }
+        #endregion
     }
 
     void NextTurn()
@@ -574,9 +587,9 @@ public class Battle : MonoBehaviour
             //clear playerCountForKnockedOut
         }
         //If a player knocks down an enemy
-        for (int i = 0; i < playersInThisFight.Count; i++)
+        for (int i = 0; i < enemiesInFight.Count; i++)
         {
-            if (playersInThisFight[i].GetComponent<Unit>().hasBeenKnockedDown)
+            if (enemiesInFight[i].GetComponent<Unit>().hasBeenKnockedDown)
             {
                 enemyCountForKnockedOut++;
             }
@@ -584,7 +597,14 @@ public class Battle : MonoBehaviour
 
         if (enemyCountForKnockedOut == enemiesInFight.Count && currentCombatantUnit.isAPlayer && playersInThisFight.Count >= 2)
         {
-            print("Enemy All Out Attack");
+            print("Player All Out Attack");
+
+            //Open UI menu to let players know attack is available
+            groupAttackHappening = true;
+
+            movingCamera.transform.position = AllEnemiesKnockedDownPOV.transform.position;
+            //button is handled on screen and triggered from button in PlayerUICanvas script
+
 
             //All players take damage based on who is still standing on the enemy side
             //Check if players are alive

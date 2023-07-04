@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BattleMenu : MonoBehaviour
 {
-    public GameObject firstMenu, tacticsMenu, fleeMenu, guardMenu, spellsMenu, itemsMenu, attackingMenu;
+    public GameObject firstMenu, tacticsMenu, fleeMenu, guardMenu, spellsMenu, itemsMenu, attackingMenu, groupAttackMenu;
     public GameObject tacticsMenuForLeader;
 
     Battle battle;
@@ -19,6 +19,16 @@ public class BattleMenu : MonoBehaviour
     private void Start()
     {
         battle = GameObject.Find("Battle").GetComponent<Battle>();
+    }
+
+    private void Update()
+    {
+        if (battle.groupAttackHappening)
+        {
+            TurnOffAllMenus();
+            groupAttackMenu.SetActive(true);
+        }
+
     }
 
     //this is starting at every player turn, Tactics menu should be turned off for all but Dani.
@@ -105,6 +115,12 @@ public class BattleMenu : MonoBehaviour
         battle.GuardPlayer();
     }
 
+    public void AttackAll()
+    {
+       // if (battle.groupAttackHappening)
+            print("group attack happening");
+    }
+
     public void TurnOffAllMenus()
     {
         firstMenu.SetActive(false);
@@ -114,6 +130,7 @@ public class BattleMenu : MonoBehaviour
         spellsMenu.SetActive(false);
         itemsMenu.SetActive(false);
         attackingMenu.SetActive(false);
+        groupAttackMenu.SetActive(false);
         //if cam position changed or particles are turn on, this resets it
         battle.TurnOffIndividualAttackItems();
         if (isSpellBackButton)

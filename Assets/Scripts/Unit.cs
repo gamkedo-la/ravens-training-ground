@@ -682,7 +682,11 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            anim.SetTrigger("TakeDamage");
+            //if enemy was already knocked down, add 20% damage (as if their defense was lowered)
+            if (hasBeenKnockedDown)
+                damageToTake *= 1.2f;
+            else
+                anim.SetTrigger("TakeDamage");
 
             if (charms && StrC || physical && StrP || darkArts && StrD || transfiguration && StrT || ancient && StrA)
             {
@@ -704,6 +708,8 @@ public class Unit : MonoBehaviour
                 {
                     affinityText.color = Color.yellow;
                     affinityText.text = "Weak";
+                    hasBeenKnockedDown = true;
+                    anim.SetBool("knockedDown", true);
                     StartCoroutine(ClearText());
                 }
                 if (isAPlayer)
