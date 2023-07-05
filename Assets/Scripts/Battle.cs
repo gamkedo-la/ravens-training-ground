@@ -227,6 +227,18 @@ public class Battle : MonoBehaviour
     {
         return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == true).ToList();
     }
+
+    List<GameObject> GetUnconciousPlayers()
+    {
+        return GetPlayers().Where(x => x.GetComponent<Unit>().currentState == Unit.UnitState.Unconcious).ToList();
+    }
+
+    GameObject GetLowestHealthEnemy()
+    {
+        List<GameObject> enemies = GetEnemies();
+        enemies.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+        return enemies[0];
+    }
     void OrderCombatants()
     {
         currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
