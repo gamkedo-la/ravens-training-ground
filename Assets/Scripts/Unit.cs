@@ -752,6 +752,7 @@ public class Unit : MonoBehaviour
                 //  anim.SetTrigger("isDead");
                 Instantiate(deathParticle, transform.position, transform.rotation);
                 characterIsDead = true;
+                unitState = UnitState.Unconcious;
                 battle.ExperienceAndDeathCollection();
                 return true;
             }         
