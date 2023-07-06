@@ -21,7 +21,7 @@ public class PotionOfResurrection : IStatusEffect
     private int originalAttackBonusTurnCount;
 
     public void ApplyEffect(Unit affectedCombatUnit) {
-        affectedCombatUnit.characterIsDead = false;
+        affectedCombatUnit.currentState = Unit.UnitState.Alive;
         affectedCombatUnit.CurrentHP = (affectedCombatUnit.MaxHP * .5f);
         Transform affectedCombatUnitTransform = affectedCombatUnit.transform; 
         // TODO - Fire event for unit add as combatant

@@ -11,7 +11,6 @@ public class Unit : MonoBehaviour
     public bool isAPlayer;
 
     public string Name;
-    public UnitState unitState=UnitState.Alive;
     public float CurrentHP = 25, MaxHP = 20, CurrentMP = 30, MaxMP = 25, Magic = 10, Physical = 9, Agility = 15, Finesse = 20;
     public int CurrentLevel = 1;
     public int tempAgility = 0;
@@ -35,7 +34,6 @@ public class Unit : MonoBehaviour
 
     public float damage, healthToRecover;
 
-    public bool characterIsDead;
     public float experienceEarned;
 
     public bool hasBeenKnockedDown;
@@ -69,7 +67,8 @@ public class Unit : MonoBehaviour
         CASTINGATTACKSPELL,
         IDLE,
         Alive,
-        Unconcious,
+        Unconscious,
+        Fled,
         Dead
     }
 
@@ -114,7 +113,7 @@ public class Unit : MonoBehaviour
 
     public void TakingUnitTurn(AttackBase selectedAttack = null)
     {
-        if (!characterIsDead)
+        if (currentState != UnitState.Unconscious || currentState != UnitState.Fled)
         {
             battle.MoveCamera();
             if (hasBeenKnockedDown)
@@ -174,7 +173,7 @@ public class Unit : MonoBehaviour
             StartCoroutine(ClearText());
 
             Instantiate(deathParticle, transform.position, transform.rotation);
-            characterIsDead = true;
+            currentState = UnitState.Fled;
             battle.ExperienceAndDeathCollection();
             //character fled
             return false;
@@ -751,8 +750,7 @@ public class Unit : MonoBehaviour
             {
                 //  anim.SetTrigger("isDead");
                 Instantiate(deathParticle, transform.position, transform.rotation);
-                characterIsDead = true;
-                unitState = UnitState.Unconcious;
+                currentState = UnitState.Unconscious;
                 battle.ExperienceAndDeathCollection();
                 return true;
             }         

@@ -225,12 +225,12 @@ public class Battle : MonoBehaviour
     }
     List<GameObject> GetPlayers()
     {
-        return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == true).ToList();
+        return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == true && x.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious).ToList();
     }
 
     List<GameObject> GetUnconciousPlayers()
     {
-        return GetPlayers().Where(x => x.GetComponent<Unit>().currentState == Unit.UnitState.Unconcious).ToList();
+        return GetPlayers().Where(x => x.GetComponent<Unit>().currentState == Unit.UnitState.Unconscious).ToList();
     }
 
     GameObject GetLowestHealthEnemy()
@@ -321,17 +321,19 @@ public class Battle : MonoBehaviour
             currentCombatant = (currentCombatant + 1) % Combatants.Count;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
 
-            if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconcious)
+            if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
                 NextTurn();
         }
-        if (hasFled)
+
+        //this seems to only move the character if they've fled
+/*        if (hasFled)
         {
             for (int i = 0; i < GetPlayers().Count; i++)
             {
                 if(!GetPlayers()[i].GetComponent<Unit>().characterIsDead)
                     GetPlayers()[i].transform.position += transform.right * 3 * Time.deltaTime;
             }
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -361,7 +363,9 @@ public class Battle : MonoBehaviour
         characterNameText.text = currentCombatantUnit.Name;
 
         print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCombatantUnit.Agility + currentCombatantUnit.tempAgility) + " CurrentHP: " + currentCombatantUnit.CurrentHP);
-        currentCombatantUnit.TakingUnitTurn();
+
+        if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
+            currentCombatantUnit.TakingUnitTurn();
     }
 
     /// <summary>
@@ -531,10 +535,12 @@ public class Battle : MonoBehaviour
                 GetEnemies()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
             }
         } else {
+            
+            //shouldn't need the if since get players only returns conscious ones
             for (int i = 0; i < GetPlayers().Count; i++) {
-                if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead) {
+                //if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead) {
                     GetPlayers()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
-                }
+                //}
             }
         }
     }
@@ -556,16 +562,18 @@ public class Battle : MonoBehaviour
             // playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
 
             for (int i = 0; i < GetPlayers().Count; i++) {
-                if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead)
-                    playerToAttack++;
+                //shouldn't need the if since get players only returns conscious ones
+                //if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead)
+                playerToAttack++;
             }
-
-            int playerToChoose = Random.Range(0, GetPlayers().Count - 1);
-            Combatants[currentCombatant].transform.LookAt(GetPlayers()[playerToChoose].transform);
-            bool playerWasKilled = GetPlayers()[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
 
             if (GetPlayers().Count > 0)
             {
+                int playerToChoose = Random.Range(0, GetPlayers().Count - 1);
+
+                Combatants[currentCombatant].transform.LookAt(GetPlayers()[playerToChoose].transform);
+                bool playerWasKilled = GetPlayers()[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+
                 tempStoreOfPlayer = GetPlayers()[playerToChoose].GetComponent<Unit>().name;
                 playerToAttack = 0;
             }
@@ -650,12 +658,12 @@ public class Battle : MonoBehaviour
             //player flees
             for (int i = 0; i < GetPlayers().Count; i++)
             {
-                if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead)
-                {
+                //if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead)
+                //{
                     GetPlayers()[i].transform.Rotate(0,180,0);
                     GetPlayers()[i].GetComponent<Unit>().anim.SetBool("isRunning", true);
                     hasFled = true;
-                }
+                //}
             }
             chanceToLeave = 0;
             StartCoroutine(ClearInformationText(2f, "Party escaped"));
@@ -749,7 +757,8 @@ public class Battle : MonoBehaviour
 
         //If the player is killed, there is a possibility they can be added back so we can't fully remove them. 
         //They are instead added to a dead players list (See Reincarnation() to come back)
-        for (int i = 0; i < GetPlayers().Count; i++)
+
+/*        for (int i = 0; i < GetPlayers().Count; i++)
         {
             var playerInstance = GetPlayers()[i];
             if (playerInstance.GetComponent<Unit>().characterIsDead)
@@ -758,7 +767,7 @@ public class Battle : MonoBehaviour
                     GetUnconciousPlayers().Add(playerInstance);
                 }
             }
-        }
+        }*/
 
         //Current structure is to not remove players from the PlayersInThisFight list as they can be called back
         //So right now, if the number of deadPlayers equals the number of players in the fight - everyone has been killed and the player loses
@@ -917,13 +926,14 @@ public class Battle : MonoBehaviour
 
             for (int i = 0; i < GetPlayers().Count; i++)
             {
-                if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead)
-                {
-                    GetPlayers()[i].GetComponent<Unit>().anim.SetTrigger("battleWon");
+                //shouldn't need the if since get players only returns conscious ones
+                //if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead)
+                //{
+                GetPlayers()[i].GetComponent<Unit>().anim.SetTrigger("battleWon");
 
                     //Change colors of all materials to match party member color
                     GetPlayers()[i].GetComponent<Unit>().objectToChangeMaterialOf.GetComponent<Renderer>().materials = GetPlayers()[i].GetComponent<Unit>().playerMaterial;
-                }
+                //}
             }
 
             movingCamera.transform.position = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.position;
