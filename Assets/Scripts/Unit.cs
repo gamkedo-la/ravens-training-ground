@@ -113,8 +113,15 @@ public class Unit : MonoBehaviour
 
     public void TakingUnitTurn(AttackBase selectedAttack = null)
     {
-        if (currentState != UnitState.Unconscious || currentState != UnitState.Fled)
-        {
+        //break out if unit is unconcious dead or fled
+        if(currentState == UnitState.Unconscious)
+        { return; }
+        if (currentState == UnitState.Fled)
+        { return; }
+        if (currentState == UnitState.Dead)
+        { return; }
+/*        if (currentState != UnitState.Unconscious || currentState != UnitState.Fled)
+        {*/
             battle.MoveCamera();
             if (hasBeenKnockedDown)
             {
@@ -134,9 +141,9 @@ public class Unit : MonoBehaviour
 
             DetermineAttackFromList(selectedAttack);
            // DetermineAttack();
-        }
+/*        }
         else
-            print("Character is dead, you shouldn't reach here, something went wrong");
+            print("Character is dead, you shouldn't reach here, something went wrong");*/
     }
     void DetermineAttackFromList(AttackBase selectedAttack = null)
     {
