@@ -63,44 +63,51 @@ public class AttackBase : ScriptableObject
         if (castType == CastType.Friendly) {
             damage = 0;
         }
+
+        damage *= GetCriticalChanceMultiplier(caster);
+
+        Debug.Log($"{caster.Name} is casting attack {name} on {target.Name}");
+
+        target.TakeDamage(damage);
+
         battle = GameObject.Find("Battle").GetComponent<Battle>();
 
         battle.ResolvingATurn(damage, this);
     }
 
 
-    float GetEffectModifier(Unit unit)
+    float GetEffectModifier(Unit caster)
     {
         switch (effectType)
         {
             case EffectType.Charms:
-                return unit.Magic;
+                return caster.Magic;
             case EffectType.Physical:
-                return unit.Physical;
+                return caster.Physical;
             case EffectType.DarkArts:
-                return unit.Magic;
+                return caster.Magic;
             case EffectType.Transfiguration:
-                return unit.Magic;
+                return caster.Magic;
             case EffectType.Ancient:
-                return unit.Magic;
+                return caster.Magic;
             case EffectType.Potions:
-                return unit.Magic;
+                return caster.Magic;
             case EffectType.None:
-                return unit.Magic;
+                return caster.Magic;
             default:
                 Debug.Log("Missing Type");
                 return 0;
 
         }
     }
-    float GetEquipmentModifier(Unit unit)
+    float GetEquipmentModifier(Unit caster)
     {
         switch (effectType)
         {
             case EffectType.Charms:
                 return 0;
             case EffectType.Physical:
-                return unit.PhysicalEquipment;
+                return caster.PhysicalEquipment;
             case EffectType.DarkArts:
                 return 0;
             case EffectType.Transfiguration:
@@ -130,5 +137,16 @@ public class AttackBase : ScriptableObject
             default:
                 return 0f;
         }
+    }
+
+    float GetCriticalChanceMultiplier(Unit caster)
+    {
+        float chanceForCritial = Random.Range(0, 100);
+        float criticalChance = caster.Finesse + caster.FinesseEquipment;
+
+        if (chanceForCritial <= criticalChance)
+            return 2;
+        else
+            return 1;
     }
 }
