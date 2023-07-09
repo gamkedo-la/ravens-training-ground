@@ -114,38 +114,50 @@ public class Unit : MonoBehaviour
     public void TakingUnitTurn(AttackBase selectedAttack = null)
     {
         //break out if unit is unconcious dead or fled
-        if(currentState == UnitState.Unconscious)
+        if (currentState == UnitState.Unconscious)
         { return; }
         if (currentState == UnitState.Fled)
         { return; }
         if (currentState == UnitState.Dead)
         { return; }
-/*        if (currentState != UnitState.Unconscious || currentState != UnitState.Fled)
-        {*/
-            battle.MoveCamera();
-            if (hasBeenKnockedDown)
-            {
-                anim.SetBool("knockedDown", false);
-                hasBeenKnockedDown = false;
-            }
-            
-            if (attackBonusTurnCount > 0)
-                attackBonusTurnCount--;
-            else
-                attackMultiplier = 1;
+        /*        if (currentState != UnitState.Unconscious || currentState != UnitState.Fled)
+                {*/
+        battle.MoveCamera();
+        if (hasBeenKnockedDown)
+        {
+            anim.SetBool("knockedDown", false);
+            hasBeenKnockedDown = false;
+        }
 
-            if (defenseBonusTurnCount > 0)
-                defenseBonusTurnCount--;
-            else
-                defenseMultiplier = 1;
-
-            DetermineAttackFromList(selectedAttack);
-           // DetermineAttack();
-/*        }
+        if (attackBonusTurnCount > 0)
+            attackBonusTurnCount--;
         else
-            print("Character is dead, you shouldn't reach here, something went wrong");*/
+            attackMultiplier = 1;
+
+        if (defenseBonusTurnCount > 0)
+            defenseBonusTurnCount--;
+        else
+            defenseMultiplier = 1;
+
+        if (DidNotFlee() == false)
+            return;
+
+        AttackBase attackBaseTemp = DetermineAttackFromList(selectedAttack);
+
+       
+        if (isOnAuto)
+        {
+            Unit target = SelectAutoRandomTarget();
+
+            attackBaseTemp.AttemptAttack(this, target);
+        }
+
+        // DetermineAttack();
+        /*        }
+                else
+                    print("Character is dead, you shouldn't reach here, something went wrong");*/
     }
-    void DetermineAttackFromList(AttackBase selectedAttack = null)
+    AttackBase DetermineAttackFromList(AttackBase selectedAttack = null)
     {
         AttackBase attackToUse;
         if (selectedAttack == null) {
@@ -153,7 +165,7 @@ public class Unit : MonoBehaviour
         } else {
             attackToUse = selectedAttack;
         }
-        if (isOnAuto) {
+/*        if (isOnAuto) {
             if (DidNotFlee()) {
                 print($"{name} is casting attack {attackToUse.name}");
                 attackToUse.AttemptAttack(this, attackToUse);
@@ -164,25 +176,40 @@ public class Unit : MonoBehaviour
                 print($"{name} is casting attack {attackToUse.name}");
                 attackToUse.AttemptAttack(this, attackToUse);
             }
+        }*/
+
+        return attackToUse;
+    }
+    Unit SelectAutoRandomTarget()
+    {
+        if (isAPlayer)
+        {
+            return battle.GetRandomEnemy().GetComponent<Unit>();
+        }
+        else
+        { 
+            return battle.GetRandomPlayer().GetComponent<Unit>();
         }
     }
 
     private bool DidNotFlee() {
-        int fleeThisTurn = Random.Range(0, 100);
+        int fleeThisTurn = Random.Range(100, 100);
 
         if (fleeThisTurn >= 50 && canFlee) {
             print("Character Fled");
             experienceEarned = 0;
             CurrentHP = 0;
 
-            affinityText.color = Color.black;
+/*            affinityText.color = Color.black;
             affinityText.text = "Fled";
-            StartCoroutine(ClearText());
+            StartCoroutine(ClearText());*/
 
             Instantiate(deathParticle, transform.position, transform.rotation);
             currentState = UnitState.Fled;
             battle.ExperienceAndDeathCollection();
             //character fled
+
+            Debug.LogWarning("Fled");
             return false;
         }
         return true;
@@ -669,6 +696,31 @@ public class Unit : MonoBehaviour
     */
     #endregion
 
+    public void TakeDamage(float damageToTake)
+    {
+        CurrentHP-= damageToTake;
+
+        if(CurrentHP < 0) 
+        {
+            UnitDeath();
+        }
+    }
+
+    void UnitDeath()
+    {
+        Instantiate(deathParticle, transform.position, transform.rotation);
+
+        if(isAPlayer)
+        {
+            currentState = UnitState.Unconscious;
+        }
+        else
+        {
+            battle.ExperienceAndDeathCollection();
+            battle.Combatants.Remove(this.gameObject);
+        }
+            
+    }
     public bool DidAttackKillCharacter(float damageToTake, float criticalChance)
     {
         //Calculating Chance for Dodging the attack
