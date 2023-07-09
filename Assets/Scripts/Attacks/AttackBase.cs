@@ -23,50 +23,49 @@ public class AttackBase : ScriptableObject
 
     Battle battle;
 
-    public void AttemptAttack(Unit unit, AttackBase selectedAttack)
+    public void AttemptAttack(Unit caster,Unit target)
     {
         if(resourceType == ResourceType.Mana)
         {
 
 
-            if (unit.CurrentMP >= (int)cost)
+            if (caster.CurrentMP >= (int)cost)
             {
                 int deductCost = (int)cost;
-                unit.CurrentMP -= deductCost;
-
-                Attack(unit, selectedAttack);
+                caster.CurrentMP -= deductCost;
             } 
             else
                 return;
         }
         else if(resourceType == ResourceType.Health)
         {
-            if (unit.CurrentHP >= (int)cost)
+            if (caster.CurrentHP >= (int)cost)
             {
                 int deductCost = (int)cost;
-                unit.CurrentHP -= deductCost;
-
-                Attack(unit, selectedAttack);
+                caster.CurrentHP -= deductCost;
             }
             else
                 return;
         }
+
+
+        Attack(caster, target);
     }
 
-    void Attack(Unit unit, AttackBase selectedAttack)
+    void Attack(Unit caster,Unit target)
     {
 
-        float damageType = GetEffectModifier(unit);
-        float equipmentModifier = GetEquipmentModifier(unit);
+        float damageType = GetEffectModifier(caster);
+        float equipmentModifier = GetEquipmentModifier(caster);
         float excersionModifier = GetAttackExcersersion();
 
-        float damage = (((Mathf.Sqrt(equipmentModifier) * Mathf.Sqrt(damageType)) + (unit.CurrentLevel * 1.25f)) * unit.attackMultiplier * Random.Range(.95f, 1.1f)) * excersionModifier;
-        if (selectedAttack.castType == CastType.Friendly) {
+        float damage = (((Mathf.Sqrt(equipmentModifier) * Mathf.Sqrt(damageType)) + (caster.CurrentLevel * 1.25f)) * caster.attackMultiplier * Random.Range(.95f, 1.1f)) * excersionModifier;
+        if (castType == CastType.Friendly) {
             damage = 0;
         }
         battle = GameObject.Find("Battle").GetComponent<Battle>();
 
-        battle.ResolvingATurn(damage, selectedAttack);
+        battle.ResolvingATurn(damage, this);
     }
 
 
