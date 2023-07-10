@@ -219,26 +219,38 @@ public class Battle : MonoBehaviour
         UpdatePlayerHealthManaUI();
        // NextTurn();
     }
-    List<GameObject> GetEnemies()
+    public List<GameObject> GetEnemies()
     {
         return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == false ).ToList();
     }
-    List<GameObject> GetPlayers()
+    public List<GameObject> GetPlayers()
     {
         return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == true && x.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious).ToList();
     }
 
-    List<GameObject> GetUnconciousPlayers()
+    public List<GameObject> GetUnconciousPlayers()
     {
         return GetPlayers().Where(x => x.GetComponent<Unit>().currentState == Unit.UnitState.Unconscious).ToList();
     }
 
-    GameObject GetLowestHealthEnemy()
+    public GameObject GetLowestHealthEnemy()
     {
         List<GameObject> enemies = GetEnemies();
         enemies.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
         return enemies[0];
     }
+
+    public GameObject GetRandomEnemy()
+    {
+        List<GameObject> enemies = GetEnemies();
+        return enemies[Random.Range(0,enemies.Count)];
+    }
+    public GameObject GetRandomPlayer()
+    {
+        List<GameObject> consciousPlayers = GetPlayers();
+        return consciousPlayers[Random.Range(0, consciousPlayers.Count)];
+    }
+
     void OrderCombatants()
     {
         currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
@@ -376,7 +388,7 @@ public class Battle : MonoBehaviour
         // TODO : Refactor without string dependency
         switch (selectedAttack.name) {
             case "EssenceOfPride":
-                CastEssenceOfPride();
+                //CastEssenceOfPride();
                 break;
             default:
                 break;
@@ -569,6 +581,8 @@ public class Battle : MonoBehaviour
 
             if (GetPlayers().Count > 0)
             {
+                print(GetPlayers().Count);
+
                 int playerToChoose = Random.Range(0, GetPlayers().Count - 1);
 
                 Combatants[currentCombatant].transform.LookAt(GetPlayers()[playerToChoose].transform);
@@ -869,8 +883,8 @@ public class Battle : MonoBehaviour
 
     public void AdvanceTurn()
     {
-        currentCombatant = (currentCombatant + 1) % Combatants.Count;
-        NextTurn();
+        //currentCombatant = (currentCombatant + 1) % Combatants.Count;
+        //NextTurn();
     }
 
     public void UpdatePlayerHealthManaUI()
@@ -906,8 +920,8 @@ public class Battle : MonoBehaviour
     public void EndTurn()
     {
         //this ends the turn and advances to the next one
-        currentCombatant = (currentCombatant + 1) % Combatants.Count;
-        NextTurn();
+        //currentCombatant = (currentCombatant + 1) % Combatants.Count;
+        //NextTurn();
     }
 
     void EndBattle()
