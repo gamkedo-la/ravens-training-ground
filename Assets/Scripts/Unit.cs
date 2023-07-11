@@ -795,6 +795,7 @@ public class Unit : MonoBehaviour
                 damageToTake = 1;
 
             CurrentHP -= (damageToTake * defenseMultiplier);
+            Instantiate(battle.damageParticle, transform.position, transform.rotation);
 
             if (!isAPlayer)
                 healthBar.value = CurrentHP / MaxHP;

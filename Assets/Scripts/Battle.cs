@@ -68,6 +68,7 @@ public class Battle : MonoBehaviour
     bool selectingOneTarget;
     public GameObject victoryMenu;
     public bool groupAttackHappening;
+    public GameObject damageParticle;
 
     void Start()
     {
