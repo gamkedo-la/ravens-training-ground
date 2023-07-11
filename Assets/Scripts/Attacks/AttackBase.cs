@@ -19,6 +19,7 @@ public class AttackBase : ScriptableObject
     public CastType castType;
     public TargetType targetType;
     public EffectType effectType;
+    public List<Affinity> affinities;
     public AttackExcersion attackExcersion;
 
     Battle battle;
@@ -66,13 +67,17 @@ public class AttackBase : ScriptableObject
 
         damage *= GetCriticalChanceMultiplier(caster);
 
+        damage = CalculateTargetResistances(target, damage);
+
+        damage = CalculateTargetWeaknesses(target, damage);
+
         Debug.Log($"{caster.Name} is casting attack {name} on {target.Name}");
 
         target.TakeDamage(damage);
 
-        battle = GameObject.Find("Battle").GetComponent<Battle>();
+        //battle = GameObject.Find("Battle").GetComponent<Battle>();
 
-        battle.ResolvingATurn(damage, this);
+        //battle.ResolvingATurn(damage, this);
     }
 
 
@@ -99,6 +104,30 @@ public class AttackBase : ScriptableObject
                 return 0;
 
         }
+    }
+    float CalculateTargetResistances(Unit target,float damage)
+    {
+        foreach(Affinity affinity in affinities)
+        {
+            foreach(Affinity resistance in target.resistances)
+            {
+                if (affinity == resistance)
+                    damage /= 2;
+            }
+        }
+        return damage;
+    }
+    float CalculateTargetWeaknesses(Unit target, float damage)
+    {
+        foreach (Affinity affinity in affinities)
+        {
+            foreach (Affinity weaknesses in target.weaknesses)
+            {
+                if (affinity == weaknesses)
+                    damage *= 2;
+            }
+        }
+        return damage;
     }
     float GetEquipmentModifier(Unit caster)
     {

@@ -17,6 +17,9 @@ public class Unit : MonoBehaviour
 
     public float MagicEquipment, PhysicalEquipment, AgilityEquipment, FinesseEquipment;
 
+    public List<Affinity> resistances;
+    public List<Affinity> weaknesses;
+
     public bool StrT, StrC, StrP, StrD, StrA;
     public bool WeakT, WeakC, WeakP, WeakD, WeakA;
 
