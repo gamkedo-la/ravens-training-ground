@@ -6792,6 +6792,71 @@ Transform:
   m_Father: {fileID: 532842564}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &197837793
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 592862961631223538, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: startingMusicAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 707f9c620da8c134f8e1883c996b6e63, type: 2}
+    - target: {fileID: 1400145761462031972, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_Name
+      value: MusicManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
 --- !u!1 &216841499
 GameObject:
   m_ObjectHideFlags: 0
@@ -13107,9 +13172,6 @@ MonoBehaviour:
   enemiesInThisFight: []
   enemyCount: 0
   Combatants: []
-  playersInThisFight: []
-  enemiesInFight: []
-  deadCharacters: []
   currentCombatant: 0
   currentCombatantUnit: {fileID: 0}
   healthUI:
@@ -13152,6 +13214,7 @@ MonoBehaviour:
   currentlySelectedEnemy: 0
   victoryMenu: {fileID: 155507007}
   groupAttackHappening: 0
+  damageParticle: {fileID: 3974450424714125319, guid: 128033ce485f6e4468cd1f8927449d5f, type: 3}
 --- !u!1 &1000811461
 GameObject:
   m_ObjectHideFlags: 0
