@@ -244,12 +244,18 @@ public class Battle : MonoBehaviour
     public GameObject GetRandomEnemy()
     {
         List<GameObject> enemies = GetEnemies();
-        return enemies[Random.Range(0,enemies.Count)];
+        if (enemies.Count == 0) {
+            Debug.Log($"Error: No enemies but received query for random enemy");
+        }
+        return enemies.Count == 0 ? null : enemies[Random.Range(0,enemies.Count)];
     }
     public GameObject GetRandomPlayer()
     {
         List<GameObject> consciousPlayers = GetPlayers();
-        return consciousPlayers[Random.Range(0, consciousPlayers.Count)];
+        if (consciousPlayers.Count == 0) {
+            Debug.Log($"Error: No players conscious but received query for random player");
+        }
+        return consciousPlayers.Count == 0 ? null : consciousPlayers[Random.Range(0, consciousPlayers.Count)];
     }
 
     void OrderCombatants()

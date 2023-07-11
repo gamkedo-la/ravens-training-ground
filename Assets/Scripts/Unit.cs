@@ -168,30 +168,22 @@ public class Unit : MonoBehaviour
         } else {
             attackToUse = selectedAttack;
         }
-/*        if (isOnAuto) {
-            if (DidNotFlee()) {
-                print($"{name} is casting attack {attackToUse.name}");
-                attackToUse.AttemptAttack(this, attackToUse);
-            }
-        } else {
-            if (isAPlayer)
-            {
-                print($"{name} is casting attack {attackToUse.name}");
-                attackToUse.AttemptAttack(this, attackToUse);
-            }
-        }*/
-
+        Debug.Log($"{name} is casting attack {attackToUse.name}");
         return attackToUse;
     }
     Unit SelectAutoRandomTarget()
     {
+        GameObject randomTarget = battle.GetRandomEnemy();
+        if (randomTarget == null) {
+            Debug.Log($"Unable to select random target.");
+        }
         if (isAPlayer)
         {
-            return battle.GetRandomEnemy().GetComponent<Unit>();
+            return randomTarget.GetComponent<Unit>();
         }
         else
         { 
-            return battle.GetRandomPlayer().GetComponent<Unit>();
+            return randomTarget.GetComponent<Unit>();
         }
     }
 
@@ -255,17 +247,6 @@ public class Unit : MonoBehaviour
       }
   }*/
 
-    public void RedoAttack()
-    {
-        if (isOnAuto)
-        {
-            DetermineAttackFromList();
-         //   DetermineAttack();
-        }
-        else
-            print("Player doesn't have enough MP, choose a different attack");
-    }
-
     //Basic Calculation for attack: 
     //Example: damage = ((Mathf.Sqrt(MagicEquipment) * Mathf.Sqrt(Magic)) + ((CurrentLevel * 1.25f) + Mathf.Sqrt(Physical))) * attackMultiplier * Random.Range(.95f, 1.1f) * lightAttack;
     //Breakdown: damage = {[ Square root of 'MagicEquipment' bonus * Square root of 'Magic' stat ] add (CurrentLevel * 25%) + Square root of 'Physical' stat } * Attack Multiplier from bonuses * Variance between 95-110% * LightAttack modifier
@@ -287,7 +268,7 @@ public class Unit : MonoBehaviour
             battle.ResolvingATurn();
         }
         else
-            RedoAttack();
+            
     }
     */
     #region Full List of Attacks
@@ -307,7 +288,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void Deeza()
@@ -325,7 +306,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void Hookeeghan()
@@ -343,7 +324,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void AuraDEau()
@@ -361,7 +342,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void CriDeGivre()
@@ -379,7 +360,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void FuseeDeVent()
@@ -397,7 +378,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void HomdomIritus()
@@ -415,7 +396,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void ManictomDotum()
@@ -433,7 +414,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void OrbemPardonti()
@@ -451,7 +432,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void ScoptumTalli()
@@ -470,7 +451,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void Charge()
@@ -489,7 +470,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void EssenceOfPride()
@@ -505,7 +486,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void Pestectus()
@@ -523,7 +504,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void PillarOfStrength()
@@ -539,7 +520,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void PotionOfHealing()
@@ -557,7 +538,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void PotionOfResolve()
@@ -573,7 +554,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
     
         public void PotionOfResurrection()
@@ -587,7 +568,7 @@ public class Unit : MonoBehaviour
                 CurrentMP -= deductCost;
             }
             else
-                RedoAttack();
+                
         }
 
         public void ForcefulLunge()
@@ -605,7 +586,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
         public void PlayfulShove()
         {
@@ -622,7 +603,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void VerticalSlice()
@@ -640,7 +621,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void ExpelindoElemicus()
@@ -658,7 +639,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void FierelloDeflectus()
@@ -676,7 +657,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
 
         public void SellamTrahere()
@@ -694,7 +675,7 @@ public class Unit : MonoBehaviour
                 battle.ResolvingATurn();
             }
             else
-                RedoAttack();
+                
         }
     */
     #endregion
