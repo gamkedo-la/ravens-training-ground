@@ -698,9 +698,9 @@ public class Unit : MonoBehaviour
 
     public void TakeDamage(float damageToTake)
     {
-        CurrentHP-= damageToTake;
+        CurrentHP -= damageToTake;
 
-        if(CurrentHP < 0) 
+        if(CurrentHP <= 0) 
         {
             UnitDeath();
         }
@@ -709,6 +709,7 @@ public class Unit : MonoBehaviour
     void UnitDeath()
     {
         Instantiate(deathParticle, transform.position, transform.rotation);
+        this.gameObject.SetActive(false);
 
         if(isAPlayer)
         {
