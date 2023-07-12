@@ -555,6 +555,8 @@ MonoBehaviour:
   multiplier: 8
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &126405874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,6 +1185,8 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 1
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &302057750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1295,6 +1299,8 @@ MonoBehaviour:
   multiplier: 8
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &473189664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -1325,6 +1331,8 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &473189668 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3722963889842574863, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -1837,6 +1845,8 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &712491853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2944,6 +2954,8 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &1170546024 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3722963889842574863, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -3088,6 +3100,8 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 1
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &1378744809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -3140,6 +3154,8 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 1
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &1455507053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7784,6 +7800,8 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &1536951616 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1309927893999250161, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -7968,6 +7986,8 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 1
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &1778662587
 GameObject:
   m_ObjectHideFlags: 0
@@ -8849,6 +8869,8 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &2046773821 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3722963889842574863, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
@@ -9344,3 +9366,5 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 1
+  tintImageColor: {r: 0, g: 0, b: 1, a: 1}
