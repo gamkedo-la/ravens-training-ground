@@ -237,6 +237,10 @@ MonoBehaviour:
   multiplier: 5
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &986641
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +705,10 @@ MonoBehaviour:
   multiplier: 8
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &44323512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,6 +989,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &53533981
 GameObject:
   m_ObjectHideFlags: 0
@@ -8786,6 +8798,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &462664722
 GameObject:
   m_ObjectHideFlags: 0
@@ -9342,6 +9358,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &532842563
 GameObject:
   m_ObjectHideFlags: 0
@@ -10252,6 +10272,10 @@ MonoBehaviour:
   multiplier: 8
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &667693495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12058,6 +12082,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &897288536
 GameObject:
   m_ObjectHideFlags: 0
@@ -13095,6 +13123,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &987575094
 GameObject:
   m_ObjectHideFlags: 0
@@ -13997,6 +14029,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1096296318
 GameObject:
   m_ObjectHideFlags: 0
@@ -19545,6 +19581,10 @@ MonoBehaviour:
   multiplier: 8
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1167788206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19768,6 +19808,10 @@ MonoBehaviour:
   multiplier: 5
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1193508062
 GameObject:
   m_ObjectHideFlags: 0
@@ -20053,6 +20097,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 1
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1222704135
 GameObject:
   m_ObjectHideFlags: 0
@@ -20378,6 +20426,10 @@ MonoBehaviour:
   multiplier: 5
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1242765479
 GameObject:
   m_ObjectHideFlags: 0
@@ -21420,6 +21472,10 @@ MonoBehaviour:
   multiplier: 8
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1301759211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27099,6 +27155,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1411591355
 GameObject:
   m_ObjectHideFlags: 0
@@ -27161,6 +27221,10 @@ MonoBehaviour:
   multiplier: 8
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1411591358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28546,6 +28610,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1604330531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30548,6 +30616,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1912658437
 GameObject:
   m_ObjectHideFlags: 0
@@ -30984,6 +31056,10 @@ MonoBehaviour:
   multiplier: 8
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1932818585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31610,6 +31686,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1996252405
 GameObject:
   m_ObjectHideFlags: 0
@@ -32276,6 +32356,10 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: Floor1
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &2107754529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32728,6 +32812,10 @@ MonoBehaviour:
   multiplier: 8
   isFlee: 0
   levelToLoad: 
+  tintImageOnHover: 0
+  outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &2135561362
 MonoBehaviour:
   m_ObjectHideFlags: 0

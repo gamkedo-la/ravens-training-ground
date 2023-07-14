@@ -24,33 +24,41 @@ public class AttackBase : ScriptableObject
 
     Battle battle;
 
-    public void AttemptAttack(Unit caster,Unit target)
+    public bool AttemptAttack(Unit caster,Unit target)
     {
         if(resourceType == ResourceType.Mana)
         {
-
-
             if (caster.CurrentMP >= (int)cost)
             {
                 int deductCost = (int)cost;
                 caster.CurrentMP -= deductCost;
-            } 
+            }
             else
-                return;
+            {
+                //If an attack is chosen the caster doesn't have enough MP/HP for it, circle it back to choose a different attack
+               // DetermineAttackFromList()
+                return false;
+            }
         }
         else if(resourceType == ResourceType.Health)
         {
-            if (caster.CurrentHP >= (int)cost)
+            //user cannot cast an attack that is equal to their health as the attack would kill them
+            if (caster.CurrentHP > (int)cost)
             {
                 int deductCost = (int)cost;
                 caster.CurrentHP -= deductCost;
             }
             else
-                return;
+            {
+                //If an attack is chosen the caster doesn't have enough MP/HP for it, circle it back to choose a different attack
+                // DetermineAttackFromList()
+                return false;
+            }
         }
 
-
         Attack(caster, target);
+        caster.anim.SetTrigger("Attack");
+        return true;
     }
 
     void Attack(Unit caster,Unit target)

@@ -67,16 +67,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48917a6b23c6e0a4299f9d25d7f71551, type: 2}
   weaknesses:
   - {fileID: 11400000, guid: 90f41aed330a972458f06338d928fd45, type: 2}
-  StrT: 0
-  StrC: 1
-  StrP: 0
-  StrD: 0
-  StrA: 1
-  WeakT: 0
-  WeakC: 0
-  WeakP: 1
-  WeakD: 0
-  WeakA: 0
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0

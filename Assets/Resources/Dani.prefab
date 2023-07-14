@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnAuto: 0
+  isOnAuto: 1
   isAPlayer: 1
   Name: Dani
   CurrentHP: 5
@@ -99,16 +99,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48917a6b23c6e0a4299f9d25d7f71551, type: 2}
   weaknesses:
   - {fileID: 11400000, guid: 9fbfb035e54ff7e46af4b3e68577de2c, type: 2}
-  StrT: 0
-  StrC: 0
-  StrP: 0
-  StrD: 0
-  StrA: 1
-  WeakT: 0
-  WeakC: 0
-  WeakP: 0
-  WeakD: 1
-  WeakA: 0
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0

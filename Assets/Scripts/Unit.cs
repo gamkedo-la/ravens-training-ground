@@ -109,6 +109,12 @@ public class Unit : MonoBehaviour
         
     }
 
+    IEnumerator WaitingMoment()
+    {
+        yield return new WaitForEndOfFrame();
+
+    }
+
     public void TakingUnitTurn(AttackBase selectedAttack = null)
     {
         //break out if unit is unconcious dead or fled
