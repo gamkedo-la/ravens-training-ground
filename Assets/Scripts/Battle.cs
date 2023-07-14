@@ -142,81 +142,6 @@ public class Battle : MonoBehaviour
     IEnumerator SetUpBattle()
     {
         yield return new WaitForSeconds(0.25f);
-
-        //This segment add players to the player list, enemies to the enemy list, and players/enemies to a combined 'combatants' list
-/*        #region This Adds members to the Party as well as Sorts by Agility
-        currentParty0 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[0]), PlayerBattleStations[0].transform.position + platformOffset, PlayerBattleStations[0].transform.rotation);
-        Combatants.Add(currentParty0);
-        playersInThisFight.Add(currentParty0);
-
-        if (GameManager.inCurrentParty.Count > 0)
-        {
-            currentParty1 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[1]), PlayerBattleStations[1].transform.position + platformOffset, PlayerBattleStations[1].transform.rotation);
-            Combatants.Add(currentParty1);
-            playersInThisFight.Add(currentParty1);
-        }
-        if (GameManager.inCurrentParty.Count > 1)
-        {
-            currentParty2 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[2]), PlayerBattleStations[2].transform.position + platformOffset, PlayerBattleStations[2].transform.rotation);
-            Combatants.Add(currentParty2);
-            playersInThisFight.Add(currentParty2);
-        }
-
-        if (GameManager.inCurrentParty.Count > 2)
-        {
-            currentParty3 = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[3]), PlayerBattleStations[3].transform.position + platformOffset, PlayerBattleStations[3].transform.rotation);
-            Combatants.Add(currentParty3);
-            playersInThisFight.Add(currentParty3);
-        }
-
-        currentEnemy0 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[0]), EnemyBattleStations[0].transform.position + platformOffset, EnemyBattleStations[0].transform.rotation);
-        Combatants.Add(currentEnemy0);
-        enemiesInFight.Add(currentEnemy0);
-
-        if (enemyCount > 1)
-        {
-            currentEnemy1 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[1]), EnemyBattleStations[1].transform.position + platformOffset, EnemyBattleStations[1].transform.rotation);
-            Combatants.Add(currentEnemy1);
-            enemiesInFight.Add(currentEnemy1);
-        }
-      
-        if (enemyCount > 2)
-        { 
-            currentEnemy2 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[2]), EnemyBattleStations[2].transform.position + platformOffset, EnemyBattleStations[2].transform.rotation);
-            Combatants.Add(currentEnemy2);
-            enemiesInFight.Add(currentEnemy2);
-        }
-        if (enemyCount > 3)
-        {
-            currentEnemy3 = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[3]), EnemyBattleStations[3].transform.position + platformOffset, EnemyBattleStations[3].transform.rotation);
-            Combatants.Add(currentEnemy3);
-            enemiesInFight.Add(currentEnemy3);
-        }
-
-        currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
-        //This stems from the overworld - the player attacked the enemy - player gets initiative, if enemy attacked player, enemy gets initiative
-        if (GameManager.initiativeSiezedByEnemy)
-        {
-            for (int i = 0; i < enemiesInFight.Count; i++)
-            {
-                enemiesInFight[i].GetComponent<Unit>().tempAgility += 70;
-                GameManager.initiativeSiezedByEnemy = false;
-                StartCoroutine(ClearInformationText(2f, "Surprise Attack Enemies Attacking"));
-            }
-        }
-
-        else
-        {
-            for (int i = 0; i < playersInThisFight.Count; i++)
-            {
-                playersInThisFight[i].GetComponent<Unit>().tempAgility += 70;
-                StartCoroutine(ClearInformationText(2f, "Surprise Round"));
-            }
-        }
-
-            Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().tempAgility)).ToList();
-        #endregion
-*/
         UpdatePlayerHealthManaUI();
        // NextTurn();
     }
@@ -343,16 +268,6 @@ public class Battle : MonoBehaviour
             if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
                 NextTurn();
         }
-
-        //this seems to only move the character if they've fled
-/*        if (hasFled)
-        {
-            for (int i = 0; i < GetPlayers().Count; i++)
-            {
-                if(!GetPlayers()[i].GetComponent<Unit>().characterIsDead)
-                    GetPlayers()[i].transform.position += transform.right * 3 * Time.deltaTime;
-            }
-        }*/
 
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -775,20 +690,6 @@ public class Battle : MonoBehaviour
             state = StateOfBattle.WON;
             EndBattle();
         }
-
-        //If the player is killed, there is a possibility they can be added back so we can't fully remove them. 
-        //They are instead added to a dead players list (See Reincarnation() to come back)
-
-/*        for (int i = 0; i < GetPlayers().Count; i++)
-        {
-            var playerInstance = GetPlayers()[i];
-            if (playerInstance.GetComponent<Unit>().characterIsDead)
-            {
-                if (!GetUnconciousPlayers().Contains(playerInstance)) {
-                    GetUnconciousPlayers().Add(playerInstance);
-                }
-            }
-        }*/
 
         //Current structure is to not remove players from the PlayersInThisFight list as they can be called back
         //So right now, if the number of deadPlayers equals the number of players in the fight - everyone has been killed and the player loses
