@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        inCurrentParty.Clear();
+        charactersNotInParty.Clear();
+        colorsInParty.Clear();
+        colorsNotInParty.Clear();
+
         inCurrentParty.Add("Dani");
         inCurrentParty.Add("Erebus");
         inCurrentParty.Add("Sophie");
