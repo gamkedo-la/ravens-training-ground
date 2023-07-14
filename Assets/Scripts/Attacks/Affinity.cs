@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum AffinityType
 {
-    Charms, Physical, DarkArts, Transfiguration, Ancient
+    Charms, Physical, DarkArts, Transfiguration, Ancient, Potions, None
 }
 [CreateAssetMenu(fileName = "Affinity", menuName = "Affinity")]
 

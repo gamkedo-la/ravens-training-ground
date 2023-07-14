@@ -20,11 +20,6 @@ public class Unit : MonoBehaviour
     public List<Affinity> resistances;
     public List<Affinity> weaknesses;
 
-    public bool StrT, StrC, StrP, StrD, StrA;
-    public bool WeakT, WeakC, WeakP, WeakD, WeakA;
-
-    // public bool essenceOfPride, pestectus, pillarOfStrength, potionOfHealing, potionofResolve, potionOfResurrection;
-
     float lightAttack = 1f, mediumAttack = 1.4f;
 
     public bool isASoloAttack, isAGroupAttack, isAHeal;
@@ -261,7 +256,7 @@ public class Unit : MonoBehaviour
             else
                 anim.SetTrigger("TakeDamage");
 
-            if (charms && StrC || physical && StrP || darkArts && StrD || transfiguration && StrT || ancient && StrA)
+           /* if (charms && StrC || physical && StrP || darkArts && StrD || transfiguration && StrT || ancient && StrA)
             {
                 damageToTake = damageToTake / 2;
 
@@ -304,7 +299,7 @@ public class Unit : MonoBehaviour
                 }
                 print($"{name} was knocked down. ");
                 battle.CheckIfAllMembersKnockedDown();
-            }
+            }*/
 
             if (isMetallic)
                 damageToTake = 1;

@@ -19,4 +19,6 @@ MonoBehaviour:
   castType: 1
   targetType: 0
   effectType: 3
+  affinities:
+  - {fileID: 11400000, guid: c1361669b677df848b667bd68cb4ce74, type: 2}
   attackExcersion: 0
