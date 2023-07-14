@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour {
-	public static MusicManager instance;
-	[SerializeField] private AudioSource musicSourcePrefab;
-	[SerializeField] private MusicAsset startingMusicAsset;
+	private static MusicManager _instance = null;
+	public static MusicManager Instance {
+		get {
+			if (_instance == null) {
+				_instance = new GameObject("MusicManager").AddComponent<MusicManager>();
+			}
+			return _instance;
+		}
+	}
 
-	public bool playOnStart = true;
+	[SerializeField] private AudioSource musicSourcePrefab;
+
+	[Space(20)]
+	[SerializeField] private MusicAsset startingMusicAsset;
+	[SerializeField] private bool playOnStart = true;
 
 	const double BufferTime = 0.25;
 	const float FadeTime = 0.15f;
@@ -19,11 +29,11 @@ public class MusicManager : MonoBehaviour {
 	private double nextStartTime = double.MaxValue;
 
 	void Awake() {
-		if (instance != null) {
+		if (_instance != null) {
 			if (playOnStart && startingMusicAsset) startingMusicAsset.Play();
 			Destroy(gameObject);
 		} else {
-			instance = this;
+			_instance = this;
 			DontDestroyOnLoad(gameObject);
 		}
 	}
@@ -39,7 +49,7 @@ public class MusicManager : MonoBehaviour {
 	}
 
 	public void PlayMux(Mux newMux) {
-		if (newMux == null || newMux == currentMux) return;
+		if (newMux == null || newMux == currentMux || newMux.tracks.Count == 0) return;
 
 		StopMux((float)BufferTime);
 		currentMux = newMux;
@@ -98,7 +108,7 @@ public class MusicManager : MonoBehaviour {
 
 [System.Serializable]
 public class Mux {
-	public List<MuxTrack> tracks;
+	public List<MuxTrack> tracks = new List<MuxTrack>();
 
 	public MuxTrack GetNextTrack(MuxTrack currentTrack) {
 		string label = currentTrack.GetTransitionTarget().ToLower();

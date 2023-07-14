@@ -7,7 +7,7 @@ using UnityEditor;
 
 [CreateAssetMenu(fileName = "NewMusicAssetSimple", menuName = "Simple Music Asset")]
 public class MusicAssetBasic : MusicAsset {
-	public AudioClip musicClip;
+	[SerializeField] private AudioClip musicClip;
 	private Mux mux = new Mux();
 
 	public override void Play() {
@@ -15,7 +15,7 @@ public class MusicAssetBasic : MusicAsset {
 
 		if (mux.tracks.Count == 0) AssignClip();
 
-		MusicManager.instance.PlayMux(mux);
+		MusicManager.Instance.PlayMux(mux);
 	}
 
 	private void AssignClip() {

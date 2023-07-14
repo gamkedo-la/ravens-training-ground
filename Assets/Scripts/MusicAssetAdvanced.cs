@@ -7,10 +7,10 @@ using UnityEditor;
 
 [CreateAssetMenu(fileName = "NewMusicAsset", menuName = "Advanced Music Asset")]
 public class MusicAssetAdvanced : MusicAsset {
-	public Mux mux;
+	[SerializeField] private Mux mux;
 
 	public override void Play() {
-		MusicManager.instance.PlayMux(mux);
+		MusicManager.Instance.PlayMux(mux);
 	}
 }
 
