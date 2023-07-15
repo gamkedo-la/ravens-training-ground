@@ -4,16 +4,33 @@ using UnityEngine;
 
 public class RandomRotateBob : MonoBehaviour
 {
-    public bool rotation, bob;
+    public float percentMin = .9f, percentMax = 1.1f;
+    public float multiplier = 8;
+    public bool rotation, bob, grow;
     public Vector3 rotateDirection;
-    public float minHeight, maxHeight;
-    float speed;
+
+    Vector3 minVect3, maxVect3, defaultVect3;
+    public float startingX, startingY, startingZ;
+
+    private void Start()
+    {
+        minVect3 = new Vector3(startingX * percentMin, startingY * percentMin, startingZ * percentMin);
+        maxVect3 = new Vector3(startingX * percentMax, startingY * percentMax, startingZ * percentMax);
+    }
 
     void Update()
     {
         if (bob)
         {
-            //this.transform.position.y += speed * Time.deltaTime;
+            if (grow)
+                this.gameObject.transform.position += defaultVect3 * .1f * multiplier * Time.deltaTime;
+            else
+                this.gameObject.transform.position += defaultVect3 * .1f * -multiplier * Time.deltaTime;
+
+            if (this.gameObject.transform.position.x >= maxVect3.x)
+                grow = false;
+            if (this.gameObject.transform.position.x <= minVect3.x)
+                grow = true;
         }
         if (rotation)
         {

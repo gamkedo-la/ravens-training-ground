@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     //
     public static bool initiativeSiezedByEnemy, initiativeSiezedByPlayer;
 
+    public static bool floor2Unlocked, floor3Unlocked;
+
     public void Start()
     {
         inCurrentParty.Clear();
