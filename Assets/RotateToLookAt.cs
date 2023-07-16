@@ -10,6 +10,7 @@ public class RotateToLookAt : MonoBehaviour
     public GameObject cam, nameBadgeObj;
     public GameObject UICanvas;
     public string npcName, npcMessage;
+    public Color color;
     public string yes, no;
     public UpdateUIForParty updateUI;
 
@@ -24,13 +25,21 @@ public class RotateToLookAt : MonoBehaviour
                 updateUI.nameToDisplay = npcName;
                 updateUI.descToDisplay = npcMessage;
 
-                if (GameManager.inCurrentParty.Count < 4 && !GameManager.inCurrentParty.Contains(npcName))
-                    updateUI.yesToDisplay = "Yes";
+                updateUI.color = color;
+
+                if (GameManager.inCurrentParty.Count < 4)
+                {
+                    if (!GameManager.inCurrentParty.Contains(npcName))
+                        updateUI.yesToDisplay = "Yes";
+                    else
+                        updateUI.yesToDisplay = "In Party";
+                }
+                else
+                    updateUI.yesToDisplay = "Party Full";      
+
                 if (GameManager.inCurrentParty.Contains(npcName))
                     updateUI.noToDisplay = "Remove";
-                if (GameManager.inCurrentParty.Count >= 4)
-                    updateUI.yesToDisplay = "Party Full";
-                if(!GameManager.inCurrentParty.Contains(npcName))
+                else
                     updateUI.noToDisplay = "No";
             }
         }

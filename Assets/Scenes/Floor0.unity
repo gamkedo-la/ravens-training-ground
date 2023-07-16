@@ -4979,6 +4979,7 @@ MonoBehaviour:
   UICanvas: {fileID: 305438131}
   npcName: Phoebe
   npcMessage: I mean, like, obviously you need me.
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: Yes
   no: No
   updateUI: {fileID: 305438136}
@@ -5782,6 +5783,7 @@ MonoBehaviour:
   noToDisplay: 
   yesButton: {fileID: 450636961}
   noButton: {fileID: 1313885037}
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &321227271
 GameObject:
   m_ObjectHideFlags: 0
@@ -5904,6 +5906,7 @@ MonoBehaviour:
   UICanvas: {fileID: 0}
   npcName: 
   npcMessage: 
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: 
   no: 
   updateUI: {fileID: 0}
@@ -5956,6 +5959,7 @@ MonoBehaviour:
   UICanvas: {fileID: 305438131}
   npcName: Erebus
   npcMessage: Would you like me to accompany you?
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: Yes
   no: No
   updateUI: {fileID: 305438136}
@@ -6123,6 +6127,7 @@ MonoBehaviour:
   UICanvas: {fileID: 0}
   npcName: 
   npcMessage: 
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: 
   no: 
   updateUI: {fileID: 0}
@@ -6370,7 +6375,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 450636963}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 305438136}
+        m_TargetAssemblyTypeName: UpdateUIForParty, Assembly-CSharp
+        m_MethodName: TopButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &450636962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7293,6 +7310,7 @@ MonoBehaviour:
   UICanvas: {fileID: 0}
   npcName: 
   npcMessage: 
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: 
   no: 
   updateUI: {fileID: 0}
@@ -7324,6 +7342,7 @@ MonoBehaviour:
   UICanvas: {fileID: 305438131}
   npcName: Theo
   npcMessage: I can come if it isn't a bother.
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: Yes
   no: No
   updateUI: {fileID: 305438136}
@@ -8294,6 +8313,7 @@ MonoBehaviour:
   UICanvas: {fileID: 305438131}
   npcName: Sophie
   npcMessage: I believe you may need my assistance.
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: Yes
   no: No
   updateUI: {fileID: 305438136}
@@ -13800,7 +13820,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1313885039}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 305438136}
+        m_TargetAssemblyTypeName: UpdateUIForParty, Assembly-CSharp
+        m_MethodName: LowerButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1313885038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15135,6 +15167,7 @@ MonoBehaviour:
   UICanvas: {fileID: 0}
   npcName: 
   npcMessage: 
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: 
   no: 
   updateUI: {fileID: 0}
@@ -16094,6 +16127,7 @@ MonoBehaviour:
   UICanvas: {fileID: 0}
   npcName: 
   npcMessage: 
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: 
   no: 
   updateUI: {fileID: 0}
@@ -16447,6 +16481,7 @@ MonoBehaviour:
   UICanvas: {fileID: 305438131}
   npcName: Tristan
   npcMessage: 'Yooo! Got room for one more? '
+  color: {r: 0, g: 0, b: 0, a: 0}
   yes: Yes
   no: No
   updateUI: {fileID: 305438136}

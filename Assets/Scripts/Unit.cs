@@ -153,7 +153,7 @@ public class Unit : MonoBehaviour
         {
             Unit target = SelectAutoRandomTarget();
 
-            attackBaseTemp.AttemptAttack(this, target);
+            attackBaseTemp.Attack(this, target);
         }
 
         // DetermineAttack();
