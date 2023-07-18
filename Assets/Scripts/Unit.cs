@@ -20,17 +20,17 @@ public class Unit : MonoBehaviour
     public List<Affinity> resistances;
     public List<Affinity> weaknesses;
 
-    float lightAttack = 1f, mediumAttack = 1.4f;
+    //float lightAttack = 1f, mediumAttack = 1.4f;
 
     public bool isASoloAttack, isAGroupAttack, isAHeal;
-    bool charms, physical, darkArts, transfiguration, ancient;
-    bool attackBoosted, defenseBoosted, charged;
+/*    bool charms, physical, darkArts, transfiguration, ancient;
+    bool attackBoosted, defenseBoosted, charged;*/
 
     public int attackBonusTurnCount, defenseBonusTurnCount;
 
     public float attackMultiplier = 1, defenseMultiplier = 1;
 
-    public float damage, healthToRecover;
+    public float healthToRecover;
 
     public float experienceEarned;
 
@@ -40,8 +40,8 @@ public class Unit : MonoBehaviour
     public GameObject powerUpParticle, deathParticle, targetParticle, canvas;
 
     //Cost
-    int deductCost;
-    public int tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 15, tier5 = 18, tier6 = 21;
+    /*int deductCost;
+    public int tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 15, tier5 = 18, tier6 = 21;*/
 
     Battle battle;
 
@@ -356,15 +356,15 @@ public class Unit : MonoBehaviour
         isAHeal = false;
 
         // TODO : Resolve current status effects
-
+/*
         charms = false;
         physical = false;
         darkArts = false;
         transfiguration = false;
         ancient = false;
-
-        deductCost = 0;
-        damage = 0;
+*/
+        //deductCost = 0;
+        //damage = 0;
         healthToRecover = 0;
         tempAgility = 0;
     }
