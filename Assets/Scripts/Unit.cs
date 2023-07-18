@@ -19,7 +19,7 @@ public class Unit : MonoBehaviour
 
     public List<Affinity> resistances;
     public List<Affinity> weaknesses;
-
+    public List<Enhancement> enhancements;
     //float lightAttack = 1f, mediumAttack = 1.4f;
 
     public bool isASoloAttack, isAGroupAttack, isAHeal;
