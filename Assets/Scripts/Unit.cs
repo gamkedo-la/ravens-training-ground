@@ -12,8 +12,8 @@ public class Unit : MonoBehaviour
 
     public string Name;
     public float CurrentHP = 25, MaxHP = 20, CurrentMP = 30, MaxMP = 25, Magic = 10, Physical = 9, Agility = 15, Finesse = 20;
+    public float startingMagic = 10, startingPhysical = 9, startingAgility = 15, startingFinesse = 20;
     public int CurrentLevel = 1;
-    public int tempAgility = 0;
 
     public float MagicEquipment, PhysicalEquipment, AgilityEquipment, FinesseEquipment;
 
@@ -106,7 +106,18 @@ public class Unit : MonoBehaviour
                 canFlee = true;
             }
         }
-        
+        foreach(Enhancement enhancement in enhancements)
+        {
+            enhancement.Initialize(this);
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            ApplyEnhancements();
+        }
     }
 
     IEnumerator WaitingMoment()
@@ -127,6 +138,9 @@ public class Unit : MonoBehaviour
         /*        if (currentState != UnitState.Unconscious || currentState != UnitState.Fled)
                 {*/
         battle.MoveCamera();
+
+        
+
         if (hasBeenKnockedDown)
         {
             anim.SetBool("knockedDown", false);
@@ -160,6 +174,10 @@ public class Unit : MonoBehaviour
         /*        }
                 else
                     print("Character is dead, you shouldn't reach here, something went wrong");*/
+    }
+    void ApplyEnhancements()
+    {
+        Calculate();
     }
     AttackBase DetermineAttackFromList(AttackBase selectedAttack = null)
     {
@@ -218,6 +236,23 @@ public class Unit : MonoBehaviour
         if(CurrentHP <= 0) 
         {
             UnitDeath();
+        }
+    }
+    public void AddEnhancement(Enhancement enhancement)
+    {
+        enhancements.Add(enhancement);
+        enhancement.Initialize(this);
+    }
+    void Calculate()
+    {
+        Magic = startingMagic;
+        Physical = startingPhysical;
+        Agility = startingAgility;
+        Finesse= startingFinesse;
+
+        foreach (Enhancement enhancement in enhancements)
+        {
+            enhancement.ApplyEnhancement();
         }
     }
 
@@ -366,6 +401,6 @@ public class Unit : MonoBehaviour
         //deductCost = 0;
         //damage = 0;
         healthToRecover = 0;
-        tempAgility = 0;
+        //tempAgility = 0;
     }
 }

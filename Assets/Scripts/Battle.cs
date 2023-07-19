@@ -193,18 +193,18 @@ public class Battle : MonoBehaviour
             Unit combatantUnitProperties = combatant.GetComponent<Unit>();
             if (!combatantUnitProperties.isAPlayer && GameManager.initiativeSiezedByEnemy)
             {
-                combatantUnitProperties.tempAgility += 70;
+                combatantUnitProperties.Agility += 70;
                 StartCoroutine(ClearInformationText(2f, "Surprise Attack Enemies Attacking"));
             }
             else if (combatantUnitProperties.isAPlayer && GameManager.initiativeSiezedByPlayer)
             {
-                combatantUnitProperties.tempAgility += 70;
+                combatantUnitProperties.Agility += 70;
                 StartCoroutine(ClearInformationText(2f, "Surprise Round"));
             }
         }
 
 
-        Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().tempAgility)).ToList();
+        Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().Agility)).ToList();
 
         UpdatePlayerHealthManaUI();
     }
@@ -284,19 +284,19 @@ public class Battle : MonoBehaviour
         //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
         if (currentCombatant >= Combatants.Count)
         {
-            Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().tempAgility)).ToList();
+            Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().Agility)).ToList();
             currentCombatant = 0;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
             for (int i = 0; i < Combatants.Count; i++)
             {
-                Combatants[i].GetComponent<Unit>().tempAgility = 0;
+                Combatants[i].GetComponent<Unit>().Agility = 0;
             }
         }
 
         characterNameHolder.SetActive(true);
         characterNameText.text = currentCombatantUnit.Name;
 
-        print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCombatantUnit.Agility + currentCombatantUnit.tempAgility) + " CurrentHP: " + currentCombatantUnit.CurrentHP);
+        print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCombatantUnit.Agility + currentCombatantUnit.Agility) + " CurrentHP: " + currentCombatantUnit.CurrentHP);
 
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
             currentCombatantUnit.TakingUnitTurn();
