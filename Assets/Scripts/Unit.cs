@@ -238,6 +238,15 @@ public class Unit : MonoBehaviour
             UnitDeath();
         }
     }
+    public void Heal(float healValue)
+    {
+        CurrentHP += healValue;
+
+        if (CurrentHP >= MaxHP)
+        {
+            CurrentHP= MaxHP;
+        }
+    }
     public void AddEnhancement(Enhancement enhancement)
     {
         enhancements.Add(enhancement);

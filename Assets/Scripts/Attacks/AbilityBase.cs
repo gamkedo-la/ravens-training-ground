@@ -84,6 +84,10 @@ public class AbilityBase : ScriptableObject
         {
             (this as AttackBase).Attack(caster, target,abilityValue);
         }
+        if (this.GetType() == typeof(HealBase))
+        {
+            (this as HealBase).Heal(caster, target, abilityValue);
+        }
     }
     //Claculates all modifiers that comes from the targets attributes
     public float CalculateTargetModifiers(Unit target,float value)

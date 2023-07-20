@@ -8,8 +8,6 @@ public class AttackBase : AbilityBase
 
     public void Attack(Unit caster,Unit target,float attackValue)
     {
-        Debug.Log($"{caster.Name} is casting attack {name} on {target.Name}");
-
         float damageType = GetEffectModifier(caster);
         float equipmentModifier = GetEquipmentModifier(caster);
         float excersionModifier = GetAttackExcersersion();
