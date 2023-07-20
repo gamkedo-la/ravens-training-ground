@@ -63,7 +63,7 @@ public class Battle : MonoBehaviour
     public GameObject playerUICanvas;
     public Transform AoEView, AllEnemiesKnockedDownPOV;
 
-    public AttackBase selectedSpell;
+    public AbilityBase selectedSpell;
     public int currentlySelectedEnemy;
     bool selectingOneTarget;
     public GameObject victoryMenu;
@@ -755,11 +755,11 @@ public class Battle : MonoBehaviour
     {
         //move camera
         //turn on particle system (based on attack)
-        for (int i = 0; i < currentCombatantUnit.attacks.Count; i++)
+        for (int i = 0; i < currentCombatantUnit.abilities.Count; i++)
         {
-            if (currentCombatantUnit.attacks[i] == selectedSpell)
+            if (currentCombatantUnit.abilities[i] == selectedSpell)
             {
-                if (currentCombatantUnit.attacks[i].targetType == TargetType.SingleTarget)
+                if (currentCombatantUnit.abilities[i].targetType == TargetType.SingleTarget)
                     selectingOneTarget = true;
                 else
                 {

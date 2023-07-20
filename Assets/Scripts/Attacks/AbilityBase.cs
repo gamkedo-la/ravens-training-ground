@@ -5,6 +5,7 @@ using UnityEngine;
 
 
 public enum AttackCosts { tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 15, tier5 = 18, tier6 = 21 }
+public enum AttackExcersion { LightAttack, MediumAttack, DefaultAttack }
 public enum ResourceType { Mana, Health }
 public enum CastType { Friendly, Enemy }
 public enum TargetType { SingleTarget, AOE }
@@ -17,9 +18,11 @@ public class AbilityBase : ScriptableObject
     public AttackCosts cost;
     public ResourceType resourceType;
     public CastType castType;
+    public AttackExcersion attackExcersion;
     public TargetType targetType;
     public EffectType effectType;
     public List<Affinity> affinities;
+    public List<Enhancement> enhancements;
 
     Battle battle;
     
@@ -55,19 +58,41 @@ public class AbilityBase : ScriptableObject
                 return false;
             }
         }
-        
-        if(this.GetType() == typeof(AttackBase)) 
+       
+
+        foreach(Enhancement enhancement in enhancements)
         {
-            (this as AttackBase).Attack(caster, target);
+            target.AddEnhancement(enhancement);
         }
+
         return true;
     }
-    //Claculates all modifiers that comes from the targets attributes
-    public void CalculateTargetModifiers(Unit target)
-    {
-        abilityValue = CalculateTargetResistances(target, abilityValue);
 
-        abilityValue = CalculateTargetWeaknesses(target, abilityValue);
+    public void UseAbility(Unit caster, List<Unit> targets)
+    {
+        foreach (Unit target in targets)
+        {
+            UseAbility(caster, target);
+        }
+    }
+
+    public void UseAbility(Unit caster, Unit target)
+    {
+        Debug.Log($"{caster.Name} is casting attack {name} on {target.Name}");
+
+        if (this.GetType() == typeof(AttackBase))
+        {
+            (this as AttackBase).Attack(caster, target,abilityValue);
+        }
+    }
+    //Claculates all modifiers that comes from the targets attributes
+    public float CalculateTargetModifiers(Unit target,float value)
+    {
+        value = CalculateTargetResistances(target, value);
+
+        value = CalculateTargetWeaknesses(target, value);
+
+        return value;
     }
     public float GetEffectModifier(Unit caster)
     {
@@ -141,14 +166,29 @@ public class AbilityBase : ScriptableObject
 
         }
     }
-    public float GetCriticalChanceMultiplier(Unit caster)
+
+    float GetAttackExcersersion()
+    {
+        switch (attackExcersion)
+        {
+            case AttackExcersion.DefaultAttack:
+                return .6f;
+            case AttackExcersion.LightAttack:
+                return 1f;
+            case AttackExcersion.MediumAttack:
+                return 1.4f;
+            default:
+                return 0f;
+        }
+    }
+    public float GetCriticalChanceMultiplier(Unit caster, float value)
     {
         float chanceForCritial = Random.Range(0, 100);
         float criticalChance = caster.Finesse + caster.FinesseEquipment;
 
         if (chanceForCritial <= criticalChance)
-            return 2;
+            return value * 2;
         else
-            return 1;
+            return value * 1;
     }
 }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class SpellPrefab : MonoBehaviour
 {
-    public AttackBase associatedAttack;
+    public AbilityBase associatedAttack;
 }

@@ -33,7 +33,7 @@ public class Enhancement : ScriptableObject
 
         SetStat(Calculate(stat));
     }
-    void ProgressTurn()
+    public void ProgressTurn()
     {
         turnCount++;
         if (turnCount >= numberOfTurns)

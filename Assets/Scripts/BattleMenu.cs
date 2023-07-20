@@ -147,45 +147,45 @@ public class BattleMenu : MonoBehaviour
     {
         //Destroy all child count before reloading this menu (that way it doesn't duplicate it)
 
-        for (int i = 0; i < battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks.Count - 1; i++)
+        for (int i = 0; i < battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities.Count - 1; i++)
         {
             GameObject instantiatedPrefab = Instantiate(spellsUIPrefab, spellsMenuHolder.transform.position, spellsMenuHolder.transform.rotation);
             instantiatedPrefab.transform.parent = spellsMenuHolder.transform;
             instantiatedPrefab.transform.localScale = new Vector3(5, 0.4f, 1);
-            AttackBase associatedAttack = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i];
+            AbilityBase associatedAttack = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities[i];
             instantiatedPrefab.transform.Find("SpellName").GetComponent<TextMeshProUGUI>().text = associatedAttack.AttackName;
             instantiatedPrefab.transform.Find("SpellDesc").GetComponent<TextMeshProUGUI>().text = associatedAttack.AttackDescription;
             instantiatedPrefab.transform.Find("SpellCost").GetComponent<TextMeshProUGUI>().text = associatedAttack.cost.ToString();
             instantiatedPrefab.GetComponent<SpellPrefab>().associatedAttack = associatedAttack;
 
 
-            if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Ancient")
+            if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities[i].effectType.ToString() == "Ancient")
             {
                 instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[0];
                 instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
             }
-            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "DarkArts")
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities[i].effectType.ToString() == "DarkArts")
             {
                 instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[1];
                 instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
             }
-            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Charms")
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities[i].effectType.ToString() == "Charms")
             {
                 instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[2];
                 instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
             }
-            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Transfiguration")
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities[i].effectType.ToString() == "Transfiguration")
             {
                 instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[3];
             //    instantiatedPrefab.GetComponent<Button>().highlightedColor = new Color(238, 23, 33);
                 instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";
             }
-            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Physical")
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities[i].effectType.ToString() == "Physical")
             {
                 instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[4];
                 instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "HP";
             }
-            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().attacks[i].effectType.ToString() == "Potions")
+            else if (battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities[i].effectType.ToString() == "Potions")
             {
                 instantiatedPrefab.transform.Find("SpellIcon").GetComponent<Image>().sprite = icons[5];
                 instantiatedPrefab.transform.Find("MPHP").GetComponent<TextMeshProUGUI>().text = "MP";

@@ -45,7 +45,7 @@ public class Unit : MonoBehaviour
 
     Battle battle;
 
-    public List<AttackBase> attacks;
+    public List<AbilityBase> abilities;
 
     public TMP_Text characterName, affinityText;
     public Slider healthBar;
@@ -126,7 +126,7 @@ public class Unit : MonoBehaviour
 
     }
 
-    public void TakingUnitTurn(AttackBase selectedAttack = null)
+    public void TakingUnitTurn(AbilityBase selectedAbility = null)
     {
         //break out if unit is unconcious dead or fled
         if (currentState == UnitState.Unconscious)
@@ -160,14 +160,14 @@ public class Unit : MonoBehaviour
         if (DidNotFlee() == false)
             return;
 
-        AttackBase attackBaseTemp = DetermineAttackFromList(selectedAttack);
+        AbilityBase abilityBaseTemp = DetermineAbilityFromList(selectedAbility);
 
        
         if (isOnAuto)
         {
             Unit target = SelectAutoRandomTarget();
 
-            attackBaseTemp.Attack(this, target);
+            abilityBaseTemp.AttemptAbility(this, target);
         }
 
         // DetermineAttack();
@@ -177,18 +177,18 @@ public class Unit : MonoBehaviour
     }
     void ApplyEnhancements()
     {
-        Calculate();
+        CalculateStats();
     }
-    AttackBase DetermineAttackFromList(AttackBase selectedAttack = null)
+    AbilityBase DetermineAbilityFromList(AbilityBase selectedAbility = null)
     {
-        AttackBase attackToUse;
-        if (selectedAttack == null) {
-            attackToUse = attacks[Random.Range(0, attacks.Count - 1)];
+        AbilityBase abilityToUse;
+        if (selectedAbility == null) {
+            abilityToUse = abilities[Random.Range(0, abilities.Count - 1)];
         } else {
-            attackToUse = selectedAttack;
+            abilityToUse = selectedAbility;
         }
-        Debug.Log($"{name} is casting attack {attackToUse.name}");
-        return attackToUse;
+        Debug.Log($"{name} is casting attack {abilityToUse.name}");
+        return abilityToUse;
     }
     Unit SelectAutoRandomTarget()
     {
@@ -242,8 +242,10 @@ public class Unit : MonoBehaviour
     {
         enhancements.Add(enhancement);
         enhancement.Initialize(this);
+
+        CalculateStats();
     }
-    void Calculate()
+    void CalculateStats()
     {
         Magic = startingMagic;
         Physical = startingPhysical;

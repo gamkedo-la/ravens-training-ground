@@ -2,46 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackExcersion { LightAttack, MediumAttack, DefaultAttack }
-
 [CreateAssetMenu(fileName ="Attack",menuName ="Actions/Attack")]
 public class AttackBase : AbilityBase
 {
 
-    public AttackExcersion attackExcersion;
-    public void Attack(Unit caster,List<Unit> targets)
+    public void Attack(Unit caster,Unit target,float attackValue)
     {
-        foreach(Unit target in targets)
-        {
-            Attack(caster,target);
-        }
-    }
-
-    public void Attack(Unit caster, Unit target)
-    {
-        abilityValue = 0;
-
-        CalculateCasterModifiers(caster);
-
-        CalculateTargetModifiers(target);
-
         Debug.Log($"{caster.Name} is casting attack {name} on {target.Name}");
 
-        target.TakeDamage(abilityValue);
-    }
-    void CalculateCasterModifiers(Unit caster)
-    {
         float damageType = GetEffectModifier(caster);
         float equipmentModifier = GetEquipmentModifier(caster);
         float excersionModifier = GetAttackExcersersion();
 
-        abilityValue = (((Mathf.Sqrt(equipmentModifier) * Mathf.Sqrt(damageType)) + (caster.CurrentLevel * 1.25f)) * caster.attackMultiplier * Random.Range(.95f, 1.1f)) * excersionModifier;
+        attackValue = (((Mathf.Sqrt(equipmentModifier) * Mathf.Sqrt(damageType)) + (caster.CurrentLevel * 1.25f)) * caster.attackMultiplier * Random.Range(.95f, 1.1f)) * excersionModifier;
         if (castType == CastType.Friendly)
         {
-            abilityValue = 0;
+            attackValue = 0;
         }
 
-        abilityValue *= GetCriticalChanceMultiplier(caster);
+        attackValue = GetCriticalChanceMultiplier(caster,attackValue);
+
+        attackValue = CalculateTargetModifiers(target,attackValue);
+
+        target.TakeDamage(attackValue);
     }
 
 
