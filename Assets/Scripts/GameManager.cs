@@ -33,17 +33,17 @@ public class GameManager : MonoBehaviour
         inCurrentParty.Add("Dani");
         inCurrentParty.Add("Erebus");
         inCurrentParty.Add("Sophie");
-        inCurrentParty.Add("Theo");
+        inCurrentParty.Add("Phoebe");
 
         charactersNotInParty.Add("Tristan");
-        charactersNotInParty.Add("Phoebe");
+        charactersNotInParty.Add("Theo");
 
         colorsInParty.Add(new Color(255,176,0));
         colorsInParty.Add(new Color(83, 0, 255));
         colorsInParty.Add(new Color(0,170, 255));
-        colorsInParty.Add(new Color(23,183,0));
+        colorsInParty.Add(new Color(255, 0, 0));
 
         colorsNotInParty.Add(new Color(0, 0, 0));
-        colorsNotInParty.Add(new Color(255,0, 0));
+        colorsNotInParty.Add(new Color(23, 183, 0));
     }
 }
