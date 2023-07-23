@@ -7844,8 +7844,11 @@ MonoBehaviour:
   Physical: 20
   Agility: 15
   Finesse: 20
+  startingMagic: 10
+  startingPhysical: 9
+  startingAgility: 15
+  startingFinesse: 20
   CurrentLevel: 3
-  tempAgility: 0
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
@@ -7854,6 +7857,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0167df4f9063baa41b46df34b2da2e78, type: 2}
   weaknesses:
   - {fileID: 11400000, guid: c1361669b677df848b667bd68cb4ce74, type: 2}
+  enhancements: []
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -7861,7 +7865,6 @@ MonoBehaviour:
   defenseBonusTurnCount: 0
   attackMultiplier: 1
   defenseMultiplier: 1
-  damage: 0
   healthToRecover: 0
   experienceEarned: 0
   hasBeenKnockedDown: 0
@@ -7870,14 +7873,7 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 3955729933635845421}
   canvas: {fileID: 8606632244713806473}
-  tier0: 0
-  tier1: 4
-  tier2: 8
-  tier3: 12
-  tier4: 15
-  tier5: 18
-  tier6: 21
-  attacks:
+  abilities:
   - {fileID: 11400000, guid: 2aa710b8e25a76b4aa73ad4adf42d770, type: 2}
   - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
   - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
