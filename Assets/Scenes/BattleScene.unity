@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6815,7 +6815,7 @@ PrefabInstance:
     - target: {fileID: 592862961631223538, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
       propertyPath: startingMusicAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 707f9c620da8c134f8e1883c996b6e63, type: 2}
+      objectReference: {fileID: 11400000, guid: 5bda76a352521e64892cfd9a0b985e88, type: 2}
     - target: {fileID: 1400145761462031972, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
       propertyPath: m_Name
       value: MusicManager

@@ -16,7 +16,6 @@ public class MusicAssetAdvanced : MusicAsset {
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(MusicAssetAdvanced))]
-[CanEditMultipleObjects]
 public class MusicAssetAdvancedEditor : Editor {
 	public override void OnInspectorGUI() {
 		base.OnInspectorGUI();
