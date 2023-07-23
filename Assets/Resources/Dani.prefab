@@ -89,8 +89,11 @@ MonoBehaviour:
   Physical: 9
   Agility: 15
   Finesse: 20
+  startingMagic: 10
+  startingPhysical: 9
+  startingAgility: 15
+  startingFinesse: 20
   CurrentLevel: 2
-  tempAgility: 0
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
@@ -99,6 +102,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48917a6b23c6e0a4299f9d25d7f71551, type: 2}
   weaknesses:
   - {fileID: 11400000, guid: 9fbfb035e54ff7e46af4b3e68577de2c, type: 2}
+  enhancements: []
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -106,7 +110,6 @@ MonoBehaviour:
   defenseBonusTurnCount: 0
   attackMultiplier: 1
   defenseMultiplier: 1
-  damage: 0
   healthToRecover: 0
   experienceEarned: 0
   hasBeenKnockedDown: 0
@@ -115,24 +118,7 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 0}
   canvas: {fileID: 0}
-  tier0: 0
-  tier1: 4
-  tier2: 8
-  tier3: 12
-  tier4: 15
-  tier5: 18
-  tier6: 21
-  attacks:
-  - {fileID: 11400000, guid: d4915714b74e71649a695510d9fc3c13, type: 2}
-  - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
-  - {fileID: 11400000, guid: 0e4b6da2b5fbc5248bdb4bb71c19471c, type: 2}
-  - {fileID: 11400000, guid: 4d6804d652cb6e841aa6adf2a9c456b9, type: 2}
-  - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
-  - {fileID: 11400000, guid: 9ab63710f58339c4cbe205faea1ee8a5, type: 2}
-  - {fileID: 11400000, guid: 2aa710b8e25a76b4aa73ad4adf42d770, type: 2}
-  - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
-  - {fileID: 11400000, guid: a400b13aa01717f4283ebefa251eff7e, type: 2}
-  - {fileID: 11400000, guid: 9fb43ad457c431b43ba25b89b6794e60, type: 2}
+  abilities: []
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}
