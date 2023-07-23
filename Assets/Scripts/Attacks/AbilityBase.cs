@@ -58,12 +58,9 @@ public class AbilityBase : ScriptableObject
                 return false;
             }
         }
-       
+        //Debug.Log("fdsaf");
 
-        foreach(Enhancement enhancement in enhancements)
-        {
-            target.AddEnhancement(enhancement);
-        }
+        UseAbility(caster, target);
 
         return true;
     }
@@ -73,6 +70,7 @@ public class AbilityBase : ScriptableObject
         foreach (Unit target in targets)
         {
             UseAbility(caster, target);
+
         }
     }
 
@@ -87,6 +85,11 @@ public class AbilityBase : ScriptableObject
         if (this.GetType() == typeof(HealBase))
         {
             (this as HealBase).Heal(caster, target, abilityValue);
+        }
+
+        foreach (Enhancement enhancement in enhancements)
+        {
+            target.AddEnhancement(enhancement);
         }
     }
     //Claculates all modifiers that comes from the targets attributes
