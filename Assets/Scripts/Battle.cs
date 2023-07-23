@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using TMPro;
+using Character.Stats;
 
 public enum StateOfBattle { Start, WON, LOST }
 
@@ -162,7 +163,7 @@ public class Battle : MonoBehaviour
     public GameObject GetLowestHealthEnemy()
     {
         List<GameObject> enemies = GetEnemies();
-        enemies.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+        enemies.OrderBy(x => x.GetComponent<Health>().GetCurrentHP()).ToList();
         return enemies[0];
     }
 
@@ -204,7 +205,7 @@ public class Battle : MonoBehaviour
         }
 
 
-        Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().Agility)).ToList();
+        Combatants = Combatants.OrderByDescending(x => (x.GetComponent<BaseStats>().GetStat(Stat.Agility)) + x.GetComponent<BaseStats>().GetStat(Stat.Agility)).ToList();
 
         UpdatePlayerHealthManaUI();
     }
@@ -284,7 +285,7 @@ public class Battle : MonoBehaviour
         //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
         if (currentCombatant >= Combatants.Count)
         {
-            Combatants = Combatants.OrderByDescending(x => (x.GetComponent<Unit>().Agility + x.GetComponent<Unit>().Agility)).ToList();
+            Combatants = Combatants.OrderByDescending(x => x.GetComponent<BaseStats>().GetStat(Stat.Agility) + x.GetComponent<BaseStats>().GetStat(Stat.Agility)).ToList();
             currentCombatant = 0;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
             for (int i = 0; i < Combatants.Count; i++)
@@ -295,8 +296,9 @@ public class Battle : MonoBehaviour
 
         characterNameHolder.SetActive(true);
         characterNameText.text = currentCombatantUnit.Name;
-
-        print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCombatantUnit.Agility + currentCombatantUnit.Agility) + " CurrentHP: " + currentCombatantUnit.CurrentHP);
+        int currentCharacterAgilityStat = currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Agility);
+        int currentCharacterCurrentHP = currentCombatantUnit.GetComponent<Health>().GetCurrentHP();
+        print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCharacterAgilityStat) + " CurrentHP: " + currentCharacterCurrentHP);
 
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
             currentCombatantUnit.TakingUnitTurn();
@@ -328,7 +330,7 @@ public class Battle : MonoBehaviour
 
     /// <summary>
     /// 1) Brings one party member back to life 
-    /// 2) Sets that party member's health to 50% 
+    /// 2) Sets that party member's hitpoints to 50% 
     /// 3) adds them back into the turn order
     /// </summary>
     private void CastPotionOfResurrection(List<GameObject> affectedCombatantList) {
@@ -368,7 +370,7 @@ public class Battle : MonoBehaviour
        
     }
     /// <summary>
-    /// Pestecus this slightly increases the health of all party members (that are alive)
+    /// Pestecus this slightly increases the hitpoints of all party members (that are alive)
     /// </summary>
     private void CastPestecus(List<GameObject> affectedCombatantList) {
         for (int i = 0; i < affectedCombatantList.Count; i++) {
@@ -492,7 +494,7 @@ public class Battle : MonoBehaviour
                 Combatants[currentCombatant].transform.LookAt(GetEnemies()[opponentToAttack].transform);
             }
         } else {
-            //i think this line can go away, it is to sort player's health if we want to structure it similar to the player where they target the weakest player
+            //i think this line can go away, it is to sort player's hitpoints if we want to structure it similar to the player where they target the weakest player
             // playersInThisFight = playersInThisFight.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
 
             for (int i = 0; i < GetPlayers().Count; i++) {
@@ -800,8 +802,8 @@ public class Battle : MonoBehaviour
         //This updates the player's UI in the bottom right hand corner (usually done at the end of the player's turn)
         for (int i = 0; i < GetPlayers().Count; i++)
         {
-            //If player's health < 0 their icons are turned black
-            //This is hardcoded to be at 0 so the player doesn't see how negative their health is
+            //If player's hitpoints < 0 their icons are turned black
+            //This is hardcoded to be at 0 so the player doesn't see how negative their hitpoints is
             if (GetPlayers()[i].GetComponent<Unit>().CurrentHP <= 0)
             {
                 healthText[i].text = "0";

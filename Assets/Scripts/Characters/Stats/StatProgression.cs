@@ -6,8 +6,13 @@ namespace Character.Stats
     [CreateAssetMenu(fileName = "Stats", menuName = "ScriptableObjects/StatProgression", order = 1)]
     public class StatProgression : ScriptableObject
     {
-        [SerializeField] float[] statProgresionRate;
-        [SerializeField] int statProgresionAmount;
+
+        [SerializeField] public string statName;
+
+        [SerializeField] private float[] statProgresionRate;
+        [SerializeField] private int statProgresionAmount;
+        [SerializeField] private int metallicModifier = 0;
+
         private int startLevel = 0;
         private int endLevel;
         public int GetStat(int level) {
@@ -18,7 +23,7 @@ namespace Character.Stats
             } else {
                 var currentModifier = 0;
                 for (var i = 0; i < statProgresionRate.Length; i++) {
-                    currentModifier += (int) Math.Round(statProgresionRate[i] * (level * statProgresionAmount), 0);
+                    currentModifier += (int) Math.Round(statProgresionRate[i] * (level * (statProgresionAmount + metallicModifier)), 0);
                 }
                 return currentModifier;
             }

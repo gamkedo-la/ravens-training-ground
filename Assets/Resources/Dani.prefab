@@ -40,8 +40,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5920217333913091518}
-  - component: {fileID: 5347537393173891232}
   - component: {fileID: -800283866936015331}
+  - component: {fileID: 5347537393173891232}
+  - component: {fileID: 6043779486445279016}
+  - component: {fileID: 7394113027325024077}
+  - component: {fileID: 2268096271109284703}
   m_Layer: 0
   m_Name: Dani
   m_TagString: Untagged
@@ -66,6 +69,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &-800283866936015331
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4646048799911148421}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &5347537393173891232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,33 +164,51 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 0448044731fd90641ad61ead6d119f42, type: 2}
   - {fileID: 2100000, guid: 0448044731fd90641ad61ead6d119f42, type: 2}
   currentState: 0
---- !u!54 &-800283866936015331
-Rigidbody:
+--- !u!114 &6043779486445279016
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4646048799911148421}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 0
-  m_ImplicitTensor: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1c5b87bdf685548815e651704f58b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statProgressions:
+  - {fileID: 11400000, guid: 2564e6c459745ef468bea05149321bad, type: 2}
+  - {fileID: 11400000, guid: 0a05e76a093d05c46a52daf6edccc8c1, type: 2}
+  - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
+  - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
+  - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
+  currentLevel: 0
+--- !u!114 &7394113027325024077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4646048799911148421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28040d7fc3552da4380d6a16522ee2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experience: 0
+--- !u!114 &2268096271109284703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4646048799911148421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
 --- !u!1 &4714939838000303951
 GameObject:
   m_ObjectHideFlags: 0

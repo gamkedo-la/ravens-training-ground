@@ -1,12 +1,14 @@
 using Character.Stats;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-namespace Character.BaseStats
+namespace Character.Stats
 {
-    public class StatProgression : MonoBehaviour
+    public class BaseStats : MonoBehaviour
     {
-        [SerializeField] int startingLevel = 1;
+        private int startingLevel = 1;
         [SerializeField] StatProgression[] statProgressions = null;
 
         Experience experience;
@@ -25,6 +27,25 @@ namespace Character.BaseStats
                 }
             }
             return startingLevel;
+        }
+
+        public bool HasStat(Stat stat) {
+            List<String> availableStats = (from currentStats in statProgressions.ToList() select name).ToList();
+            return availableStats.Contains(stat.ToString());
+        }
+
+        public int GetStat(Stat statToGetValueOf) {
+            if (HasStat(statToGetValueOf)) {
+                if (statProgressions != null) {
+                   List<StatProgression> availableStats = statProgressions.ToList();
+                   StatProgression desiredStat = availableStats.Where(stat => stat.statName == statToGetValueOf.ToString()).First();
+                   return desiredStat.GetStat(currentLevel);
+                } else {
+                    throw new Exception($" {this.ToString()} has null statProgressionss");
+                }
+            } else {
+                throw new Exception($" {this.ToString()} does not have requested stat {statToGetValueOf}");
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Increases health by amount to recover
+/// Increases hitpoints by amount to recover
 /// </summary>
 public class Pestecus : IStatusEffect
 {

@@ -45,7 +45,7 @@ public class AbilityBase : ScriptableObject
         }
         else if (resourceType == ResourceType.Health)
         {
-            //user cannot cast an attack that is equal to their health as the attack would kill them
+            //user cannot cast an attack that is equal to their hitpoints as the attack would kill them
             if (caster.CurrentHP > (int)cost)
             {
                 int deductCost = (int)cost;

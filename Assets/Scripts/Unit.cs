@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Character.Stats;
 
 public class Unit : MonoBehaviour
 {
@@ -71,10 +72,13 @@ public class Unit : MonoBehaviour
     }
 
     public UnitState currentState;
+    private BaseStats baseStats;
+
 
     private void Start()
     {
         currentState = UnitState.IDLE;
+        baseStats = GetComponent<BaseStats>();
         battle = GameObject.Find("Battle").GetComponent<Battle>();
 
         if (!isAPlayer && characterName.text != null)
@@ -242,9 +246,9 @@ public class Unit : MonoBehaviour
     {
         CurrentHP += healValue;
 
-        if (CurrentHP >= MaxHP)
+        if (CurrentHP >= GetComponent<Health>().GetMaxHP())
         {
-            CurrentHP= MaxHP;
+            CurrentHP = GetComponent<Health>().GetMaxHP();
         }
     }
     public void AddEnhancement(Enhancement enhancement)
