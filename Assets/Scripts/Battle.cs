@@ -272,7 +272,7 @@ public class Battle : MonoBehaviour
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
 
             if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
-                NextTurn();
+                StartCoroutine(NextTurn());
         }
 
         if (Input.GetKeyDown(KeyCode.V))
@@ -284,7 +284,7 @@ public class Battle : MonoBehaviour
         #endregion
     }
 
-    void NextTurn()
+    IEnumerator NextTurn()
     {
         //The combatants list is sorted in order from largest to smallest incrementing by one. 
         //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
@@ -309,7 +309,11 @@ public class Battle : MonoBehaviour
         print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCharacterAgilityStat) + " CurrentHP: " + currentCharacterCurrentHP);
 
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
-            currentCombatantUnit.TakingUnitTurn();
+        {
+            yield return StartCoroutine(currentCombatantUnit.TakingUnitTurn());
+            Debug.LogWarning("finished turn");
+        }
+            
     }
 
     /// <summary>
