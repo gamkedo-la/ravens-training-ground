@@ -174,10 +174,14 @@ public class Unit : MonoBehaviour
         {
             Unit target = SelectAutoRandomTarget();
 
-            abilityBaseTemp.AttemptAbility(this, target);
+            if(abilityBaseTemp.AttemptAbility(this, target))
+            {
+                anim.SetTrigger("Attack");
+                //TODO: add a trigger to the animation to tell when the attack has ended
+            }
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForEndOfFrame();
         // DetermineAttack();
         /*        }
                 else
@@ -378,7 +382,7 @@ public class Unit : MonoBehaviour
 
     public void RotateCamera()
     {
-        battle.RotateCamera();
+        //battle.RotateCamera();
     }
 
     public void AdvanceTurn()

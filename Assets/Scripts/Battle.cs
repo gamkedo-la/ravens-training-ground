@@ -273,7 +273,7 @@ public class Battle : MonoBehaviour
             currentCombatant = (currentCombatant + 1) % Combatants.Count;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
 
-            if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
+            if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Dead || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Fled)
                 StartCoroutine(NextTurn());
         }
 
