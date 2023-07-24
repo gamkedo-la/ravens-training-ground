@@ -42,6 +42,10 @@ GameObject:
   - component: {fileID: 2228828099864112908}
   - component: {fileID: 6070649036248793589}
   - component: {fileID: -866191291645170898}
+  - component: {fileID: -1885225567423985942}
+  - component: {fileID: -1212315643977720763}
+  - component: {fileID: -2418534135887642923}
+  - component: {fileID: -856476907103364348}
   m_Layer: 0
   m_Name: Sophie
   m_TagString: Untagged
@@ -81,14 +85,7 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 1
   Name: Sophie
-  CurrentHP: 5
-  MaxHP: 30
   CurrentMP: 30
-  MaxMP: 30
-  Magic: 12
-  Physical: 17
-  Agility: 12
-  Finesse: 20
   startingMagic: 10
   startingPhysical: 9
   startingAgility: 15
@@ -170,6 +167,65 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1885225567423985942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240733256356684476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1c5b87bdf685548815e651704f58b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statProgressions:
+  - {fileID: 11400000, guid: 2564e6c459745ef468bea05149321bad, type: 2}
+  - {fileID: 11400000, guid: 0a05e76a093d05c46a52daf6edccc8c1, type: 2}
+  - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
+  - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
+  - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
+  currentLevel: 0
+  experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
+--- !u!114 &-1212315643977720763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240733256356684476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28040d7fc3552da4380d6a16522ee2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experience: 0
+--- !u!114 &-2418534135887642923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240733256356684476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitpoints: 50
+--- !u!114 &-856476907103364348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240733256356684476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicpoints: 100
 --- !u!1 &1584590050889509745
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Character.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ public class PotionOfResurrection : IStatusEffect
 
     public void ApplyEffect(Unit affectedCombatUnit) {
         affectedCombatUnit.currentState = Unit.UnitState.Alive;
-        affectedCombatUnit.CurrentHP = (affectedCombatUnit.MaxHP * .5f);
+        affectedCombatUnit.GetComponent<Health>().AddHealth((int) (affectedCombatUnit.GetComponent<Health>().GetMaxHP() * .5f));
         Transform affectedCombatUnitTransform = affectedCombatUnit.transform; 
         // TODO - Fire event for unit add as combatant
         // Combatants.Add(deadCharacters[deadPlayerChosen]);

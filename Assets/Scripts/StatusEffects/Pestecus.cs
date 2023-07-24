@@ -1,3 +1,4 @@
+using Character.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,7 @@ public class Pestecus : IStatusEffect
 
     public void ApplyEffect(Unit affectedCombatUnit) {
         Object.Instantiate(affectedCombatUnit.powerUpParticle, affectedCombatUnit.gameObject.transform.position, affectedCombatUnit.gameObject.transform.rotation);
-        affectedCombatUnit.CurrentHP += affectedCombatUnit.healthToRecover;
-        if (affectedCombatUnit.CurrentHP >= affectedCombatUnit.MaxHP) {
-            affectedCombatUnit.CurrentHP = affectedCombatUnit.MaxHP;
-        }
+        affectedCombatUnit.GetComponent<Health>().AddHealth( (int) affectedCombatUnit.healthToRecover);
     }
 
     public void RemoveEffect(Unit affectedCombatUnit) {

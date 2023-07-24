@@ -126,6 +126,10 @@ GameObject:
   - component: {fileID: 5974396021625036794}
   - component: {fileID: 1692924528698019732}
   - component: {fileID: -1393977606469236529}
+  - component: {fileID: 3987401911589210539}
+  - component: {fileID: 4752357220681098044}
+  - component: {fileID: 6179545054639404137}
+  - component: {fileID: 4497717823535547333}
   m_Layer: 0
   m_Name: Tristan
   m_TagString: Untagged
@@ -165,16 +169,12 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 1
   Name: Tristan
-  CurrentHP: 5
-  MaxHP: 30
   CurrentMP: 25
-  MaxMP: 25
-  Magic: 10
-  Physical: 8
-  Agility: 7
-  Finesse: 20
+  startingMagic: 10
+  startingPhysical: 9
+  startingAgility: 15
+  startingFinesse: 20
   CurrentLevel: 1
-  tempAgility: 0
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
@@ -183,6 +183,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 90f41aed330a972458f06338d928fd45, type: 2}
   weaknesses:
   - {fileID: 11400000, guid: 0167df4f9063baa41b46df34b2da2e78, type: 2}
+  enhancements: []
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -190,7 +191,6 @@ MonoBehaviour:
   defenseBonusTurnCount: 0
   attackMultiplier: 1
   defenseMultiplier: 1
-  damage: 0
   healthToRecover: 0
   experienceEarned: 0
   hasBeenKnockedDown: 0
@@ -199,22 +199,7 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 0}
   canvas: {fileID: 0}
-  tier0: 0
-  tier1: 4
-  tier2: 8
-  tier3: 12
-  tier4: 15
-  tier5: 18
-  tier6: 21
-  attacks:
-  - {fileID: 11400000, guid: d4915714b74e71649a695510d9fc3c13, type: 2}
-  - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
-  - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
-  - {fileID: 11400000, guid: 9ab63710f58339c4cbe205faea1ee8a5, type: 2}
-  - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
-  - {fileID: 11400000, guid: 9fb43ad457c431b43ba25b89b6794e60, type: 2}
-  - {fileID: 11400000, guid: 7100bd8896f520d41b56081045c03f38, type: 2}
-  - {fileID: 11400000, guid: b2fcbf246926b104d9e1ce5b70714fa2, type: 2}
+  abilities: []
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}
@@ -257,6 +242,65 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3987401911589210539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383520769527709757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1c5b87bdf685548815e651704f58b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statProgressions:
+  - {fileID: 11400000, guid: 2564e6c459745ef468bea05149321bad, type: 2}
+  - {fileID: 11400000, guid: 0a05e76a093d05c46a52daf6edccc8c1, type: 2}
+  - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
+  - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
+  - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
+  currentLevel: 0
+  experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
+--- !u!114 &4752357220681098044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383520769527709757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28040d7fc3552da4380d6a16522ee2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experience: 0
+--- !u!114 &6179545054639404137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383520769527709757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitpoints: 50
+--- !u!114 &4497717823535547333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383520769527709757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicpoints: 100
 --- !u!1 &7461716472172569951
 GameObject:
   m_ObjectHideFlags: 0

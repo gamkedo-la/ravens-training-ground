@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6043779486445279016}
   - component: {fileID: 7394113027325024077}
   - component: {fileID: 2268096271109284703}
+  - component: {fileID: 907737480074910388}
   m_Layer: 0
   m_Name: Dani
   m_TagString: Untagged
@@ -111,14 +112,7 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 1
   Name: Dani
-  CurrentHP: 5
-  MaxHP: 30
   CurrentMP: 24
-  MaxMP: 24
-  Magic: 10
-  Physical: 9
-  Agility: 15
-  Finesse: 20
   startingMagic: 10
   startingPhysical: 9
   startingAgility: 15
@@ -194,6 +188,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
   - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
   currentLevel: 0
+  experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
 --- !u!114 &7394113027325024077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +214,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  hitpoints: 50
+--- !u!114 &907737480074910388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4646048799911148421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicpoints: 100
 --- !u!1 &4714939838000303951
 GameObject:
   m_ObjectHideFlags: 0

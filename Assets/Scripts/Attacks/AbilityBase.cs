@@ -1,5 +1,7 @@
+using Character.Stats;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -29,12 +31,13 @@ public class AbilityBase : ScriptableObject
     public float abilityValue = 0;
     public bool AttemptAbility(Unit caster, Unit target)
     {
+        int casterCurrentMP = caster.GetComponent<Magic>().GetCurrentMP();
+        int casterCurrentHP = caster.GetComponent<Health>().GetCurrentHP();
         if (resourceType == ResourceType.Mana)
         {
-            if (caster.CurrentMP >= (int)cost)
+            if (casterCurrentMP >= (int)cost)
             {
-                int deductCost = (int)cost;
-                caster.CurrentMP -= deductCost;
+                caster.GetComponent<Magic>().UseMagic((int)cost);
             }
             else
             {
@@ -46,10 +49,10 @@ public class AbilityBase : ScriptableObject
         else if (resourceType == ResourceType.Health)
         {
             //user cannot cast an attack that is equal to their hitpoints as the attack would kill them
-            if (caster.CurrentHP > (int)cost)
+            if (casterCurrentHP > (int)cost)
             {
                 int deductCost = (int)cost;
-                caster.CurrentHP -= deductCost;
+                caster.GetComponent<Health>().TakeDamage(this.GameObject(), (int)cost);
             }
             else
             {
@@ -106,19 +109,19 @@ public class AbilityBase : ScriptableObject
         switch (effectType)
         {
             case EffectType.Charms:
-                return caster.Magic;
+                return caster.GetComponent<BaseStats>().GetStat(Stat.Magic);
             case EffectType.Physical:
-                return caster.Physical;
+                return caster.GetComponent<BaseStats>().GetStat(Stat.Physical);
             case EffectType.DarkArts:
-                return caster.Magic;
+                return caster.GetComponent<BaseStats>().GetStat(Stat.Magic);
             case EffectType.Transfiguration:
-                return caster.Magic;
+                return caster.GetComponent<BaseStats>().GetStat(Stat.Magic);
             case EffectType.Ancient:
-                return caster.Magic;
+                return caster.GetComponent<BaseStats>().GetStat(Stat.Magic);
             case EffectType.Potions:
-                return caster.Magic;
+                return caster.GetComponent<BaseStats>().GetStat(Stat.Magic);
             case EffectType.None:
-                return caster.Magic;
+                return caster.GetComponent<BaseStats>().GetStat(Stat.Magic);
             default:
                 Debug.Log("Missing Type");
                 return 0;
@@ -191,7 +194,7 @@ public class AbilityBase : ScriptableObject
     public float GetCriticalChanceMultiplier(Unit caster, float value)
     {
         float chanceForCritial = Random.Range(0, 100);
-        float criticalChance = caster.Finesse + caster.FinesseEquipment;
+        float criticalChance = caster.GetComponent<BaseStats>().GetStat(Stat.Finesse) + caster.FinesseEquipment;
 
         if (chanceForCritial <= criticalChance)
             return value * 2;

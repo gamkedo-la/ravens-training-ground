@@ -1,5 +1,7 @@
+using Character.Stats;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="Attack",menuName ="Actions/Attack")]
@@ -22,7 +24,7 @@ public class AttackBase : AbilityBase
 
         attackValue = CalculateTargetModifiers(target,attackValue);
 
-        target.TakeDamage(attackValue);
+        target.GetComponent<Health>().TakeDamage(this.GameObject(), (int) attackValue);
     }
 
 

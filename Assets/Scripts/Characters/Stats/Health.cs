@@ -8,7 +8,12 @@ namespace Character.Stats {
         public event Action OnDie;
 
         public bool IsDead() {
-            return hitpoints >= 0;
+            return hitpoints <= 0;
+        }
+
+        public void Die() {
+            hitpoints = 0;
+            OnDie.Invoke();
         }
 
         public int GetMaxHP() {
@@ -17,6 +22,14 @@ namespace Character.Stats {
 
         public int GetCurrentHP() {
             return hitpoints;
+        }
+
+        public void AddHealth(int healthToAdd) {
+            hitpoints = Math.Min(hitpoints + healthToAdd, GetComponent<BaseStats>().GetStat(Stat.Health));
+        }
+
+        public void HealToFull() {
+            hitpoints = GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         public void TakeDamage(GameObject damageSource, int damage) {

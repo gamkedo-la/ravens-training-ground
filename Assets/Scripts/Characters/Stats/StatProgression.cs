@@ -18,11 +18,11 @@ namespace Character.Stats
         public int GetStat(int level) {
             endLevel = statProgresionRate.Length;
             // TODO: Change progression per stat
-            if (level < endLevel && level > startLevel) {
-                return (level * 10);
+            if (level > endLevel || level < startLevel) {
+                return 0;
             } else {
                 var currentModifier = 0;
-                for (var i = 0; i < statProgresionRate.Length; i++) {
+                for (var i = 0; i < level; i++) {
                     currentModifier += (int) Math.Round(statProgresionRate[i] * (level * (statProgresionAmount + metallicModifier)), 0);
                 }
                 return currentModifier;

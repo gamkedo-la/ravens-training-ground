@@ -12,7 +12,7 @@ public class Unit : MonoBehaviour
     public bool isAPlayer;
 
     public string Name;
-    public float CurrentHP = 25, MaxHP = 20, CurrentMP = 30, MaxMP = 25, Magic = 10, Physical = 9, Agility = 15, Finesse = 20;
+    public float CurrentMP = 30;
     public float startingMagic = 10, startingPhysical = 9, startingAgility = 15, startingFinesse = 20;
     public int CurrentLevel = 1;
 
@@ -80,6 +80,7 @@ public class Unit : MonoBehaviour
         currentState = UnitState.IDLE;
         baseStats = GetComponent<BaseStats>();
         battle = GameObject.Find("Battle").GetComponent<Battle>();
+        GetComponent<Health>().OnDie += UnitDeath;
 
         if (!isAPlayer && characterName.text != null)
         {
@@ -101,11 +102,13 @@ public class Unit : MonoBehaviour
                     }
                     rend.materials = mats;
                 }
-
-                CurrentHP = 5;
-                MaxHP = 5;
-                Agility = 80;
-                Finesse = 80;
+                /*
+                 * TODO: Add enhancement with metallic properties
+                    CurrentHP = 5;
+                    MaxHP = 5;
+                    Agility = 80;
+                    Finesse = 80;
+                */
                 experienceEarned *= 5; 
                 canFlee = true;
             }
@@ -216,7 +219,7 @@ public class Unit : MonoBehaviour
         if (fleeThisTurn >= 50 && canFlee) {
             print("Character Fled");
             experienceEarned = 0;
-            CurrentHP = 0;
+            GetComponent<Health>().Die();
 
 /*            affinityText.color = Color.black;
             affinityText.text = "Fled";
@@ -233,23 +236,9 @@ public class Unit : MonoBehaviour
         return true;
     }
 
-    public void TakeDamage(float damageToTake)
-    {
-        CurrentHP -= damageToTake;
-
-        if(CurrentHP <= 0) 
-        {
-            UnitDeath();
-        }
-    }
     public void Heal(float healValue)
     {
-        CurrentHP += healValue;
-
-        if (CurrentHP >= GetComponent<Health>().GetMaxHP())
-        {
-            CurrentHP = GetComponent<Health>().GetMaxHP();
-        }
+        GetComponent<Health>().AddHealth((int) healValue);
     }
     public void AddEnhancement(Enhancement enhancement)
     {
@@ -260,10 +249,13 @@ public class Unit : MonoBehaviour
     }
     void CalculateStats()
     {
+        /* 
+         * 
         Magic = startingMagic;
         Physical = startingPhysical;
         Agility = startingAgility;
         Finesse= startingFinesse;
+         */
 
         foreach (Enhancement enhancement in enhancements)
         {
@@ -293,7 +285,7 @@ public class Unit : MonoBehaviour
         float chanceForAttackToLand = Random.Range(0, 100);
         float chanceForCritial = Random.Range(0, 100);
 
-        if (chanceForAttackToLand <= (Agility + AgilityEquipment + (CurrentLevel * 1.25f)))
+        if (chanceForAttackToLand <= (GetComponent<BaseStats>().GetStat(Stat.Agility) + AgilityEquipment + (CurrentLevel * 1.25f)))
         {
             if (!isAPlayer)
             {
@@ -360,15 +352,15 @@ public class Unit : MonoBehaviour
             if (isMetallic)
                 damageToTake = 1;
 
-            CurrentHP -= (damageToTake * defenseMultiplier);
+            GetComponent<Health>().TakeDamage(this.gameObject, (int) (damageToTake * defenseMultiplier));
             Instantiate(battle.damageParticle, transform.position, transform.rotation);
 
             if (!isAPlayer)
-                healthBar.value = CurrentHP / MaxHP;
+                healthBar.value = GetComponent<Health>().GetCurrentHP() / GetComponent<Health>().GetMaxHP();
             else
                 battle.UpdatePlayerHealthManaUI();
 
-            if (CurrentHP >= 0)
+            if (GetComponent<Health>().GetCurrentHP() >= 0)
             {
                 return false;
             }

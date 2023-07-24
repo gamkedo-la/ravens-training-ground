@@ -1,27 +1,44 @@
+using Character.Stats;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Playables;
 using UnityEngine;
 
 public enum MathSign {Multiply,Divide, Add,Subtract};
 public enum Activation {Immediate, StartOfTurn, EndOfTurn};
-public enum StatToChange
+
+public class EnhancementStatAmountArgs : EventArgs
 {
-    Magic, Physical, Agility, Finesse
+    public EnhancementStatAmountArgs(float enhancementAmount, Stat effectedStat) {
+        EnhancementAmount = enhancementAmount;
+        EffectedStat = effectedStat;
+    }
+
+    public float EnhancementAmount { get; set; }
+    public Stat EffectedStat { get; set; }
 }
+
 [CreateAssetMenu(fileName = "Enhancement", menuName = "Enhancement")]
 public class Enhancement : ScriptableObject
 {
     Unit unitAttachedTo;
     public Activation activation;
-    public StatToChange statToChange;
+    public Stat statToChange;
     [Header("Enhancement Variables")]
     public MathSign sign;
     public float effectiveness;
     [Header("Turn Variables")]
     public int numberOfTurns;
     public int turnCount;
+
+    public float magicEnhancementAmount;
+    public float physicalEnhancementAmount;
+    public float finesseEnhancementAmount;
+    public float agilityEnhancementAmount;
+
+    public event EventHandler<EnhancementStatAmountArgs> OnEnhancementEvent;
 
     public void Initialize(Unit unit)
     {
@@ -67,38 +84,43 @@ public class Enhancement : ScriptableObject
     {
         switch (statToChange)
         {
-            case StatToChange.Magic:
-                return unitAttachedTo.Magic;
-            case StatToChange.Physical:
-                return unitAttachedTo.Physical;
-            case StatToChange.Finesse:
-                return unitAttachedTo.Finesse;
-            case StatToChange.Agility:
-                return unitAttachedTo.Agility;
+            case Stat.Magic:
+                return unitAttachedTo.GetComponent<BaseStats>().GetStat(Stat.Magic);
+            case Stat.Physical:
+                return unitAttachedTo.GetComponent<BaseStats>().GetStat(Stat.Physical);
+            case Stat.Finesse:
+                return unitAttachedTo.GetComponent<BaseStats>().GetStat(Stat.Finesse);
+            case Stat.Agility:
+                return unitAttachedTo.GetComponent<BaseStats>().GetStat(Stat.Agility);
             default:
                 return 0;
         }        
     }
-    void SetStat(float stat)
+    void SetStat(float statModificationAmount)
     {
         switch (statToChange)
         {
-            case StatToChange.Magic:
-                unitAttachedTo.Magic = stat;
+            case Stat.Magic:
+                OnEnhancementEvent(this, new EnhancementStatAmountArgs(statModificationAmount, Stat.Magic));
+                magicEnhancementAmount = statModificationAmount;
                 break;
-            case StatToChange.Physical:
-                unitAttachedTo.Physical = stat;
+            case Stat.Physical:
+                OnEnhancementEvent(this, new EnhancementStatAmountArgs(statModificationAmount, Stat.Physical));
+                physicalEnhancementAmount = statModificationAmount;
                 break;
-            case StatToChange.Finesse:
-                unitAttachedTo.Finesse = stat;
+            case Stat.Finesse:
+                OnEnhancementEvent(this, new EnhancementStatAmountArgs(statModificationAmount, Stat.Finesse));
+                finesseEnhancementAmount = statModificationAmount;
                 break;
-            case StatToChange.Agility:
-                unitAttachedTo.Agility = stat;
+            case Stat.Agility:
+                OnEnhancementEvent(this, new EnhancementStatAmountArgs(statModificationAmount, Stat.Agility));
+                agilityEnhancementAmount = statModificationAmount;
                 break;
         }
     }
     public void RemoveEnhancement()
     {
+        OnEnhancementEvent(this, new EnhancementStatAmountArgs(0, statToChange));
         unitAttachedTo.enhancements.Remove(this);
     }
 }

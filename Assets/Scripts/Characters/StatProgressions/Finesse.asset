@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b0d4e43803ad34485c21a58711553b, type: 3}
   m_Name: Finesse
   m_EditorClassIdentifier: 
+  statName: Finesse
   statProgresionRate:
   - 0.1
   - 0.1
   - 0.3
   - 0.5
   statProgresionAmount: 50
+  metallicModifier: 0

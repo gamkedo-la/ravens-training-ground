@@ -1,3 +1,4 @@
+using Character.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class PotionOfHealing : IStatusEffect
 
     public void ApplyEffect(Unit affectedCombatUnit) {
         Object.Instantiate(affectedCombatUnit.powerUpParticle, affectedCombatUnit.gameObject.transform.position, affectedCombatUnit.gameObject.transform.rotation);
-        affectedCombatUnit.CurrentHP = affectedCombatUnit.MaxHP;
+        affectedCombatUnit.GetComponent<Health>().HealToFull();
     }
 
     public void RemoveEffect(Unit affectedCombatUnit) {

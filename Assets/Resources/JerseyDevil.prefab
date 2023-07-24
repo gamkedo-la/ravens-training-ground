@@ -10,6 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3971475092950407125}
   - component: {fileID: 6151210296619848168}
+  - component: {fileID: -7709673358690473427}
+  - component: {fileID: 5078678958310548051}
+  - component: {fileID: -8296064440617506209}
+  - component: {fileID: 8479494753516535388}
   m_Layer: 0
   m_Name: JerseyDevil
   m_TagString: Untagged
@@ -48,16 +52,12 @@ MonoBehaviour:
   isOnAuto: 1
   isAPlayer: 0
   Name: Jersey Devil
-  CurrentHP: 60
-  MaxHP: 20
   CurrentMP: 30
-  MaxMP: 25
-  Magic: 10
-  Physical: 9
-  Agility: 15
-  Finesse: 20
+  startingMagic: 10
+  startingPhysical: 9
+  startingAgility: 15
+  startingFinesse: 20
   CurrentLevel: 1
-  tempAgility: 0
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
@@ -67,6 +67,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9fbfb035e54ff7e46af4b3e68577de2c, type: 2}
   weaknesses:
   - {fileID: 11400000, guid: 0167df4f9063baa41b46df34b2da2e78, type: 2}
+  enhancements: []
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -74,7 +75,6 @@ MonoBehaviour:
   defenseBonusTurnCount: 0
   attackMultiplier: 1
   defenseMultiplier: 1
-  damage: 0
   healthToRecover: 0
   experienceEarned: 0
   hasBeenKnockedDown: 0
@@ -83,17 +83,7 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 0}
   canvas: {fileID: 0}
-  tier0: 0
-  tier1: 4
-  tier2: 8
-  tier3: 12
-  tier4: 15
-  tier5: 18
-  tier6: 21
-  attacks:
-  - {fileID: 11400000, guid: 1c0c20297e32df24e9a974642536bc8b, type: 2}
-  - {fileID: 11400000, guid: a6b60d89678e4fd40ac55b042ca5df6e, type: 2}
-  - {fileID: 11400000, guid: 0e4b6da2b5fbc5248bdb4bb71c19471c, type: 2}
+  abilities: []
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}
@@ -106,6 +96,65 @@ MonoBehaviour:
   objectToChangeMaterialOf: {fileID: 0}
   playerMaterial: []
   currentState: 0
+--- !u!114 &-7709673358690473427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438760704815962653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1c5b87bdf685548815e651704f58b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statProgressions:
+  - {fileID: 11400000, guid: 2564e6c459745ef468bea05149321bad, type: 2}
+  - {fileID: 11400000, guid: 0a05e76a093d05c46a52daf6edccc8c1, type: 2}
+  - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
+  - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
+  - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
+  currentLevel: 0
+  experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
+--- !u!114 &5078678958310548051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438760704815962653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28040d7fc3552da4380d6a16522ee2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experience: 0
+--- !u!114 &-8296064440617506209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438760704815962653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitpoints: 50
+--- !u!114 &8479494753516535388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438760704815962653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicpoints: 100
 --- !u!1001 &1835330528460020603
 PrefabInstance:
   m_ObjectHideFlags: 0

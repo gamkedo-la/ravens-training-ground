@@ -192,14 +192,19 @@ public class Battle : MonoBehaviour
         foreach (GameObject combatant in Combatants)
         {
             Unit combatantUnitProperties = combatant.GetComponent<Unit>();
+            BaseStats combatantUnitStats = combatant.GetComponent<BaseStats>();
             if (!combatantUnitProperties.isAPlayer && GameManager.initiativeSiezedByEnemy)
             {
-                combatantUnitProperties.Agility += 70;
+                /* TODO: Add enhancement effect with this modifier
+                 * combatantUnitStats.GetStat(Stat.Agility) += 70;
+                 * */
                 StartCoroutine(ClearInformationText(2f, "Surprise Attack Enemies Attacking"));
             }
             else if (combatantUnitProperties.isAPlayer && GameManager.initiativeSiezedByPlayer)
             {
-                combatantUnitProperties.Agility += 70;
+                /* TODO: Add enhancement effect with this modifier
+                 * combatantUnitStats.GetStat(Stat.Agility) += 70;
+                 * */
                 StartCoroutine(ClearInformationText(2f, "Surprise Round"));
             }
         }
@@ -288,10 +293,13 @@ public class Battle : MonoBehaviour
             Combatants = Combatants.OrderByDescending(x => x.GetComponent<BaseStats>().GetStat(Stat.Agility) + x.GetComponent<BaseStats>().GetStat(Stat.Agility)).ToList();
             currentCombatant = 0;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
-            for (int i = 0; i < Combatants.Count; i++)
-            {
-                Combatants[i].GetComponent<Unit>().Agility = 0;
-            }
+            /*
+             * TODO : Modify ordering based on agility, without modifying base agiity so enhancements persist
+                for (int i = 0; i < Combatants.Count; i++)
+                {
+                    Combatants[i].GetComponent<Unit>().Agility = 0;
+                }
+             */
         }
 
         characterNameHolder.SetActive(true);
@@ -349,7 +357,7 @@ public class Battle : MonoBehaviour
     /// CastPotionOfHealing Heals one party member. There is an 80% chance they heal the weakest party member, 20% chance it randomly heals another person in the party
     /// </summary>
     private void CastPotionOfHealing(List<GameObject> affectedCombatantList) {
-        List<GameObject> sortedAffectedCombatantList = affectedCombatantList.OrderBy(x => x.GetComponent<Unit>().CurrentHP).ToList();
+        List<GameObject> sortedAffectedCombatantList = affectedCombatantList.OrderBy(x => x.GetComponent<Health>().GetCurrentHP()).ToList();
         int chanceOfPersonToHeal = Random.Range(0, 100);
         Unit personToHeal;
         if (chanceOfPersonToHeal <= 80) { // 80% heal first unit
@@ -456,26 +464,26 @@ public class Battle : MonoBehaviour
 
     private void HandleManualAoeAttack(float damage) {
         for (int i = 0; i < GetEnemies().Count; i++) {
-            GetEnemies()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+            GetEnemies()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
         }
     }
 
     private void HandleManualSingleTargetAttack(float damage) {
         Combatants[currentCombatant].transform.LookAt(Combatants[currentlySelectedEnemy].transform);
-        Combatants[currentlySelectedEnemy].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+        Combatants[currentlySelectedEnemy].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
     }
 
     private void HandleAutoAoeAttack(float damage) {
         if (currentCombatantUnit.isAPlayer) {
             for (int i = 0; i < GetEnemies().Count; i++) {
-                GetEnemies()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+                GetEnemies()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
             }
         } else {
             
             //shouldn't need the if since get players only returns conscious ones
             for (int i = 0; i < GetPlayers().Count; i++) {
                 //if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead) {
-                    GetPlayers()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+                    GetPlayers()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
                 //}
             }
         }
@@ -487,10 +495,10 @@ public class Battle : MonoBehaviour
             int randAttack = Random.Range(0, 100);
             if (randAttack < 50) {
                 Combatants[currentCombatant].transform.LookAt(GetLowestHealthEnemy().transform);
-                GetLowestHealthEnemy().GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+                GetLowestHealthEnemy().GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
             } else {
                 int opponentToAttack = Random.Range(0, GetEnemies().Count);
-                GetEnemies()[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+                GetEnemies()[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
                 Combatants[currentCombatant].transform.LookAt(GetEnemies()[opponentToAttack].transform);
             }
         } else {
@@ -510,7 +518,7 @@ public class Battle : MonoBehaviour
                 int playerToChoose = Random.Range(0, GetPlayers().Count - 1);
 
                 Combatants[currentCombatant].transform.LookAt(GetPlayers()[playerToChoose].transform);
-                bool playerWasKilled = GetPlayers()[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.Finesse + currentCombatantUnit.FinesseEquipment));
+                bool playerWasKilled = GetPlayers()[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
 
                 tempStoreOfPlayer = GetPlayers()[playerToChoose].GetComponent<Unit>().name;
                 playerToAttack = 0;
@@ -591,7 +599,7 @@ public class Battle : MonoBehaviour
                 chanceToLeave += 25;
         }
 
-        if (percentToLeave <= chanceToLeave + currentCombatantUnit.Agility + currentCombatantUnit.AgilityEquipment)
+        if (percentToLeave <= chanceToLeave + currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Agility) + currentCombatantUnit.AgilityEquipment)
         {
             //player flees
             for (int i = 0; i < GetPlayers().Count; i++)
@@ -617,14 +625,11 @@ public class Battle : MonoBehaviour
     public void GuardPlayer()
     {
         StartCoroutine(ClearInformationText(2f, "Guard"));
+        Health currentCombatantHealth = currentCombatantUnit.GetComponent<Health>();
         currentCombatantUnit.defenseMultiplier = .5f;
         currentCombatantUnit.defenseBonusTurnCount = 2;
-        currentCombatantUnit.CurrentHP += 3;
-        currentCombatantUnit.CurrentMP += 3;
-        if (currentCombatantUnit.CurrentHP >= currentCombatantUnit.MaxHP)
-            currentCombatantUnit.CurrentHP = currentCombatantUnit.MaxHP;
-        if (currentCombatantUnit.CurrentMP >= currentCombatantUnit.MaxMP)
-            currentCombatantUnit.CurrentMP = currentCombatantUnit.MaxMP;
+        currentCombatantHealth.AddHealth(3);
+        currentCombatantUnit.GetComponent<Magic>().AddMagic(3);
 
         UpdatePlayerHealthManaUI();
 
@@ -661,7 +666,7 @@ public class Battle : MonoBehaviour
         //This first part - if either a player or enemy is killed, they are removed from the Combatants list (their turn is skipped in battle)
         for (int i = 0; i < Combatants.Count; i++)
         {
-            if (Combatants[i].GetComponent<Unit>().CurrentHP <= 0)
+            if (Combatants[i].GetComponent<Health>().GetCurrentHP() <= 0)
             {
                 totalExperienceAwarded += Combatants[i].GetComponent<Unit>().experienceEarned;
 
@@ -679,7 +684,7 @@ public class Battle : MonoBehaviour
         //If an enemy is killed in battle, they are: 1) Removed from play 2) Removed from the list 3) their experience is added to a total number
         for (int i = 0; i < GetEnemies().Count; i++)
         {
-            if (GetEnemies()[i].GetComponent<Unit>().CurrentHP <= 0)
+            if (GetEnemies()[i].GetComponent<Health>().GetCurrentHP() <= 0)
             {
                 totalExperienceAwarded += Combatants[i].GetComponent<Unit>().experienceEarned;
                 GetEnemies().Remove(GetEnemies()[i]);
@@ -804,7 +809,7 @@ public class Battle : MonoBehaviour
         {
             //If player's hitpoints < 0 their icons are turned black
             //This is hardcoded to be at 0 so the player doesn't see how negative their hitpoints is
-            if (GetPlayers()[i].GetComponent<Unit>().CurrentHP <= 0)
+            if (GetPlayers()[i].GetComponent<Health>().GetCurrentHP() <= 0)
             {
                 healthText[i].text = "0";
                 healthUI[i].value = 0;
@@ -816,14 +821,14 @@ public class Battle : MonoBehaviour
             //otherwise, the stats are updated to reflected current state
             else
             {
-                healthUI[i].value = GetPlayers()[i].GetComponent<Unit>().CurrentHP / GetPlayers()[i].GetComponent<Unit>().MaxHP;
-                healthText[i].text = GetPlayers()[i].GetComponent<Unit>().CurrentHP.ToString("F0");
+                healthUI[i].value = GetPlayers()[i].GetComponent<Health>().GetCurrentHP() / GetPlayers()[i].GetComponent<Health>().GetMaxHP();
+                healthText[i].text = GetPlayers()[i].GetComponent<Health>().GetCurrentHP().ToString("F0");
 
                 triangles[i].color = GameManager.colorsInParty[i];
                 icons[i].color = Color.white;
                 icons[i].sprite = Resources.Load<Sprite>("PlayerIcons/" + GetPlayers()[i].GetComponent<Unit>().Name);
             }
-            manaUI[i].value = GetPlayers()[i].GetComponent<Unit>().CurrentMP / GetPlayers()[i].GetComponent<Unit>().MaxMP;
+            manaUI[i].value = GetPlayers()[i].GetComponent<Unit>().CurrentMP / GetPlayers()[i].GetComponent<Health>().GetMaxHP();
             manaText[i].text = GetPlayers()[i].GetComponent<Unit>().CurrentMP.ToString("F0");
         }
     }
