@@ -177,7 +177,7 @@ public class Unit : MonoBehaviour
             abilityBaseTemp.AttemptAbility(this, target);
         }
 
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(2);
         // DetermineAttack();
         /*        }
                 else

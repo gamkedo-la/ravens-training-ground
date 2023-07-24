@@ -15,6 +15,8 @@ public class Battle : MonoBehaviour
     //check for which setup to use
     public bool usesSetup2;
 
+    bool unitCurrentlyTakingTurn;
+
     public GameObject informationTextHolder, characterNameHolder;
     public TMP_Text informationText, characterNameText;
 
@@ -266,7 +268,7 @@ public class Battle : MonoBehaviour
         }
 
         //Pressing Space advances the turn - this is not permenant - just for testing
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !unitCurrentlyTakingTurn)
         {
             currentCombatant = (currentCombatant + 1) % Combatants.Count;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
@@ -310,8 +312,10 @@ public class Battle : MonoBehaviour
 
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
         {
+            unitCurrentlyTakingTurn= true;
             yield return StartCoroutine(currentCombatantUnit.TakingUnitTurn());
             Debug.LogWarning("finished turn");
+            unitCurrentlyTakingTurn = false;
         }
             
     }
