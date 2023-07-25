@@ -12,10 +12,19 @@ public class RandomRotateBob : MonoBehaviour
     Vector3 minVect3, maxVect3, defaultVect3;
     public float startingX, startingY, startingZ;
 
+    public bool getStartRot;
+
     private void Start()
     {
         minVect3 = new Vector3(startingX * percentMin, startingY * percentMin, startingZ * percentMin);
         maxVect3 = new Vector3(startingX * percentMax, startingY * percentMax, startingZ * percentMax);
+
+        if (getStartRot)
+        {
+            startingX = this.transform.rotation.x;
+            startingY = this.transform.rotation.y;
+            startingZ = this.transform.rotation.z;
+        }
     }
 
     void Update()
