@@ -62,7 +62,6 @@ public class AbilityBase : ScriptableObject
                 return false;
             }
         }
-        //Debug.Log("fdsaf");
 
         UseAbility(caster, target);
 

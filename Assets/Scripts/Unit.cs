@@ -133,15 +133,15 @@ public class Unit : MonoBehaviour
 
     }
 
-    public void TakingUnitTurn(AbilityBase selectedAbility = null)
+    public IEnumerator TakingUnitTurn(AbilityBase selectedAbility = null)
     {
         //break out if unit is unconcious dead or fled
         if (currentState == UnitState.Unconscious)
-        { return; }
+        { yield return new WaitForEndOfFrame(); }
         if (currentState == UnitState.Fled)
-        { return; }
+        { yield return new WaitForEndOfFrame(); }
         if (currentState == UnitState.Dead)
-        { return; }
+        { yield return new WaitForEndOfFrame(); }
         /*        if (currentState != UnitState.Unconscious || currentState != UnitState.Fled)
                 {*/
         battle.MoveCamera();
@@ -165,7 +165,7 @@ public class Unit : MonoBehaviour
             defenseMultiplier = 1;
 
         if (DidNotFlee() == false)
-            return;
+            yield return new WaitForEndOfFrame();
 
         AbilityBase abilityBaseTemp = DetermineAbilityFromList(selectedAbility);
 
@@ -174,9 +174,14 @@ public class Unit : MonoBehaviour
         {
             Unit target = SelectAutoRandomTarget();
 
-            abilityBaseTemp.AttemptAbility(this, target);
+            if(abilityBaseTemp.AttemptAbility(this, target))
+            {
+                anim.SetTrigger("Attack");
+                //TODO: add a trigger to the animation to tell when the attack has ended
+            }
         }
 
+        yield return new WaitForEndOfFrame();
         // DetermineAttack();
         /*        }
                 else
@@ -377,7 +382,7 @@ public class Unit : MonoBehaviour
 
     public void RotateCamera()
     {
-        battle.RotateCamera();
+        //battle.RotateCamera();
     }
 
     public void AdvanceTurn()

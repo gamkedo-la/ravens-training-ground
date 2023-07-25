@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Floor2.unity
     guid: d30e8903de2be5442bec3d7b652fff03
   - enabled: 1
+    path: Assets/Scenes/BattleSceneFloor2.unity
+    guid: 148e8100931b1bb4980da5d2c2786513
+  - enabled: 1
     path: Assets/Scenes/Floor3.unity
     guid: 718b90cf93ce1f5449467bd4207b9fed
+  - enabled: 1
+    path: Assets/Scenes/BattleSceneFloor3.unity
+    guid: 49a86dc44f7df4b4395cbed8c20015a4
   m_configObjects: {}

@@ -15,6 +15,8 @@ public class Battle : MonoBehaviour
     //check for which setup to use
     public bool usesSetup2;
 
+    bool unitCurrentlyTakingTurn;
+
     public GameObject informationTextHolder, characterNameHolder;
     public TMP_Text informationText, characterNameText;
 
@@ -266,13 +268,13 @@ public class Battle : MonoBehaviour
         }
 
         //Pressing Space advances the turn - this is not permenant - just for testing
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !unitCurrentlyTakingTurn)
         {
             currentCombatant = (currentCombatant + 1) % Combatants.Count;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
 
-            if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
-                NextTurn();
+            if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Dead || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Fled)
+                StartCoroutine(NextTurn());
         }
 
         if (Input.GetKeyDown(KeyCode.V))
@@ -284,7 +286,7 @@ public class Battle : MonoBehaviour
         #endregion
     }
 
-    void NextTurn()
+    IEnumerator NextTurn()
     {
         //The combatants list is sorted in order from largest to smallest incrementing by one. 
         //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
@@ -309,7 +311,13 @@ public class Battle : MonoBehaviour
         print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCharacterAgilityStat) + " CurrentHP: " + currentCharacterCurrentHP);
 
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
-            currentCombatantUnit.TakingUnitTurn();
+        {
+            unitCurrentlyTakingTurn= true;
+            yield return StartCoroutine(currentCombatantUnit.TakingUnitTurn());
+            Debug.LogWarning("finished turn");
+            unitCurrentlyTakingTurn = false;
+        }
+            
     }
 
     /// <summary>
