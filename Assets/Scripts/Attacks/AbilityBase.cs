@@ -64,7 +64,6 @@ public class AbilityBase : ScriptableObject
         }
 
         UseAbility(caster, target);
-
         return true;
     }
 
