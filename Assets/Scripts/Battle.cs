@@ -314,6 +314,8 @@ public class Battle : MonoBehaviour
         {
             unitCurrentlyTakingTurn= true;
             yield return StartCoroutine(currentCombatantUnit.TakingUnitTurn());
+
+            UpdatePlayerHealthManaUI();
             Debug.LogWarning("finished turn");
             unitCurrentlyTakingTurn = false;
         }
@@ -836,8 +838,8 @@ public class Battle : MonoBehaviour
                 icons[i].color = Color.white;
                 icons[i].sprite = Resources.Load<Sprite>("PlayerIcons/" + GetPlayers()[i].GetComponent<Unit>().Name);
             }
-            manaUI[i].value = GetPlayers()[i].GetComponent<Unit>().CurrentMP / GetPlayers()[i].GetComponent<Health>().GetMaxHP();
-            manaText[i].text = GetPlayers()[i].GetComponent<Unit>().CurrentMP.ToString("F0");
+            manaUI[i].value = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP() / GetPlayers()[i].GetComponent<Magic>().GetMaxMP();
+            manaText[i].text = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP().ToString("F0");
         }
     }
     public void EndTurn()

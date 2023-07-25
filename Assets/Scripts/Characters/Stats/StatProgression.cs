@@ -17,7 +17,6 @@ namespace Character.Stats
         private int endLevel;
         public int GetStat(int level) {
             endLevel = statProgresionRate.Length;
-            // TODO: Change progression per stat
             if (level > endLevel || level < startLevel) {
                 return 0;
             } else {

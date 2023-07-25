@@ -35,9 +35,10 @@ public class AbilityBase : ScriptableObject
         int casterCurrentHP = caster.GetComponent<Health>().GetCurrentHP();
         if (resourceType == ResourceType.Mana)
         {
-            if (casterCurrentMP >= (int)cost)
+            int spellCost = (int)cost;
+            if (casterCurrentMP >= spellCost)
             {
-                caster.GetComponent<Magic>().UseMagic((int)cost);
+                caster.GetComponent<Magic>().UseMagic(spellCost);
             }
             else
             {
@@ -63,7 +64,6 @@ public class AbilityBase : ScriptableObject
         }
 
         UseAbility(caster, target);
-
         return true;
     }
 

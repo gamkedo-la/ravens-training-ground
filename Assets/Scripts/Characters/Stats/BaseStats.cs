@@ -38,7 +38,7 @@ namespace Character.Stats
         public int GetStat(Stat targetStat) {
             switch (targetStat) {
                 case Stat.Finesse: {
-                        return GetBaseStat(targetStat) + (int) magicEnhancementAmount;
+                        return GetBaseStat(targetStat) + (int) finesseEnhancementAmount;
                     }
                 case Stat.Physical: {
                         return GetBaseStat(targetStat) + (int) physicalEnhancementAmount;
