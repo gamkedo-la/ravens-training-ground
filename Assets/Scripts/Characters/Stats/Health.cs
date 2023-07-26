@@ -32,19 +32,21 @@ namespace Character.Stats {
             hitpoints = GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
-        public void TakeDamage(GameObject damageSource, int damage) {
+        public void TakeDamage(Unit damageSource, int damage) {
             hitpoints = Mathf.Max(hitpoints - damage, 0);
-            if (IsDead()) {
+            if (IsDead()) {          
+                Debug.Log(damageSource.name);          
+                GrantKillerExperience(damageSource.gameObject);
                 OnDie.Invoke();
-                GrantKillerExperience(damageSource);
             }
         }
         private void GrantKillerExperience(GameObject damageSource) {
+        
             Experience damageSourceExperienceComponent = damageSource.GetComponent<Experience>();
             if (damageSourceExperienceComponent == null) {
                 return;
             }
-            int myExperienceReward = GetComponent<BaseStats>().GetStat(Stat.ExperienceGainedForDefeat);
+            int myExperienceReward = GetComponent<Experience>().GetExperience();
             damageSourceExperienceComponent.GrantExperience(myExperienceReward);
         }
 

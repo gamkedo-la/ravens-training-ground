@@ -8,6 +8,8 @@ using Character.Stats;
 public class Unit : MonoBehaviour
 {
     //HP = Health, MP = Magic, Magic = damage through magic, Physical = damage through physical, agility = ability to dodge, finesse = critical chance
+    public Health health;
+
     public bool isOnAuto = true;
     public bool isAPlayer;
 
@@ -181,7 +183,7 @@ public class Unit : MonoBehaviour
             }
         }
 
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1);
         // DetermineAttack();
         /*        }
                 else
@@ -357,7 +359,7 @@ public class Unit : MonoBehaviour
             if (isMetallic)
                 damageToTake = 1;
 
-            GetComponent<Health>().TakeDamage(this.gameObject, (int) (damageToTake * defenseMultiplier));
+            //GetComponent<Health>().TakeDamage(this.gameObject, (int) (damageToTake * defenseMultiplier));
             Instantiate(battle.damageParticle, transform.position, transform.rotation);
 
             if (!isAPlayer)

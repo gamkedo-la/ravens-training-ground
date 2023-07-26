@@ -53,7 +53,7 @@ public class AbilityBase : ScriptableObject
             if (casterCurrentHP > (int)cost)
             {
                 int deductCost = (int)cost;
-                caster.GetComponent<Health>().TakeDamage(this.GameObject(), (int)cost);
+                caster.GetComponent<Health>().TakeDamage(caster, (int)cost);
             }
             else
             {

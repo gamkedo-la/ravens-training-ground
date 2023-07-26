@@ -9,6 +9,7 @@ namespace Character.Stats
         public event Action OnGainedExperience;
         public void GrantExperience(int experienceToAdd) {
             experience += experienceToAdd;
+            if(OnGainedExperience != null)
             OnGainedExperience();
         }
 

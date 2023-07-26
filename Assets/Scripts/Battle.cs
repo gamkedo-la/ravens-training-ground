@@ -474,26 +474,26 @@ public class Battle : MonoBehaviour
 
     private void HandleManualAoeAttack(float damage) {
         for (int i = 0; i < GetEnemies().Count; i++) {
-            GetEnemies()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
+            //GetEnemies()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
         }
     }
 
     private void HandleManualSingleTargetAttack(float damage) {
         Combatants[currentCombatant].transform.LookAt(Combatants[currentlySelectedEnemy].transform);
-        Combatants[currentlySelectedEnemy].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
+        //Combatants[currentlySelectedEnemy].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
     }
 
     private void HandleAutoAoeAttack(float damage) {
         if (currentCombatantUnit.isAPlayer) {
             for (int i = 0; i < GetEnemies().Count; i++) {
-                GetEnemies()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
+                //GetEnemies()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
             }
         } else {
             
             //shouldn't need the if since get players only returns conscious ones
             for (int i = 0; i < GetPlayers().Count; i++) {
                 //if (!GetPlayers()[i].GetComponent<Unit>().characterIsDead) {
-                    GetPlayers()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
+                    //GetPlayers()[i].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
                 //}
             }
         }
@@ -505,10 +505,10 @@ public class Battle : MonoBehaviour
             int randAttack = Random.Range(0, 100);
             if (randAttack < 50) {
                 Combatants[currentCombatant].transform.LookAt(GetLowestHealthEnemy().transform);
-                GetLowestHealthEnemy().GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
+                //GetLowestHealthEnemy().GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
             } else {
                 int opponentToAttack = Random.Range(0, GetEnemies().Count);
-                GetEnemies()[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
+                //GetEnemies()[opponentToAttack].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
                 Combatants[currentCombatant].transform.LookAt(GetEnemies()[opponentToAttack].transform);
             }
         } else {
@@ -528,7 +528,7 @@ public class Battle : MonoBehaviour
                 int playerToChoose = Random.Range(0, GetPlayers().Count - 1);
 
                 Combatants[currentCombatant].transform.LookAt(GetPlayers()[playerToChoose].transform);
-                bool playerWasKilled = GetPlayers()[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
+                //bool playerWasKilled = GetPlayers()[playerToChoose].GetComponent<Unit>().DidAttackKillCharacter(damage, (currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Finesse) + currentCombatantUnit.FinesseEquipment));
 
                 tempStoreOfPlayer = GetPlayers()[playerToChoose].GetComponent<Unit>().name;
                 playerToAttack = 0;
