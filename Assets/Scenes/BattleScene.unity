@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 986644}
   - component: {fileID: 986643}
   m_Layer: 0
-  m_Name: EnemyStations1
+  m_Name: EnemyStations3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15300,7 +15300,7 @@ GameObject:
   - component: {fileID: 532842566}
   - component: {fileID: 532842565}
   m_Layer: 0
-  m_Name: EnemyStations4
+  m_Name: EnemyStations1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21410,7 +21410,7 @@ GameObject:
   - component: {fileID: 839366103}
   - component: {fileID: 839366102}
   m_Layer: 0
-  m_Name: PlayerStation3
+  m_Name: PlayerStation1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25468,14 +25468,14 @@ MonoBehaviour:
   informationText: {fileID: 1114254898}
   characterNameText: {fileID: 1114254898}
   PlayerBattleStations:
-  - {fileID: 2107339574}
-  - {fileID: 965518152}
   - {fileID: 839366101}
-  - {fileID: 1249924372}
-  EnemyBattleStations:
-  - {fileID: 986642}
-  - {fileID: 478377637}
+  - {fileID: 965518152}
+  - {fileID: 2107339574}
   - {fileID: 1295072328}
+  EnemyBattleStations:
+  - {fileID: 532842564}
+  - {fileID: 478377637}
+  - {fileID: 986642}
   - {fileID: 532842564}
   platformOffset: {x: 0, y: 0.5, z: 0}
   floor1: 1
@@ -37130,7 +37130,7 @@ GameObject:
   - component: {fileID: 1295072330}
   - component: {fileID: 1295072329}
   m_Layer: 0
-  m_Name: EnemyStations3
+  m_Name: EnemyStations4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48052,14 +48052,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2107339574}
-  - {fileID: 965518152}
   - {fileID: 839366101}
+  - {fileID: 965518152}
+  - {fileID: 2107339574}
   - {fileID: 1249924372}
-  - {fileID: 1295072328}
   - {fileID: 532842564}
-  - {fileID: 986642}
   - {fileID: 478377637}
+  - {fileID: 986642}
+  - {fileID: 1295072328}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56440,7 +56440,7 @@ GameObject:
   - component: {fileID: 2107339576}
   - component: {fileID: 2107339575}
   m_Layer: 0
-  m_Name: PlayerStation1
+  m_Name: PlayerStation3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
