@@ -19,7 +19,7 @@ public class Unit : MonoBehaviour
     public int CurrentLevel = 1;
 
     public float MagicEquipment, PhysicalEquipment, AgilityEquipment, FinesseEquipment;
-
+    public Unit leftUnit, rightUnit;
     public List<Affinity> resistances;
     public List<Affinity> weaknesses;
     public List<Enhancement> enhancements;

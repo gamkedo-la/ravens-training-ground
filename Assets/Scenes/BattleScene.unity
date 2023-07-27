@@ -25471,12 +25471,12 @@ MonoBehaviour:
   - {fileID: 839366101}
   - {fileID: 965518152}
   - {fileID: 2107339574}
-  - {fileID: 1295072328}
+  - {fileID: 1249924372}
   EnemyBattleStations:
   - {fileID: 532842564}
   - {fileID: 478377637}
   - {fileID: 986642}
-  - {fileID: 532842564}
+  - {fileID: 1295072328}
   platformOffset: {x: 0, y: 0.5, z: 0}
   floor1: 1
   floor2: 0

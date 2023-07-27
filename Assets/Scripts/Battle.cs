@@ -125,17 +125,46 @@ public class Battle : MonoBehaviour
 
         //iterate through each player in your party to add to the list
         //spot index is for where party will be placed
+
+        Unit currentUnit = null;
+        Unit lastUnit = null;
+
         int spotIndex = 0;
         foreach(string member in GameManager.inCurrentParty)
         {
             GameObject tempMember = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[spotIndex]), PlayerBattleStations[spotIndex].transform.position + platformOffset, PlayerBattleStations[spotIndex].transform.rotation);
+
+            currentUnit = tempMember.GetComponent<Unit>();
+
+            if(lastUnit!= null)
+            {
+                lastUnit.rightUnit= currentUnit;
+                currentUnit.leftUnit= lastUnit;
+            }
+
             Combatants.Add(tempMember);
             spotIndex++;
+
+            lastUnit= currentUnit;
         }
 
-        for(int i = 0; i<enemyCount;i++)
+        currentUnit = null;
+        lastUnit = null;
+        
+        for (int i = 0; i<enemyCount;i++)
         {
             GameObject tempEnemy = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[i]), EnemyBattleStations[i].transform.position + platformOffset, EnemyBattleStations[i].transform.rotation);
+
+            currentUnit = tempEnemy.GetComponent<Unit>();
+
+            if (lastUnit != null)
+            {
+                lastUnit.rightUnit = currentUnit;
+                currentUnit.leftUnit = lastUnit;
+            }
+
+            lastUnit = currentUnit;
+
             Combatants.Add(tempEnemy);
         }
         currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
