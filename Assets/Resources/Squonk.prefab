@@ -1963,6 +1963,7 @@ GameObject:
   - component: {fileID: 7162772077932932600}
   - component: {fileID: -4005943422957342306}
   - component: {fileID: 7219564608946760210}
+  - component: {fileID: 5789643650442788744}
   m_Layer: 0
   m_Name: Squonk
   m_TagString: Untagged
@@ -2000,6 +2001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aIBrain: {fileID: 0}
   isOnAuto: 1
   isAPlayer: 0
   Name: Squonk
@@ -2013,6 +2015,8 @@ MonoBehaviour:
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
+  leftUnit: {fileID: 0}
+  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: c1361669b677df848b667bd68cb4ce74, type: 2}
   weaknesses:
@@ -2108,6 +2112,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicpoints: 100
+--- !u!114 &5789643650442788744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913473220747212850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5481bd2b78fed3f40bbf589c0eba8866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4969067674065681699
 GameObject:
   m_ObjectHideFlags: 0

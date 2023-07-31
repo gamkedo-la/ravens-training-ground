@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -745308333439177684}
   - component: {fileID: -2724061985467034846}
   - component: {fileID: 2259514934234704072}
+  - component: {fileID: -3894873182879857756}
   m_Layer: 0
   m_Name: Miniwashitu
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aIBrain: {fileID: 0}
   isOnAuto: 1
   isAPlayer: 0
   Name: Miniwashitu
@@ -62,6 +64,8 @@ MonoBehaviour:
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
+  leftUnit: {fileID: 0}
+  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: 90f41aed330a972458f06338d928fd45, type: 2}
   - {fileID: 11400000, guid: 9fbfb035e54ff7e46af4b3e68577de2c, type: 2}
@@ -155,6 +159,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicpoints: 100
+--- !u!114 &-3894873182879857756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8342584508360348025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5481bd2b78fed3f40bbf589c0eba8866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &713151437108637495
 PrefabInstance:
   m_ObjectHideFlags: 0

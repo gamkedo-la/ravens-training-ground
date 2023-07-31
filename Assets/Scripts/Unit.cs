@@ -4,11 +4,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Character.Stats;
+using System.Linq;
 
 public class Unit : MonoBehaviour
 {
     //HP = Health, MP = Magic, Magic = damage through magic, Physical = damage through physical, agility = ability to dodge, finesse = critical chance
-    public Health health;
+    //public Health health;
+
+    [SerializeField]
+    AIBrain aIBrain;
 
     public bool isOnAuto = true;
     public bool isAPlayer;
@@ -79,6 +83,9 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
+        if (aIBrain == null)
+            aIBrain=GetComponent<AIBrain>();
+
         currentState = UnitState.IDLE;
         baseStats = GetComponent<BaseStats>();
         battle = GameObject.Find("Battle").GetComponent<Battle>();
@@ -174,7 +181,7 @@ public class Unit : MonoBehaviour
        
         if (isOnAuto)
         {
-            Unit target = SelectAutoRandomTarget();
+            Unit target = aIBrain.SelectTarget(abilityBaseTemp,this,battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
 
             if(abilityBaseTemp.AttemptAbility(this, target))
             {
@@ -196,29 +203,26 @@ public class Unit : MonoBehaviour
     AbilityBase DetermineAbilityFromList(AbilityBase selectedAbility = null)
     {
         AbilityBase abilityToUse;
-        if (selectedAbility == null) {
-            abilityToUse = abilities[Random.Range(0, abilities.Count - 1)];
-        } else {
+        if (selectedAbility != null)
+        {
             abilityToUse = selectedAbility;
+            return abilityToUse;
         }
+
+        abilityToUse = aIBrain.SelectAbility(abilities);
         Debug.Log($"{name} is casting attack {abilityToUse.name}");
         return abilityToUse;
     }
-    Unit SelectAutoRandomTarget()
+/*    Unit SelectAutoRandomTarget()
     {
-        GameObject randomTarget = battle.GetRandomEnemy();
-        if (randomTarget == null) {
+        GameObject randomTarget = battle.GetRandomEnemy(this);
+        if (randomTarget == null)
+        {
             Debug.Log($"Unable to select random target.");
         }
-        if (isAPlayer)
-        {
-            return randomTarget.GetComponent<Unit>();
-        }
-        else
-        { 
-            return randomTarget.GetComponent<Unit>();
-        }
-    }
+
+        return randomTarget.GetComponent<Unit>();
+    }*/
 
     private bool DidNotFlee() {
         int fleeThisTurn = Random.Range(100, 100);

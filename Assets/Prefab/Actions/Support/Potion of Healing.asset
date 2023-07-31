@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9b74d8730ef00c408257177426cee69, type: 3}
+  m_Script: {fileID: 11500000, guid: a04ad5265eedc7347af042c545f5e764, type: 3}
   m_Name: Potion of Healing
   m_EditorClassIdentifier: 
   AttackName: Potion of Healing
@@ -17,6 +17,9 @@ MonoBehaviour:
   cost: 8
   resourceType: 0
   castType: 0
+  attackExcersion: 0
   targetType: 0
   effectType: 5
-  attackExcersion: 0
+  affinities: []
+  enhancements: []
+  abilityValue: 5

@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: -556071309621965558}
   - component: {fileID: 4921908743612569531}
   - component: {fileID: 2283401261569145259}
+  - component: {fileID: -430639854931623349}
   m_Layer: 0
   m_Name: Theo
   m_TagString: Untagged
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 0}
+  aIBrain: {fileID: 0}
   isOnAuto: 1
   isAPlayer: 1
   Name: Theo
@@ -229,6 +230,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicpoints: 100
+--- !u!114 &-430639854931623349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229248018598742710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5481bd2b78fed3f40bbf589c0eba8866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7091997121335273710
 GameObject:
   m_ObjectHideFlags: 0

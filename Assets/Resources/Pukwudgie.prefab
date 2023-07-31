@@ -7800,6 +7800,7 @@ GameObject:
   - component: {fileID: 2683032318008896148}
   - component: {fileID: 5516891556711581842}
   - component: {fileID: 7302785771841487918}
+  - component: {fileID: -7122040956800397253}
   m_Layer: 0
   m_Name: Pukwudgie
   m_TagString: Untagged
@@ -7837,6 +7838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aIBrain: {fileID: 0}
   isOnAuto: 1
   isAPlayer: 0
   Name: Pukwudgie
@@ -7850,6 +7852,8 @@ MonoBehaviour:
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
+  leftUnit: {fileID: 0}
+  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: 0167df4f9063baa41b46df34b2da2e78, type: 2}
   weaknesses:
@@ -7945,6 +7949,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicpoints: 100
+--- !u!114 &-7122040956800397253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7121922335841690469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5481bd2b78fed3f40bbf589c0eba8866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7275965210484628570
 GameObject:
   m_ObjectHideFlags: 0

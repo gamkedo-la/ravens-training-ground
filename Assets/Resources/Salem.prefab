@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5692324867274770526}
   - component: {fileID: 3103081245544380713}
   - component: {fileID: -2740940999675550672}
+  - component: {fileID: -9193956240433995921}
   m_Layer: 0
   m_Name: Salem
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aIBrain: {fileID: 0}
   isOnAuto: 1
   isAPlayer: 0
   Name: Salem Witch
@@ -62,6 +64,8 @@ MonoBehaviour:
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
+  leftUnit: {fileID: 0}
+  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: 0167df4f9063baa41b46df34b2da2e78, type: 2}
   - {fileID: 11400000, guid: 48917a6b23c6e0a4299f9d25d7f71551, type: 2}
@@ -155,6 +159,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicpoints: 100
+--- !u!114 &-9193956240433995921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145070293030175982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5481bd2b78fed3f40bbf589c0eba8866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &631664577593930862
 PrefabInstance:
   m_ObjectHideFlags: 0
