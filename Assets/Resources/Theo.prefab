@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
   isOnAuto: 1
   isAPlayer: 1
   Name: Theo
@@ -95,6 +96,8 @@ MonoBehaviour:
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
+  leftUnit: {fileID: 0}
+  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: c1361669b677df848b667bd68cb4ce74, type: 2}
   weaknesses:
@@ -116,7 +119,15 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 0}
   canvas: {fileID: 0}
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
+  - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
+  - {fileID: 11400000, guid: 1c0c20297e32df24e9a974642536bc8b, type: 2}
+  - {fileID: 11400000, guid: 9ab63710f58339c4cbe205faea1ee8a5, type: 2}
+  - {fileID: 11400000, guid: a400b13aa01717f4283ebefa251eff7e, type: 2}
+  - {fileID: 11400000, guid: 68f14292271b47943a7a47bb47c413c4, type: 2}
+  - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
+  - {fileID: 11400000, guid: 69de7dada261ec24ab4d291b1d6115ce, type: 2}
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}
