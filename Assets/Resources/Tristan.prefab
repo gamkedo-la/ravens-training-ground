@@ -203,7 +203,15 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 0}
   canvas: {fileID: 0}
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
+  - {fileID: 11400000, guid: 0ee90d502be7e2340ae9974d4e20d358, type: 2}
+  - {fileID: 11400000, guid: 81e0b86fd20520843bbc35afe13333a1, type: 2}
+  - {fileID: 11400000, guid: b2fcbf246926b104d9e1ce5b70714fa2, type: 2}
+  - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
+  - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
+  - {fileID: 11400000, guid: 9ab63710f58339c4cbe205faea1ee8a5, type: 2}
+  - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
   characterName: {fileID: 0}
   affinityText: {fileID: 0}
   healthBar: {fileID: 0}
