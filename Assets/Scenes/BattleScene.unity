@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 986642}
   - component: {fileID: 986644}
   - component: {fileID: 986643}
+  - component: {fileID: 986645}
   m_Layer: 0
   m_Name: EnemyStations3
   m_TagString: Untagged
@@ -326,6 +327,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986641}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &986645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d921591d7bec2f2458a805a90a7aa394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stationedUnit: {fileID: 0}
+  perspectiveCamera: {fileID: 601791667}
+  neighborStations:
+  - {fileID: 1295072331}
+  - {fileID: 478377640}
+  platformOffset: {x: 0, y: 0.45, z: 0}
 --- !u!1 &6981231
 GameObject:
   m_ObjectHideFlags: 0
@@ -14247,6 +14266,7 @@ GameObject:
   - component: {fileID: 478377637}
   - component: {fileID: 478377639}
   - component: {fileID: 478377638}
+  - component: {fileID: 478377640}
   m_Layer: 0
   m_Name: EnemyStations2
   m_TagString: Untagged
@@ -14320,6 +14340,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478377636}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &478377640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478377636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d921591d7bec2f2458a805a90a7aa394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stationedUnit: {fileID: 0}
+  perspectiveCamera: {fileID: 934528748}
+  neighborStations:
+  - {fileID: 532842567}
+  - {fileID: 986645}
+  platformOffset: {x: 0, y: 0.45, z: 0}
 --- !u!1 &478442437
 GameObject:
   m_ObjectHideFlags: 0
@@ -15299,6 +15337,7 @@ GameObject:
   - component: {fileID: 532842564}
   - component: {fileID: 532842566}
   - component: {fileID: 532842565}
+  - component: {fileID: 532842567}
   m_Layer: 0
   m_Name: EnemyStations1
   m_TagString: Untagged
@@ -15373,6 +15412,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532842563}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &532842567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532842563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d921591d7bec2f2458a805a90a7aa394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stationedUnit: {fileID: 0}
+  perspectiveCamera: {fileID: 1535710748}
+  neighborStations:
+  - {fileID: 478377640}
+  platformOffset: {x: 0, y: 0.45, z: 0}
 --- !u!1 &533845364
 GameObject:
   m_ObjectHideFlags: 0
@@ -21409,6 +21465,7 @@ GameObject:
   - component: {fileID: 839366101}
   - component: {fileID: 839366103}
   - component: {fileID: 839366102}
+  - component: {fileID: 839366104}
   m_Layer: 0
   m_Name: PlayerStation1
   m_TagString: Untagged
@@ -21483,6 +21540,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839366100}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &839366104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839366100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d921591d7bec2f2458a805a90a7aa394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stationedUnit: {fileID: 0}
+  perspectiveCamera: {fileID: 304969212}
+  neighborStations:
+  - {fileID: 965518155}
+  platformOffset: {x: 0, y: 0.45, z: 0}
 --- !u!1 &839465064
 GameObject:
   m_ObjectHideFlags: 0
@@ -24888,6 +24962,7 @@ GameObject:
   - component: {fileID: 965518152}
   - component: {fileID: 965518154}
   - component: {fileID: 965518153}
+  - component: {fileID: 965518155}
   m_Layer: 0
   m_Name: PlayerStation2
   m_TagString: Untagged
@@ -24962,6 +25037,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965518151}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &965518155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965518151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d921591d7bec2f2458a805a90a7aa394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stationedUnit: {fileID: 0}
+  perspectiveCamera: {fileID: 1165035809}
+  neighborStations:
+  - {fileID: 839366104}
+  - {fileID: 2107339577}
+  platformOffset: {x: 0, y: 0.45, z: 0}
 --- !u!1 &966706960
 GameObject:
   m_ObjectHideFlags: 0
@@ -25468,16 +25561,15 @@ MonoBehaviour:
   informationText: {fileID: 1114254898}
   characterNameText: {fileID: 1114254898}
   PlayerBattleStations:
-  - {fileID: 839366101}
-  - {fileID: 965518152}
-  - {fileID: 2107339574}
-  - {fileID: 1249924372}
+  - {fileID: 839366104}
+  - {fileID: 965518155}
+  - {fileID: 2107339577}
+  - {fileID: 1249924375}
   EnemyBattleStations:
-  - {fileID: 532842564}
-  - {fileID: 478377637}
-  - {fileID: 986642}
-  - {fileID: 1295072328}
-  platformOffset: {x: 0, y: 0.5, z: 0}
+  - {fileID: 532842567}
+  - {fileID: 478377640}
+  - {fileID: 986645}
+  - {fileID: 1295072331}
   floor1: 1
   floor2: 0
   floor3: 0
@@ -36160,6 +36252,7 @@ GameObject:
   - component: {fileID: 1249924372}
   - component: {fileID: 1249924374}
   - component: {fileID: 1249924373}
+  - component: {fileID: 1249924375}
   m_Layer: 0
   m_Name: PlayerStation4
   m_TagString: Untagged
@@ -36234,6 +36327,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249924371}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1249924375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249924371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d921591d7bec2f2458a805a90a7aa394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stationedUnit: {fileID: 0}
+  perspectiveCamera: {fileID: 1346788046}
+  neighborStations:
+  - {fileID: 2107339577}
+  platformOffset: {x: 0, y: 0.45, z: 0}
 --- !u!1001 &1253922134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37129,6 +37239,7 @@ GameObject:
   - component: {fileID: 1295072328}
   - component: {fileID: 1295072330}
   - component: {fileID: 1295072329}
+  - component: {fileID: 1295072331}
   m_Layer: 0
   m_Name: EnemyStations4
   m_TagString: Untagged
@@ -37143,15 +37254,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295072327}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.13, y: 1.49, z: -1}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -4.1300006, y: 1.49, z: -1}
   m_LocalScale: {x: 1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1680488748}
   - {fileID: 85093696}
   m_Father: {fileID: 1620461291}
-  m_RootOrder: 4
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!23 &1295072329
 MeshRenderer:
@@ -37203,6 +37314,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295072327}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1295072331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295072327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d921591d7bec2f2458a805a90a7aa394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stationedUnit: {fileID: 0}
+  perspectiveCamera: {fileID: 85093696}
+  neighborStations:
+  - {fileID: 986645}
+  platformOffset: {x: 0, y: 0.45, z: 0}
 --- !u!1 &1295531972
 GameObject:
   m_ObjectHideFlags: 0
@@ -56439,6 +56567,7 @@ GameObject:
   - component: {fileID: 2107339574}
   - component: {fileID: 2107339576}
   - component: {fileID: 2107339575}
+  - component: {fileID: 2107339577}
   m_Layer: 0
   m_Name: PlayerStation3
   m_TagString: Untagged
@@ -56513,6 +56642,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107339573}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2107339577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107339573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d921591d7bec2f2458a805a90a7aa394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stationedUnit: {fileID: 0}
+  perspectiveCamera: {fileID: 1567203607}
+  neighborStations:
+  - {fileID: 1249924375}
+  - {fileID: 965518155}
+  platformOffset: {x: 0, y: 0.45, z: 0}
 --- !u!1 &2107754526
 GameObject:
   m_ObjectHideFlags: 0

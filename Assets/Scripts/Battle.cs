@@ -20,12 +20,12 @@ public class Battle : MonoBehaviour
     public GameObject informationTextHolder, characterNameHolder;
     public TMP_Text informationText, characterNameText;
 
-    public List<Transform> PlayerBattleStations = new List<Transform>();
-    public List<Transform> EnemyBattleStations = new List<Transform>();
+    public List<StationController> PlayerBattleStations = new List<StationController>();
+    public List<StationController> EnemyBattleStations = new List<StationController>();
 
     GameObject currentParty0, currentParty1, currentParty2, currentParty3;
     GameObject currentEnemy0, currentEnemy1, currentEnemy2, currentEnemy3;
-    public Vector3 platformOffset = new Vector3(0, 1, 0);
+
 
     public bool floor1 = true, floor2, floor3;
     public List<string> enemiesFloor1 = new List<string>();
@@ -126,44 +126,23 @@ public class Battle : MonoBehaviour
         //iterate through each player in your party to add to the list
         //spot index is for where party will be placed
 
-        Unit currentUnit = null;
-        Unit lastUnit = null;
-
         int spotIndex = 0;
         foreach(string member in GameManager.inCurrentParty)
         {
-            GameObject tempMember = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[spotIndex]), PlayerBattleStations[spotIndex].transform.position + platformOffset, PlayerBattleStations[spotIndex].transform.rotation);
+            GameObject tempMember = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[spotIndex]));
 
-            currentUnit = tempMember.GetComponent<Unit>();
-
-            if(lastUnit!= null)
-            {
-                lastUnit.rightUnit= currentUnit;
-                currentUnit.leftUnit= lastUnit;
-            }
+            PlayerBattleStations[spotIndex].AddUnit(tempMember.GetComponent<Unit>());
 
             Combatants.Add(tempMember);
             spotIndex++;
-
-            lastUnit= currentUnit;
         }
 
-        currentUnit = null;
-        lastUnit = null;
         
         for (int i = 0; i<enemyCount;i++)
         {
-            GameObject tempEnemy = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[i]), EnemyBattleStations[i].transform.position + platformOffset, EnemyBattleStations[i].transform.rotation);
+            GameObject tempEnemy = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[i]));
 
-            currentUnit = tempEnemy.GetComponent<Unit>();
-
-            if (lastUnit != null)
-            {
-                lastUnit.rightUnit = currentUnit;
-                currentUnit.leftUnit = lastUnit;
-            }
-
-            lastUnit = currentUnit;
+            EnemyBattleStations[i].AddUnit(tempEnemy.GetComponent<Unit>());
 
             Combatants.Add(tempEnemy);
         }
@@ -755,8 +734,8 @@ public class Battle : MonoBehaviour
             {
                 if (currentCombatantUnit.name == GetPlayers()[i].GetComponent<Unit>().name)
                 {
-                    movingCamera.transform.position = PlayerBattleStations[i].GetChild(0).transform.position;
-                    movingCamera.transform.rotation = PlayerBattleStations[i].GetChild(0).transform.rotation;
+                    movingCamera.transform.position = PlayerBattleStations[i].perspectiveCamera.position;
+                    movingCamera.transform.rotation = PlayerBattleStations[i].perspectiveCamera.rotation;
                 }
             }
         }
@@ -769,8 +748,8 @@ public class Battle : MonoBehaviour
             {
                 if (currentCombatantUnit.name == GetEnemies()[i].GetComponent<Unit>().name)
                 {
-                    movingCamera.transform.position = EnemyBattleStations[i].GetChild(0).transform.position;
-                    movingCamera.transform.rotation = EnemyBattleStations[i].GetChild(0).transform.rotation;
+                    movingCamera.transform.position = EnemyBattleStations[i].perspectiveCamera.position;
+                    movingCamera.transform.rotation = EnemyBattleStations[i].perspectiveCamera.rotation;
                 }
             }      
         }       
