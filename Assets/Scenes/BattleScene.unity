@@ -26017,6 +26017,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7609594263977302639, guid: 41a4ace934725c64abd04b1ed4a57f9a, type: 3}
   m_PrefabInstance: {fileID: 1003133956}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1006212986
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076828113102501437, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_Name
+      value: Ravens-in-the-sky (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
 --- !u!1001 &1006342523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51535,6 +51596,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828473563}
   m_Mesh: {fileID: -7387706064836869012, guid: 52a6f3e9e3ed7e2469ef20008e78e7b4, type: 3}
+--- !u!1001 &1829384686
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -23.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70105743
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.09229579
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70105743
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.09229579
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 905907844942935199, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076828113102501437, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: m_Name
+      value: Ravens-in-the-sky
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
 --- !u!1 &1841012859
 GameObject:
   m_ObjectHideFlags: 0
