@@ -26,7 +26,18 @@ public class AIBrain : MonoBehaviour
     {
         List<Unit> targets = new List<Unit>();
 
+        if(ability.targetType == TargetType.AOE)
+        {
+            if (ability.castType == CastType.Friendly)
+                targets = GetFriendlyUnits(unit, possibleTargets);
+            if (ability.castType == CastType.Enemy)
+                targets = GetEnemyUnits(unit, possibleTargets); 
+
+            return targets;
+        }
+
         Unit targetedUnit = null;
+
         if (ability.castType == CastType.Friendly)
             targetedUnit = GetRandomFriendlyUnit(unit, possibleTargets);
         if (ability.castType == CastType.Enemy)
@@ -34,8 +45,11 @@ public class AIBrain : MonoBehaviour
 
         targets.Add(targetedUnit);
 
-        if (ability.targetType == TargetType.AOE)
+        if (ability.targetType == TargetType.TargetAndNeighbors)
+        {   
             targets.AddRange(targetedUnit.GetNeighborUnits());
+        }
+
 
         //SelectRandomTarget(possibleTargets);
 

@@ -24,7 +24,6 @@ public class AttackBase : AbilityBase
 
         attackValue = CalculateTargetModifiers(target,attackValue);
 
-        Debug.Log(this.GameObject());
         target.GetComponent<Health>().TakeDamage(caster, (int) attackValue);
     }
 

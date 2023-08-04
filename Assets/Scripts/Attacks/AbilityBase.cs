@@ -10,7 +10,7 @@ public enum AttackCosts { tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 1
 public enum AttackExcersion { LightAttack, MediumAttack, DefaultAttack }
 public enum ResourceType { Mana, Health }
 public enum CastType { Friendly, Enemy }
-public enum TargetType { SingleTarget, AOE }
+public enum TargetType { SingleTarget, AOE,TargetAndNeighbors }
 public enum EffectType { Charms, Physical, DarkArts, Transfiguration, Ancient, Potions, None }
 
 public class AbilityBase : ScriptableObject
