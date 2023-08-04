@@ -29,7 +29,7 @@ public class AbilityBase : ScriptableObject
     Battle battle;
     
     public float abilityValue = 0;
-    public bool AttemptAbility(Unit caster, Unit target)
+    public bool AttemptAbility(Unit caster, List<Unit> target)
     {
         int casterCurrentMP = caster.GetComponent<Magic>().GetCurrentMP();
         int casterCurrentHP = caster.GetComponent<Health>().GetCurrentHP();

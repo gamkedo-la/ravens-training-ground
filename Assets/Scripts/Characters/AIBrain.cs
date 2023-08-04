@@ -22,15 +22,24 @@ public class AIBrain : MonoBehaviour
     }
     #endregion
     #region Target Selection
-    public Unit SelectTarget(AbilityBase ability,Unit unit, List<Unit> possibleTargets)
+    public List<Unit> SelectTarget(AbilityBase ability,Unit unit, List<Unit> possibleTargets)
     {
-        if (ability.castType == CastType.Friendly)
-            return GetRandomFriendlyUnit(unit, possibleTargets);
-        if (ability.castType == CastType.Enemy)
-            return GetRandomEnemyUnit(unit, possibleTargets);
+        List<Unit> targets = new List<Unit>();
 
-        SelectRandomTarget(possibleTargets);
-        return null;
+        Unit targetedUnit = null;
+        if (ability.castType == CastType.Friendly)
+            targetedUnit = GetRandomFriendlyUnit(unit, possibleTargets);
+        if (ability.castType == CastType.Enemy)
+            targetedUnit = GetRandomEnemyUnit(unit, possibleTargets);
+
+        targets.Add(targetedUnit);
+
+        if (ability.targetType == TargetType.AOE)
+            targets.AddRange(targetedUnit.GetNeighborUnits());
+
+        //SelectRandomTarget(possibleTargets);
+
+        return targets;
     }
 
     Unit SelectRandomTarget(List<Unit> possibleTargets)

@@ -13,7 +13,7 @@ public class Unit : MonoBehaviour
 
     [SerializeField]
     AIBrain aIBrain;
-
+    public StationController stationController;
     public bool isOnAuto = true;
     public bool isAPlayer;
 
@@ -141,6 +141,10 @@ public class Unit : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
     }
+    public List<Unit> GetNeighborUnits()
+    {
+        return stationController.GetNeighborUnits();
+    }
 
     public IEnumerator TakingUnitTurn(AbilityBase selectedAbility = null)
     {
@@ -181,9 +185,9 @@ public class Unit : MonoBehaviour
        
         if (isOnAuto)
         {
-            Unit target = aIBrain.SelectTarget(abilityBaseTemp,this,battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
+            List<Unit> targets = aIBrain.SelectTarget(abilityBaseTemp,this,battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
 
-            if(abilityBaseTemp.AttemptAbility(this, target))
+            if(abilityBaseTemp.AttemptAbility(this, targets))
             {
                 anim.SetTrigger("Attack");
                 //TODO: add a trigger to the animation to tell when the attack has ended
