@@ -8509,6 +8509,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4346188755076331721, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8076828113102501437, guid: cf39eb3a541e8474192a5bc502a69338, type: 3}
       propertyPath: m_Name
       value: Ravens-in-the-sky
