@@ -34,8 +34,9 @@ namespace Character.Stats {
 
         public void TakeDamage(Unit damageSource, int damage) {
             hitpoints = Mathf.Max(hitpoints - damage, 0);
-            if (IsDead()) {          
-                Debug.Log(damageSource.name);          
+            Debug.Log("Damage Applied to: " + gameObject.name);
+            if (IsDead()) {    
+                Debug.Log(gameObject.name + " was killed by : " + damageSource.name);          
                 GrantKillerExperience(damageSource.gameObject);
                 OnDie.Invoke();
             }
@@ -44,6 +45,7 @@ namespace Character.Stats {
         
             Experience damageSourceExperienceComponent = damageSource.GetComponent<Experience>();
             if (damageSourceExperienceComponent == null) {
+                Debug.Log("Experience component not found in 'GrantKillerExperience': " + damageSource.name);
                 return;
             }
             int myExperienceReward = GetComponent<Experience>().GetExperience();
