@@ -158,7 +158,7 @@ public class Battle : MonoBehaviour
     }
     public List<GameObject> GetEnemies()
     {
-        return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == false ).ToList();
+       return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == false ).ToList();
     }
     public List<GameObject> GetPlayers()
     {
@@ -293,6 +293,7 @@ public class Battle : MonoBehaviour
 
             for (int i = 0; i < GetEnemies().Count; i++)
             {
+                print(GetEnemies()[i].name);
                 GetEnemies()[i].GetComponent<Health>().TakeDamage(GetPlayers()[0].GetComponent<Unit>(), 9999);
                 /*
                 {
@@ -710,12 +711,19 @@ public class Battle : MonoBehaviour
         }
 
         //If an enemy is killed in battle, they are: 1) Removed from play 2) Removed from the list 3) their experience is added to a total number
-        for (int i = 0; i < GetEnemies().Count; i++)
+
+        //Reverse the loop to remove while we iterate
+
+        List<GameObject> enemyList = GetEnemies();
+
+        for (int i = enemyList.Count-1; i >= 0; i--)
         {
-            if (GetEnemies()[i].GetComponent<Health>().GetCurrentHP() <= 0)
+            Debug.Log(i);
+            if (enemyList[i].GetComponent<Health>().GetCurrentHP() <= 0)
             {
+                Debug.Log("Removing:" + i);
                 totalExperienceAwarded += Combatants[i].GetComponent<Unit>().experienceEarned;
-                GetEnemies().Remove(GetEnemies()[i]);
+                enemyList.Remove(enemyList[i]);
             }
         }
 
