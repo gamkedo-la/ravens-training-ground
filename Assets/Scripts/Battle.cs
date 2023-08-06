@@ -90,7 +90,8 @@ public class Battle : MonoBehaviour
             //if player is on floor 1, this determines the percentage of chance for a certain number of enemies
             if (floor1)
             {
-                int percent = Random.Range(1, 100);
+                enemyCount = 4;
+               /* int percent = Random.Range(1, 100);
                 if (percent < 30)
                     enemyCount = 1;
                 else if (percent >= 30 && percent < 60)
@@ -98,7 +99,7 @@ public class Battle : MonoBehaviour
                 else if (percent >= 60 && percent < 89)
                     enemyCount = 3;
                 else
-                    enemyCount = 4;
+                    enemyCount = 4;*/
 
                 for (int i = 0; i < enemyCount; i++)
                 {
@@ -158,7 +159,7 @@ public class Battle : MonoBehaviour
     }
     public List<GameObject> GetEnemies()
     {
-       return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == false ).ToList();
+       return Combatants.Where(x => x.GetComponent<Unit>().isAPlayer == false && x.active).ToList();
     }
     public List<GameObject> GetPlayers()
     {
@@ -291,16 +292,13 @@ public class Battle : MonoBehaviour
             /* state = StateOfBattle.WON;
              EndBattle();*/
 
-            for (int i = 0; i < GetEnemies().Count; i++)
+            GetEnemies()[0].GetComponent<Health>().TakeDamage(GetPlayers()[0].GetComponent<Unit>(), 9999);
+
+            /*for (int i = 0; i < GetEnemies().Count; i++)
             {
                 print(GetEnemies()[i].name);
-                GetEnemies()[i].GetComponent<Health>().TakeDamage(GetPlayers()[0].GetComponent<Unit>(), 9999);
-                /*
-                {
-                    totalExperienceAwarded += Combatants[i].GetComponent<Unit>().experienceEarned;
-                    GetEnemies().Remove(GetEnemies()[i]);
-                }*/
-            }
+                GetEnemies()[i].GetComponent<Health>().TakeDamage(GetPlayers()[0].GetComponent<Unit>(), 9999);     
+            }*/
         }
         #endregion
     }
@@ -715,6 +713,8 @@ public class Battle : MonoBehaviour
         //Reverse the loop to remove while we iterate
 
         List<GameObject> enemyList = GetEnemies();
+
+        Debug.Log(enemyList.Count + " is the enemy length");
 
         for (int i = enemyList.Count-1; i >= 0; i--)
         {

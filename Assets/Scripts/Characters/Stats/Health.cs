@@ -13,7 +13,8 @@ namespace Character.Stats {
 
         public void Die() {
             hitpoints = 0;
-            OnDie.Invoke();
+            //Somewhere else should be calling out that <= 0 should die so we commented it out
+          //  OnDie.Invoke();
         }
 
         public int GetMaxHP() {

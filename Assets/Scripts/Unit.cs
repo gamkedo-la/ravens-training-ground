@@ -296,6 +296,7 @@ public class Unit : MonoBehaviour
     }
     public bool DidAttackKillCharacter(float damageToTake, float criticalChance)
     {
+        print("DID WE HIT THIS");
         //Calculating Chance for Dodging the attack
         float chanceForAttackToLand = Random.Range(0, 100);
         float chanceForCritial = Random.Range(0, 100);
