@@ -288,8 +288,18 @@ public class Battle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             //this enters a victory state, TESTING, REMOVE EVENTUALLY
-            state = StateOfBattle.WON;
-            EndBattle();
+            /* state = StateOfBattle.WON;
+             EndBattle();*/
+
+            for (int i = 0; i < GetEnemies().Count; i++)
+            {
+                GetEnemies()[i].GetComponent<Health>().TakeDamage(GetPlayers()[0].GetComponent<Unit>(), 9999);
+                /*
+                {
+                    totalExperienceAwarded += Combatants[i].GetComponent<Unit>().experienceEarned;
+                    GetEnemies().Remove(GetEnemies()[i]);
+                }*/
+            }
         }
         #endregion
     }

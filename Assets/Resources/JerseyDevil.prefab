@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aIBrain: {fileID: 0}
+  stationController: {fileID: 0}
   isOnAuto: 1
   isAPlayer: 0
   Name: Jersey Devil
@@ -132,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28040d7fc3552da4380d6a16522ee2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  experience: 0
+  experience: 500
 --- !u!114 &-8296064440617506209
 MonoBehaviour:
   m_ObjectHideFlags: 0

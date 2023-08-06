@@ -8,6 +8,7 @@ namespace Character.Stats
 
         public event Action OnGainedExperience;
         public void GrantExperience(int experienceToAdd) {
+            Debug.Log("Experience Granted:" + experienceToAdd);
             experience += experienceToAdd;
             if(OnGainedExperience != null)
             OnGainedExperience();
