@@ -33,10 +33,10 @@ public class Enhancement : ScriptableObject
     public int numberOfTurns;
     public int turnCount;
 
-    public float magicEnhancementAmount;
+/*    public float magicEnhancementAmount;
     public float physicalEnhancementAmount;
     public float finesseEnhancementAmount;
-    public float agilityEnhancementAmount;
+    public float agilityEnhancementAmount;*/
 
     public event EventHandler<EnhancementStatAmountArgs> OnEnhancementEvent;
 
@@ -47,6 +47,8 @@ public class Enhancement : ScriptableObject
     public void ApplyEnhancement()
     {
         float stat = GetStat();
+
+        unitAttachedTo.GetComponent<BaseStats>().RegisterEnhancementEvent(this);
 
         SetStat(Calculate(stat));
     }
@@ -102,19 +104,19 @@ public class Enhancement : ScriptableObject
         {
             case Stat.Magic:
                 OnEnhancementEvent(this, new EnhancementStatAmountArgs(statModificationAmount, Stat.Magic));
-                magicEnhancementAmount = statModificationAmount;
+                //magicEnhancementAmount = statModificationAmount;
                 break;
             case Stat.Physical:
                 OnEnhancementEvent(this, new EnhancementStatAmountArgs(statModificationAmount, Stat.Physical));
-                physicalEnhancementAmount = statModificationAmount;
+                //physicalEnhancementAmount = statModificationAmount;
                 break;
             case Stat.Finesse:
                 OnEnhancementEvent(this, new EnhancementStatAmountArgs(statModificationAmount, Stat.Finesse));
-                finesseEnhancementAmount = statModificationAmount;
+                //finesseEnhancementAmount = statModificationAmount;
                 break;
             case Stat.Agility:
                 OnEnhancementEvent(this, new EnhancementStatAmountArgs(statModificationAmount, Stat.Agility));
-                agilityEnhancementAmount = statModificationAmount;
+                //agilityEnhancementAmount = statModificationAmount;
                 break;
         }
     }
