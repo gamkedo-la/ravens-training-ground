@@ -864,7 +864,11 @@ public class Battle : MonoBehaviour
                 icons[i].color = Color.white;
                 icons[i].sprite = Resources.Load<Sprite>("PlayerIcons/" + GetPlayers()[i].GetComponent<Unit>().Name);
             }
-            manaUI[i].value = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP() / GetPlayers()[i].GetComponent<Magic>().GetMaxMP();
+
+            manaUI[i].maxValue = GetPlayers()[i].GetComponent<Magic>().GetMaxMP();
+
+            print(GetPlayers()[i].GetComponent<Magic>().GetCurrentMP());
+            manaUI[i].value = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP();
             manaText[i].text = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP().ToString("F0");
         }
     }

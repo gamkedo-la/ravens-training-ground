@@ -171,11 +171,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aIBrain: {fileID: 0}
+  stationController: {fileID: 0}
   isOnAuto: 1
   isAPlayer: 1
   Name: Erebus
-  CurrentMP: 31
-  startingMagic: 10
+  CurrentMP: 10
+  startingMagic: 2
   startingPhysical: 9
   startingAgility: 15
   startingFinesse: 20
@@ -316,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicpoints: 100
+  magicpoints: 20
 --- !u!114 &-2976540547589758795
 MonoBehaviour:
   m_ObjectHideFlags: 0

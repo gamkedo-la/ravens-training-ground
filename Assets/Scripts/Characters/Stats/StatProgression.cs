@@ -12,6 +12,7 @@ namespace Character.Stats
         [SerializeField] private float[] statProgresionRate;
         [SerializeField] private int statProgresionAmount;
         [SerializeField] private int metallicModifier = 0;
+        [SerializeField] private int baseAmount = 20;
 
         private int startLevel = 0;
         private int endLevel;
@@ -22,7 +23,7 @@ namespace Character.Stats
             } else {
                 var currentModifier = 0;
                 for (var i = 0; i < level; i++) {
-                    currentModifier += (int) Math.Round(statProgresionRate[i] * (level * (statProgresionAmount + metallicModifier)), 0);
+                    currentModifier += (baseAmount + (int) Math.Round(statProgresionRate[i] * (level * (statProgresionAmount + metallicModifier)), 0));
                 }
                 return currentModifier;
             }
