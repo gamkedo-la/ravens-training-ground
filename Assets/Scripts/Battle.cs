@@ -279,6 +279,7 @@ public class Battle : MonoBehaviour
         //Pressing Space advances the turn - this is not permenant - just for testing
         if (Input.GetKeyDown(KeyCode.Space) && !unitCurrentlyTakingTurn)
         {
+            playerUICanvas.SetActive(false);
             currentCombatant = (currentCombatant + 1) % Combatants.Count;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
 
@@ -335,6 +336,7 @@ public class Battle : MonoBehaviour
             UpdatePlayerHealthManaUI();
             Debug.LogWarning("finished turn");
             unitCurrentlyTakingTurn = false;
+            playerUICanvas.SetActive(true);
         }
             
     }
@@ -747,7 +749,7 @@ public class Battle : MonoBehaviour
     {
         if (currentCombatantUnit.isAPlayer)
         {
-            playerUICanvas.SetActive(true);
+        //    playerUICanvas.SetActive(true);
             for (int i = 0; i < GetPlayers().Count; i++)
             {
                 if (currentCombatantUnit.name == GetPlayers()[i].GetComponent<Unit>().name)
@@ -759,7 +761,7 @@ public class Battle : MonoBehaviour
         }
         else
         {
-            playerUICanvas.SetActive(false);
+        //    playerUICanvas.SetActive(false);
 
             //THIS IS A PROBLEM - ENEMIES CAN BE NAMED THE SAME THING
             for (int i = 0; i < GetEnemies().Count; i++)
