@@ -866,8 +866,6 @@ public class Battle : MonoBehaviour
             }
 
             manaUI[i].maxValue = GetPlayers()[i].GetComponent<Magic>().GetMaxMP();
-
-            print(GetPlayers()[i].GetComponent<Magic>().GetCurrentMP());
             manaUI[i].value = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP();
             manaText[i].text = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP().ToString("F0");
         }

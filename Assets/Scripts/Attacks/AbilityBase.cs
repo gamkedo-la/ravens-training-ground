@@ -80,6 +80,9 @@ public class AbilityBase : ScriptableObject
     {
         Debug.Log($"{caster.Name} is casting attack {name} on {target.Name}");
 
+        if(!target.GetComponent<Unit>().isAPlayer)
+            target.GetComponent<Unit>().canvas.SetActive(true);
+
         if (this.GetType() == typeof(AttackBase))
         {
             (this as AttackBase).Attack(caster, target,abilityValue);
