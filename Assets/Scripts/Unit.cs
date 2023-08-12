@@ -200,6 +200,26 @@ public class Unit : MonoBehaviour
                 else
                     print("Character is dead, you shouldn't reach here, something went wrong");*/
     }
+
+    public IEnumerator UpdateUI()
+    {
+        yield return new WaitForSeconds(1.25f);
+        if (!isAPlayer)
+        {
+            healthBar.maxValue = gameObject.GetComponent<Health>().startingHitPoints;
+            healthBar.value = gameObject.GetComponent<Health>().GetCurrentHP();
+            print(gameObject.GetComponent<Health>().GetCurrentHP() + " / " + gameObject.GetComponent<Health>().startingHitPoints);
+            print(healthBar.value);
+        }
+    }
+
+    public IEnumerator TurnOffUI()
+    {
+        yield return new WaitForSeconds(2.5f);
+        //coming from Health.cs if it is an enemy
+        //once the turn is over, turn off their UI
+        canvas.SetActive(false);
+    }
     void ApplyEnhancements()
     {
         CalculateStats();
