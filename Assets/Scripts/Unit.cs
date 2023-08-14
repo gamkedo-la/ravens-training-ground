@@ -67,6 +67,8 @@ public class Unit : MonoBehaviour
     public GameObject objectToChangeMaterialOf;
     public Material[] playerMaterial;
 
+    List<Unit> targets;
+
     public enum UnitState {
         CASTINGSUPPORTSPELL,
         CASTINGATTACKSPELL,
@@ -185,12 +187,14 @@ public class Unit : MonoBehaviour
        
         if (isOnAuto)
         {
-            List<Unit> targets = aIBrain.SelectTarget(abilityBaseTemp,this,battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
 
-            if(abilityBaseTemp.AttemptAbility(this, targets))
+            targets = aIBrain.SelectTarget(abilityBaseTemp, this, battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
+
+            if (abilityBaseTemp.AttemptAbility(this, targets))
             {
                 anim.SetTrigger("Attack");
-                //TODO: add a trigger to the animation to tell when the attack has ended
+                //this waits the duration of the attack (1.2 seconds), but only 75% through the animation before playing 'takedamage'
+                Invoke("WaitingForAttackToHit", 1.2f * .75f);
             }
         }
 
@@ -200,6 +204,15 @@ public class Unit : MonoBehaviour
                 else
                     print("Character is dead, you shouldn't reach here, something went wrong");*/
     }
+
+    public void WaitingForAttackToHit()
+    {
+        for (int i = 0; i < targets.Count; i++)
+        {
+            targets[i].anim.SetTrigger("TakeDamage");
+        }
+    }
+
 
     public IEnumerator UpdateUI()
     {
