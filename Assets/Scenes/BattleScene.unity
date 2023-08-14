@@ -241,6 +241,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1 &986641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,6 +1243,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!114 &44323512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1609,6 +1611,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1 &53533981
 GameObject:
   m_ObjectHideFlags: 0
@@ -14680,6 +14683,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1 &462664722
 GameObject:
   m_ObjectHideFlags: 0
@@ -15340,6 +15344,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1001 &489008202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18932,6 +18937,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!114 &667693495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24171,6 +24177,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1 &894417895
 GameObject:
   m_ObjectHideFlags: 0
@@ -26146,7 +26153,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2052257343}
   m_Father: {fileID: 153362044}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26950,6 +26958,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1 &982395269
 GameObject:
   m_ObjectHideFlags: 0
@@ -29634,6 +29643,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1 &1096296318
 GameObject:
   m_ObjectHideFlags: 0
@@ -36804,6 +36814,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!114 &1167788206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37117,6 +37128,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1001 &1178048886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37665,6 +37677,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1001 &1209909976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38163,6 +38176,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1 &1232937852
 GameObject:
   m_ObjectHideFlags: 0
@@ -40210,6 +40224,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!114 &1301759211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46995,6 +47010,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1 &1400907092
 GameObject:
   m_ObjectHideFlags: 0
@@ -47227,6 +47243,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!114 &1411591358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50269,6 +50286,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!114 &1604330531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55326,6 +55344,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1 &1871025854
 GameObject:
   m_ObjectHideFlags: 0
@@ -56767,6 +56786,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!114 &1932818585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57835,6 +57855,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!1001 &1983323589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59054,6 +59075,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046285266}
   m_Mesh: {fileID: -3329902420748629119, guid: 52a6f3e9e3ed7e2469ef20008e78e7b4, type: 3}
+--- !u!1 &2052257342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052257343}
+  - component: {fileID: 2052257344}
+  m_Layer: 0
+  m_Name: GoIntoBattleAnim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2052257343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052257342}
+  m_LocalRotation: {x: 0.31327155, y: -0.78322095, z: -0.097423784, w: -0.5281425}
+  m_LocalPosition: {x: -2.845295, y: -1.3131728, z: 3.1351533}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -151.08499, y: -61.09201, z: 153.702}
+--- !u!114 &2052257344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052257342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1463209f30e4384eadb86d3384347af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objToInstantiate: {fileID: 8175607585471904830, guid: edab85879001b144b96f8b99b734d521, type: 3}
+  timerToTurnOff: 0.1
 --- !u!1 &2057329680
 GameObject:
   m_ObjectHideFlags: 0
@@ -59880,6 +59947,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 2052257342}
 --- !u!114 &2107754529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60855,6 +60923,7 @@ MonoBehaviour:
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
+  toTurnOn: {fileID: 0}
 --- !u!114 &2135561362
 MonoBehaviour:
   m_ObjectHideFlags: 0
