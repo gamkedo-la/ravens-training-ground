@@ -9,7 +9,7 @@ namespace Character.Stats {
 
         private void Start()
         {
-            startingHitPoints = hitpoints;
+            hitpoints=startingHitPoints = GetMaxHP();
         }
 
         public event Action OnDie;
