@@ -129,13 +129,14 @@ public class Unit : MonoBehaviour
             enhancement.Initialize(this);
         }
     }
+    private void OnValidate()
+    {
+        
+    }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            ApplyEnhancements();
-        }
+
     }
 
     IEnumerator WaitingMoment()
@@ -233,10 +234,6 @@ public class Unit : MonoBehaviour
         //once the turn is over, turn off their UI
         canvas.SetActive(false);
     }
-    void ApplyEnhancements()
-    {
-        CalculateStats();
-    }
     AbilityBase DetermineAbilityFromList(AbilityBase selectedAbility = null)
     {
         AbilityBase abilityToUse;
@@ -247,7 +244,7 @@ public class Unit : MonoBehaviour
         }
 
         abilityToUse = aIBrain.SelectAbility(abilities);
-        Debug.Log($"{name} is casting attack {abilityToUse.name}");
+        //Debug.Log($"{name} is casting attack {abilityToUse.name}");
         return abilityToUse;
     }
 /*    Unit SelectAutoRandomTarget()
@@ -290,26 +287,9 @@ public class Unit : MonoBehaviour
     }
     public void AddEnhancement(Enhancement enhancement)
     {
-        enhancements.Add(enhancement);
         enhancement.Initialize(this);
-
-        CalculateStats();
     }
-    void CalculateStats()
-    {
-        /* 
-         * 
-        Magic = startingMagic;
-        Physical = startingPhysical;
-        Agility = startingAgility;
-        Finesse= startingFinesse;
-         */
 
-        foreach (Enhancement enhancement in enhancements)
-        {
-            enhancement.ApplyEnhancement();
-        }
-    }
 
     void UnitDeath()
     {

@@ -7,6 +7,7 @@ using UnityEditor.Playables;
 using UnityEngine;
 
 public enum MathSign {Multiply,Divide, Add,Subtract};
+public enum BufforDebuff { Buff,Debuff };
 public enum Activation {Immediate, StartOfTurn, EndOfTurn};
 
 public class EnhancementStatAmountArgs : EventArgs
@@ -25,6 +26,7 @@ public class Enhancement : ScriptableObject
 {
     Unit unitAttachedTo;
     public Activation activation;
+    public BufforDebuff buffOrDebuff;
     public Stat statToChange;
     [Header("Enhancement Variables")]
     public MathSign sign;
@@ -43,6 +45,8 @@ public class Enhancement : ScriptableObject
     public void Initialize(Unit unit)
     {
         unitAttachedTo = unit;
+
+        ApplyEnhancement();
     }
     public void ApplyEnhancement()
     {
@@ -50,7 +54,7 @@ public class Enhancement : ScriptableObject
 
         unitAttachedTo.GetComponent<BaseStats>().RegisterEnhancementEvent(this);
 
-        SetStat(Calculate(stat));
+        SetStat(AddOrSubtract(Calculate(stat)));
     }
     public void ProgressTurn()
     {
@@ -97,6 +101,20 @@ public class Enhancement : ScriptableObject
             default:
                 return 0;
         }        
+    }
+    float AddOrSubtract(float input)
+    {
+        if (buffOrDebuff == BufforDebuff.Buff)
+        {
+            Debug.Log(input);
+            return input;
+        }
+        else
+        {
+            Debug.Log(-input);
+            return -input;
+        }
+
     }
     void SetStat(float statModificationAmount)
     {
