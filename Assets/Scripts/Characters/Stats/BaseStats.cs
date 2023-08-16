@@ -22,8 +22,11 @@ namespace Character.Stats
         private float agilityEnhancementAmount;
         private float healthEnhancementAmount;
 
-        Enhancement[] enhancements = null;
-
+        Enhancement[] enhancements = new Enhancement[0];
+        public void Initialize()
+        {
+            
+        }
         public void RegisterEnhancementEvent(Enhancement enhancement) {
             enhancements.Append(enhancement);
             enhancement.OnEnhancementEvent += HandleNewStatEnhancement;
@@ -89,6 +92,7 @@ namespace Character.Stats
         private void HandleNewStatEnhancement(object sender, EnhancementStatAmountArgs e) {
             Stat affectedStat = e.EffectedStat;
             float enhancementAmount = e.EnhancementAmount;
+            print(enhancementAmount);
             switch (affectedStat) {
                 case Stat.Magic: {
                         magicEnhancementAmount = enhancementAmount;
