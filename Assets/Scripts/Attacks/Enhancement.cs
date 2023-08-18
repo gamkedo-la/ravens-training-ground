@@ -141,6 +141,6 @@ public class Enhancement : ScriptableObject
     public void RemoveEnhancement()
     {
         OnEnhancementEvent(this, new EnhancementStatAmountArgs(0, statToChange));
-        unitAttachedTo.enhancements.Remove(this);
+        unitAttachedTo.GetComponent<BaseStats>().DeregisterEnhancementEvent(this);
     }
 }
