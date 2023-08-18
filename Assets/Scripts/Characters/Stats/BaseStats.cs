@@ -22,16 +22,27 @@ namespace Character.Stats
         public float agilityEnhancementAmount;
         public float healthEnhancementAmount;
 
-        Enhancement[] enhancements = new Enhancement[0];
+        public List<Enhancement> enhancements = new List<Enhancement>();
         public void Initialize()
         {
             
         }
+        public void NewTurnEntered()
+        {
+            foreach(Enhancement enhancement in enhancements.ToList()) 
+            {
+                enhancement.ProgressTurn();
+            }
+        }
         public void RegisterEnhancementEvent(Enhancement enhancement) {
-            enhancements.Append(enhancement);
+            enhancements.Add(enhancement);
             enhancement.OnEnhancementEvent += HandleNewStatEnhancement;
         }
-
+        public void DeregisterEnhancementEvent(Enhancement enhancement)
+        {
+            enhancements.Remove(enhancement);
+            enhancement.OnEnhancementEvent -= HandleNewStatEnhancement;
+        }
         public bool HasStat(Stat targetStat) {
             List<StatProgression> statList = statProgressions.ToList();
             int statIndex = statList.FindIndex(stat => stat.statName.Equals(targetStat.ToString()));
