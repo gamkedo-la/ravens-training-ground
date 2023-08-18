@@ -26,7 +26,6 @@ public class Unit : MonoBehaviour
     public Unit leftUnit, rightUnit;
     public List<Affinity> resistances;
     public List<Affinity> weaknesses;
-    public List<Enhancement> enhancements;
     //float lightAttack = 1f, mediumAttack = 1.4f;
 
     public bool isASoloAttack, isAGroupAttack, isAHeal;
@@ -124,10 +123,6 @@ public class Unit : MonoBehaviour
                 canFlee = true;
             }
         }
-        foreach(Enhancement enhancement in enhancements)
-        {
-            enhancement.Initialize(this);
-        }
     }
     private void OnValidate()
     {
@@ -162,7 +157,7 @@ public class Unit : MonoBehaviour
                 {*/
         battle.MoveCamera();
 
-        
+        GetComponent<BaseStats>().NewTurnEntered();
 
         if (hasBeenKnockedDown)
         {
