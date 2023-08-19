@@ -8,10 +8,14 @@ public class DungeonRoom : MonoBehaviour {
 	public void SetWalls(List<Direction> openWalls) {
 		if (openWalls == null || openWalls.Count == 0) return;
 
+		int rotation = Random.Range(0, 4);
+		transform.rotation = Quaternion.Euler(new Vector3(0f, -90f * rotation, 0f));
+
 		foreach (WallReferance wall in wallList) {
 			foreach (Direction direction in openWalls) {
+				Direction checkDirection = (Direction)(((int)direction + rotation) % 4);
 				for (int i = 0; i < wall.directions.Count; i++) {
-					if (wall.directions[i] == direction) {
+					if (wall.directions[i] == checkDirection) {
 						DestroyImmediate(wall.go);
 					}
 				}

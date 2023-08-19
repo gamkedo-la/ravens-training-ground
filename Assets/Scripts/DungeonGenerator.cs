@@ -17,14 +17,16 @@ public class DungeonGenerator : MonoBehaviour {
 
 	public int growthIterations = 3;
 	public float oddsOfBranch = 1f/3f;
+	public int fillIterations = 2;
 
 	public float gridScale = 30f;
 	public List<DungeonRoom> startRooms;
 	public List<DungeonRoom> endRooms;
 	public List<DungeonRoom> combatRooms;
 	public List<DungeonRoom> treasureRooms;
+	public List<DungeonRoom> gapRooms;
 
-	public enum RoomType {TBD, Start, End, Combat, Treasure};
+	public enum RoomType {TBD, Start, End, Combat, Treasure, Gap};
 
 	public class RoomNode {
 		public RoomType roomType;
@@ -84,6 +86,9 @@ public class DungeonGenerator : MonoBehaviour {
 
 		// Lower roomMap into world
 		AssignRoomTypes();
+		for (int i = 0; i < fillIterations; i++) {
+			FillGaps();
+		}
 		LowerRoomMap();
 		PrintRoomMap();
 
@@ -128,6 +133,25 @@ public class DungeonGenerator : MonoBehaviour {
 			break;
 		}
 		
+	}
+
+	private void FillGaps() {
+		List<Vector2Int> gaps = new List<Vector2Int>();
+
+		foreach (KeyValuePair<Vector2Int, RoomNode> currentRoom in roomMap) {
+			List<Vector2Int> openNeighbors = FindOpenNeighbors(currentRoom.Key);
+			foreach (Vector2Int neighbor in openNeighbors) {
+				if (!gaps.Contains(neighbor)) {
+					gaps.Add(neighbor);
+				}
+			}
+		}
+
+		foreach (Vector2Int gap in gaps) {
+			roomMap.Add(gap, new RoomNode());
+			roomMap[gap].SetRoomType(RoomType.Gap);
+		}
+
 	}
 
 	private List<Vector2Int> GetDeadEnds() {
@@ -201,6 +225,9 @@ public class DungeonGenerator : MonoBehaviour {
 					break;
 				case RoomType.Treasure:
 					roomToSpawn = treasureRooms[Random.Range(0, treasureRooms.Count)];
+					break;
+				case RoomType.Gap:
+					roomToSpawn = gapRooms[Random.Range(0, gapRooms.Count)];
 					break;
 			}
 
