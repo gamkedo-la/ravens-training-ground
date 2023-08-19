@@ -655,7 +655,7 @@ Transform:
   - {fileID: 7356921785319479177}
   - {fileID: 5413773973500181583}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-4725255171092789864
 MonoBehaviour:
@@ -690,8 +690,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c1361669b677df848b667bd68cb4ce74, type: 2}
   weaknesses:
   - {fileID: 11400000, guid: 48917a6b23c6e0a4299f9d25d7f71551, type: 2}
-  enhancements:
-  - {fileID: 11400000, guid: e03111dea81b59b4c9adbeef5499d510, type: 2}
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -783,6 +781,7 @@ MonoBehaviour:
   finesseEnhancementAmount: 0
   agilityEnhancementAmount: 0
   healthEnhancementAmount: 0
+  enhancements: []
 --- !u!114 &-556071309621965558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,9 +1084,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1599826595754709761, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
       propertyPath: m_Name
       value: theo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
