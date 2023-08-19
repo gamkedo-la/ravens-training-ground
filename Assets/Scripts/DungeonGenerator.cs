@@ -10,12 +10,13 @@ public enum Direction { UP, RIGHT, DOWN, LEFT };
 
 public class DungeonGenerator : MonoBehaviour {
 
-	private List<Vector2Int> direction = new List<Vector2Int>() { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left };
+	private List<Vector2Int> directions = new List<Vector2Int>() { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left };
+	private Dictionary<Vector2Int, RoomNode> roomMap = new Dictionary<Vector2Int, RoomNode>();
 
 	public NavMeshSurface surface;
 
-	public int iterations = 3;
-	public List<RuleSet> ruleSets = new List<RuleSet>();
+	public int growthIterations = 3;
+	public float oddsOfBranch = 1f/3f;
 
 	public float gridScale = 30f;
 	public List<DungeonRoom> startRooms;
@@ -25,19 +26,6 @@ public class DungeonGenerator : MonoBehaviour {
 
 	public enum RoomType {TBD, Start, End, Combat, Treasure};
 
-	[System.Serializable]
-	public struct RuleNode {
-		public int id;
-		public List<int> connections;
-	}
-	[System.Serializable]
-	public struct RuleGraph {
-		public List<RuleNode> nodes;
-	}
-	[System.Serializable]
-	public struct RuleSet {
-		public List<RuleGraph> graphs;
-	}
 	public class RoomNode {
 		public RoomType roomType;
 		public List<Direction> openDoors;
@@ -72,12 +60,10 @@ public class DungeonGenerator : MonoBehaviour {
 
 	public void Generate() {
 		//Debug.Log("Generate");
-		Dictionary<Vector2Int, RoomNode> roomMap = new Dictionary<Vector2Int, RoomNode>();
-		List<Vector2Int> ends = new List<Vector2Int>();
-
+		Clear();
 		// Initialize with first and last room;
 		{
-			Vector2Int randomStartDirection = direction[Random.Range(0, direction.Count)];
+			Vector2Int randomStartDirection = directions[Random.Range(0, directions.Count)];
 			roomMap.Add(Vector2Int.zero, new RoomNode());
 			roomMap.Add(randomStartDirection, new RoomNode());
 
@@ -87,66 +73,71 @@ public class DungeonGenerator : MonoBehaviour {
 			Direction doorDirection = FindDirectionToRoom(Vector2Int.zero, randomStartDirection);
 			roomMap[Vector2Int.zero].AddDoor(doorDirection);
 			roomMap[randomStartDirection].AddDoor(GetOppositeDirection(doorDirection));
-			PrintRoomMap(roomMap);
+			PrintRoomMap();
 		}
 		
-		// Apply rules to build the map
-		for (int i = 0; i < iterations; i++) {
-			//Debug.Log("Iteraton " + i);
-
-			// Cycle over RuleSets
-			for (int j = 0; j < ruleSets.Count; j++) {
-				if (ruleSets[j].graphs.Count <= 0) continue;
-
-				RuleSet ruleSet = ruleSets[j];
-
-				//Select initial ruleGraph
-				int ruleIndex = Random.Range(0, ruleSet.graphs.Count);
-				RuleGraph ruleGraph = ruleSet.graphs[ruleIndex];
-
-				ends = GetDeadEnds(roomMap);
-
-				//Cycle over RuleGraphs in ruleSet until you find a valid rule
-				for (int k = 0; k < ruleSet.graphs.Count; k++) {
-					// Check if valid (dfs compairing roomMap to ruleGraph)
-					if (IsValidRule(roomMap, ruleGraph)) {
-						// If valid, apply ruleGraph to roomMap
-						roomMap = ApplyRuleToMap(roomMap, ruleGraph);
-
-						break;
-					}
-
-					// Move to next RuleGraph
-					ruleIndex = (ruleIndex + 1) % ruleSet.graphs.Count;
-					ruleGraph = ruleSet.graphs[ruleIndex];
-				}
-
-			}
+		// Apply rules to build the maps
+		for (int i = 0; i < growthIterations; i++) {
+			//Debug.Log("Groth Iteraton " + i);
+			Grow();
 		}
 
 		// Lower roomMap into world
-		roomMap = AssignRoomTypes(roomMap);
-		LowerRoomMap(roomMap);
-		PrintRoomMap(roomMap);
+		AssignRoomTypes();
+		LowerRoomMap();
+		PrintRoomMap();
 
 		StartCoroutine(BuildNavMesh());
 	}
 
 	public void Clear() {
+		roomMap.Clear();
+
 		for (int i = transform.childCount - 1; i >= 0; i--) {
 			DestroyImmediate(transform.GetChild(i).gameObject);
 		}
 	}
 
-	private List<Vector2Int> GetDeadEnds(Dictionary<Vector2Int, RoomNode> roomMap) {
-		//Debug.Log("GetDeadEnds");
+	private void Grow() {
+		//Debug.Log("Grow");
+		List<Vector2Int> ends = GetDeadEnds(); ;
+		if (ends.Count == 0) return;
+
+		int currentRoomIndex = Random.Range(0, ends.Count);
+		for (int i = 0; i < ends.Count; i++) {
+			Vector2Int currentRoom = ends[currentRoomIndex];
+
+			for (int j = oddsOfBranch < Random.Range(0f, 1f) ? 1 : 2; j > 0; j--) {
+				List<Vector2Int> openNeighbors = FindOpenNeighbors(currentRoom);
+				if (openNeighbors.Count == 0) continue;
+
+				//expand
+				RoomNode endRoom = roomMap[currentRoom];
+				roomMap[currentRoom] = new RoomNode();
+				roomMap[currentRoom].openDoors = new List<Direction>(endRoom.openDoors);
+				endRoom.openDoors.Clear();
+
+				Vector2Int newRoom = openNeighbors[Random.Range(0, openNeighbors.Count)];
+
+				roomMap.Add(newRoom, endRoom);
+				Direction doorDirection = FindDirectionToRoom(currentRoom, newRoom);
+				roomMap[currentRoom].AddDoor(doorDirection);
+				roomMap[newRoom].AddDoor(GetOppositeDirection(doorDirection));
+			}
+
+			break;
+		}
+		
+	}
+
+	private List<Vector2Int> GetDeadEnds() {
 		List<Vector2Int> ends = new List<Vector2Int>();
 
-		foreach (KeyValuePair<Vector2Int, RoomNode> room in roomMap) {
-			if (room.Value.GetRoomType() == RoomType.Start) continue;
+		foreach (KeyValuePair<Vector2Int, RoomNode> currentRoom in roomMap) {
+			if (currentRoom.Value.GetRoomType() == RoomType.Start) continue;
 
-			if (room.Value.openDoors != null && room.Value.openDoors.Count == 1) {
-				ends.Add(room.Key);
+			if (currentRoom.Value.openDoors != null && currentRoom.Value.openDoors.Count == 1) {
+				ends.Add(currentRoom.Key);
 			}
 		}
 
@@ -165,18 +156,21 @@ public class DungeonGenerator : MonoBehaviour {
 		return (Direction)(((int)direction + 2) % 4);
 	}
 
-	private bool IsValidRule(Dictionary<Vector2Int, RoomNode> roomMap, RuleGraph ruleGraph) {
-		return false;
+	private List<Vector2Int> FindOpenNeighbors(Vector2Int startingRoom) {
+		List<Vector2Int> foundNeighbors = new List<Vector2Int>();
+
+		foreach (Vector2Int direction in directions) {
+			Vector2Int checkRoom = direction + startingRoom;
+			if (!roomMap.ContainsKey(checkRoom)) {
+				foundNeighbors.Add(checkRoom);
+			}
+		}
+
+		return foundNeighbors;
 	}
 
-	private Dictionary<Vector2Int, RoomNode> ApplyRuleToMap(Dictionary<Vector2Int, RoomNode> roomMap, RuleGraph ruleGraph) {
-		return roomMap;
-	}
-
-	private Dictionary<Vector2Int, RoomNode> AssignRoomTypes(Dictionary<Vector2Int, RoomNode> roomMap) {
-		//Debug.Log("AssignRoomTypes");
-		List<Vector2Int> ends = new List<Vector2Int>();
-		ends = GetDeadEnds(roomMap);
+	private void AssignRoomTypes() {
+		List<Vector2Int> ends = GetDeadEnds();
 
 		foreach (KeyValuePair<Vector2Int, RoomNode> room in roomMap) {
 			if (room.Value.GetRoomType() == RoomType.TBD) {
@@ -187,13 +181,10 @@ public class DungeonGenerator : MonoBehaviour {
 				}
 			}
 		}
-		
-		return roomMap;
 	}
 
-	private void LowerRoomMap(Dictionary<Vector2Int, RoomNode> roomMap) {
+	private void LowerRoomMap() {
 		//Debug.Log("LowerRoomMap");
-		Clear();
 
 		DungeonRoom roomToSpawn = null;
 
@@ -225,20 +216,10 @@ public class DungeonGenerator : MonoBehaviour {
 		}
 	}
 
-	private void PrintRoomMap(Dictionary<Vector2Int, RoomNode> roomMap) {
+	private void PrintRoomMap() {
 		foreach (KeyValuePair<Vector2Int, RoomNode> room in roomMap) {
 			//Debug.Log("<" + room.Key.x + "," + room.Key.y + "> " + room.Value.GetRoomType());
 		}
-	}
-
-	private Dictionary<Vector2Int, RoomNode> GetCopyOfRoomMap(Dictionary<Vector2Int, RoomNode> roomMap) {
-		Dictionary<Vector2Int, RoomNode> newRoomMap = new Dictionary<Vector2Int, RoomNode>();
-
-		foreach (KeyValuePair<Vector2Int, RoomNode> room in roomMap) {
-			newRoomMap.Add(room.Key, room.Value);
-		}
-
-		return newRoomMap;
 	}
 
 	IEnumerator BuildNavMesh() {
