@@ -739,7 +739,7 @@ Transform:
   - {fileID: 8569146206067648663}
   - {fileID: 2214548057360832617}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &-800283866936015331
 Rigidbody:
@@ -801,7 +801,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48917a6b23c6e0a4299f9d25d7f71551, type: 2}
   weaknesses:
   - {fileID: 11400000, guid: 9fbfb035e54ff7e46af4b3e68577de2c, type: 2}
-  enhancements: []
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -869,6 +868,7 @@ MonoBehaviour:
   finesseEnhancementAmount: 0
   agilityEnhancementAmount: 0
   healthEnhancementAmount: 0
+  enhancements: []
 --- !u!114 &7394113027325024077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,6 +1085,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1599826595754709761, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1526964690268444965, guid: bf3a770a4c2fec14d93cfa8fd0001fd8, type: 3}
