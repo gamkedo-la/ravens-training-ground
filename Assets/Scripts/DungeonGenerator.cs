@@ -70,7 +70,7 @@ public class DungeonGenerator : MonoBehaviour {
 			roomMap.Add(randomStartDirection, new RoomNode());
 
 			roomMap[Vector2Int.zero].SetRoomType(RoomType.Start);
-			roomMap[randomStartDirection].SetRoomType(RoomType.End);
+			//roomMap[randomStartDirection].SetRoomType(RoomType.End);
 
 			Direction doorDirection = FindDirectionToRoom(Vector2Int.zero, randomStartDirection);
 			roomMap[Vector2Int.zero].AddDoor(doorDirection);
@@ -82,6 +82,21 @@ public class DungeonGenerator : MonoBehaviour {
 		for (int i = 0; i < growthIterations; i++) {
 			//Debug.Log("Groth Iteraton " + i);
 			Grow();
+		}
+
+		//Make furthest end room into end 
+		{
+			Vector2Int furthestRoom = new Vector2Int();
+			float distance = 0f;
+			foreach (Vector2Int currentRoom in GetDeadEnds()) {
+				float checkDistance = Vector2Int.Distance(Vector2Int.zero, currentRoom);
+				if (checkDistance > distance) {
+					furthestRoom = currentRoom;
+					distance = checkDistance;
+				}
+			}
+
+			roomMap[furthestRoom].SetRoomType(RoomType.End);
 		}
 
 		// Lower roomMap into world
