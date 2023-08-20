@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DungeonRoom : MonoBehaviour {
 	public List<WallReferance> wallList;
+	public DungeonGenerator.RoomNode roomNode;
 
 	public void SetWalls(List<Direction> openWalls) {
 		if (openWalls == null || openWalls.Count == 0) return;
@@ -16,7 +17,8 @@ public class DungeonRoom : MonoBehaviour {
 				Direction checkDirection = (Direction)(((int)direction + rotation) % 4);
 				for (int i = 0; i < wall.directions.Count; i++) {
 					if (wall.directions[i] == checkDirection) {
-						DestroyImmediate(wall.go);
+						wall.go.SetActive(false);
+						break;
 					}
 				}
 			}

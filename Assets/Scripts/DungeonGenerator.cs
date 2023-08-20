@@ -12,12 +12,20 @@ public class DungeonGenerator : MonoBehaviour {
 
 	private List<Vector2Int> directions = new List<Vector2Int>() { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left };
 	private Dictionary<Vector2Int, RoomNode> roomMap = new Dictionary<Vector2Int, RoomNode>();
+	private List<DoorAndKeys> lockedDoors = new List<DoorAndKeys>();
 
 	public NavMeshSurface surface;
+	public GameObject lockedDoor;
 
-	public int growthIterations = 3;
+	public int keyIterations = 2;
+	public int preKeyIterations = 1;
+	public int postKeyIterations = 2;
+	public int preGrowthIterations = 2;
+	public int postGrowthIterations = 3;
 	public float oddsOfBranch = 1f/3f;
 	public int fillIterations = 2;
+
+	public bool lockAndKey = false;
 
 	public float gridScale = 30f;
 	public List<DungeonRoom> startRooms;
@@ -25,12 +33,13 @@ public class DungeonGenerator : MonoBehaviour {
 	public List<DungeonRoom> combatRooms;
 	public List<DungeonRoom> treasureRooms;
 	public List<DungeonRoom> gapRooms;
+	public List<DungeonRoom> keyRooms;
 
-	public enum RoomType {TBD, Start, End, Combat, Treasure, Gap};
+	public enum RoomType {TBD, Start, End, Combat, Treasure, Gap, Key};
 
 	public class RoomNode {
 		public RoomType roomType;
-		public List<Direction> openDoors;
+		public List<Direction> openDoors = new List<Direction>();
 
 		public void SetRoomType(RoomType type) {
 			roomType = type;
@@ -40,20 +49,21 @@ public class DungeonGenerator : MonoBehaviour {
 		}
 
 		public void AddDoor(Direction direction) {
-			if (openDoors == null) openDoors = new List<Direction>();
-
 			if (!openDoors.Contains(direction)) {
 				openDoors.Add(direction);
 			}
 		}
 
-		public void removeDoor(Direction direction) {
-			if (openDoors == null) openDoors = new List<Direction>();
+		public void ClearDoors() {
+			openDoors.Clear();
 
-			if (openDoors.Contains(direction)) {
-				openDoors.Remove(direction);
-			}
 		}
+	}
+
+	private class DoorAndKeys {
+		public Direction doorFacing;
+		public Vector2Int doorRoom;
+		public List<RoomNode> keyRooms = new List<RoomNode>();
 	}
 
 	void Start() {
@@ -70,22 +80,84 @@ public class DungeonGenerator : MonoBehaviour {
 			roomMap.Add(randomStartDirection, new RoomNode());
 
 			roomMap[Vector2Int.zero].SetRoomType(RoomType.Start);
-			//roomMap[randomStartDirection].SetRoomType(RoomType.End);
+			roomMap[randomStartDirection].SetRoomType(RoomType.End);
 
 			Direction doorDirection = FindDirectionToRoom(Vector2Int.zero, randomStartDirection);
 			roomMap[Vector2Int.zero].AddDoor(doorDirection);
 			roomMap[randomStartDirection].AddDoor(GetOppositeDirection(doorDirection));
 			PrintRoomMap();
 		}
-		
+
 		// Apply rules to build the maps
-		for (int i = 0; i < growthIterations; i++) {
-			//Debug.Log("Groth Iteraton " + i);
-			Grow();
+		for (int i = 0; i < keyIterations; i++) {
+
+			for (int j = 0; j < preGrowthIterations; j++) {
+				Grow();
+			}
+
+			List<Vector2Int> specialEnds = GetSpecialEnds();
+			if (specialEnds.Count == 0) break;
+
+			Vector2Int specialRoom = specialEnds[Random.Range(0, specialEnds.Count)];
+			Vector2Int baseRoom = specialRoom;
+			Direction lockedDoorDirection = Direction.UP;
+			if (roomMap[baseRoom].openDoors.Count > 0) {
+				lockedDoorDirection = GetOppositeDirection(roomMap[baseRoom].openDoors[0]);
+			}
+
+			for (int j = 0; j < preKeyIterations + 1; j++) {
+				Vector2Int newRoom = AddRoom(specialRoom);
+				if (newRoom == Vector2Int.zero) break;
+
+				lockedDoorDirection = FindDirectionToRoom(newRoom, specialRoom);
+				specialRoom = newRoom;
+			}
+
+			if (lockAndKey && FindOpenNeighbors(baseRoom).Count >= 1) {
+				specialEnds = AddLockAndKey(baseRoom);
+
+				DoorAndKeys newLockedDoor = new DoorAndKeys();
+				newLockedDoor.doorFacing = lockedDoorDirection;
+				newLockedDoor.doorRoom = specialRoom;
+				foreach (Vector2Int keyRoom in specialEnds) {
+					newLockedDoor.keyRooms.Add(roomMap[keyRoom]);
+				}
+
+				if (newLockedDoor.keyRooms.Count > 0) {
+					lockedDoors.Add(newLockedDoor);
+				}
+			}
+
+			for (int j = 0; j < postKeyIterations; j++) {
+				for (int k = specialEnds.Count-1; k >= 0; k--) {
+					specialEnds[k] = AddRoom(specialEnds[k]);
+					if (specialEnds[k] == Vector2Int.zero) {
+						specialEnds.RemoveAt(k);
+					}
+				}
+			}
+
+
+			for (int j = 0; j < postGrowthIterations; j++) {
+				Grow();
+			}
+
 		}
 
-		//Make furthest end room into end 
-		{
+		//Make furthest end room into end, if not using keys
+		if (!lockAndKey) {
+			// Clear ond end
+			List<Vector2Int> specialEnds = GetSpecialEnds();
+			if (specialEnds.Count > 0) {
+				foreach(Vector2Int end in specialEnds) { 
+					if (roomMap[end].GetRoomType() == RoomType.End) {
+						roomMap[end].SetRoomType(RoomType.TBD);
+						break;
+					}
+				}
+			}
+
+			// Find the furthest room
 			Vector2Int furthestRoom = new Vector2Int();
 			float distance = 0f;
 			foreach (Vector2Int currentRoom in GetDeadEnds()) {
@@ -96,6 +168,7 @@ public class DungeonGenerator : MonoBehaviour {
 				}
 			}
 
+			// Assign new end
 			roomMap[furthestRoom].SetRoomType(RoomType.End);
 		}
 
@@ -112,6 +185,7 @@ public class DungeonGenerator : MonoBehaviour {
 
 	public void Clear() {
 		roomMap.Clear();
+		lockedDoors.Clear();
 
 		for (int i = transform.childCount - 1; i >= 0; i--) {
 			DestroyImmediate(transform.GetChild(i).gameObject);
@@ -120,34 +194,45 @@ public class DungeonGenerator : MonoBehaviour {
 
 	private void Grow() {
 		//Debug.Log("Grow");
-		List<Vector2Int> ends = GetDeadEnds(); ;
+		List<Vector2Int> ends = GetDeadEnds();
 		if (ends.Count == 0) return;
 
-		int currentRoomIndex = Random.Range(0, ends.Count);
-		for (int i = 0; i < ends.Count; i++) {
-			Vector2Int currentRoom = ends[currentRoomIndex];
-
-			for (int j = oddsOfBranch < Random.Range(0f, 1f) ? 1 : 2; j > 0; j--) {
-				List<Vector2Int> openNeighbors = FindOpenNeighbors(currentRoom);
-				if (openNeighbors.Count == 0) continue;
-
-				//expand
-				RoomNode endRoom = roomMap[currentRoom];
-				roomMap[currentRoom] = new RoomNode();
-				roomMap[currentRoom].openDoors = new List<Direction>(endRoom.openDoors);
-				endRoom.openDoors.Clear();
-
-				Vector2Int newRoom = openNeighbors[Random.Range(0, openNeighbors.Count)];
-
-				roomMap.Add(newRoom, endRoom);
-				Direction doorDirection = FindDirectionToRoom(currentRoom, newRoom);
-				roomMap[currentRoom].AddDoor(doorDirection);
-				roomMap[newRoom].AddDoor(GetOppositeDirection(doorDirection));
-			}
-
-			break;
+		Vector2Int currentRoom = ends[Random.Range(0, ends.Count)];
+		for (int i = oddsOfBranch < Random.Range(0f, 1f) ? 1 : 2; i > 0; i--) {
+			AddRoom(currentRoom);
 		}
-		
+
+	}
+
+	private List<Vector2Int> AddLockAndKey(Vector2Int baseRoom) {
+		List<Vector2Int> ends = new List<Vector2Int>();
+		for (int i = oddsOfBranch < Random.Range(0f, 1f) ? 1 : 2; i > 0; i--) {
+			Vector2Int newRoom = AddRoom(baseRoom);
+			if (newRoom == Vector2Int.zero) continue;
+
+			roomMap[newRoom].SetRoomType(RoomType.Key);
+			ends.Add(newRoom);
+		}
+
+		return ends;
+	}
+
+	private Vector2Int AddRoom(Vector2Int startingRoom) {
+		List<Vector2Int> openNeighbors = FindOpenNeighbors(startingRoom);
+		if (openNeighbors.Count == 0) return Vector2Int.zero;
+
+		RoomNode endRoom = roomMap[startingRoom];
+		roomMap[startingRoom] = new RoomNode();
+		roomMap[startingRoom].openDoors = new List<Direction>(endRoom.openDoors);
+		endRoom.ClearDoors();
+
+		Vector2Int newRoom = openNeighbors[Random.Range(0, openNeighbors.Count)];
+		roomMap.Add(newRoom, endRoom);
+		Direction doorDirection = FindDirectionToRoom(startingRoom, newRoom);
+		roomMap[startingRoom].AddDoor(doorDirection);
+		roomMap[newRoom].AddDoor(GetOppositeDirection(doorDirection));
+
+		return newRoom;
 	}
 
 	private void FillGaps() {
@@ -176,6 +261,20 @@ public class DungeonGenerator : MonoBehaviour {
 			if (currentRoom.Value.GetRoomType() == RoomType.Start) continue;
 
 			if (currentRoom.Value.openDoors != null && currentRoom.Value.openDoors.Count == 1) {
+				ends.Add(currentRoom.Key);
+			}
+		}
+
+		return ends;
+	}
+
+	private List<Vector2Int> GetSpecialEnds() {
+		List<Vector2Int> ends = new List<Vector2Int>();
+
+		foreach (KeyValuePair<Vector2Int, RoomNode> currentRoom in roomMap) {
+			if (currentRoom.Value.GetRoomType() == RoomType.Start) continue;
+
+			if (currentRoom.Value.GetRoomType() == RoomType.End || currentRoom.Value.GetRoomType() == RoomType.Key) {
 				ends.Add(currentRoom.Key);
 			}
 		}
@@ -244,17 +343,30 @@ public class DungeonGenerator : MonoBehaviour {
 				case RoomType.Gap:
 					roomToSpawn = gapRooms[Random.Range(0, gapRooms.Count)];
 					break;
+				case RoomType.Key:
+					roomToSpawn = keyRooms[Random.Range(0, keyRooms.Count)];
+					break;
 			}
 
 			//Debug.Log(room.Value.GetRoomType());
 
 			if (!roomToSpawn) continue;
 			GameObject newRoom = Instantiate(roomToSpawn.gameObject);
+			newRoom.transform.parent = transform;
 			newRoom.gameObject.SetActive(true);
 			newRoom.transform.position = new Vector3(room.Key.x, 0f, room.Key.y) * gridScale;
-			newRoom.transform.parent = transform;
 			newRoom.name = "<" + room.Key.x + "," + room.Key.y + "> " + room.Value.GetRoomType();
 			newRoom.GetComponent<DungeonRoom>().SetWalls(room.Value.openDoors);
+			newRoom.GetComponent<DungeonRoom>().roomNode = room.Value;
+		}
+
+		foreach (DoorAndKeys door in lockedDoors) {
+			GameObject newDoor = Instantiate(lockedDoor);
+			newDoor.transform.parent = transform;
+			newDoor.gameObject.SetActive(true);
+			Vector2Int enteranceDirection = directions[(int)door.doorFacing];
+			newDoor.transform.position = (new Vector3(door.doorRoom.x, 0f, door.doorRoom.y) * gridScale) + (new Vector3(enteranceDirection.x, 0f, enteranceDirection.y) * (gridScale*0.5f));
+			newDoor.transform.rotation = Quaternion.Euler(new Vector3(0f, 90f * (int)door.doorFacing, 0f));
 		}
 	}
 
@@ -268,6 +380,57 @@ public class DungeonGenerator : MonoBehaviour {
 		yield return null;
 
 		surface.BuildNavMesh();
+	}
+
+	void OnDrawGizmos() {
+		return;
+
+		foreach (KeyValuePair<Vector2Int, RoomNode> room in roomMap) {
+			Vector3 pos = new Vector3(room.Key.x, 1f, room.Key.y) * gridScale;
+			Gizmos.color = Color.black;
+
+			Gizmos.DrawCube(pos, new Vector3(gridScale, 1f, gridScale));
+		}
+		foreach (KeyValuePair<Vector2Int, RoomNode> room in roomMap) {
+			Vector3 pos = new Vector3(room.Key.x, 1f, room.Key.y) * gridScale;
+			Gizmos.color = Color.blue;
+			switch (room.Value.GetRoomType()) {
+				case RoomType.Start:
+				case RoomType.End:
+					Gizmos.color = Color.cyan;
+					break;
+				case RoomType.Combat:
+					Gizmos.color = Color.red;
+					break;
+				case RoomType.Treasure:
+					Gizmos.color = Color.green;
+					break;
+				case RoomType.Gap:
+					Gizmos.color = Color.black;
+					break;
+				case RoomType.Key:
+					Gizmos.color = Color.yellow;
+					break;
+			}
+
+			Gizmos.DrawWireSphere(pos, gridScale*0.5f);
+
+			if (room.Value.openDoors == null) continue;
+			for (int i = 0; i < room.Value.openDoors.Count; i++) {
+				Vector2Int dir = directions[(int)room.Value.openDoors[i]];
+				pos = (new Vector3(room.Key.x, 1f, room.Key.y) * gridScale) + (new Vector3(dir.x, 0f, dir.y) * (gridScale*0.55f));
+
+				Gizmos.DrawWireCube(pos, new Vector3(5f, 5f, 5f));
+			}
+		}
+		foreach (DoorAndKeys door in lockedDoors) {
+			Vector2Int room = door.doorRoom;
+			Vector2Int dir = directions[(int)door.doorFacing];
+			Vector3 pos = (new Vector3(room.x, 1f, room.y) * gridScale) + (new Vector3(dir.x, 0f, dir.y) * (gridScale*0.55f));
+			Gizmos.color = Color.magenta;
+
+			Gizmos.DrawWireCube(pos, new Vector3(10f, 10f, 10f));
+		}
 	}
 }
 
