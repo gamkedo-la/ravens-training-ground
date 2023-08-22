@@ -27235,6 +27235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 987575096}
   - component: {fileID: 987575097}
+  - component: {fileID: 987575098}
   m_Layer: 0
   m_Name: Battle
   m_TagString: Untagged
@@ -27344,6 +27345,21 @@ MonoBehaviour:
   victoryMenu: {fileID: 155507007}
   groupAttackHappening: 0
   damageParticle: {fileID: 3974450424714125319, guid: 128033ce485f6e4468cd1f8927449d5f, type: 3}
+--- !u!114 &987575098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987575094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc24a3849eb56cb4e9945f3099eadaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caster: {fileID: 0}
+  abilityToUse: {fileID: 0}
+  targets: []
 --- !u!1001 &992902330
 PrefabInstance:
   m_ObjectHideFlags: 0
