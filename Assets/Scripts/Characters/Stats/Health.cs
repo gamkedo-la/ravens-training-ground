@@ -9,7 +9,7 @@ namespace Character.Stats {
 
         private void Start()
         {
-             hitpoints=startingHitPoints;
+             startingHitPoints=hitpoints;
         }
 
         public event Action OnDie;
@@ -50,8 +50,15 @@ namespace Character.Stats {
                 StartCoroutine(gameObject.GetComponent<Unit>().TurnOffUI());
             }
 
-            if (IsDead()) {    
-                Debug.Log(gameObject.name + " was killed by : " + damageSource.name);          
+            if (IsDead())
+            {
+                if (damageSource == null)
+                {
+                    print("No Damage Source");
+                    OnDie.Invoke();
+                    return;
+                }
+                Debug.Log(gameObject.name + " was killed by : " + damageSource.name);
                 GrantKillerExperience(damageSource.gameObject);
                 OnDie.Invoke();
             }
