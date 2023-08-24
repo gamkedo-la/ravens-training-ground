@@ -1964,6 +1964,7 @@ GameObject:
   - component: {fileID: -4005943422957342306}
   - component: {fileID: 7219564608946760210}
   - component: {fileID: 5789643650442788744}
+  - component: {fileID: -2273048187361931670}
   m_Layer: 0
   m_Name: Squonk
   m_TagString: Untagged
@@ -2022,7 +2023,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c1361669b677df848b667bd68cb4ce74, type: 2}
   weaknesses:
   - {fileID: 11400000, guid: 9fbfb035e54ff7e46af4b3e68577de2c, type: 2}
-  enhancements: []
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -2074,6 +2074,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
   currentLevel: 0
   experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
+  magicEnhancementAmount: 0
+  physicalEnhancementAmount: 0
+  finesseEnhancementAmount: 0
+  agilityEnhancementAmount: 0
+  healthEnhancementAmount: 0
+  enhancements: []
 --- !u!114 &7162772077932932600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,6 +2132,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5481bd2b78fed3f40bbf589c0eba8866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-2273048187361931670
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913473220747212850}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4969067674065681699
 GameObject:
   m_ObjectHideFlags: 0
