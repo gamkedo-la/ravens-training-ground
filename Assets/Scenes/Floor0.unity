@@ -5257,6 +5257,7 @@ MonoBehaviour:
   startingY: 0
   startingZ: 0
   getStartRot: 0
+  rotationSpeed: 100
 --- !u!65 &169091973
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7179,6 +7180,7 @@ MonoBehaviour:
   startingY: 0
   startingZ: 0
   getStartRot: 0
+  rotationSpeed: 100
 --- !u!65 &556475222
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8290,6 +8292,7 @@ MonoBehaviour:
   startingY: 0
   startingZ: 0
   getStartRot: 0
+  rotationSpeed: 100
 --- !u!65 &813794629
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8614,6 +8617,7 @@ MonoBehaviour:
   startingY: 2.9
   startingZ: -2.08
   getStartRot: 0
+  rotationSpeed: 50
 --- !u!64 &873647168
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8864,6 +8868,7 @@ MonoBehaviour:
   startingY: 0
   startingZ: 0
   getStartRot: 0
+  rotationSpeed: 100
 --- !u!65 &908342137
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8993,6 +8998,7 @@ MonoBehaviour:
   startingY: 0
   startingZ: 0
   getStartRot: 0
+  rotationSpeed: 100
 --- !u!65 &914559887
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9352,6 +9358,7 @@ MonoBehaviour:
   startingY: 0
   startingZ: 0
   getStartRot: 0
+  rotationSpeed: 100
 --- !u!65 &987068010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16291,6 +16298,7 @@ MonoBehaviour:
   startingY: 2.9
   startingZ: -2.08
   getStartRot: 0
+  rotationSpeed: 50
 --- !u!64 &1607058992
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17939,6 +17947,7 @@ MonoBehaviour:
   startingY: 0
   startingZ: 0
   getStartRot: 0
+  rotationSpeed: 100
 --- !u!65 &1903019061
 BoxCollider:
   m_ObjectHideFlags: 0
