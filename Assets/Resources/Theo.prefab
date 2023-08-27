@@ -657,7 +657,7 @@ Transform:
   - {fileID: 5413773973500181583}
   - {fileID: 9114002475334305728}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-4725255171092789864
 MonoBehaviour:
@@ -1179,16 +1179,64 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7640558969779515294, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_Name
+      value: cataclysm
+      objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_Name
+      value: pajamabottoms
+      objectReference: {fileID: 0}
+    - target: {fileID: -2045257923548263128, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_Name
+      value: phantom
+      objectReference: {fileID: 0}
+    - target: {fileID: -2045257923548263128, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1599826595754709761, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_Name
+      value: jeans
+      objectReference: {fileID: 0}
+    - target: {fileID: -1599826595754709761, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_Name
+      value: head
+      objectReference: {fileID: 0}
+    - target: {fileID: -466329591000292508, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_Name
+      value: pajamatop
+      objectReference: {fileID: 0}
+    - target: {fileID: -208595431880416365, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_Name
+      value: warrior
+      objectReference: {fileID: 0}
+    - target: {fileID: -208595431880416365, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281855664364225751, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_Name
+      value: nightfall
+      objectReference: {fileID: 0}
+    - target: {fileID: 281855664364225751, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
       propertyPath: m_Name
       value: theo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
+      propertyPath: m_Name
+      value: trousers
       objectReference: {fileID: 0}
     - target: {fileID: 8416272007918961125, guid: 8f2b225745d82394c943fa56f4009416, type: 3}
       propertyPath: m_IsActive

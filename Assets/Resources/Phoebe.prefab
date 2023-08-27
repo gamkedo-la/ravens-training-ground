@@ -40,7 +40,7 @@ Transform:
   - {fileID: 310019201792806779}
   - {fileID: 4621232343370702201}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1507063610130183861
 MonoBehaviour:
@@ -1119,9 +1119,77 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: head
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: lifesoulBinder
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6763858364670572316, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: phantom
+      objectReference: {fileID: 0}
+    - target: {fileID: -6763858364670572316, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2045257923548263128, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: thundersoul
+      objectReference: {fileID: 0}
+    - target: {fileID: -2045257923548263128, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1599826595754709761, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: pajamapants
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: notUsed
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -466329591000292508, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: nexusskirt
+      objectReference: {fileID: 0}
+    - target: {fileID: -466329591000292508, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -208595431880416365, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: blackfireskirt
+      objectReference: {fileID: 0}
+    - target: {fileID: -208595431880416365, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 281855664364225751, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: pajamatop
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
       propertyPath: m_Name
       value: phoebe
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_Name
+      value: blightSkirt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: fc7e1702bdc8c5a4ea0e7418eae3d5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
