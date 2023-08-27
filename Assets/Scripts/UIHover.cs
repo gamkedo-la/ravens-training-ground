@@ -93,7 +93,7 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void IsContinue()
     {
         toTurnOn.SetActive(true);
-        Invoke("Advance", 1f);
+        Invoke("Advance", 1);
     }
 
     void Advance()
