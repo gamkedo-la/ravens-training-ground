@@ -5039,6 +5039,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 510772856468813912, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
+      propertyPath: m_Range
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4249220191032639368, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -5095,6 +5099,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7314970614924128275, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
+      propertyPath: m_Range
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7708166694304694607, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
       propertyPath: m_Name
       value: LavaFall
@@ -5102,6 +5110,14 @@ PrefabInstance:
     - target: {fileID: 7708166694304694607, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397326089798356784, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
+      propertyPath: m_Range
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500111141903118361, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
+      propertyPath: m_Range
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8268,6 +8284,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 510772856468813912, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
+      propertyPath: m_Range
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4249220191032639368, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -8324,9 +8344,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7314970614924128275, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
+      propertyPath: m_Range
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7708166694304694607, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
       propertyPath: m_Name
       value: LavaFall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397326089798356784, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
+      propertyPath: m_Range
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500111141903118361, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
+      propertyPath: m_Range
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
