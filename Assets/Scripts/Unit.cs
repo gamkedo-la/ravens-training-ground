@@ -153,9 +153,7 @@ public class Unit : MonoBehaviour
         { yield return new WaitForEndOfFrame(); }
         if (currentState == UnitState.Dead)
         { yield return new WaitForEndOfFrame(); }
-        /*        if (currentState != UnitState.Unconscious || currentState != UnitState.Fled)
-                {*/
-        battle.MoveCamera();
+
 
         GetComponent<BaseStats>().NewTurnEntered();
 

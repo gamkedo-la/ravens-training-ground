@@ -62,7 +62,7 @@ public class Battle : MonoBehaviour
     bool hasFled;
     string tempStoreOfPlayer;
 
-    public GameObject movingCamera, cameraView;
+    public GameObject movingCamera;
     public GameObject playerUICanvas;
     public Transform AoEView, AllEnemiesKnockedDownPOV;
 
@@ -72,6 +72,8 @@ public class Battle : MonoBehaviour
     public GameObject victoryMenu;
     public bool groupAttackHappening;
     public GameObject damageParticle;
+
+    public BattleCameraController battleCameraController;
 
     void Start()
     {
@@ -283,6 +285,8 @@ public class Battle : MonoBehaviour
             currentCombatant = (currentCombatant + 1) % Combatants.Count;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
 
+            MoveCamera();
+
             if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Dead || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Fled)
                 StartCoroutine(NextTurn());
         }
@@ -338,6 +342,7 @@ public class Battle : MonoBehaviour
             unitCurrentlyTakingTurn = false;
             playerUICanvas.SetActive(true);
         }
+        MoveCamera();
             
     }
 
@@ -747,31 +752,15 @@ public class Battle : MonoBehaviour
 
     public void MoveCamera()
     {
+        battleCameraController.SetBattleCameraTransform(currentCombatantUnit.stationController.perspectiveCamera.transform);
         if (currentCombatantUnit.isAPlayer)
         {
             playerUICanvas.SetActive(true);
-            for (int i = 0; i < GetPlayers().Count; i++)
-            {
-                if (currentCombatantUnit.name == GetPlayers()[i].GetComponent<Unit>().name)
-                {
-                    movingCamera.transform.position = PlayerBattleStations[i].perspectiveCamera.position;
-                    movingCamera.transform.rotation = PlayerBattleStations[i].perspectiveCamera.rotation;
-                }
-            }
+
         }
         else
         {
             playerUICanvas.SetActive(false);
-
-            //THIS IS A PROBLEM - ENEMIES CAN BE NAMED THE SAME THING
-            for (int i = 0; i < GetEnemies().Count; i++)
-            {
-                if (currentCombatantUnit.name == GetEnemies()[i].GetComponent<Unit>().name)
-                {
-                    movingCamera.transform.position = EnemyBattleStations[i].perspectiveCamera.position;
-                    movingCamera.transform.rotation = EnemyBattleStations[i].perspectiveCamera.rotation;
-                }
-            }      
         }       
     }
 
@@ -907,7 +896,7 @@ public class Battle : MonoBehaviour
 
             movingCamera.transform.position = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.position;
             movingCamera.transform.rotation = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.rotation;
-            cameraView.GetComponent<Animator>().SetTrigger("victory");
+            battleCameraController.GetComponent<Animator>().SetTrigger("victory");
 
 
             //open experience menu
