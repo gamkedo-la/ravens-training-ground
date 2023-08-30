@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 6738333048669163199}
   - component: {fileID: 1920275915637271523}
   - component: {fileID: 5763898504775467543}
+  - component: {fileID: 7077275883611595432}
   m_Layer: 5
   m_Name: playerProfile
   m_TagString: Untagged
@@ -406,6 +407,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7077275883611595432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3434058846492571849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5c150b564af0a4e934bfb696fc6f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUI: {fileID: 3278982627643087473}
+  manaUI: {fileID: 1956890914566659792}
+  healthText: {fileID: 4527918456787908990}
+  manaText: {fileID: 3241272572948747476}
+  icon: {fileID: 1718125927361129343}
+  triangle: {fileID: 3408374362619955040}
 --- !u!1 &3525246180662154304
 GameObject:
   m_ObjectHideFlags: 0
