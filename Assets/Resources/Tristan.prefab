@@ -710,7 +710,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5974396021625036794}
   - component: {fileID: 1692924528698019732}
-  - component: {fileID: -1393977606469236529}
   - component: {fileID: 3987401911589210539}
   - component: {fileID: 4752357220681098044}
   - component: {fileID: 6179545054639404137}
@@ -814,33 +813,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: c271e6615554bd944a93ab4dd4904755, type: 2}
   - {fileID: 2100000, guid: c271e6615554bd944a93ab4dd4904755, type: 2}
   currentState: 0
---- !u!54 &-1393977606469236529
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7383520769527709757}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 0
-  m_ImplicitTensor: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &3987401911589210539
 MonoBehaviour:
   m_ObjectHideFlags: 0
