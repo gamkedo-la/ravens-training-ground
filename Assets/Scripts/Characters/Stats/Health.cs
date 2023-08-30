@@ -7,6 +7,8 @@ namespace Character.Stats {
         //Cassidy wrote this, startingHitPoints is acting as a 'max' hit points for enemies 12/8/23
         public int startingHitPoints;
 
+        public delegate void HealthChanged(int health);
+        public event HealthChanged HealthChangedEvent;
         private void Start()
         {
              startingHitPoints=hitpoints;
@@ -43,7 +45,8 @@ namespace Character.Stats {
         public void TakeDamage(Unit damageSource, int damage) {
             hitpoints = Mathf.Max(hitpoints - damage, 0);
             Debug.Log("Damage Applied to: " + gameObject.name);
-
+            if(HealthChangedEvent!= null)
+                HealthChangedEvent(hitpoints);
             if (!gameObject.GetComponent<Unit>().isAPlayer)
             {
                 StartCoroutine(gameObject.GetComponent<Unit>().UpdateUI());
