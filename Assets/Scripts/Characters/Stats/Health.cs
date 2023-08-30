@@ -4,6 +4,20 @@ using UnityEngine;
 namespace Character.Stats { 
     public class Health : MonoBehaviour {
         [SerializeField] int hitpoints;
+
+        public int HitPoints
+        {
+            set
+            {
+                hitpoints = value;
+                if (HealthChangedEvent != null)
+                    HealthChangedEvent(hitpoints);
+            }
+            get
+            {
+                return hitpoints;
+            }
+        }
         //Cassidy wrote this, startingHitPoints is acting as a 'max' hit points for enemies 12/8/23
         public int startingHitPoints;
 
@@ -11,17 +25,17 @@ namespace Character.Stats {
         public event HealthChanged HealthChangedEvent;
         private void Start()
         {
-             startingHitPoints=hitpoints;
+             startingHitPoints= HitPoints;
         }
 
         public event Action OnDie;
 
         public bool IsDead() {
-            return hitpoints <= 0;
+            return HitPoints <= 0;
         }
 
         public void Die() {
-            hitpoints = 0;
+            HitPoints = 0;
             //Somewhere else should be calling out that <= 0 should die so we commented it out
           //  OnDie.Invoke();
         }
@@ -31,11 +45,11 @@ namespace Character.Stats {
         }
 
         public int GetCurrentHP() {
-            return hitpoints;
+            return HitPoints;
         }
 
         public void AddHealth(int healthToAdd) {
-            hitpoints = Math.Min(hitpoints + healthToAdd, GetComponent<BaseStats>().GetStat(Stat.Health));
+            HitPoints = Math.Min(HitPoints + healthToAdd, GetComponent<BaseStats>().GetStat(Stat.Health));
         }
 
         public void HealToFull() {
@@ -43,10 +57,8 @@ namespace Character.Stats {
         }
 
         public void TakeDamage(Unit damageSource, int damage) {
-            hitpoints = Mathf.Max(hitpoints - damage, 0);
+            HitPoints = Mathf.Max(HitPoints - damage, 0);
             Debug.Log("Damage Applied to: " + gameObject.name);
-            if(HealthChangedEvent!= null)
-                HealthChangedEvent(hitpoints);
             if (!gameObject.GetComponent<Unit>().isAPlayer)
             {
                 StartCoroutine(gameObject.GetComponent<Unit>().UpdateUI());
