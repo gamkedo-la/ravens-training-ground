@@ -19,6 +19,7 @@ public class BattlePlayerProfileController : MonoBehaviour
     {
         this.unit = unit;
         unit.GetComponent<Health>().HealthChangedEvent += UpdateHealth;
+        unit.GetComponent<Magic>().MagicPointsChangedEvent += UpdateMagic;
 
         SetIcons(index);
         SetHealth();
@@ -46,6 +47,11 @@ public class BattlePlayerProfileController : MonoBehaviour
     {
         healthUI.value = health;
         healthText.text = health.ToString("F0");
+    }
+    public void UpdateMagic(int magic)
+    {
+        manaUI.value = magic;
+        manaText.text = magic.ToString("F0");
     }
 
 }
