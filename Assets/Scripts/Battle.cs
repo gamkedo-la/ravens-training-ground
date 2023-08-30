@@ -23,9 +23,6 @@ public class Battle : MonoBehaviour
     public List<StationController> PlayerBattleStations = new List<StationController>();
     public List<StationController> EnemyBattleStations = new List<StationController>();
 
-    GameObject currentParty0, currentParty1, currentParty2, currentParty3;
-    GameObject currentEnemy0, currentEnemy1, currentEnemy2, currentEnemy3;
-
 
     public bool floor1 = true, floor2, floor3;
     public List<string> enemiesFloor1 = new List<string>();
@@ -48,13 +45,7 @@ public class Battle : MonoBehaviour
 
     int enemyCountForKnockedOut, playerCountForKnockedOut;
 
-    //UI for Players
-    public List<Slider> healthUI = new List<Slider>();
-    public List<Slider> manaUI = new List<Slider>();
-    public List<TMP_Text> healthText = new List<TMP_Text>();
-    public List<TMP_Text> manaText = new List<TMP_Text>();
-    public List<Image> icons = new List<Image>();
-    public List<Image> triangles = new List<Image>();
+    public List<BattlePlayerProfileController> battlePlayerProfileControllers;
 
     public GameObject powerUpParticle;
     int playerToAttack;
@@ -73,6 +64,7 @@ public class Battle : MonoBehaviour
     public bool groupAttackHappening;
     public GameObject damageParticle;
 
+    public PlayerUIControllor playerUIControllor;
     public BattleCameraController battleCameraController;
 
     void Start()
@@ -150,6 +142,8 @@ public class Battle : MonoBehaviour
             Combatants.Add(tempEnemy);
         }
         currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
+
+        playerUIControllor.Initialize(GetPlayers().Select(r => r.GetComponent<Unit>()).ToList());
 
         OrderCombatants();
     }
@@ -831,7 +825,7 @@ public class Battle : MonoBehaviour
 
     public void UpdatePlayerHealthManaUI()
     {
-        //This updates the player's UI in the bottom right hand corner (usually done at the end of the player's turn)
+/*        //This updates the player's UI in the bottom right hand corner (usually done at the end of the player's turn)
         for (int i = 0; i < GetPlayers().Count; i++)
         {
             //If player's hitpoints < 0 their icons are turned black
@@ -859,7 +853,7 @@ public class Battle : MonoBehaviour
             manaUI[i].maxValue = GetPlayers()[i].GetComponent<Magic>().GetMaxMP();
             manaUI[i].value = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP();
             manaText[i].text = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP().ToString("F0");
-        }
+        }*/
     }
     public void EndTurn()
     {
