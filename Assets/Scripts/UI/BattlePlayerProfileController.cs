@@ -18,6 +18,7 @@ public class BattlePlayerProfileController : MonoBehaviour
     public void Intitialize(Unit unit,int index)
     {
         this.unit = unit;
+        unit.GetComponent<Health>().HealthChangedEvent += UpdateHealth;
 
         SetIcons(index);
         SetHealth();
@@ -31,7 +32,8 @@ public class BattlePlayerProfileController : MonoBehaviour
     }
     public void SetHealth()
     {
-        healthUI.value = unit.GetComponent<Health>().GetCurrentHP() / unit.GetComponent<Health>().GetMaxHP();
+        healthUI.maxValue = unit.GetComponent<Health>().GetMaxHP();
+        healthUI.value = unit.GetComponent<Health>().GetCurrentHP();
         healthText.text = unit.GetComponent<Health>().GetCurrentHP().ToString("F0");
     }
     public void SetMana()
@@ -40,7 +42,11 @@ public class BattlePlayerProfileController : MonoBehaviour
         manaUI.value = unit.GetComponent<Magic>().GetCurrentMP();
         manaText.text = unit.GetComponent<Magic>().GetCurrentMP().ToString("F0");
     }
-
+    public void UpdateHealth(int health)
+    {
+        healthUI.value = health;
+        healthText.text = health.ToString("F0");
+    }
 
 }
 
