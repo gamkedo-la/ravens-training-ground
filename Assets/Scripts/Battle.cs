@@ -148,6 +148,8 @@ public class Battle : MonoBehaviour
         playerUIControllor.Initialize(GetPlayers().Select(r => r.GetComponent<Unit>()).ToList());
 
         OrderCombatants();
+
+        StartCoroutine(ActivateNextUnit());
     }
     IEnumerator SetUpBattle()
     {
@@ -278,10 +280,6 @@ public class Battle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !unitCurrentlyTakingTurn)
         {
             playerUICanvas.SetActive(false);
-            currentCombatant = (currentCombatant + 1) % Combatants.Count;
-            currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
-
-            MoveCamera();
 
             if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Dead || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Fled)
                 StartCoroutine(NextTurn());
@@ -303,23 +301,19 @@ public class Battle : MonoBehaviour
         }
         #endregion
     }
-
-    IEnumerator NextTurn()
+    IEnumerator ActivateNextUnit()
     {
-        //The combatants list is sorted in order from largest to smallest incrementing by one. 
-        //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
+        Debug.Log("dsA");
         if (currentCombatant >= Combatants.Count)
         {
             Combatants = Combatants.OrderByDescending(x => x.GetComponent<BaseStats>().GetStat(Stat.Agility) + x.GetComponent<BaseStats>().GetStat(Stat.Agility)).ToList();
             currentCombatant = 0;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
-            /*
-             * TODO : Modify ordering based on agility, without modifying base agiity so enhancements persist
-                for (int i = 0; i < Combatants.Count; i++)
-                {
-                    Combatants[i].GetComponent<Unit>().Agility = 0;
-                }
-             */
+        }
+        else
+        {
+            currentCombatant = (currentCombatant + 1) % Combatants.Count;
+            currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
         }
 
         characterNameHolder.SetActive(true);
@@ -327,6 +321,16 @@ public class Battle : MonoBehaviour
         int currentCharacterAgilityStat = currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Agility);
         int currentCharacterCurrentHP = currentCombatantUnit.GetComponent<Health>().GetCurrentHP();
         print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCharacterAgilityStat) + " CurrentHP: " + currentCharacterCurrentHP);
+
+
+        MoveCamera();
+        yield return new WaitForEndOfFrame();
+    }
+    IEnumerator NextTurn()
+    {
+        //The combatants list is sorted in order from largest to smallest incrementing by one. 
+        //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
+
 
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
         {
@@ -338,8 +342,8 @@ public class Battle : MonoBehaviour
             unitCurrentlyTakingTurn = false;
             playerUICanvas.SetActive(true);
         }
-        MoveCamera();
-            
+
+        StartCoroutine(ActivateNextUnit());
     }
 
     /// <summary>
