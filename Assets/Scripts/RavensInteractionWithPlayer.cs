@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class RavensInteractionWithPlayer : MonoBehaviour
 {
     bool isColliding;
     public GameObject UICanvas;
     public GameObject cam;
+
+    public TMP_Text shiny;
+
+    public GameObject itemStore, clothesStore;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +24,7 @@ public class RavensInteractionWithPlayer : MonoBehaviour
         if (isColliding && Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(Entering());
+            shiny.text = GameManager.shinyThings.ToString("F0");
             UICanvas.SetActive(true);
         }
     }
@@ -49,5 +55,17 @@ public class RavensInteractionWithPlayer : MonoBehaviour
         else
             cam.GetComponent<Animator>().SetBool("focused", false);
 
+    }
+
+    public void itemPressed()
+    {
+        itemStore.SetActive(true);
+        clothesStore.SetActive(false);
+    }
+
+    public void clothesPressed()
+    {
+        itemStore.SetActive(false);
+        clothesStore.SetActive(true);
     }
 }
