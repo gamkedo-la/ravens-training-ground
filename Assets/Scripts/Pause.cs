@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Pause : MonoBehaviour
 {
     private bool isGamePaused = false;
     [SerializeField] GameObject pauseMenuCanvas;
+    [SerializeField] PlayableDirector pauseTimeline;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class Pause : MonoBehaviour
             else
             {
                 PauseGame();
+                pauseTimeline.Play();
             }
         }
     }
