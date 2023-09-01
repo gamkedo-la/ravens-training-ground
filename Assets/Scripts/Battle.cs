@@ -61,6 +61,8 @@ public class Battle : MonoBehaviour
     public int currentlySelectedEnemy;
     bool selectingOneTarget;
     public GameObject victoryMenu;
+    public float victoryCurrency;
+    public TMP_Text victoryCurrencyText;
     public bool groupAttackHappening;
     public GameObject damageParticle;
 
@@ -704,6 +706,7 @@ public class Battle : MonoBehaviour
                 }
                 if (Combatants[i].GetComponent<Unit>().isAPlayer == false)
                 {
+                    victoryCurrency += Combatants[i].GetComponent<Unit>().currencyToGive;
                     Combatants.Remove(Combatants[i]);
                 }
             }
@@ -906,6 +909,9 @@ public class Battle : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         victoryMenu.SetActive(true);
+        GameManager.shinyThings += victoryCurrency;
+        print(GameManager.shinyThings);
+        victoryCurrencyText.text = victoryCurrency.ToString("F0");
     }
 
     //This clears any leftover data from GameManager picked up from 'RoamingMonster.cs' or weird data from the fight

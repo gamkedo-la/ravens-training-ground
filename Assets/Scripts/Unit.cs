@@ -22,6 +22,8 @@ public class Unit : MonoBehaviour
     public float startingMagic = 10, startingPhysical = 9, startingAgility = 15, startingFinesse = 20;
     public int CurrentLevel = 1;
 
+    public float currencyToGive = 8;
+
     public float MagicEquipment, PhysicalEquipment, AgilityEquipment, FinesseEquipment;
     public Unit leftUnit, rightUnit;
     public List<Affinity> resistances;

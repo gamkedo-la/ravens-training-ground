@@ -23,8 +23,13 @@ public class GameManager : MonoBehaviour
 
     public static bool floor2Unlocked, floor3Unlocked;
 
+    //currency of choice for Ravens
+    public static float shinyThings; 
+
     public void Start()
     {
+        shinyThings += 100;
+
         inCurrentParty.Clear();
         charactersNotInParty.Clear();
         colorsInParty.Clear();
