@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1100844f9e73e4a854d13c55b01def, type: 3}
+  m_Name: RavenExploration
+  m_EditorClassIdentifier: 
+  mux:
+    tracks:
+    - label: Aa1
+      audioclips:
+      - {fileID: 8300000, guid: 4f2bfb92b5cc30b498364cdbfc25a314, type: 3}
+      - {fileID: 8300000, guid: 74945721790522a4aa6aa4c0049e5d8d, type: 3}
+      - {fileID: 8300000, guid: ab2a45b1bf6a4c249bda85318a1a8c32, type: 3}
+      - {fileID: 8300000, guid: 41ba54988dfc7b841bb1ef6afba99a76, type: 3}
+      startTime: 2.033
+      endTime: 18.305
+      trasitionTargets:
+      - label: Aa2
+        weight: 1
+    - label: Aa2
+      audioclips:
+      - {fileID: 8300000, guid: 4f2bfb92b5cc30b498364cdbfc25a314, type: 3}
+      - {fileID: 8300000, guid: 74945721790522a4aa6aa4c0049e5d8d, type: 3}
+      - {fileID: 8300000, guid: ab2a45b1bf6a4c249bda85318a1a8c32, type: 3}
+      - {fileID: 8300000, guid: 41ba54988dfc7b841bb1ef6afba99a76, type: 3}
+      startTime: 2.033
+      endTime: 18.305
+      trasitionTargets:
+      - label: Ba1
+        weight: 1
+    - label: Ba1
+      audioclips:
+      - {fileID: 8300000, guid: 245b33cf6ccd2ad4fb4134118cc92211, type: 3}
+      - {fileID: 8300000, guid: 9e30fb23390089c47b4905ff906f35e9, type: 3}
+      startTime: 2.033
+      endTime: 18.305
+      trasitionTargets:
+      - label: Ba2
+        weight: 1
+    - label: Ba2
+      audioclips:
+      - {fileID: 8300000, guid: 245b33cf6ccd2ad4fb4134118cc92211, type: 3}
+      - {fileID: 8300000, guid: 9e30fb23390089c47b4905ff906f35e9, type: 3}
+      startTime: 2.033
+      endTime: 18.305
+      trasitionTargets:
+      - label: Ab1
+        weight: 1
+    - label: Ab1
+      audioclips:
+      - {fileID: 8300000, guid: aa13c641c8a2e064eae7f219528f5497, type: 3}
+      - {fileID: 8300000, guid: ec137ee74b24ee04fa9592a1a2923b4e, type: 3}
+      - {fileID: 8300000, guid: 099e9b646e7d7734995e3453e80a06d4, type: 3}
+      - {fileID: 8300000, guid: 5e7829b160cd1e544869c5bd8329dc7d, type: 3}
+      startTime: 2.033
+      endTime: 18.305
+      trasitionTargets:
+      - label: Ab2
+        weight: 1
+    - label: Ab2
+      audioclips:
+      - {fileID: 8300000, guid: aa13c641c8a2e064eae7f219528f5497, type: 3}
+      - {fileID: 8300000, guid: ec137ee74b24ee04fa9592a1a2923b4e, type: 3}
+      - {fileID: 8300000, guid: 099e9b646e7d7734995e3453e80a06d4, type: 3}
+      - {fileID: 8300000, guid: 5e7829b160cd1e544869c5bd8329dc7d, type: 3}
+      startTime: 2.033
+      endTime: 18.305
+      trasitionTargets:
+      - label: Bb1
+        weight: 1
+    - label: Bb1
+      audioclips:
+      - {fileID: 8300000, guid: d19a1ea4028f67e48a1b47f8356c983f, type: 3}
+      - {fileID: 8300000, guid: 18c6a2de2558cc54495b6ffc57e4f7ed, type: 3}
+      startTime: 2.033
+      endTime: 18.305
+      trasitionTargets:
+      - label: Bb2
+        weight: 1
+    - label: Bb2
+      audioclips:
+      - {fileID: 8300000, guid: d19a1ea4028f67e48a1b47f8356c983f, type: 3}
+      - {fileID: 8300000, guid: 18c6a2de2558cc54495b6ffc57e4f7ed, type: 3}
+      startTime: 2.033
+      endTime: 18.305
+      trasitionTargets:
+      - label: Aa1
+        weight: 1
