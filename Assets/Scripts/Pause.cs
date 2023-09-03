@@ -28,6 +28,7 @@ public class Pause : MonoBehaviour
             if (isGamePaused)
             {
                 UnPauseGame();
+                ResetTimeline();
             }
             else
             {
@@ -35,6 +36,13 @@ public class Pause : MonoBehaviour
                 pauseTimeline.Play();
             }
         }
+    }
+
+    private void ResetTimeline()
+    {
+        pauseTimeline.Stop();
+        pauseTimeline.time = 0;
+        pauseTimeline.Evaluate();
     }
 
     private void PauseGame()
