@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a06c662307682da439ba201e5e9a71c9, type: 3}
-  m_Name: nightfall jacket 3
+  m_Name: pajama pants
   m_EditorClassIdentifier: 
-  nameOfItem: 
-  Cost: 250
-  ravenStock: 6
-  playerStock: 0
-  whatDoesItDo: 
-  equipableSlot: chest
-  gender: 
-  modifier: 
-  percentIncrease: 17
+  nameOfItem: Pajama Pants
+  Cost: 0
+  ravenStock: 0
+  playerStock: 6
+  whatDoesItDo: why would the Raven wake us up in the middle of the night?
+  equipableSlot: legs
+  gender: unisex
+  modifier: none
+  percentIncrease: 0
