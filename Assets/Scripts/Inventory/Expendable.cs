@@ -17,4 +17,6 @@ public class Expendable : InventoryItemBase
     public bool magicPoints, health, attack, defense;
     //affecting a direct number (like 50 health) or a percent (20% attack increase)
     public int specificAmount, percentageAmount;
+    //only useable in battle (others can be used outside of battle)
+    public bool onlyUsedInBattle;
 }

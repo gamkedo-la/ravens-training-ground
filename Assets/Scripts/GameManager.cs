@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public static bool floor2Unlocked, floor3Unlocked;
 
     public List<Expendable> playerInventory;
+    public List<Clothing> playerClothes;
 
     //currency of choice for Ravens
     public static float shinyThings; 

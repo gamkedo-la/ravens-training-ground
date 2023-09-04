@@ -18,6 +18,6 @@ MonoBehaviour:
   playerStock: 0
   whatDoesItDo: Forged from the fires of Cataclysm Cave, these aid in Charms.
   equipableSlot: legs
-  gender: 'female '
+  gender: female
   modifier: charms
   percentIncrease: 13
