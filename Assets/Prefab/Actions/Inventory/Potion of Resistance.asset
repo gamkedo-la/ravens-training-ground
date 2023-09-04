@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Potion of Resistance
   Cost: 100
-  ravenStock: 5
+  ravenStock: 6
   playerStock: 0
   whatDoesItDo: A potion to decrease the defense of all enemies
   solo: 0

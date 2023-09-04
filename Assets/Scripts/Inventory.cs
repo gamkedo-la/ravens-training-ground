@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<string> ravensInventory, ravensClothing, playersInventory;
+    public List<string> ravensInventory, ravensClothing;
     public List<int> ravensStock, playerStock;
     // Start is called before the first frame update
     void Start()

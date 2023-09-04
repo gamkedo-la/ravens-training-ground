@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Motivational Stone
   Cost: 100
-  ravenStock: 5
+  ravenStock: 6
   playerStock: 0
   whatDoesItDo: A motivational rock, used to increase attack of party
   solo: 0

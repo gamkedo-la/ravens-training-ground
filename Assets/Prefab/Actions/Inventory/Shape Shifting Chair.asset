@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Shape Shifting Chair
   Cost: 150
-  ravenStock: 5
+  ravenStock: 6
   playerStock: 0
   whatDoesItDo: Launcing a transfigured chair at one enemy
   solo: 1

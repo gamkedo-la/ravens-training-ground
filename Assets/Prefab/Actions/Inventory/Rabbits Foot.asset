@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Rabbits Foot
   Cost: 75
-  ravenStock: 5
+  ravenStock: 6
   playerStock: 0
   whatDoesItDo: A lucky token to increase attack of one person
   solo: 1

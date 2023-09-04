@@ -16,5 +16,5 @@ public class Expendable : InventoryItemBase
     //specific stat affected
     public bool magicPoints, health, attack, defense;
     //affecting a direct number (like 50 health) or a percent (20% attack increase)
-    public int specificAmount, percentageAmount; 
+    public int specificAmount, percentageAmount;
 }

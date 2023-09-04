@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Bandage
   Cost: 50
-  ravenStock: 5
+  ravenStock: 6
   playerStock: 0
   whatDoesItDo: A small bandage for small injuries
   solo: 1
