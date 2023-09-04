@@ -1,15 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using TMPro;
 
-public class IndividualItemLayout : MonoBehaviour
+public class IndividualItemLayout : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TMP_Text itemName, itemStock, itemCost;
     public Expendable specificItem;
 
     public TMP_Text shinyText;
     GameObject gameManager;
+
+    public GameObject descriptorBox;
+    public TMP_Text descriptorText;
 
     private void Start()
     {
@@ -19,6 +24,18 @@ public class IndividualItemLayout : MonoBehaviour
         itemName.text = specificItem.nameOfItem;
         itemStock.text = specificItem.ravenStock.ToString("F0");
         itemCost.text = specificItem.Cost.ToString("F0");
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        descriptorBox.SetActive(true);
+        descriptorText.text = specificItem.whatDoesItDo;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        descriptorBox.SetActive(false);
+        descriptorText.text = "";
     }
 
     public void PurchaseItem()
