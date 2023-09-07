@@ -8512,6 +8512,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 276267232}
+  - component: {fileID: 276267234}
+  - component: {fileID: 276267233}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -8537,6 +8539,40 @@ Transform:
   m_Father: {fileID: 198202746}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &276267233
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276267231}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 2.16, z: 2.83}
+--- !u!114 &276267234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276267231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e54ac02af66c440a9dd14bca3b45dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keys: []
 --- !u!4 &276808140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7609594263977302639, guid: 41a4ace934725c64abd04b1ed4a57f9a, type: 3}
@@ -51524,8 +51560,10 @@ GameObject:
   - component: {fileID: 1778096408}
   - component: {fileID: 1778096410}
   - component: {fileID: 1778096409}
+  - component: {fileID: 1778096412}
+  - component: {fileID: 1778096411}
   m_Layer: 0
-  m_Name: Torus
+  m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51596,6 +51634,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778096407}
   m_Mesh: {fileID: -8803937527578110353, guid: 96ea108243274f348a00d31bf3c6b5e4, type: 3}
+--- !u!135 &1778096411
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778096407}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.05
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1778096412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778096407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdea3352b574ff14fbb875c672aab926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: 
 --- !u!1001 &1784429620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56118,14 +56190,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 0}
   lockedDoor: {fileID: 276267231}
-  keyIterations: 3
+  keyIterations: 4
   preKeyIterations: 1
   postKeyIterations: 2
   preGrowthIterations: 2
   postGrowthIterations: 3
   oddsOfBranch: 0.33333334
   fillIterations: 2
-  lockAndKey: 0
+  lockAndKey: 1
   gridScale: 15
   startRooms:
   - {fileID: 847941990}
