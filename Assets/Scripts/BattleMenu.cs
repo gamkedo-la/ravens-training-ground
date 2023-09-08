@@ -149,9 +149,9 @@ public class BattleMenu : MonoBehaviour
 
         for (int i = 0; i < battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities.Count - 1; i++)
         {
-            GameObject instantiatedPrefab = Instantiate(spellsUIPrefab, spellsMenuHolder.transform.position, spellsMenuHolder.transform.rotation);
-            instantiatedPrefab.transform.parent = spellsMenuHolder.transform;
-            instantiatedPrefab.transform.localScale = new Vector3(5, 0.4f, 1);
+            GameObject instantiatedPrefab = Instantiate(spellsUIPrefab, spellsMenuHolder.transform);
+            //instantiatedPrefab.transform.parent = spellsMenuHolder.transform;
+            //instantiatedPrefab.transform.localScale = new Vector3(5, 0.4f, 1);
             AbilityBase associatedAttack = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities[i];
             instantiatedPrefab.transform.Find("SpellName").GetComponent<TextMeshProUGUI>().text = associatedAttack.AttackName;
             instantiatedPrefab.transform.Find("SpellDesc").GetComponent<TextMeshProUGUI>().text = associatedAttack.AttackDescription;
