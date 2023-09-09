@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Allergy Meds
   Cost: 100
-  ravenStock: 5
-  playerStock: 1
+  ravenStock: 6
+  playerStock: 3
   whatDoesItDo: Allergy suppresant to increase defense
   solo: 0
   party: 1

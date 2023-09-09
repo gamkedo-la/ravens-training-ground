@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfItem: Potion of Shielding
   Cost: 100
   ravenStock: 6
-  playerStock: 0
+  playerStock: 3
   whatDoesItDo: A one use potion to increase defense of the party
   solo: 0
   party: 1

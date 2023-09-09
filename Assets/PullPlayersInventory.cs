@@ -42,7 +42,7 @@ public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointe
         PullPlayerItems();
     }
 
-    void PullPlayerItems()
+    public void PullPlayerItems()
     {
         itemQuantity.text = specificItem.playerStock.ToString("F0");
 
@@ -80,21 +80,18 @@ public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointe
         }
         else
         {
-            if (specificItem.health)
+            for (int i = 0; i < playerUI.Length; i++)
             {
-                for (int i = 0; i < playerUI.Length; i++)
-                {
-                    if (specificItem.magicPoints)
-                        playerUI[i].interactable = true;
+                if (specificItem.magicPoints)
+                    playerUI[i].interactable = true;
 
-                    else if (playerHealth[i].HitPoints <= 0 && specificItem.reincarnate)
-                        playerUI[i].interactable = true;
-                    else if(playerHealth[i].HitPoints > 0 && !specificItem.reincarnate)
-                        playerUI[i].interactable = true;
-                }
+                else if (playerHealth[i].HitPoints <= 0 && specificItem.reincarnate)
+                    playerUI[i].interactable = true;
+                else if (playerHealth[i].HitPoints > 0 && !specificItem.reincarnate)
+                    playerUI[i].interactable = true;
             }
 
-            GameManager.itemName = specificItem.nameOfItem;
+            GameManager.itemName = specificItem;
             if (specificItem.health)
             {
                 GameManager.holdingHealth = specificItem.specificAmount;

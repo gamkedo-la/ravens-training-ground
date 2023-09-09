@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfItem: Rocks Fall
   Cost: 300
   ravenStock: 6
-  playerStock: 0
+  playerStock: 3
   whatDoesItDo: Scroll to summon a pile of rocks on all enemies
   solo: 0
   party: 1

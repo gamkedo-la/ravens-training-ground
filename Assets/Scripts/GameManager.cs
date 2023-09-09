@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     //holding variables for inventory;
     public static int holdingMagic, holdingHealth;
     public static bool holdingDeath;
-    public static string itemName;
+    public static Expendable itemName;
 
     public void Start()
     {
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     public static void ClearGameManagerDataFromInventory()
     {
-        itemName = "";
+        itemName = null;
         holdingHealth = 0;
         holdingMagic = 0;
         holdingDeath = false;

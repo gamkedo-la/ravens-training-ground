@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfItem: Botched Potion
   Cost: 50
   ravenStock: 6
-  playerStock: 0
+  playerStock: 3
   whatDoesItDo: A poorly made health potion that decreases health of one enemy
   solo: 1
   party: 0

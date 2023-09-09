@@ -16,7 +16,7 @@ MonoBehaviour:
   Cost: 200
   ravenStock: 6
   playerStock: 3
-  whatDoesItDo: A rare stone to bring a fallen player back at half health
+  whatDoesItDo: A rare stone to bring a fallen player back at 10 HP
   solo: 1
   party: 0
   boost: 1
@@ -26,6 +26,6 @@ MonoBehaviour:
   health: 1
   attack: 0
   defense: 0
-  specificAmount: 100
+  specificAmount: 10
   percentageAmount: 0
   onlyUsedInBattle: 0
