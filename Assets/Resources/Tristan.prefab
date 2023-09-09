@@ -813,6 +813,28 @@ MonoBehaviour:
   - {fileID: 2100000, guid: c271e6615554bd944a93ab4dd4904755, type: 2}
   - {fileID: 2100000, guid: c271e6615554bd944a93ab4dd4904755, type: 2}
   - {fileID: 2100000, guid: c271e6615554bd944a93ab4dd4904755, type: 2}
+  hats:
+  - {fileID: 9029133153572345407}
+  - {fileID: 5698430799520390205}
+  - {fileID: 7150260205772075400}
+  - {fileID: 3865095238960755462}
+  tops:
+  - {fileID: 3143658398398193470}
+  - {fileID: 7646196060241091314}
+  - {fileID: 7397240264077878544}
+  - {fileID: 749897943249556237}
+  pants:
+  - {fileID: 1536574827108416427}
+  - {fileID: 2050894945558792120}
+  - {fileID: 8072198455648302270}
+  - {fileID: 6939255518949178149}
+  wands:
+  - {fileID: 1412770376587120603}
+  - {fileID: 7408179858810823086}
+  - {fileID: 2965663439569748246}
+  - {fileID: 5519680433624457112}
+  - {fileID: 1046940466880773470}
+  - {fileID: 7306219702228862409}
   currentState: 0
 --- !u!114 &3987401911589210539
 MonoBehaviour:
@@ -1225,9 +1247,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &749897943249556237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 281855664364225751, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  m_PrefabInstance: {fileID: 684958425359259610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1012130631750938673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  m_PrefabInstance: {fileID: 684958425359259610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1536574827108416427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7146521406498821007, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  m_PrefabInstance: {fileID: 684958425359259610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2050894945558792120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7640558969779515294, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  m_PrefabInstance: {fileID: 684958425359259610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3143658398398193470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6763858364670572316, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
   m_PrefabInstance: {fileID: 684958425359259610}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6194232992531690994 stripped
@@ -1240,9 +1282,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -2968575774917529453, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
   m_PrefabInstance: {fileID: 684958425359259610}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6939255518949178149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1599826595754709761, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  m_PrefabInstance: {fileID: 684958425359259610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7397240264077878544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8009987137999418058, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  m_PrefabInstance: {fileID: 684958425359259610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7646196060241091314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2045257923548263128, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  m_PrefabInstance: {fileID: 684958425359259610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8072198455648302270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -466329591000292508, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  m_PrefabInstance: {fileID: 684958425359259610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8167002539437610954 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -516098083770646512, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+  m_PrefabInstance: {fileID: 684958425359259610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9029133153572345407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8416272007918961125, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
   m_PrefabInstance: {fileID: 684958425359259610}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6862518322720380533

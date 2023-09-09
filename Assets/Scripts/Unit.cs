@@ -68,6 +68,8 @@ public class Unit : MonoBehaviour
     public GameObject objectToChangeMaterialOf;
     public Material[] playerMaterial;
 
+    public GameObject[] hats, tops, pants, wands;
+
     List<Unit> targets;
 
     public enum UnitState {
