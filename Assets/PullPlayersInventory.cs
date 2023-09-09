@@ -22,8 +22,11 @@ public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointe
     public bool isBackButton;
     public GameObject currentMenu, previousMenu;
 
+    public Health[] playerHealth;
     public Magic[] players;
     public GameObject macroUIManager;
+
+    public Button[] playerUI;
 
     #region useableOutOfBattle
     
@@ -51,10 +54,9 @@ public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void UsingItemFirstStep()
     {
-        print("here");
+        GameManager.ClearGameManagerDataFromInventory();
         if (!specificItem.solo)
         {
-            print("group item, using it now");
             if (specificItem.magicPoints)
             {
                 for (int i = 0; i < players.Length; i++)
@@ -69,7 +71,6 @@ public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointe
                 itemQuantity.text = specificItem.playerStock.ToString("F0");
                 macroUIManager.GetComponent<UpdatePlayerStatsUI>().UpdatePlayerUI();
 
-                print("increase all MP");
                 specificItem.playerStock -= 1;
                 if (specificItem.playerStock <= 0)
                 {
@@ -79,11 +80,28 @@ public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointe
         }
         else
         {
-            print("one person got a health or mana up or revive");
-            /*for (int i = 0; i < playerButtons.Length; i++)
+            if (specificItem.health)
             {
-                playerButtons[i].GetComponent<Button>().interactable = true;
-            }*/
+                for (int i = 0; i < playerUI.Length; i++)
+                {
+                    if (specificItem.magicPoints)
+                        playerUI[i].interactable = true;
+
+                    else if (playerHealth[i].HitPoints <= 0 && specificItem.reincarnate)
+                        playerUI[i].interactable = true;
+                    else if(playerHealth[i].HitPoints > 0 && !specificItem.reincarnate)
+                        playerUI[i].interactable = true;
+                }
+            }
+
+            GameManager.itemName = specificItem.nameOfItem;
+            if (specificItem.health)
+            {
+                GameManager.holdingHealth = specificItem.specificAmount;
+                GameManager.holdingDeath = false;
+            }
+            if (specificItem.magicPoints)
+                GameManager.holdingMagic = specificItem.specificAmount;
         }
 
 
@@ -113,6 +131,7 @@ public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void isBack()
     {
+        GameManager.ClearGameManagerDataFromInventory();
         previousMenu.SetActive(true);
         currentMenu.SetActive(false);
     }

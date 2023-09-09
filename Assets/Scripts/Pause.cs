@@ -25,6 +25,8 @@ public class Pause : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            GameManager.ClearGameManagerDataFromInventory();
+
             if (isGamePaused)
             {
                 UnPauseGame();

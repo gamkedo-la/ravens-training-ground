@@ -27,7 +27,12 @@ public class GameManager : MonoBehaviour
     public List<Clothing> playerClothes;
 
     //currency of choice for Ravens
-    public static float shinyThings; 
+    public static float shinyThings;
+
+    //holding variables for inventory;
+    public static int holdingMagic, holdingHealth;
+    public static bool holdingDeath;
+    public static string itemName;
 
     public void Start()
     {
@@ -53,5 +58,13 @@ public class GameManager : MonoBehaviour
 
         colorsNotInParty.Add(new Color(0, 0, 0));
         colorsNotInParty.Add(new Color(23, 183, 0));
+    }
+
+    public static void ClearGameManagerDataFromInventory()
+    {
+        itemName = "";
+        holdingHealth = 0;
+        holdingMagic = 0;
+        holdingDeath = false;
     }
 }

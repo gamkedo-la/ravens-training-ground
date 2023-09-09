@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfItem: Sacred Moon Rock
   Cost: 400
   ravenStock: 6
-  playerStock: 0
+  playerStock: 3
   whatDoesItDo: Revive a fallen party member at full health
   solo: 1
   party: 0
@@ -26,6 +26,6 @@ MonoBehaviour:
   health: 1
   attack: 0
   defense: 0
-  specificAmount: 0
-  percentageAmount: 100
+  specificAmount: 5000
+  percentageAmount: 0
   onlyUsedInBattle: 0
