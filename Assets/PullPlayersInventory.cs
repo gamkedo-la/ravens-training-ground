@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using Character.Stats;
+using System.Linq;
 
 public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -20,6 +22,13 @@ public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointe
     public bool isBackButton;
     public GameObject currentMenu, previousMenu;
 
+    public Magic[] players;
+    public GameObject macroUIManager;
+
+    #region useableOutOfBattle
+    
+    #endregion
+
 
     private void Start()
     {
@@ -32,38 +41,51 @@ public class PullPlayersInventory : MonoBehaviour, IPointerEnterHandler, IPointe
 
     void PullPlayerItems()
     {
-        if (specificItem.onlyUsedInBattle)
-            this.gameObject.SetActive(false);
-        else
+        itemQuantity.text = specificItem.playerStock.ToString("F0");
+
+        if (specificItem.playerStock <= 0)
         {
-            if (gameManager.GetComponent<GameManager>().playerInventory.Contains(specificItem))
-            {
-                itemQuantity.text = specificItem.playerStock.ToString("F0");
-            }
-            else
-                this.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }
     }
 
     public void UsingItemFirstStep()
     {
+        print("here");
         if (!specificItem.solo)
         {
             print("group item, using it now");
             if (specificItem.magicPoints)
             {
+                for (int i = 0; i < players.Length; i++)
+                {
+                    players[i].MagicPoints += 50;
+                    if (players[i].MagicPoints >= players[i].startingMagicPoints)
+                    {
+                        players[i].MagicPoints = players[i].startingMagicPoints;
+                    }
+                }
+
+                itemQuantity.text = specificItem.playerStock.ToString("F0");
+                macroUIManager.GetComponent<UpdatePlayerStatsUI>().UpdatePlayerUI();
+
                 print("increase all MP");
                 specificItem.playerStock -= 1;
+                if (specificItem.playerStock <= 0)
+                {
+                    this.gameObject.SetActive(false);
+                }
             }
         }
         else
         {
-            print("one person got a health or mana up");
+            print("one person got a health or mana up or revive");
             /*for (int i = 0; i < playerButtons.Length; i++)
             {
                 playerButtons[i].GetComponent<Button>().interactable = true;
             }*/
         }
+
 
         if (specificItem.playerStock <= 0)
         {

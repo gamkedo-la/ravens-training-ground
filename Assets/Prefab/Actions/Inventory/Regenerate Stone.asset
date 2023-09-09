@@ -28,4 +28,4 @@ MonoBehaviour:
   defense: 0
   specificAmount: 0
   percentageAmount: 50
-  onlyUsedInBattle: 1
+  onlyUsedInBattle: 0

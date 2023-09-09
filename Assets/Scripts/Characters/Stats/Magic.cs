@@ -5,6 +5,9 @@ namespace Character.Stats {
     public class Magic : MonoBehaviour {
         [SerializeField] int magicpoints;
 
+        //Cassidy wrote this, startingHitPoints is acting as a 'max' magic points for enemies 9/9/23
+        public int startingMagicPoints = 20;
+
         public int MagicPoints
         {
             set
@@ -18,6 +21,8 @@ namespace Character.Stats {
                 return magicpoints;
             }
         }
+
+
 
         public delegate void MagicPointsChanged(int magic);
         public event MagicPointsChanged MagicPointsChangedEvent;

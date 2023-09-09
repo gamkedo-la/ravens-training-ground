@@ -179,6 +179,7 @@ MonoBehaviour:
   startingAgility: 15
   startingFinesse: 20
   CurrentLevel: 2
+  currencyToGive: 8
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
@@ -281,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitpoints: 50
-  startingHitPoints: 0
+  startingHitPoints: 65
 --- !u!114 &-856476907103364348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicpoints: 20
+  magicpoints: 17
+  startingMagicPoints: 30
 --- !u!114 &8444948811190367310
 MonoBehaviour:
   m_ObjectHideFlags: 0

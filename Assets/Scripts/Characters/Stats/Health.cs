@@ -19,7 +19,7 @@ namespace Character.Stats {
             }
         }
         //Cassidy wrote this, startingHitPoints is acting as a 'max' hit points for enemies 12/8/23
-        public int startingHitPoints;
+        public int startingHitPoints = 30;
 
         public delegate void HealthChanged(int health);
         public event HealthChanged HealthChangedEvent;
