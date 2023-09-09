@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public static int holdingMagic, holdingHealth;
     public static bool holdingDeath;
     public static Expendable itemName;
+    public static Clothing clothingName;
 
     public void Start()
     {
@@ -66,5 +67,6 @@ public class GameManager : MonoBehaviour
         holdingHealth = 0;
         holdingMagic = 0;
         holdingDeath = false;
+        clothingName = null;
     }
 }
