@@ -1,18 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
     private bool isGamePaused = false;
     [SerializeField] GameObject pauseMenuCanvas;
     [SerializeField] PlayableDirector pauseTimeline;
+    [SerializeField] GameObject startingMenu;
+    [SerializeField] GameObject foreground;
+    [SerializeField] GameObject background;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ResetPauseCanvas();
     }
 
     // Update is called once per frame
@@ -29,8 +34,9 @@ public class Pause : MonoBehaviour
 
             if (isGamePaused)
             {
-                UnPauseGame();
                 ResetTimeline();
+                ResetPauseCanvas();
+                UnPauseGame();
             }
             else
             {
@@ -38,6 +44,26 @@ public class Pause : MonoBehaviour
                 pauseTimeline.Play();
             }
         }
+    }
+
+    private void ResetPauseCanvas()
+    {
+        foreach (Transform canvasObject in pauseMenuCanvas.transform)
+        {
+            if(
+                canvasObject.gameObject == startingMenu ||
+                canvasObject.gameObject == foreground ||
+                canvasObject.gameObject == background
+            )
+            {
+                canvasObject.gameObject.SetActive(true);
+            }
+            else
+            {
+                canvasObject.gameObject.SetActive(false);
+            }
+        }
+        DeactivateStartingButtons();
     }
 
     private void ResetTimeline()
@@ -60,5 +86,26 @@ public class Pause : MonoBehaviour
         isGamePaused = false;
         Time.timeScale = 1.0f;
         pauseMenuCanvas.SetActive(false);
+    }
+
+    public void ActivatePauseButtons()
+    {
+        ActivateStartingButtons();
+    }
+
+    private void ActivateStartingButtons()
+    {
+        foreach (Button startingMenuButton in startingMenu.GetComponentsInChildren<Button>())
+        {
+            startingMenuButton.enabled = true;
+        }
+    }
+
+    private void DeactivateStartingButtons()
+    {
+        foreach (Transform startingMenuButton in startingMenu.transform)
+        {
+            startingMenuButton.GetComponent<Button>().enabled = false;
+        }
     }
 }
