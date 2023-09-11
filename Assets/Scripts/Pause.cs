@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
@@ -116,5 +117,11 @@ public class Pause : MonoBehaviour
         {
             startingMenuButton.GetComponent<Button>().enabled = false;
         }
+    }
+
+    public void QuitGame()
+    {
+        UnFreezeGame();
+        SceneManager.LoadScene("MainMenu");
     }
 }
