@@ -26,6 +26,20 @@ public class Pause : MonoBehaviour
         HandlePauseEvents();
     }
 
+    public void ResumeGame()
+    {
+        ResetTimeline();
+        ResetPauseCanvas();
+        UnFreezeGame();
+    }
+
+    private void PauseGame()
+    {
+        FreezeGame();
+        pauseMenuCanvas.SetActive(true);
+        pauseTimeline.Play();
+    }
+
     private void HandlePauseEvents()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -34,14 +48,11 @@ public class Pause : MonoBehaviour
 
             if (isGamePaused)
             {
-                ResetTimeline();
-                ResetPauseCanvas();
-                UnPauseGame();
+                ResumeGame();
             }
             else
             {
                 PauseGame();
-                pauseTimeline.Play();
             }
         }
     }
@@ -64,6 +75,7 @@ public class Pause : MonoBehaviour
             }
         }
         DeactivateStartingButtons();
+        pauseMenuCanvas.SetActive(false);
     }
 
     private void ResetTimeline()
@@ -73,19 +85,16 @@ public class Pause : MonoBehaviour
         pauseTimeline.Evaluate();
     }
 
-    private void PauseGame()
+    private void FreezeGame()
     {
         isGamePaused = true;
         Time.timeScale = 0.0f;
-        pauseMenuCanvas.SetActive(true);
     }
 
-
-    private void UnPauseGame()
+    private void UnFreezeGame()
     {
         isGamePaused = false;
         Time.timeScale = 1.0f;
-        pauseMenuCanvas.SetActive(false);
     }
 
     public void ActivatePauseButtons()
