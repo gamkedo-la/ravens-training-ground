@@ -25,7 +25,7 @@ public class Unit : MonoBehaviour
     public float currencyToGive = 8;
 
     public float MagicEquipment, PhysicalEquipment, AgilityEquipment, FinesseEquipment;
-    public Unit leftUnit, rightUnit;
+    public List<Unit> targets = new List<Unit>();
     public List<Affinity> resistances;
     public List<Affinity> weaknesses;
     //float lightAttack = 1f, mediumAttack = 1.4f;
@@ -52,7 +52,7 @@ public class Unit : MonoBehaviour
     public int tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 15, tier5 = 18, tier6 = 21;*/
 
     Battle battle;
-
+    public AbilityBase selectedAbility;
     public List<AbilityBase> abilities;
 
     public TMP_Text characterName, affinityText;
@@ -70,8 +70,6 @@ public class Unit : MonoBehaviour
 
     public GameObject[] hats, tops, pants, wands;
 
-    List<Unit> targets;
-
     public enum UnitState {
         CASTINGSUPPORTSPELL,
         CASTINGATTACKSPELL,
@@ -85,7 +83,10 @@ public class Unit : MonoBehaviour
     public UnitState currentState;
     private BaseStats baseStats;
 
-
+    public void OnConnectedToServer()
+    {
+        
+    }
     private void Start()
     {
         if (aIBrain == null)
@@ -231,18 +232,21 @@ public class Unit : MonoBehaviour
         //once the turn is over, turn off their UI
         canvas.SetActive(false);
     }
-    AbilityBase DetermineAbilityFromList(AbilityBase selectedAbility = null)
+    public AbilityBase DetermineAbilityFromList(AbilityBase selectedAbility = null)
     {
         AbilityBase abilityToUse;
         if (selectedAbility != null)
         {
             abilityToUse = selectedAbility;
-            return abilityToUse;
         }
+        else
+        {
+            abilityToUse = aIBrain.SelectAbility(abilities);
+        }
+        this.selectedAbility = abilityToUse;
 
-        abilityToUse = aIBrain.SelectAbility(abilities);
         //Debug.Log($"{name} is casting attack {abilityToUse.name}");
-        return abilityToUse;
+        return selectedAbility;
     }
 /*    Unit SelectAutoRandomTarget()
     {
@@ -255,6 +259,7 @@ public class Unit : MonoBehaviour
         return randomTarget.GetComponent<Unit>();
     }*/
 
+   
     private bool DidNotFlee() {
         int fleeThisTurn = Random.Range(100, 100);
 
