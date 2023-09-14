@@ -1213,7 +1213,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 44323510}
         m_TargetAssemblyTypeName: SpellSelection, Assembly-CSharp
-        m_MethodName: SpellSelected
+        m_MethodName: UseAbility
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10434,6 +10434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentUnit: {fileID: 0}
+  targets: []
 --- !u!4 &256340453
 Transform:
   m_ObjectHideFlags: 0
@@ -19356,7 +19357,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.9
+  m_fontSize: 63.6
   m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -25055,6 +25056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   usesSetup2: 1
+  targetingSystem: {fileID: 256340452}
   informationTextHolder: {fileID: 1442760901}
   characterNameHolder: {fileID: 1042042379}
   informationText: {fileID: 1114254898}
