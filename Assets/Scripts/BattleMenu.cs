@@ -40,12 +40,9 @@ public class BattleMenu : MonoBehaviour
         else
             tacticsMenuForLeader.SetActive(false);
         */
+        TurnOffAllMenus();
+
         firstMenu.SetActive(true);
-        tacticsMenu.SetActive(false);
-        fleeMenu.SetActive(false);
-        guardMenu.SetActive(false);
-        spellsMenu.SetActive(false);
-        itemsMenu.SetActive(false);
     }
 
     public void OpenTacticsMenu()
