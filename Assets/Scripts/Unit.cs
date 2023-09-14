@@ -25,7 +25,7 @@ public class Unit : MonoBehaviour
     public float currencyToGive = 8;
 
     public float MagicEquipment, PhysicalEquipment, AgilityEquipment, FinesseEquipment;
-    public List<Unit> targets = new List<Unit>();
+
     public List<Affinity> resistances;
     public List<Affinity> weaknesses;
     //float lightAttack = 1f, mediumAttack = 1.4f;
@@ -53,6 +53,17 @@ public class Unit : MonoBehaviour
 
     Battle battle;
     public AbilityBase selectedAbility;
+    public AbilityBase SelectedAbility { 
+        get
+        { return selectedAbility; }
+        set 
+        {
+            selectedAbility = value;
+
+            if(selectedAbility.targetType == TargetType.AOE)
+            SetAOETargets(selectedAbility);
+        }
+    }
     public List<AbilityBase> abilities;
 
     public TMP_Text characterName, affinityText;
@@ -74,6 +85,7 @@ public class Unit : MonoBehaviour
         CASTINGSUPPORTSPELL,
         CASTINGATTACKSPELL,
         IDLE,
+        Targeting,
         Alive,
         Unconscious,
         Fled,
@@ -181,21 +193,24 @@ public class Unit : MonoBehaviour
         if (DidNotFlee() == false)
             yield return new WaitForEndOfFrame();
 
-        AbilityBase abilityBaseTemp = DetermineAbilityFromList(selectedAbility);
 
-       
+        SelectedAbility = DetermineAbilityFromList(selectedAbility);
+
         if (isOnAuto)
         {
 
-            targets = aIBrain.SelectTarget(abilityBaseTemp, this, battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
+            battle.targetingSystem.Targets = aIBrain.SelectTarget(this.selectedAbility, this, battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
 
-            if (abilityBaseTemp.AttemptAbility(this, targets))
-            {
-                anim.SetTrigger("Attack");
-                //this waits the duration of the attack (1.2 seconds), but only 75% through the animation before playing 'takedamage'
-                Invoke("WaitingForAttackToHit", 1.2f * .75f);
-            }
+
         }
+
+        yield return StartCoroutine(UseAbility());
+        
+        battle.targetingSystem.CurrentUnit = null;
+
+        yield return new WaitForEndOfFrame();
+
+        StartCoroutine(battle.CombatantFinishedTurn());
 
         yield return new WaitForSeconds(1);
         // DetermineAttack();
@@ -204,13 +219,24 @@ public class Unit : MonoBehaviour
                     print("Character is dead, you shouldn't reach here, something went wrong");*/
     }
 
-    public void WaitingForAttackToHit()
+    public IEnumerator UseAbility()
+    {
+        if (SelectedAbility.AttemptAbility(this, battle.targetingSystem.Targets))
+        {
+            anim.SetTrigger("Attack");
+            //this waits the duration of the attack (1.2 seconds), but only 75% through the animation before playing 'takedamage'
+            Invoke("WaitingForAttackToHit", 1.2f * .75f);
+        }
+        yield return new WaitForSeconds(1.2f * .75f);
+    }
+
+/*    public void WaitingForAttackToHit()
     {
         for (int i = 0; i < targets.Count; i++)
         {
             targets[i].anim.SetTrigger("TakeDamage");
         }
-    }
+    }*/
 
 
     public IEnumerator UpdateUI()
@@ -243,10 +269,18 @@ public class Unit : MonoBehaviour
         {
             abilityToUse = aIBrain.SelectAbility(abilities);
         }
-        this.selectedAbility = abilityToUse;
 
-        //Debug.Log($"{name} is casting attack {abilityToUse.name}");
-        return selectedAbility;
+        return abilityToUse;
+    }
+    public List<Unit> SetAOETargets(AbilityBase ability)
+    {
+        List<Unit> targets = new List<Unit>();
+
+        targets = aIBrain.SelectTarget(ability, this, battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
+
+        battle.targetingSystem.Targets= targets;
+
+        return targets;
     }
 /*    Unit SelectAutoRandomTarget()
     {
@@ -441,12 +475,14 @@ public class Unit : MonoBehaviour
         healthToRecover = 0;
         //tempAgility = 0;
     }
-    private void OnMouseEnter()
+    private void OnMouseDown()
     {
-        targetParticle.SetActive(true);
+        List<Unit> targets = new List<Unit>();
+        targets.Add(this);
+        battle.targetingSystem.Targets = targets;
     }
     private void OnMouseExit()
     {
-        targetParticle.SetActive(false);
+        //battle.currentCombatantUnit.targets.Remove(this);
     }
 }
