@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.UI;
 using TMPro;
 using Character.Stats;
+using JetBrains.Annotations;
 
 public enum StateOfBattle { Start, WON, LOST }
 
@@ -16,6 +17,8 @@ public class Battle : MonoBehaviour
     public bool usesSetup2;
 
     bool unitCurrentlyTakingTurn;
+
+    public TargetingSystem targetingSystem;
 
     public GameObject informationTextHolder, characterNameHolder;
     public TMP_Text informationText, characterNameText;
@@ -303,7 +306,6 @@ public class Battle : MonoBehaviour
     }
     IEnumerator ActivateNextUnit()
     {
-        Debug.Log("dsA");
         if (currentCombatant >= Combatants.Count)
         {
             Combatants = Combatants.OrderByDescending(x => x.GetComponent<BaseStats>().GetStat(Stat.Agility) + x.GetComponent<BaseStats>().GetStat(Stat.Agility)).ToList();
@@ -315,6 +317,9 @@ public class Battle : MonoBehaviour
             currentCombatant = (currentCombatant + 1) % Combatants.Count;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
         }
+        targetingSystem.CurrentUnit= currentCombatantUnit;
+
+        playerUICanvas.GetComponent<BattleMenu>().OpenFirstMenu();
 
         characterNameHolder.SetActive(true);
         characterNameText.text = currentCombatantUnit.Name;
@@ -324,6 +329,11 @@ public class Battle : MonoBehaviour
 
 
         MoveCamera();
+        yield return new WaitForEndOfFrame();
+    }
+    public IEnumerator CombatantFinishedTurn()
+    {
+        StartCoroutine(ActivateNextUnit());
         yield return new WaitForEndOfFrame();
     }
     IEnumerator NextTurn()
@@ -342,8 +352,6 @@ public class Battle : MonoBehaviour
             unitCurrentlyTakingTurn = false;
             playerUICanvas.SetActive(true);
         }
-
-        StartCoroutine(ActivateNextUnit());
     }
 
     /// <summary>
