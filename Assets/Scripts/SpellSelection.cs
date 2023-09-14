@@ -17,7 +17,7 @@ public class SpellSelection : MonoBehaviour
         playerUI = GameObject.Find("PlayerUICanvas").GetComponent<BattleMenu>();
     }
     public void SpellSelected()
-    { 
+    {
         battle.currentCombatantUnit.DetermineAbilityFromList(this.gameObject.GetComponent<SpellPrefab>().associatedAttack);
         if (!isAttacking)
         {
@@ -35,5 +35,9 @@ public class SpellSelection : MonoBehaviour
             playerUI.TurnOffAllMenus();
             battle.selectedSpell = null;
         }
+    }
+    public void UseAbility()
+    {
+        StartCoroutine(battle.currentCombatantUnit.TakingUnitTurn(battle.currentCombatantUnit.SelectedAbility));
     }
 }
