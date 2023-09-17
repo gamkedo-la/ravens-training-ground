@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverworldMovement : MonoBehaviour
 {
-    float speed = .025f;
+    float speed = 2.5f;
     bool cantMove;
     public Animator anim;
     public float turnSmoothTime = 0.1f;
@@ -16,7 +16,7 @@ public class OverworldMovement : MonoBehaviour
         float vertical = -Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical);
 
-        gameObject.transform.position = new Vector3(transform.position.x + (horizontal * speed), -2.4f, transform.position.z + (vertical * speed));
+        gameObject.transform.position = new Vector3(transform.position.x + (horizontal * speed * Time.deltaTime), -2.4f, transform.position.z + (vertical * speed * Time.deltaTime));
 
         if (direction.magnitude >= 0.1)
         {

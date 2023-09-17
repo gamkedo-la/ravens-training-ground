@@ -14,6 +14,8 @@ public class RandomRotateBob : MonoBehaviour
 
     public bool getStartRot;
 
+    public float rotationSpeed = 100f;
+
     private void Start()
     {
         minVect3 = new Vector3(startingX * percentMin, startingY * percentMin, startingZ * percentMin);
@@ -43,7 +45,7 @@ public class RandomRotateBob : MonoBehaviour
         }
         if (rotation)
         {
-            transform.Rotate(rotateDirection);
+            transform.Rotate(rotateDirection * rotationSpeed * Time.deltaTime);
         }
     }
 }

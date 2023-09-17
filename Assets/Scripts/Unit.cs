@@ -22,11 +22,12 @@ public class Unit : MonoBehaviour
     public float startingMagic = 10, startingPhysical = 9, startingAgility = 15, startingFinesse = 20;
     public int CurrentLevel = 1;
 
+    public float currencyToGive = 8;
+
     public float MagicEquipment, PhysicalEquipment, AgilityEquipment, FinesseEquipment;
-    public Unit leftUnit, rightUnit;
+
     public List<Affinity> resistances;
     public List<Affinity> weaknesses;
-    public List<Enhancement> enhancements;
     //float lightAttack = 1f, mediumAttack = 1.4f;
 
     public bool isASoloAttack, isAGroupAttack, isAHeal;
@@ -51,7 +52,18 @@ public class Unit : MonoBehaviour
     public int tier0 = 0, tier1 = 4, tier2 = 8, tier3 = 12, tier4 = 15, tier5 = 18, tier6 = 21;*/
 
     Battle battle;
+    public AbilityBase selectedAbility;
+    public AbilityBase SelectedAbility { 
+        get
+        { return selectedAbility; }
+        set 
+        {
+            selectedAbility = value;
 
+            if(selectedAbility.targetType == TargetType.AOE)
+            SetAOETargets(selectedAbility);
+        }
+    }
     public List<AbilityBase> abilities;
 
     public TMP_Text characterName, affinityText;
@@ -67,10 +79,13 @@ public class Unit : MonoBehaviour
     public GameObject objectToChangeMaterialOf;
     public Material[] playerMaterial;
 
+    public GameObject[] hats, tops, pants, wands;
+
     public enum UnitState {
         CASTINGSUPPORTSPELL,
         CASTINGATTACKSPELL,
         IDLE,
+        Targeting,
         Alive,
         Unconscious,
         Fled,
@@ -80,7 +95,10 @@ public class Unit : MonoBehaviour
     public UnitState currentState;
     private BaseStats baseStats;
 
-
+    public void OnConnectedToServer()
+    {
+        
+    }
     private void Start()
     {
         if (aIBrain == null)
@@ -122,18 +140,15 @@ public class Unit : MonoBehaviour
                 canFlee = true;
             }
         }
-        foreach(Enhancement enhancement in enhancements)
-        {
-            enhancement.Initialize(this);
-        }
+    }
+    private void OnValidate()
+    {
+        
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            ApplyEnhancements();
-        }
+
     }
 
     IEnumerator WaitingMoment()
@@ -155,11 +170,9 @@ public class Unit : MonoBehaviour
         { yield return new WaitForEndOfFrame(); }
         if (currentState == UnitState.Dead)
         { yield return new WaitForEndOfFrame(); }
-        /*        if (currentState != UnitState.Unconscious || currentState != UnitState.Fled)
-                {*/
-        battle.MoveCamera();
 
-        
+
+        GetComponent<BaseStats>().NewTurnEntered();
 
         if (hasBeenKnockedDown)
         {
@@ -180,19 +193,24 @@ public class Unit : MonoBehaviour
         if (DidNotFlee() == false)
             yield return new WaitForEndOfFrame();
 
-        AbilityBase abilityBaseTemp = DetermineAbilityFromList(selectedAbility);
 
-       
+        SelectedAbility = DetermineAbilityFromList(selectedAbility);
+
         if (isOnAuto)
         {
-            List<Unit> targets = aIBrain.SelectTarget(abilityBaseTemp,this,battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
 
-            if(abilityBaseTemp.AttemptAbility(this, targets))
-            {
-                anim.SetTrigger("Attack");
-                //TODO: add a trigger to the animation to tell when the attack has ended
-            }
+            battle.targetingSystem.Targets = aIBrain.SelectTarget(this.selectedAbility, this, battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
+
+
         }
+
+        yield return StartCoroutine(UseAbility());
+        
+        battle.targetingSystem.CurrentUnit = null;
+
+        yield return new WaitForEndOfFrame();
+
+        StartCoroutine(battle.CombatantFinishedTurn());
 
         yield return new WaitForSeconds(1);
         // DetermineAttack();
@@ -200,6 +218,26 @@ public class Unit : MonoBehaviour
                 else
                     print("Character is dead, you shouldn't reach here, something went wrong");*/
     }
+
+    public IEnumerator UseAbility()
+    {
+        if (SelectedAbility.AttemptAbility(this, battle.targetingSystem.Targets))
+        {
+            anim.SetTrigger("Attack");
+            //this waits the duration of the attack (1.2 seconds), but only 75% through the animation before playing 'takedamage'
+            Invoke("WaitingForAttackToHit", 1.2f * .75f);
+        }
+        yield return new WaitForSeconds(1.2f * .75f);
+    }
+
+/*    public void WaitingForAttackToHit()
+    {
+        for (int i = 0; i < targets.Count; i++)
+        {
+            targets[i].anim.SetTrigger("TakeDamage");
+        }
+    }*/
+
 
     public IEnumerator UpdateUI()
     {
@@ -220,22 +258,29 @@ public class Unit : MonoBehaviour
         //once the turn is over, turn off their UI
         canvas.SetActive(false);
     }
-    void ApplyEnhancements()
-    {
-        CalculateStats();
-    }
-    AbilityBase DetermineAbilityFromList(AbilityBase selectedAbility = null)
+    public AbilityBase DetermineAbilityFromList(AbilityBase selectedAbility = null)
     {
         AbilityBase abilityToUse;
         if (selectedAbility != null)
         {
             abilityToUse = selectedAbility;
-            return abilityToUse;
+        }
+        else
+        {
+            abilityToUse = aIBrain.SelectAbility(abilities);
         }
 
-        abilityToUse = aIBrain.SelectAbility(abilities);
-        Debug.Log($"{name} is casting attack {abilityToUse.name}");
         return abilityToUse;
+    }
+    public List<Unit> SetAOETargets(AbilityBase ability)
+    {
+        List<Unit> targets = new List<Unit>();
+
+        targets = aIBrain.SelectTarget(ability, this, battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
+
+        battle.targetingSystem.Targets= targets;
+
+        return targets;
     }
 /*    Unit SelectAutoRandomTarget()
     {
@@ -248,6 +293,7 @@ public class Unit : MonoBehaviour
         return randomTarget.GetComponent<Unit>();
     }*/
 
+   
     private bool DidNotFlee() {
         int fleeThisTurn = Random.Range(100, 100);
 
@@ -277,26 +323,9 @@ public class Unit : MonoBehaviour
     }
     public void AddEnhancement(Enhancement enhancement)
     {
-        enhancements.Add(enhancement);
         enhancement.Initialize(this);
-
-        CalculateStats();
     }
-    void CalculateStats()
-    {
-        /* 
-         * 
-        Magic = startingMagic;
-        Physical = startingPhysical;
-        Agility = startingAgility;
-        Finesse= startingFinesse;
-         */
 
-        foreach (Enhancement enhancement in enhancements)
-        {
-            enhancement.ApplyEnhancement();
-        }
-    }
 
     void UnitDeath()
     {
@@ -445,5 +474,15 @@ public class Unit : MonoBehaviour
         //damage = 0;
         healthToRecover = 0;
         //tempAgility = 0;
+    }
+    private void OnMouseDown()
+    {
+        List<Unit> targets = new List<Unit>();
+        targets.Add(this);
+        battle.targetingSystem.Targets = targets;
+    }
+    private void OnMouseExit()
+    {
+        //battle.currentCombatantUnit.targets.Remove(this);
     }
 }

@@ -24,6 +24,8 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Color backgroundImageColorOriginal = Color.white;
     private Color textColorOriginal = Color.black;
 
+    public GameObject toTurnOn;
+
     void Start()
     {
         grow = true;
@@ -89,6 +91,12 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
     public void IsContinue()
+    {
+        toTurnOn.SetActive(true);
+        Invoke("Advance", 1);
+    }
+
+    void Advance()
     {
         SceneManager.LoadScene(levelToLoad);
     }

@@ -1,3 +1,4 @@
+using Character.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class HealBase : AbilityBase
 
         healValue = CalculateTargetModifiers(target, healValue);
 
-        target.Heal(healValue);
+        Debug.LogWarning(healValue);
+        target.gameObject.GetComponent<Health>().AddHealth((int)healValue);
     }
 }

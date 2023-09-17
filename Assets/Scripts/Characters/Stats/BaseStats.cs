@@ -16,19 +16,33 @@ namespace Character.Stats
         [SerializeField] int currentLevel;
         [SerializeField] int[] experienceRequirements = new int[] { 100, 200, 300, 400, 500, 1000 };
 
-        private float magicEnhancementAmount;
-        private float physicalEnhancementAmount;
-        private float finesseEnhancementAmount;
-        private float agilityEnhancementAmount;
-        private float healthEnhancementAmount;
+        public float magicEnhancementAmount;
+        public float physicalEnhancementAmount;
+        public float finesseEnhancementAmount;
+        public float agilityEnhancementAmount;
+        public float healthEnhancementAmount;
 
-        Enhancement[] enhancements = null;
-
+        public List<Enhancement> enhancements = new List<Enhancement>();
+        public void Initialize()
+        {
+            
+        }
+        public void NewTurnEntered()
+        {
+            foreach(Enhancement enhancement in enhancements.ToList()) 
+            {
+                enhancement.ProgressTurn();
+            }
+        }
         public void RegisterEnhancementEvent(Enhancement enhancement) {
-            enhancements.Append(enhancement);
+            enhancements.Add(enhancement);
             enhancement.OnEnhancementEvent += HandleNewStatEnhancement;
         }
-
+        public void DeregisterEnhancementEvent(Enhancement enhancement)
+        {
+            enhancements.Remove(enhancement);
+            enhancement.OnEnhancementEvent -= HandleNewStatEnhancement;
+        }
         public bool HasStat(Stat targetStat) {
             List<StatProgression> statList = statProgressions.ToList();
             int statIndex = statList.FindIndex(stat => stat.statName.Equals(targetStat.ToString()));
@@ -89,25 +103,26 @@ namespace Character.Stats
         private void HandleNewStatEnhancement(object sender, EnhancementStatAmountArgs e) {
             Stat affectedStat = e.EffectedStat;
             float enhancementAmount = e.EnhancementAmount;
+            print(enhancementAmount);
             switch (affectedStat) {
                 case Stat.Magic: {
-                        magicEnhancementAmount = enhancementAmount;
+                        magicEnhancementAmount += enhancementAmount;
                         break;
                     }
                 case Stat.Finesse: {
-                        finesseEnhancementAmount = enhancementAmount;
+                        finesseEnhancementAmount += enhancementAmount;
                         break;
                     }
                 case Stat.Physical: {
-                        physicalEnhancementAmount = enhancementAmount;
+                        physicalEnhancementAmount += enhancementAmount;
                         break;
                     }
                 case Stat.Health: {
-                        healthEnhancementAmount = enhancementAmount;
+                        healthEnhancementAmount += enhancementAmount;
                         break;
                     }
                 case Stat.Agility: {
-                        agilityEnhancementAmount = enhancementAmount;
+                        agilityEnhancementAmount += enhancementAmount;
                         break;
                     }
             }

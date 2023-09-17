@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6a63ded0ab41a4cb206d06e72c6d50, type: 3}
+  m_Name: Botched Potion
+  m_EditorClassIdentifier: 
+  nameOfItem: Botched Potion
+  Cost: 50
+  ravenStock: 6
+  playerStock: 3
+  whatDoesItDo: A poorly made health potion that decreases health of one enemy
+  solo: 1
+  party: 0
+  boost: 0
+  detriment: 1
+  reincarnate: 0
+  magicPoints: 0
+  health: 1
+  attack: 0
+  defense: 0
+  specificAmount: 80
+  percentageAmount: 0
+  onlyUsedInBattle: 1

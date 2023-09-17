@@ -23,8 +23,22 @@ public class GameManager : MonoBehaviour
 
     public static bool floor2Unlocked, floor3Unlocked;
 
+    public List<Expendable> playerInventory;
+    public List<Clothing> playerClothes;
+
+    //currency of choice for Ravens
+    public static float shinyThings;
+
+    //holding variables for inventory;
+    public static int holdingMagic, holdingHealth;
+    public static bool holdingDeath;
+    public static Expendable itemName;
+    public static Clothing clothingName;
+
     public void Start()
     {
+        shinyThings += 100;
+
         inCurrentParty.Clear();
         charactersNotInParty.Clear();
         colorsInParty.Clear();
@@ -45,5 +59,14 @@ public class GameManager : MonoBehaviour
 
         colorsNotInParty.Add(new Color(0, 0, 0));
         colorsNotInParty.Add(new Color(23, 183, 0));
+    }
+
+    public static void ClearGameManagerDataFromInventory()
+    {
+        itemName = null;
+        holdingHealth = 0;
+        holdingMagic = 0;
+        holdingDeath = false;
+        clothingName = null;
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6799543001925147705}
   - component: {fileID: -2179946851509256100}
   - component: {fileID: 711260905403072549}
+  - component: {fileID: 1732746914948842226}
   m_Layer: 0
   m_Name: Cherufe
   m_TagString: Untagged
@@ -71,7 +72,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 90f41aed330a972458f06338d928fd45, type: 2}
   - {fileID: 11400000, guid: 9fbfb035e54ff7e46af4b3e68577de2c, type: 2}
   weaknesses: []
-  enhancements: []
   isASoloAttack: 0
   isAGroupAttack: 0
   isAHeal: 0
@@ -123,6 +123,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
   currentLevel: 0
   experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
+  magicEnhancementAmount: 0
+  physicalEnhancementAmount: 0
+  finesseEnhancementAmount: 0
+  agilityEnhancementAmount: 0
+  healthEnhancementAmount: 0
+  enhancements: []
 --- !u!114 &-1569232716906309050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitpoints: 50
+  startingHitPoints: 0
 --- !u!114 &-2179946851509256100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +181,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5481bd2b78fed3f40bbf589c0eba8866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1732746914948842226
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4131644099770973749}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2944355399490294778
 PrefabInstance:
   m_ObjectHideFlags: 0

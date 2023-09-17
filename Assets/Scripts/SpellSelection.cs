@@ -18,10 +18,11 @@ public class SpellSelection : MonoBehaviour
     }
     public void SpellSelected()
     {
+        battle.currentCombatantUnit.DetermineAbilityFromList(this.gameObject.GetComponent<SpellPrefab>().associatedAttack);
         if (!isAttacking)
         {
             //going from the spell selection screen, then storing it into battle.cs
-            battle.selectedSpell = this.gameObject.GetComponent<SpellPrefab>().associatedAttack;
+
             battle.TurnOnIndividualAttackItems();
 
             playerUI.OpenAttackingMenu();
@@ -34,5 +35,9 @@ public class SpellSelection : MonoBehaviour
             playerUI.TurnOffAllMenus();
             battle.selectedSpell = null;
         }
+    }
+    public void UseAbility()
+    {
+        StartCoroutine(battle.currentCombatantUnit.TakingUnitTurn(battle.currentCombatantUnit.SelectedAbility));
     }
 }

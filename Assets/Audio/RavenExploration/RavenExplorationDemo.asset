@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1100844f9e73e4a854d13c55b01def, type: 3}
+  m_Name: RavenExplorationDemo
+  m_EditorClassIdentifier: 
+  mux:
+    tracks:
+    - label: 
+      audioclips:
+      - {fileID: 8300000, guid: 6b84b8441c20884488074d16f04c0a38, type: 3}
+      startTime: 2.033
+      endTime: 18.305
+      trasitionTargets: []

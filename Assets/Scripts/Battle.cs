@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.UI;
 using TMPro;
 using Character.Stats;
+using JetBrains.Annotations;
 
 public enum StateOfBattle { Start, WON, LOST }
 
@@ -17,14 +18,13 @@ public class Battle : MonoBehaviour
 
     bool unitCurrentlyTakingTurn;
 
+    public TargetingSystem targetingSystem;
+
     public GameObject informationTextHolder, characterNameHolder;
     public TMP_Text informationText, characterNameText;
 
     public List<StationController> PlayerBattleStations = new List<StationController>();
     public List<StationController> EnemyBattleStations = new List<StationController>();
-
-    GameObject currentParty0, currentParty1, currentParty2, currentParty3;
-    GameObject currentEnemy0, currentEnemy1, currentEnemy2, currentEnemy3;
 
 
     public bool floor1 = true, floor2, floor3;
@@ -48,13 +48,7 @@ public class Battle : MonoBehaviour
 
     int enemyCountForKnockedOut, playerCountForKnockedOut;
 
-    //UI for Players
-    public List<Slider> healthUI = new List<Slider>();
-    public List<Slider> manaUI = new List<Slider>();
-    public List<TMP_Text> healthText = new List<TMP_Text>();
-    public List<TMP_Text> manaText = new List<TMP_Text>();
-    public List<Image> icons = new List<Image>();
-    public List<Image> triangles = new List<Image>();
+    public List<BattlePlayerProfileController> battlePlayerProfileControllers;
 
     public GameObject powerUpParticle;
     int playerToAttack;
@@ -62,7 +56,7 @@ public class Battle : MonoBehaviour
     bool hasFled;
     string tempStoreOfPlayer;
 
-    public GameObject movingCamera, cameraView;
+    public GameObject movingCamera;
     public GameObject playerUICanvas;
     public Transform AoEView, AllEnemiesKnockedDownPOV;
 
@@ -70,8 +64,13 @@ public class Battle : MonoBehaviour
     public int currentlySelectedEnemy;
     bool selectingOneTarget;
     public GameObject victoryMenu;
+    public float victoryCurrency;
+    public TMP_Text victoryCurrencyText;
     public bool groupAttackHappening;
     public GameObject damageParticle;
+
+    public PlayerUIControllor playerUIControllor;
+    public BattleCameraController battleCameraController;
 
     void Start()
     {
@@ -149,7 +148,11 @@ public class Battle : MonoBehaviour
         }
         currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
 
+        playerUIControllor.Initialize(GetPlayers().Select(r => r.GetComponent<Unit>()).ToList());
+
         OrderCombatants();
+
+        StartCoroutine(ActivateNextUnit());
     }
     IEnumerator SetUpBattle()
     {
@@ -280,8 +283,6 @@ public class Battle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !unitCurrentlyTakingTurn)
         {
             playerUICanvas.SetActive(false);
-            currentCombatant = (currentCombatant + 1) % Combatants.Count;
-            currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
 
             if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Dead || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Fled)
                 StartCoroutine(NextTurn());
@@ -303,30 +304,43 @@ public class Battle : MonoBehaviour
         }
         #endregion
     }
-
-    IEnumerator NextTurn()
+    IEnumerator ActivateNextUnit()
     {
-        //The combatants list is sorted in order from largest to smallest incrementing by one. 
-        //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
         if (currentCombatant >= Combatants.Count)
         {
             Combatants = Combatants.OrderByDescending(x => x.GetComponent<BaseStats>().GetStat(Stat.Agility) + x.GetComponent<BaseStats>().GetStat(Stat.Agility)).ToList();
             currentCombatant = 0;
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
-            /*
-             * TODO : Modify ordering based on agility, without modifying base agiity so enhancements persist
-                for (int i = 0; i < Combatants.Count; i++)
-                {
-                    Combatants[i].GetComponent<Unit>().Agility = 0;
-                }
-             */
         }
+        else
+        {
+            currentCombatant = (currentCombatant + 1) % Combatants.Count;
+            currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
+        }
+        targetingSystem.CurrentUnit= currentCombatantUnit;
+
+        playerUICanvas.GetComponent<BattleMenu>().OpenFirstMenu();
 
         characterNameHolder.SetActive(true);
         characterNameText.text = currentCombatantUnit.Name;
         int currentCharacterAgilityStat = currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Agility);
         int currentCharacterCurrentHP = currentCombatantUnit.GetComponent<Health>().GetCurrentHP();
         print("Currently Up: " + currentCombatantUnit.Name + " Agility: " + (currentCharacterAgilityStat) + " CurrentHP: " + currentCharacterCurrentHP);
+
+
+        MoveCamera();
+        yield return new WaitForEndOfFrame();
+    }
+    public IEnumerator CombatantFinishedTurn()
+    {
+        StartCoroutine(ActivateNextUnit());
+        yield return new WaitForEndOfFrame();
+    }
+    IEnumerator NextTurn()
+    {
+        //The combatants list is sorted in order from largest to smallest incrementing by one. 
+        //When the list hits greater than the number of combatants, it re-sorts the list (trying to capture any agility changes in the turn) then circles back around to the largest
+
 
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
         {
@@ -338,7 +352,6 @@ public class Battle : MonoBehaviour
             unitCurrentlyTakingTurn = false;
             playerUICanvas.SetActive(true);
         }
-            
     }
 
     /// <summary>
@@ -705,6 +718,7 @@ public class Battle : MonoBehaviour
                 }
                 if (Combatants[i].GetComponent<Unit>().isAPlayer == false)
                 {
+                    victoryCurrency += Combatants[i].GetComponent<Unit>().currencyToGive;
                     Combatants.Remove(Combatants[i]);
                 }
             }
@@ -747,31 +761,15 @@ public class Battle : MonoBehaviour
 
     public void MoveCamera()
     {
+        battleCameraController.SetBattleCameraTransform(currentCombatantUnit.stationController.perspectiveCamera.transform);
         if (currentCombatantUnit.isAPlayer)
         {
-        //    playerUICanvas.SetActive(true);
-            for (int i = 0; i < GetPlayers().Count; i++)
-            {
-                if (currentCombatantUnit.name == GetPlayers()[i].GetComponent<Unit>().name)
-                {
-                    movingCamera.transform.position = PlayerBattleStations[i].perspectiveCamera.position;
-                    movingCamera.transform.rotation = PlayerBattleStations[i].perspectiveCamera.rotation;
-                }
-            }
+            playerUICanvas.SetActive(true);
+
         }
         else
         {
-        //    playerUICanvas.SetActive(false);
-
-            //THIS IS A PROBLEM - ENEMIES CAN BE NAMED THE SAME THING
-            for (int i = 0; i < GetEnemies().Count; i++)
-            {
-                if (currentCombatantUnit.name == GetEnemies()[i].GetComponent<Unit>().name)
-                {
-                    movingCamera.transform.position = EnemyBattleStations[i].perspectiveCamera.position;
-                    movingCamera.transform.rotation = EnemyBattleStations[i].perspectiveCamera.rotation;
-                }
-            }      
+            playerUICanvas.SetActive(false);
         }       
     }
 
@@ -842,7 +840,7 @@ public class Battle : MonoBehaviour
 
     public void UpdatePlayerHealthManaUI()
     {
-        //This updates the player's UI in the bottom right hand corner (usually done at the end of the player's turn)
+/*        //This updates the player's UI in the bottom right hand corner (usually done at the end of the player's turn)
         for (int i = 0; i < GetPlayers().Count; i++)
         {
             //If player's hitpoints < 0 their icons are turned black
@@ -870,7 +868,7 @@ public class Battle : MonoBehaviour
             manaUI[i].maxValue = GetPlayers()[i].GetComponent<Magic>().GetMaxMP();
             manaUI[i].value = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP();
             manaText[i].text = GetPlayers()[i].GetComponent<Magic>().GetCurrentMP().ToString("F0");
-        }
+        }*/
     }
     public void EndTurn()
     {
@@ -907,7 +905,7 @@ public class Battle : MonoBehaviour
 
             movingCamera.transform.position = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.position;
             movingCamera.transform.rotation = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.rotation;
-            cameraView.GetComponent<Animator>().SetTrigger("victory");
+            battleCameraController.GetComponent<Animator>().SetTrigger("victory");
 
 
             //open experience menu
@@ -923,6 +921,9 @@ public class Battle : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         victoryMenu.SetActive(true);
+        GameManager.shinyThings += victoryCurrency;
+        print(GameManager.shinyThings);
+        victoryCurrencyText.text = victoryCurrency.ToString("F0");
     }
 
     //This clears any leftover data from GameManager picked up from 'RoamingMonster.cs' or weird data from the fight
