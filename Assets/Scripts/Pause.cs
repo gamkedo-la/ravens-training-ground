@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class Pause : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class Pause : MonoBehaviour
     {
         FreezeGame();
         pauseMenuCanvas.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
         pauseTimeline.Play();
     }
 
