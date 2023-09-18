@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class VolumeSliderScript : MonoBehaviour
 {
     [SerializeField] Slider mySlider;
-    [SerializeField] AudioSource mainCameraAudioSource;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +23,7 @@ public class VolumeSliderScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mainCameraAudioSource.volume = mySlider.value;
+        AudioListener.volume = mySlider.value;
+        PlayerPrefs.SetFloat("Volume", AudioListener.volume);
     }
 }
