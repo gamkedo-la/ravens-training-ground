@@ -762,7 +762,7 @@ MonoBehaviour:
   CurrentMP: 10
   startingMagic: 2
   startingPhysical: 9
-  startingAgility: 15
+  startingAgility: 100
   startingFinesse: 20
   CurrentLevel: 2
   currencyToGive: 8
@@ -770,8 +770,6 @@ MonoBehaviour:
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
-  leftUnit: {fileID: 0}
-  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: 48917a6b23c6e0a4299f9d25d7f71551, type: 2}
   weaknesses:
@@ -791,6 +789,7 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 6268667601149889383}
   canvas: {fileID: 0}
+  selectedAbility: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
   - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
@@ -891,8 +890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitpoints: 0
-  startingHitPoints: 75
+  hitpoints: 200
+  startingHitPoints: 200
 --- !u!114 &907737480074910388
 MonoBehaviour:
   m_ObjectHideFlags: 0
