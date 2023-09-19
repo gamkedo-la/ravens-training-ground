@@ -196,7 +196,7 @@ public class Unit : MonoBehaviour
 
         SelectedAbility = DetermineAbilityFromList(selectedAbility);
 
-        if (isOnAuto)
+        if (isOnAuto && battle.targetingSystem.Targets==null)
         {
 
             battle.targetingSystem.Targets = aIBrain.SelectTarget(this.selectedAbility, this, battle.Combatants.Select(r => r.GetComponent<Unit>()).Where(g => g != null).ToList());
