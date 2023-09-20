@@ -16,6 +16,9 @@ public class BattleMenu : MonoBehaviour
 
     public List<Sprite> icons = new List<Sprite>();
 
+    public delegate void AttackMenuOpened(bool open);
+    public event AttackMenuOpened AttackMenuOpenedEvent;
+
     private void Start()
     {
         battle = GameObject.Find("Battle").GetComponent<Battle>();
@@ -79,13 +82,17 @@ public class BattleMenu : MonoBehaviour
     }
 
     public void OpenAttackingMenu()
-    {
+    {   
+        //turn off all menus
+        TurnOffAllMenus();
+        
+        AttackMenuOpenedEvent(true);
+
         //store string for attack
 
         battle.TurnOnIndividualAttackItems();
 
-        //turn off all menus
-        TurnOffAllMenus();
+
         //turn on attacking menu
         attackingMenu.SetActive(true);
     }
@@ -132,6 +139,8 @@ public class BattleMenu : MonoBehaviour
         battle.TurnOffIndividualAttackItems();
         if (isSpellBackButton)
             ClearStoredSpell();
+
+        AttackMenuOpenedEvent(false);
     }
 
     void ClearStoredSpell()
