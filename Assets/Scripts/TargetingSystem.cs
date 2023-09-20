@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TargetingSystem : MonoBehaviour
@@ -38,7 +39,18 @@ public class TargetingSystem : MonoBehaviour
         if (targets != null)
             foreach (Unit target in targets)
             {
+                if(canTarget)
                 target.targetParticle.SetActive(targeted);
             }
+    }
+    public bool canTarget;
+    public void CanTarget(bool canTarget)
+    {
+        print(canTarget);
+        this.canTarget = canTarget; }
+
+    private void Awake()
+    {
+        FindObjectOfType(typeof(BattleMenu)).GetComponent<BattleMenu>().AttackMenuOpenedEvent+=CanTarget;
     }
 }
