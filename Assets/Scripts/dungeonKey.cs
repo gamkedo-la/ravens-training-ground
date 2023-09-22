@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class dungeonKey : MonoBehaviour {
+    public FloatAwayText floatAwayTextPrefab;
+
     public string key;
 
     private GameObject player = null;
@@ -10,6 +12,12 @@ public class dungeonKey : MonoBehaviour {
     void Update() {
         if (player) {
             player.AddComponent<dungeonKeyCarry>().key = key;
+
+            FloatAwayText newText = Instantiate(floatAwayTextPrefab);
+            newText.transform.position = transform.position;
+            newText.transform.LookAt(Camera.main.transform, Vector3.up);
+            newText.AssignText($"Got the {key} Key");
+
             Destroy(gameObject);
         }
     }
@@ -25,4 +33,5 @@ public class dungeonKey : MonoBehaviour {
             player = null;
         }
     }
+   
 }

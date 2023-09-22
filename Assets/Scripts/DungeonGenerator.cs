@@ -15,7 +15,10 @@ public class DungeonGenerator : MonoBehaviour {
 	private List<DoorAndKeys> lockedDoors = new List<DoorAndKeys>();
 
 	public NavMeshSurface surface;
-	public GameObject lockedDoor;
+	public dungeonDoor lockedDoor;
+
+	public List<string> keyNames = new List<string>();
+	private int keyNameIndex = 0;
 
 	public int keyIterations = 2;
 	public int preKeyIterations = 1;
@@ -40,6 +43,7 @@ public class DungeonGenerator : MonoBehaviour {
 	public class RoomNode {
 		public RoomType roomType;
 		public List<Direction> openDoors = new List<Direction>();
+		public GameObject instanceRef = null;
 
 		public void SetRoomType(RoomType type) {
 			roomType = type;
@@ -67,6 +71,7 @@ public class DungeonGenerator : MonoBehaviour {
 	}
 
 	void Start() {
+		keyNameIndex = Random.Range(0, keyNames.Count);
 		Generate();
 	}
 
@@ -358,15 +363,27 @@ public class DungeonGenerator : MonoBehaviour {
 			newRoom.name = "<" + room.Key.x + "," + room.Key.y + "> " + room.Value.GetRoomType();
 			newRoom.GetComponent<DungeonRoom>().SetWalls(room.Value.openDoors);
 			newRoom.GetComponent<DungeonRoom>().roomNode = room.Value;
+			room.Value.instanceRef = newRoom;
 		}
 
 		foreach (DoorAndKeys door in lockedDoors) {
-			GameObject newDoor = Instantiate(lockedDoor);
+			dungeonDoor newDoor = Instantiate(lockedDoor);
 			newDoor.transform.parent = transform;
 			newDoor.gameObject.SetActive(true);
 			Vector2Int enteranceDirection = directions[(int)door.doorFacing];
 			newDoor.transform.position = (new Vector3(door.doorRoom.x, 0f, door.doorRoom.y) * gridScale) + (new Vector3(enteranceDirection.x, 0f, enteranceDirection.y) * (gridScale*0.5f));
 			newDoor.transform.rotation = Quaternion.Euler(new Vector3(0f, 90f * (int)door.doorFacing, 0f));
+
+			foreach (RoomNode keyRoom in door.keyRooms) {
+				string keyName = keyNames[keyNameIndex];
+				keyNameIndex = (keyNameIndex + 1) % keyNames.Count;
+
+				dungeonKey dunKey = keyRoom.instanceRef.GetComponentInChildren<dungeonKey>();
+				if (dunKey) {
+					dunKey.key = keyName;
+					newDoor.keys.Add(keyName);
+				}
+			}
 		}
 	}
 
