@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class dungeonDoor : MonoBehaviour {
 	public List<string> keys;
-
+    public GameObject textMessage;
 
     private GameObject player = null;
 
     void Update() {
-        if (player && Input.GetKeyDown(KeyCode.Space) & hasKeys()) {
-            removeKeys();
-            Destroy(gameObject);
+        if (player && hasKeys()) {
+            textMessage.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                removeKeys();
+                Destroy(gameObject);
+            }
         }
     }
 

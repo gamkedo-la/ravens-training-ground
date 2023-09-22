@@ -8,7 +8,7 @@ public class dungeonKey : MonoBehaviour {
     private GameObject player = null;
 
     void Update() {
-        if (player && Input.GetKeyDown(KeyCode.Space)) {
+        if (player) {
             player.AddComponent<dungeonKeyCarry>().key = key;
             Destroy(gameObject);
         }
