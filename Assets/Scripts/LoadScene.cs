@@ -22,4 +22,12 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene(levelToLoad);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            LevelToLoad();
+        }
+    }
 }

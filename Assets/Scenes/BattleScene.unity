@@ -10435,6 +10435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentUnit: {fileID: 0}
   targets: []
+  canTarget: 0
 --- !u!4 &256340453
 Transform:
   m_ObjectHideFlags: 0
