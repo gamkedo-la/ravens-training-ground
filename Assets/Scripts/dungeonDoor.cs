@@ -9,8 +9,11 @@ public class dungeonDoor : MonoBehaviour {
     public GameObject textMessageNeedsKeys;
 
     private GameObject player = null;
+    private bool isOpen = false;
 
     void Update() {
+        if (isOpen) return;
+
         if (player && hasKeys()) {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -23,6 +26,10 @@ public class dungeonDoor : MonoBehaviour {
                     Destroy(gameObject);
                 }
 
+                textMessageHasKeys.SetActive(false);
+                textMessageNeedsKeys.SetActive(false);
+
+                isOpen = true;
             }
         }
     }
@@ -35,9 +42,8 @@ public class dungeonDoor : MonoBehaviour {
 
             if (hasKeys()) {
                 textMessageHasKeys.SetActive(true);
-            } else {
-                textMessageNeedsKeys.SetActive(true);
             }
+            textMessageNeedsKeys.SetActive(true);
         }
     }
 
