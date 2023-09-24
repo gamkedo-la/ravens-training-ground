@@ -22795,7 +22795,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Item
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d197cfb9180427d499defc380939493e, type: 2}
   m_sharedMaterial: {fileID: 9024743969796584795, guid: d197cfb9180427d499defc380939493e, type: 2}
@@ -22825,7 +22825,7 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -25101,6 +25101,14 @@ MonoBehaviour:
   victoryMenu: {fileID: 155507007}
   victoryCurrency: 0
   victoryCurrencyText: {fileID: 288802304}
+  InventoryPool:
+  - {fileID: 11400000, guid: 73dc3c0a84c9fa7478448edd46f86cb9, type: 2}
+  - {fileID: 11400000, guid: b05f9da0b0a11b4478721ebf6acf9281, type: 2}
+  - {fileID: 11400000, guid: 3e6d44301bcb52a46a28f1bf4e1a6840, type: 2}
+  - {fileID: 11400000, guid: cc7837ce26ff41547a34d4f5fc9dbfa0, type: 2}
+  - {fileID: 11400000, guid: b3059fc8ff1288746a88c6a7fd5201b3, type: 2}
+  - {fileID: 11400000, guid: e76fea4e42d65d848885e59295d626a0, type: 2}
+  victoryItemText: {fileID: 901642453}
   groupAttackHappening: 0
   damageParticle: {fileID: 3974450424714125319, guid: 128033ce485f6e4468cd1f8927449d5f, type: 3}
   playerUIControllor: {fileID: 861098630}

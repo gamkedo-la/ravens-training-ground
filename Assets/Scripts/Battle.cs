@@ -66,6 +66,9 @@ public class Battle : MonoBehaviour
     public GameObject victoryMenu;
     public float victoryCurrency;
     public TMP_Text victoryCurrencyText;
+    public Expendable[] InventoryPool;
+    GameManager gameManager;
+    public TMP_Text victoryItemText;
     public bool groupAttackHappening;
     public GameObject damageParticle;
 
@@ -126,6 +129,7 @@ public class Battle : MonoBehaviour
             StartCoroutine(SetUpBattle());
         
         state = StateOfBattle.Start;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     IEnumerator SetUpBattle2()
@@ -930,6 +934,26 @@ public class Battle : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         victoryMenu.SetActive(true);
+
+        //randomly select inventory item
+        int randomlySelect = Random.Range(0, InventoryPool.Length);
+
+        if (gameManager.GetComponent<GameManager>().playerInventory.Contains(InventoryPool[randomlySelect]))
+        {
+            InventoryPool[randomlySelect].playerStock += 1;
+        }
+
+        else
+            gameManager.GetComponent<GameManager>().playerInventory.Add(InventoryPool[randomlySelect]);
+
+        //add to inventory
+        string split = InventoryPool[randomlySelect].ToString();
+
+        split = split.Replace("(Expendable)", "");
+
+        //display item
+        victoryItemText.text = split;
+
         GameManager.shinyThings += victoryCurrency;
         print(GameManager.shinyThings);
         victoryCurrencyText.text = victoryCurrency.ToString("F0");
