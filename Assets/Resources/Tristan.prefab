@@ -739,7 +739,7 @@ Transform:
   - {fileID: 607949999688267651}
   - {fileID: 4272031042688526298}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1692924528698019732
 MonoBehaviour:
@@ -769,8 +769,6 @@ MonoBehaviour:
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
-  leftUnit: {fileID: 0}
-  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: 90f41aed330a972458f06338d928fd45, type: 2}
   weaknesses:
@@ -790,6 +788,7 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 2191157764097443390}
   canvas: {fileID: 0}
+  selectedAbility: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
   - {fileID: 11400000, guid: 0ee90d502be7e2340ae9974d4e20d358, type: 2}
@@ -1109,15 +1108,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7640558969779515294, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7146521406498821007, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
       propertyPath: m_Name
       value: pajamapants
       objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -6763858364670572316, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
       propertyPath: m_Name
       value: pajamatop
+      objectReference: {fileID: 0}
+    - target: {fileID: -6763858364670572316, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2045257923548263128, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
       propertyPath: m_Name
@@ -1125,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2045257923548263128, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1599826595754709761, guid: dea941d5b75187f41ab5d0faa84e5d5c, type: 3}
       propertyPath: m_Name
