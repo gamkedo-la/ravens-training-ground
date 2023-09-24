@@ -27,7 +27,7 @@ public class Battle : MonoBehaviour
     public List<StationController> EnemyBattleStations = new List<StationController>();
 
 
-    public bool floor1 = true, floor2, floor3;
+    public bool floor1 = true, floor2 = true, floor3;
     public List<string> enemiesFloor1 = new List<string>();
     public List<string> enemiesFloor2 = new List<string>();
     public List<string> enemiesFloor3 = new List<string>();
@@ -90,15 +90,6 @@ public class Battle : MonoBehaviour
             if (floor1)
             {
                 enemyCount = 4;
-               /* int percent = Random.Range(1, 100);
-                if (percent < 30)
-                    enemyCount = 1;
-                else if (percent >= 30 && percent < 60)
-                    enemyCount = 2;
-                else if (percent >= 60 && percent < 89)
-                    enemyCount = 3;
-                else
-                    enemyCount = 4;*/
 
                 for (int i = 0; i < enemyCount; i++)
                 {
@@ -106,12 +97,30 @@ public class Battle : MonoBehaviour
                     string currentNameChosen = enemiesFloor1[nameToChoose];
                     enemiesInThisFight.Add(currentNameChosen);
                 }
-                //floor 2 will go here
-                //floor 3 will contain 1 enemy - the final boss
             }
+            else if (floor2)
+            {
+                enemyCount = 4;
+
+                for (int i = 0; i < enemyCount; i++)
+                {
+                    int nameToChoose = Random.Range(0, enemiesFloor2.Count);
+                    string currentNameChosen = enemiesFloor2[nameToChoose];
+                    enemiesInThisFight.Add(currentNameChosen);
+                }
+            }
+            else if (floor3)
+            {
+                enemyCount = 1;
+
+                string currentNameChosen = "Cherufe";
+                enemiesInThisFight.Add(currentNameChosen);
+            }
+            //floor 2 will go here
+            //floor 3 will contain 1 enemy - the final boss
         }
 
-        if(usesSetup2)
+        if (usesSetup2)
             StartCoroutine(SetUpBattle2());
         else
             StartCoroutine(SetUpBattle());

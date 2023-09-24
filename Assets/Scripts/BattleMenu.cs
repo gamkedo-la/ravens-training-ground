@@ -26,11 +26,13 @@ public class BattleMenu : MonoBehaviour
 
     private void Update()
     {
+       // this is throwing a ton of errors, commenting out for now
+        /*
         if (battle.groupAttackHappening)
         {
             TurnOffAllMenus();
             groupAttackMenu.SetActive(true);
-        }
+        }*/
 
     }
 
