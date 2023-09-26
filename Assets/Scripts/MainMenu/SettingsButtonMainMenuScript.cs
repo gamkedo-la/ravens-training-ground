@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class SettingsButtonMainMenuScript : MonoBehaviour
 {
-    [SerializeField] GameObject SettingsCanvas;
-    private SettingsCanvasScript settingsCanvasScript;
-    [SerializeField] GameObject MainMenuCanvas;
+    [SerializeField] GameObject settingsCanvas;
+    private SubMenuFader subMenuFader;
+    [SerializeField] GameObject mainMenuCanvas;
     private CanvasGroup mainMenuCanvasGroupComponent;
 
     private float fadeSpeed = 1f;
@@ -15,8 +15,8 @@ public class SettingsButtonMainMenuScript : MonoBehaviour
 
     private void Awake()
     {
-        mainMenuCanvasGroupComponent = MainMenuCanvas.GetComponent<CanvasGroup>();
-        settingsCanvasScript = SettingsCanvas.transform.GetComponent<SettingsCanvasScript>();
+        mainMenuCanvasGroupComponent = mainMenuCanvas.GetComponent<CanvasGroup>();
+        subMenuFader = settingsCanvas.transform.GetComponent<SubMenuFader>();
     }
 
     private void Update()
@@ -51,8 +51,8 @@ public class SettingsButtonMainMenuScript : MonoBehaviour
 
     private void ToggleSettingsAndMainMenus()
     {
-        SettingsCanvas.gameObject.SetActive(true);
-        MainMenuCanvas.gameObject.SetActive(false);
-        settingsCanvasScript.isFadingIn = true;
+        settingsCanvas.gameObject.SetActive(true);
+        mainMenuCanvas.gameObject.SetActive(false);
+        subMenuFader.isFadingIn = true;
     }    
 }

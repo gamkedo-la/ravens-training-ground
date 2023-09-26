@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class BackButtonSettingsMenuScript : MonoBehaviour
 {
-    [SerializeField] GameObject HelpMenuCanvas;
-    private HelpCanvasScript helpMenuCanvasScript;
-    [SerializeField] GameObject MainMenuCanvas;
+    [SerializeField] GameObject subMenu;
+    private SubMenuFader subMenuScript;
+    [SerializeField] GameObject mainMenu;
 
     private void Awake()
     {
-        helpMenuCanvasScript = HelpMenuCanvas.gameObject.transform.GetComponent<HelpCanvasScript>();
+        subMenuScript = subMenu.gameObject.transform.GetComponent<SubMenuFader>();
     }
+    
     public void HandleClick()
     {
-        helpMenuCanvasScript.isFadingOut = true;
+        subMenuScript.isFadingOut = true;
     }    
 
     private void ToggleSettingsAndMainMenus()
     {
-        MainMenuCanvas.gameObject.SetActive(true);
-        HelpMenuCanvas.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(true);
+        subMenu.gameObject.SetActive(false);
     }     
 }

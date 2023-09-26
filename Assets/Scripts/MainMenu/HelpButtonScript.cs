@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class HelpButtonScript : MonoBehaviour
 {
-    [SerializeField] GameObject HelpMenuCanvas;
-    private HelpCanvasScript helpCanvasScript;
-    [SerializeField] GameObject MainMenuCanvas;
+    [SerializeField] GameObject helpMenuCanvas;
+    private SubMenuFader subMenuFader;
+    [SerializeField] GameObject mainMenuCanvas;
     private CanvasGroup mainMenuCanvasGroupComponent;
 
     private float fadeSpeed = 1f;
@@ -15,8 +15,8 @@ public class HelpButtonScript : MonoBehaviour
 
     private void Awake()
     {
-        mainMenuCanvasGroupComponent = MainMenuCanvas.GetComponent<CanvasGroup>();
-        helpCanvasScript = HelpMenuCanvas.transform.GetComponent<HelpCanvasScript>();
+        mainMenuCanvasGroupComponent = mainMenuCanvas.GetComponent<CanvasGroup>();
+        subMenuFader = helpMenuCanvas.transform.GetComponent<SubMenuFader>();
     }
 
     private void Update()
@@ -51,8 +51,8 @@ public class HelpButtonScript : MonoBehaviour
 
     private void ToggleHelpAndMainMenus()
     {
-        HelpMenuCanvas.gameObject.SetActive(true);
-        MainMenuCanvas.gameObject.SetActive(false);
-        helpCanvasScript.isFadingIn = true;
+        helpMenuCanvas.gameObject.SetActive(true);
+        mainMenuCanvas.gameObject.SetActive(false);
+        subMenuFader.isFadingIn = true;
     }
 }

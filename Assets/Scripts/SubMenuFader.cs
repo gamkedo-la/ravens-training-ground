@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HelpCanvasScript : MonoBehaviour
+public class SubMenuFader : MonoBehaviour
 {
     public bool isFadingIn = false;
     public bool isFadingOut = false;
