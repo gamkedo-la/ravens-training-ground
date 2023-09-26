@@ -405,7 +405,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65214
+  m_Name: pb_Mesh49084
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -5971,6 +5971,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Credits
       objectReference: {fileID: 0}
+    - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6361,6 +6365,10 @@ PrefabInstance:
       value: Settings
       objectReference: {fileID: 0}
     - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -6446,8 +6454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0106751d39158a4682e920f89b9892f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SettingsCanvas: {fileID: 783062068}
-  MainMenuCanvas: {fileID: 11872840}
+  settingsCanvas: {fileID: 783062068}
+  mainMenuCanvas: {fileID: 11872840}
   fadingOutMainMenu: 0
 --- !u!1 &391133224
 GameObject:
@@ -6842,8 +6850,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316a11f87c73c754b8de226694efef0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HelpMenuCanvas: {fileID: 2092029287}
-  MainMenuCanvas: {fileID: 11872840}
+  subMenu: {fileID: 2092029287}
+  mainMenu: {fileID: 11872840}
 --- !u!114 &584636312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6864,7 +6872,7 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
-  tintImageOnHover: 0
+  tintImageOnHover: 1
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
@@ -7281,7 +7289,7 @@ MonoBehaviour:
   multiplier: 4
   isFlee: 0
   levelToLoad: 
-  tintImageOnHover: 0
+  tintImageOnHover: 1
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
@@ -7298,8 +7306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316a11f87c73c754b8de226694efef0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HelpMenuCanvas: {fileID: 0}
-  MainMenuCanvas: {fileID: 11872840}
+  subMenu: {fileID: 783062068}
+  mainMenu: {fileID: 11872840}
 --- !u!1001 &720268929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7401,6 +7409,10 @@ PrefabInstance:
       value: 'Help
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -7774,7 +7786,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 783062068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 934174ddb7b4fe14d9c3f7759ae2f296, type: 3}
+  m_Script: {fileID: 11500000, guid: 394cb7e7993e96b4087bc45e2db81d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isFadingIn: 0
@@ -7879,6 +7891,10 @@ PrefabInstance:
     - target: {fileID: 4791597827051072457, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_text
       value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -18805,7 +18821,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySlider: {fileID: 852448175}
-  mainCameraAudioSource: {fileID: 0}
 --- !u!1 &1724075371
 GameObject:
   m_ObjectHideFlags: 0
@@ -18983,8 +18998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a99a78f168947a4fb57d9da76eb7986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HelpMenuCanvas: {fileID: 2092029287}
-  MainMenuCanvas: {fileID: 11872840}
+  helpMenuCanvas: {fileID: 2092029287}
+  mainMenuCanvas: {fileID: 11872840}
   fadingOutMainMenu: 0
 --- !u!1 &1778662587
 GameObject:
@@ -20667,6 +20682,10 @@ PrefabInstance:
     - target: {fileID: 7589736903911948648, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_Color.r
       value: 0.9490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
