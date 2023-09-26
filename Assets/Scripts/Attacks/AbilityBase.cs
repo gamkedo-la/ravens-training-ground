@@ -94,7 +94,8 @@ public class AbilityBase : ScriptableObject
 
         foreach (Enhancement enhancement in enhancements)
         {
-            target.AddEnhancement(enhancement);
+            Enhancement copy = Instantiate(enhancement);
+            target.AddEnhancement(copy);
         }
     }
     //Claculates all modifiers that comes from the targets attributes
