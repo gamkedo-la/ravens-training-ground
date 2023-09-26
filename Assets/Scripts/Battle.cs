@@ -772,6 +772,11 @@ public class Battle : MonoBehaviour
         }
     }
 
+    public void ShiftCamera()
+    {
+        battleCameraController.SetBattleCameraTransform(currentCombatantUnit.stationController.offShoulderCam.transform);
+    }
+
     public void MoveCamera()
     {
         battleCameraController.SetBattleCameraTransform(currentCombatantUnit.stationController.perspectiveCamera.transform);

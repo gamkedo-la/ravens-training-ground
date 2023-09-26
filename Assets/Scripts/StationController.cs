@@ -6,6 +6,7 @@ public class StationController : MonoBehaviour
 {
     public Unit stationedUnit;
     public Transform perspectiveCamera;
+    public Transform offShoulderCam;
     public List<StationController> neighborStations;
 
     public Vector3 platformOffset = new Vector3(0, 1, 0);

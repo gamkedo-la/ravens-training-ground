@@ -47,6 +47,8 @@ public class BattleMenu : MonoBehaviour
         */
         TurnOffAllMenus();
 
+        battle.MoveCamera();
+
         firstMenu.SetActive(true);
     }
 
@@ -72,6 +74,9 @@ public class BattleMenu : MonoBehaviour
 
     public void OpenSpellsMenu()
     {
+
+        battle.ShiftCamera();
+
         firstMenu.SetActive(false);
         tacticsMenu.SetActive(false);
         fleeMenu.SetActive(false);

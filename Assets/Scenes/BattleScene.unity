@@ -342,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 601791667}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 1295072331}
   - {fileID: 478377640}
@@ -11577,7 +11578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 304969212}
   m_Layer: 0
-  m_Name: Perspective (2)
+  m_Name: SideCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12437,6 +12438,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368752110}
   m_Mesh: {fileID: -1550514412580984892, guid: 52a6f3e9e3ed7e2469ef20008e78e7b4, type: 3}
+--- !u!1 &373307432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 373307433}
+  m_Layer: 0
+  m_Name: OnTopCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &373307433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373307432}
+  m_LocalRotation: {x: 0.111035064, y: -0.027467132, z: 0.003071081, w: 0.99343216}
+  m_LocalPosition: {x: 0.38, y: 21.782146, z: -1.079}
+  m_LocalScale: {x: 1, y: 10.383488, z: 1.0485551}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2107339574}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374381471
 GameObject:
   m_ObjectHideFlags: 0
@@ -14137,6 +14169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 934528748}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 532842567}
   - {fileID: 986645}
@@ -15210,6 +15243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 1535710748}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 478377640}
   platformOffset: {x: 0, y: 0.45, z: 0}
@@ -20859,6 +20893,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1119696678}
   - {fileID: 304969212}
   - {fileID: 216841500}
   m_Father: {fileID: 1620461291}
@@ -20927,7 +20962,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
-  perspectiveCamera: {fileID: 304969212}
+  perspectiveCamera: {fileID: 1119696678}
+  offShoulderCam: {fileID: 304969212}
   neighborStations:
   - {fileID: 965518155}
   platformOffset: {x: 0, y: 0.45, z: 0}
@@ -24272,6 +24308,7 @@ Transform:
   m_Children:
   - {fileID: 1165035809}
   - {fileID: 1384961939}
+  - {fileID: 1873015544}
   m_Father: {fileID: 1620461291}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
@@ -24339,6 +24376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 1165035809}
+  offShoulderCam: {fileID: 1873015544}
   neighborStations:
   - {fileID: 839366104}
   - {fileID: 2107339577}
@@ -32458,6 +32496,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7609594263977302639, guid: 41a4ace934725c64abd04b1ed4a57f9a, type: 3}
   m_PrefabInstance: {fileID: 1117494715}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1119696677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119696678}
+  m_Layer: 0
+  m_Name: OnTopCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1119696678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119696677}
+  m_LocalRotation: {x: 0.15701716, y: 0.04113959, z: -0.0065529183, w: 0.98671687}
+  m_LocalPosition: {x: -0.048618026, y: 19.79228, z: -0.7085424}
+  m_LocalScale: {x: 1, y: 10.383488, z: 1.0485551}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 839366101}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1121299651
 GameObject:
   m_ObjectHideFlags: 0
@@ -33879,7 +33948,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1165035809}
   m_Layer: 0
-  m_Name: Perspective (1)
+  m_Name: OnTopCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33893,7 +33962,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165035808}
   m_LocalRotation: {x: 0.111035064, y: -0.027467132, z: 0.003071081, w: 0.99343216}
-  m_LocalPosition: {x: -0.35791954, y: 21.782146, z: -0.6243954}
+  m_LocalPosition: {x: 0.4, y: 21.782146, z: -0.624}
   m_LocalScale: {x: 1, y: 10.383488, z: 1.0485551}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35436,6 +35505,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1307872650}
   - {fileID: 1346788046}
   - {fileID: 643516454}
   m_Father: {fileID: 1620461291}
@@ -35504,7 +35574,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
-  perspectiveCamera: {fileID: 1346788046}
+  perspectiveCamera: {fileID: 1307872650}
+  offShoulderCam: {fileID: 1346788046}
   neighborStations:
   - {fileID: 2107339577}
   platformOffset: {x: 0, y: 0.45, z: 0}
@@ -36358,6 +36429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 85093696}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 986645}
   platformOffset: {x: 0, y: 0.45, z: 0}
@@ -36806,6 +36878,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 769fc40a787b41d4ca23b0363bb14be1, type: 3}
   m_PrefabInstance: {fileID: 1302226318}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1307872649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1307872650}
+  m_Layer: 0
+  m_Name: OnTopCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1307872650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307872649}
+  m_LocalRotation: {x: 0.109804034, y: -0.15004225, z: 0.016771207, w: 0.9824201}
+  m_LocalPosition: {x: 0.519, y: 21.782146, z: -1.31}
+  m_LocalScale: {x: 1, y: 10.383488, z: 1.0485551}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1249924372}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 12.755, y: -17.367, z: 0}
 --- !u!1 &1308817645
 GameObject:
   m_ObjectHideFlags: 0
@@ -37484,7 +37587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1346788046}
   m_Layer: 0
-  m_Name: Perspective (3)
+  m_Name: SideCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45499,7 +45602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1567203607}
   m_Layer: 0
-  m_Name: Perspective
+  m_Name: SideCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50758,6 +50861,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872179395}
   m_Mesh: {fileID: -7387706064836869012, guid: 52a6f3e9e3ed7e2469ef20008e78e7b4, type: 3}
+--- !u!1 &1873015543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1873015544}
+  m_Layer: 0
+  m_Name: SideCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1873015544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873015543}
+  m_LocalRotation: {x: 0.111035064, y: -0.027467132, z: 0.003071081, w: 0.99343216}
+  m_LocalPosition: {x: -0.35791954, y: 21.782146, z: -0.6243954}
+  m_LocalScale: {x: 1, y: 10.383488, z: 1.0485551}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 965518152}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1873689259
 GameObject:
   m_ObjectHideFlags: 0
@@ -54567,6 +54701,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 373307433}
   - {fileID: 1567203607}
   - {fileID: 979988503}
   m_Father: {fileID: 1620461291}
@@ -54635,7 +54770,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
-  perspectiveCamera: {fileID: 1567203607}
+  perspectiveCamera: {fileID: 373307433}
+  offShoulderCam: {fileID: 1567203607}
   neighborStations:
   - {fileID: 1249924375}
   - {fileID: 965518155}
