@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activation: 0
   buffOrDebuff: 0
-  statToChange: 1
+  statToChange: 6
   sign: 0
   effectiveness: 0.3
   numberOfTurns: 1
