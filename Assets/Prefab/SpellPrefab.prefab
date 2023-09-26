@@ -250,7 +250,7 @@ MonoBehaviour:
   startingZ: 1
   percentMin: 0.95
   percentMax: 1.05
-  multiplier: 4
+  multiplier: 2
   isFlee: 0
   levelToLoad: 
   tintImageOnHover: 0

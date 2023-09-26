@@ -163,7 +163,8 @@ public class BattleMenu : MonoBehaviour
             AbilityBase associatedAttack = battle.Combatants[battle.currentCombatant].GetComponent<Unit>().abilities[i];
             instantiatedPrefab.transform.Find("SpellName").GetComponent<TextMeshProUGUI>().text = associatedAttack.AttackName;
             instantiatedPrefab.transform.Find("SpellDesc").GetComponent<TextMeshProUGUI>().text = associatedAttack.AttackDescription;
-            instantiatedPrefab.transform.Find("SpellCost").GetComponent<TextMeshProUGUI>().text = associatedAttack.cost.ToString();
+            int displayCost = (int)associatedAttack.cost;
+            instantiatedPrefab.transform.Find("SpellCost").GetComponent<TextMeshProUGUI>().text = displayCost.ToString();
             instantiatedPrefab.GetComponent<SpellPrefab>().associatedAttack = associatedAttack;
 
 
