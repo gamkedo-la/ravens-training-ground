@@ -775,11 +775,13 @@ public class Battle : MonoBehaviour
     public void ShiftCamera()
     {
         battleCameraController.SetBattleCameraTransform(currentCombatantUnit.stationController.offShoulderCam.transform);
+        battleCameraController.SetBattleCameraRotation(new Vector3(currentCombatantUnit.stationController.offShoulderCam.transform.rotation.x, currentCombatantUnit.stationController.offShoulderCam.transform.rotation.y, currentCombatantUnit.stationController.offShoulderCam.transform.rotation.z));
     }
 
     public void MoveCamera()
     {
         battleCameraController.SetBattleCameraTransform(currentCombatantUnit.stationController.perspectiveCamera.transform);
+        battleCameraController.SetBattleCameraRotation(new Vector3(currentCombatantUnit.stationController.perspectiveCamera.transform.rotation.x, currentCombatantUnit.stationController.perspectiveCamera.transform.rotation.y, currentCombatantUnit.stationController.perspectiveCamera.transform.rotation.z));
         if (currentCombatantUnit.isAPlayer)
         {
             playerUICanvas.SetActive(true);
