@@ -17,6 +17,13 @@ MonoBehaviour:
   cost: 21
   resourceType: 0
   castType: 0
+  attackExcersion: 0
   targetType: 1
   effectType: 5
-  attackExcersion: 0
+  affinities: []
+  enhancements:
+  - {fileID: 11400000, guid: cb548883cfbb1f64cba818c652f320a1, type: 2}
+  - {fileID: 11400000, guid: 9ef0bb37f5941454b97f9aa39fa7973f, type: 2}
+  - {fileID: 11400000, guid: 6a7c53fdb3e836041b0580fb87a83a0e, type: 2}
+  - {fileID: 11400000, guid: 0aa8fc920ed686040b09c99a06461a49, type: 2}
+  abilityValue: 0
