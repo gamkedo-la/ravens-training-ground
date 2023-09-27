@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class NavMeshGenerator : MonoBehaviour
 {
+    public NavMeshSurface surfaceToGenerate;
     private void Start()
     {
         Invoke("TriggerBuild", 2);
@@ -12,6 +13,6 @@ public class NavMeshGenerator : MonoBehaviour
 
     public void TriggerBuild()
     {
-        this.GetComponent<NavMeshSurface>().BuildNavMesh();
+        surfaceToGenerate.BuildNavMesh();
     }
 }
