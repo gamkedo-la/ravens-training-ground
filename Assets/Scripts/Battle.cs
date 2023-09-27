@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using Character.Stats;
 using JetBrains.Annotations;
+using UnityEngine.SceneManagement;
 
 public enum StateOfBattle { Start, WON, LOST }
 
@@ -925,7 +926,7 @@ public class Battle : MonoBehaviour
         if (state == StateOfBattle.LOST)
         {
             print("Player Lost");
-
+            StartCoroutine("WaitAfterLoss");
         }
         else
         {
@@ -955,6 +956,12 @@ public class Battle : MonoBehaviour
             currentCombatantUnit = Combatants[currentCombatant].GetComponent<Unit>();
             print("Player Won");
         }
+    }
+
+    IEnumerator WaitAfterLoss()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Floor0");
     }
 
     IEnumerator OpenVictoryMenu()

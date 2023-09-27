@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class LoadScene : MonoBehaviour
 {
     public string levelToLoad;
-    public bool isFloor2, isFloor3;
+    public bool isFloor1, isFloor2;
 
     private void Start()
     {
-        if (isFloor2 && GameManager.floor2Unlocked)
+        if (isFloor1 && GameManager.floor2Unlocked)
             this.GetComponent<Button>().interactable = true;
 
-        if (isFloor3 && GameManager.floor3Unlocked)
+        if (isFloor2 && GameManager.floor3Unlocked)
             this.GetComponent<Button>().interactable = true;
     }
 
@@ -27,6 +27,10 @@ public class LoadScene : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            if (isFloor1)
+                GameManager.floor2Unlocked = true;
+            if (isFloor2)
+                GameManager.floor3Unlocked = true;
             LevelToLoad();
         }
     }

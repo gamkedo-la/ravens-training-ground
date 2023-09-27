@@ -1209,7 +1209,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29807191}
-  m_LocalRotation: {x: 0.18087351, y: 0.000000029328385, z: -0.0000000053936895, w: 0.9835064}
+  m_LocalRotation: {x: 0.18087351, y: 0.000000021439222, z: -0.0000000039428185, w: 0.9835064}
   m_LocalPosition: {x: -5, y: 3.5807264, z: -8.112955}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21870,7 +21870,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784121538}
-  m_LocalRotation: {x: 0.18610567, y: 0.000000021221743, z: -0.0000000040197117, w: 0.98252976}
+  m_LocalRotation: {x: 0.18610567, y: 1.3247371e-15, z: 2.792613e-16, w: 0.98252976}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34819,6 +34819,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor1GenericMonster Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: sceneToLoad
+      value: BattleScene2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: enemiesFloor1.Array.data[0]
+      value: Miniwashitu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: enemiesFloor1.Array.data[1]
+      value: JerseyDevil
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: enemiesFloor1.Array.data[2]
+      value: Salem
+      objectReference: {fileID: 0}
     - target: {fileID: 3400075803176894403, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -44339,6 +44355,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor1GenericMonster Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: sceneToLoad
+      value: BattleScene2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: enemiesFloor1.Array.data[0]
+      value: Miniwashitu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: enemiesFloor1.Array.data[1]
+      value: JerseyDevil
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: enemiesFloor1.Array.data[2]
+      value: Salem
+      objectReference: {fileID: 0}
     - target: {fileID: 3400075803176894403, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -50350,6 +50382,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 29807193}
+    - target: {fileID: 3599660282056187564, guid: 50eef727d8c549e4d89068fed04651f6, type: 3}
+      propertyPath: battleSceneToLoad
+      value: BattleScene2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -61932,6 +61968,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1939494467}
   - component: {fileID: 1939494466}
+  - component: {fileID: 1939494468}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -61951,6 +61988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30ad959a135ec245bc27b5ab7b24fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFloor1: 0
+  isFloor2: 1
   surface: {fileID: 0}
   lockedDoor: {fileID: 736183232}
   keyNames:
@@ -61986,6 +62025,7 @@ MonoBehaviour:
   - {fileID: 1188818035}
   keyRooms:
   - {fileID: 1966933436}
+  surfaceToGenerate: {fileID: 1939494468}
 --- !u!4 &1939494467
 Transform:
   m_ObjectHideFlags: 0
@@ -62001,6 +62041,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1939494468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939494465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &1940369804
 GameObject:
   m_ObjectHideFlags: 0
@@ -64351,6 +64422,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor1GenericMonster Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: sceneToLoad
+      value: BattleScene2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: enemiesFloor1.Array.data[0]
+      value: Miniwashitu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: enemiesFloor1.Array.data[1]
+      value: JerseyDevil
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398420692066998163, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
+      propertyPath: enemiesFloor1.Array.data[2]
+      value: Salem
+      objectReference: {fileID: 0}
     - target: {fileID: 3400075803176894403, guid: 783381babe118de4fada4b8aa95007b1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -65674,9 +65761,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5036722e650d4479631f606a0347f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Floor2
-  isFloor2: 0
-  isFloor3: 0
+  levelToLoad: Floor0
+  isFloor1: 0
+  isFloor2: 1
 --- !u!1 &2059781231
 GameObject:
   m_ObjectHideFlags: 0
