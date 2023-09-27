@@ -128,7 +128,20 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Waiting(float loadTime)
     {
+        PreserveLocationOfOverworld();
         yield return new WaitForSeconds(loadTime);
         SceneManager.LoadScene("BattleScene");
+    }
+
+    public void PreserveLocationOfOverworld()
+    {
+        GameManager.player = this.transform.position;
+        print(GameManager.player);
+
+        for (int i = 0; i < playersInParty.Count; i++)
+        {
+            GameManager.party[i] = this.transform.position + nearbyLocations[i];
+            print(GameManager.party[i]);
+        } 
     }
 }

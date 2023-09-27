@@ -35,6 +35,25 @@ public class GameManager : MonoBehaviour
     public static Expendable itemName;
     public static Clothing clothingName;
 
+    public static bool floor1Generated, floor2Generated;
+    public static Vector3 player;
+    public static Vector3[] party;
+
+    private static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     public void Start()
     {
         shinyThings += 100;

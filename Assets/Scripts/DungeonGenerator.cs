@@ -10,6 +10,10 @@ public enum Direction { UP, RIGHT, DOWN, LEFT };
 
 public class DungeonGenerator : MonoBehaviour {
 
+	public GameObject NavMeshGenerator;
+	public bool isFloor1, isFloor2;
+		//generated is in GameManager
+
 	private List<Vector2Int> directions = new List<Vector2Int>() { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left };
 	private Dictionary<Vector2Int, RoomNode> roomMap = new Dictionary<Vector2Int, RoomNode>();
 	private List<DoorAndKeys> lockedDoors = new List<DoorAndKeys>();
@@ -72,7 +76,16 @@ public class DungeonGenerator : MonoBehaviour {
 
 	void Start() {
 		keyNameIndex = Random.Range(0, keyNames.Count);
-		Generate();
+		if (isFloor1 && !GameManager.floor1Generated)
+		{
+			Generate();
+			GameManager.floor1Generated = true;
+		}
+		if (isFloor2 && !GameManager.floor1Generated)
+		{
+			Generate();
+			GameManager.floor2Generated = true;
+		}
 	}
 
 	public void Generate() {

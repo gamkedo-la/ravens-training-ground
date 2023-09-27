@@ -184,6 +184,7 @@ public class RoamingMonster : MonoBehaviour
     }
     IEnumerator Waiting(float loadTime)
     {
+        SavePlayerLocation();
         yield return new WaitForSeconds(loadTime);
         SceneManager.LoadScene("BattleScene");
     }
@@ -202,5 +203,10 @@ public class RoamingMonster : MonoBehaviour
     public void RearLeft()
     {
         rearContact = false;
+    }
+
+    public void SavePlayerLocation()
+    {
+        player.transform.parent.GetComponent<PlayerMovement>().PreserveLocationOfOverworld();
     }
 }
