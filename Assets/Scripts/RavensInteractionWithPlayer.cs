@@ -11,11 +11,25 @@ public class RavensInteractionWithPlayer : MonoBehaviour
 
     public TMP_Text shiny;
 
+    GameObject generate;
+
     public GameObject itemStore, clothesStore;
     // Start is called before the first frame update
     void Start()
     {
-        
+        generate = GameObject.Find("generate");
+
+        if (generate != null)
+        {
+            Destroy(generate);
+            GameManager.player = new Vector3(0,0,0);
+            for (int i = 0; i < GameManager.party.Length; i++)
+            {
+                GameManager.party[i] = new Vector3(0, 0, 0);
+            }
+            GameManager.floor1Generated = false;
+            GameManager.floor2Generated = false;
+        }
     }
 
     // Update is called once per frame
