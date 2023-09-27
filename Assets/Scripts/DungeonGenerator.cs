@@ -10,7 +10,6 @@ public enum Direction { UP, RIGHT, DOWN, LEFT };
 
 public class DungeonGenerator : MonoBehaviour {
 
-	public GameObject NavMeshGenerator;
 	public bool isFloor1, isFloor2;
 		//generated is in GameManager
 
@@ -41,6 +40,10 @@ public class DungeonGenerator : MonoBehaviour {
 	public List<DungeonRoom> treasureRooms;
 	public List<DungeonRoom> gapRooms;
 	public List<DungeonRoom> keyRooms;
+
+	private static DungeonGenerator instance;
+
+	public NavMeshSurface surfaceToGenerate;
 
 	public enum RoomType {TBD, Start, End, Combat, Treasure, Gap, Key};
 
@@ -76,6 +79,7 @@ public class DungeonGenerator : MonoBehaviour {
 
 	void Start() {
 		keyNameIndex = Random.Range(0, keyNames.Count);
+		Invoke("TriggerBuild", 2);
 		if (isFloor1 && !GameManager.floor1Generated)
 		{
 			Generate();
@@ -86,6 +90,25 @@ public class DungeonGenerator : MonoBehaviour {
 			Generate();
 			GameManager.floor2Generated = true;
 		}
+
+		if (GameManager.floor1Generated || GameManager.floor2Generated)
+		{
+			if (instance != null)
+			{
+				Destroy(gameObject);
+			}
+			else
+			{
+				instance = this;
+				DontDestroyOnLoad(gameObject);
+			}
+		}
+	}
+
+
+	public void TriggerBuild()
+	{
+		surfaceToGenerate.BuildNavMesh();
 	}
 
 	public void Generate() {

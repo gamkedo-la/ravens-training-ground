@@ -8,7 +8,7 @@ public class NavMeshGenerator : MonoBehaviour
     public NavMeshSurface surfaceToGenerate;
     private void Start()
     {
-        Invoke("TriggerBuild", 2);
+        Invoke("TriggerBuild", 1);
     }
 
     public void TriggerBuild()

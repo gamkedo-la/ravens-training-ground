@@ -36,10 +36,10 @@ public class Battle : MonoBehaviour
     public int enemyCount;
 
     public List<GameObject> Combatants = new List<GameObject>();
-/*    public List<GameObject> playersInThisFight = new List<GameObject>();
-    public List<GameObject> enemiesInFight = new List<GameObject>();
+    /*    public List<GameObject> playersInThisFight = new List<GameObject>();
+        public List<GameObject> enemiesInFight = new List<GameObject>();
 
-    public List<GameObject> deadCharacters = new List<GameObject>();*/
+        public List<GameObject> deadCharacters = new List<GameObject>();*/
 
     float totalExperienceAwarded;
     public int currentCombatant = 0;
@@ -75,8 +75,10 @@ public class Battle : MonoBehaviour
     public PlayerUIControllor playerUIControllor;
     public BattleCameraController battleCameraController;
 
+    GameObject generator;
     void Start()
     {
+        Invoke("TurnOffGenerator", 1f);
         if (GameManager.enemyCount > 0)
         {
             enemyCount = GameManager.enemyCount;
@@ -127,9 +129,26 @@ public class Battle : MonoBehaviour
             StartCoroutine(SetUpBattle2());
         else
             StartCoroutine(SetUpBattle());
-        
+
         state = StateOfBattle.Start;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    void TurnOffGenerator()
+    {
+        generator = GameObject.Find("Generator");
+        foreach (Transform child in generator.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
+    void TurnOnGenerator()
+    {
+        foreach (Transform child in generator.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
     }
 
     IEnumerator SetUpBattle2()
@@ -698,6 +717,7 @@ public class Battle : MonoBehaviour
     IEnumerator BattleCleanUp()
     {
         yield return new WaitForSeconds(2f);
+        TurnOnGenerator();
         ExperienceAndDeathCollection();
         ClearGameManager();
     }

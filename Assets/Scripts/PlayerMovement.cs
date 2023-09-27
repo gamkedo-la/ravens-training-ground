@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     float turnSmoothVelocity;
     GameObject cameraEffect;
     bool cantMove;
+    GameObject generate;
 
     List<GameObject> playersInParty = new List<GameObject>();
     int totalPlayerLevel;
@@ -28,6 +29,15 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator WaitForFrame()
     {
         yield return new WaitForEndOfFrame();
+
+       /* generate = GameObject.Find("Generator");
+
+        foreach (Transform child in generate.transform)
+        {
+            child.gameObject.SetActive(true);
+        }*/
+
+        this.gameObject.transform.position = GameManager.player;
         CreatePlayersInOverworld();
         cameraEffect = GameObject.Find("CameraEffect");
     }

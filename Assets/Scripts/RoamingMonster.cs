@@ -187,6 +187,7 @@ public class RoamingMonster : MonoBehaviour
         SavePlayerLocation();
         yield return new WaitForSeconds(loadTime);
         SceneManager.LoadScene("BattleScene");
+        Destroy(this.gameObject);
     }
 
 
