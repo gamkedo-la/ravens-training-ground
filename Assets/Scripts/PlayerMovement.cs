@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     bool cantMove;
     GameObject generate;
 
+    public string battleSceneToLoad = "BattleScene";
+
     List<GameObject> playersInParty = new List<GameObject>();
     int totalPlayerLevel;
 
@@ -30,16 +32,21 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-       /* generate = GameObject.Find("Generator");
+        generate = GameObject.Find("Generator");
 
-        foreach (Transform child in generate.transform)
+        if (!generate.transform.GetChild(1).gameObject.activeSelf)
         {
-            child.gameObject.SetActive(true);
-        }*/
-
+            foreach (Transform child in generate.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
         this.gameObject.transform.position = GameManager.player;
         CreatePlayersInOverworld();
         cameraEffect = GameObject.Find("CameraEffect");
+
+        yield return new WaitForSeconds(1);
+        this.GetComponent<CapsuleCollider>().enabled = true;
     }
     void Update()
     {
@@ -152,6 +159,8 @@ public class PlayerMovement : MonoBehaviour
         {
             GameManager.party[i] = this.transform.position + nearbyLocations[i];
             print(GameManager.party[i]);
-        } 
+        }
+
+        SceneManager.LoadScene(battleSceneToLoad);
     }
 }

@@ -29,9 +29,14 @@ public class RoamingMonster : MonoBehaviour
 
     public bool frontContact, rearContact;
 
+    bool hasBeenTriggered;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (hasBeenTriggered)
+            this.gameObject.SetActive(false);
+
         nav = GetComponent<NavMeshAgent>();
         player = GameObject.Find("monsterTarget").transform;
 
@@ -184,10 +189,9 @@ public class RoamingMonster : MonoBehaviour
     }
     IEnumerator Waiting(float loadTime)
     {
-        SavePlayerLocation();
+        hasBeenTriggered = true;
         yield return new WaitForSeconds(loadTime);
-        SceneManager.LoadScene("BattleScene");
-        Destroy(this.gameObject);
+        SavePlayerLocation();
     }
 
 
