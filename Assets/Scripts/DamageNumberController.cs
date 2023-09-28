@@ -21,20 +21,26 @@ public class DamageNumberController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Create(string text,GameObject incomingGameObject)
     {
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            PlayTextAnimation();
-        }
-    }
+        GameObject temp =Instantiate(this).gameObject;
+        temp.transform.position = incomingGameObject.transform.position;
+        temp.transform.LookAt(Camera.main.transform);
+        SetText(text);
 
+    }
+    private void Awake()
+    {
+        PlayTextAnimation();
+    }
     public void PlayTextAnimation()
     {
         StartCoroutine(RunAnimation());
     }
-
+    void SetText(string text)
+    {
+        damageText.text = text;
+    }
     void SetTextColor(float progress)
     {
         Color textColor = Color.white;
@@ -67,5 +73,7 @@ public class DamageNumberController : MonoBehaviour
             progress += Time.deltaTime * speed;
             yield return new WaitForEndOfFrame();
         }
+
+        Destroy(gameObject);
     }
 }

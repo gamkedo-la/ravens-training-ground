@@ -242,6 +242,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1 &986641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,6 +1154,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &44323512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1521,6 +1523,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1 &53533981
 GameObject:
   m_ObjectHideFlags: 0
@@ -13823,6 +13826,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1 &462664722
 GameObject:
   m_ObjectHideFlags: 0
@@ -14485,6 +14489,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1001 &489008202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17978,6 +17983,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &667693495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22402,6 +22408,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1 &894417895
 GameObject:
   m_ObjectHideFlags: 0
@@ -24965,6 +24972,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1 &982395269
 GameObject:
   m_ObjectHideFlags: 0
@@ -25151,6 +25159,7 @@ MonoBehaviour:
   damageParticle: {fileID: 3974450424714125319, guid: 128033ce485f6e4468cd1f8927449d5f, type: 3}
   playerUIControllor: {fileID: 861098630}
   battleCameraController: {fileID: 963194230}
+  damageNumberController: {fileID: 2520865882135711900, guid: b5082831d75a5964694706a46773115a, type: 3}
 --- !u!114 &987575098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27115,6 +27124,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1 &1096296318
 GameObject:
   m_ObjectHideFlags: 0
@@ -34036,6 +34046,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1167788206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34350,6 +34361,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1001 &1178048886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34823,6 +34835,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1001 &1209909976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35246,6 +35259,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1 &1232937852
 GameObject:
   m_ObjectHideFlags: 0
@@ -36683,6 +36697,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1301759211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43079,6 +43094,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1 &1400907092
 GameObject:
   m_ObjectHideFlags: 0
@@ -43312,6 +43328,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1411591358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46233,6 +46250,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1604330531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50612,6 +50630,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1 &1871025854
 GameObject:
   m_ObjectHideFlags: 0
@@ -52163,6 +52182,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1932818585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53005,6 +53025,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!1001 &1983323589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54029,6 +54050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44bc6c0aced27e4795b717b9a3d62eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrollRect: {fileID: 0}
 --- !u!1 &2034592637
 GameObject:
   m_ObjectHideFlags: 0
@@ -54843,6 +54865,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 2052257342}
+  specificCallOut: 0
 --- !u!114 &2107754529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55668,6 +55691,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &2135561362
 MonoBehaviour:
   m_ObjectHideFlags: 0
