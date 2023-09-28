@@ -26,6 +26,8 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public GameObject toTurnOn;
 
+    public bool specificCallOut;
+
     void Start()
     {
         grow = true;
@@ -52,7 +54,7 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void Update()
     {
-        if (hover)
+        if (hover || specificCallOut)
         {
             if (grow)
                 this.gameObject.transform.localScale += defaultVect3 * .1f * multiplier * Time.deltaTime;
@@ -66,7 +68,6 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             if (Input.GetKeyDown(KeyCode.Mouse0))
                 hover = false;
         }
-
     }
 
     public void OnPointerEnter(PointerEventData eventData)
