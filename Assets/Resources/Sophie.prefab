@@ -184,8 +184,6 @@ MonoBehaviour:
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
-  leftUnit: {fileID: 0}
-  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: 0167df4f9063baa41b46df34b2da2e78, type: 2}
   weaknesses:
@@ -205,6 +203,7 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 3077669558372391171}
   canvas: {fileID: 0}
+  selectedAbility: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
   - {fileID: 11400000, guid: 2aa710b8e25a76b4aa73ad4adf42d770, type: 2}
@@ -270,12 +269,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
   - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
   - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
-  currentLevel: 0
+  currentLevel: 2
   experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
-  magicEnhancementAmount: 0
-  physicalEnhancementAmount: 0
-  finesseEnhancementAmount: 0
-  agilityEnhancementAmount: 0
+  magicEnhancementAmount: 6
+  physicalEnhancementAmount: 4
+  finesseEnhancementAmount: 22
+  agilityEnhancementAmount: 15
   healthEnhancementAmount: 0
   enhancements: []
 --- !u!114 &-1212315643977720763
@@ -317,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicpoints: 15
-  startingMagicPoints: 30
+  magicpoints: 35
+  startingMagicPoints: 35
 --- !u!114 &8444948811190367310
 MonoBehaviour:
   m_ObjectHideFlags: 0

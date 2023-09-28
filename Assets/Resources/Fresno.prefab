@@ -1454,17 +1454,16 @@ MonoBehaviour:
   isAPlayer: 0
   Name: Fresno Nightcrawler
   CurrentMP: 30
-  startingMagic: 10
-  startingPhysical: 9
-  startingAgility: 15
-  startingFinesse: 20
+  startingMagic: 4
+  startingPhysical: 1
+  startingAgility: 6
+  startingFinesse: 10
   CurrentLevel: 3
+  currencyToGive: 15
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
-  leftUnit: {fileID: 0}
-  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: 90f41aed330a972458f06338d928fd45, type: 2}
   weaknesses:
@@ -1484,6 +1483,7 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 5385987265257875818}
   canvas: {fileID: 5424060774806444623}
+  selectedAbility: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: 8101291718b5b1c47ae7e0d1cb456e55, type: 2}
   - {fileID: 11400000, guid: d4915714b74e71649a695510d9fc3c13, type: 2}
@@ -1499,6 +1499,10 @@ MonoBehaviour:
   victoryPlacement: {fileID: 0}
   objectToChangeMaterialOf: {fileID: 0}
   playerMaterial: []
+  hats: []
+  tops: []
+  pants: []
+  wands: []
   currentState: 0
 --- !u!114 &2860897086215744440
 MonoBehaviour:
@@ -1518,12 +1522,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
   - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
   - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
-  currentLevel: 0
+  currentLevel: 3
   experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
-  magicEnhancementAmount: 0
-  physicalEnhancementAmount: 0
-  finesseEnhancementAmount: 0
-  agilityEnhancementAmount: 0
+  magicEnhancementAmount: 4
+  physicalEnhancementAmount: 1
+  finesseEnhancementAmount: 10
+  agilityEnhancementAmount: 6
   healthEnhancementAmount: 0
   enhancements: []
 --- !u!114 &4449948923585635200
@@ -1538,7 +1542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28040d7fc3552da4380d6a16522ee2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  experience: 500
+  experience: 20
 --- !u!114 &7056203580370005559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1551,8 +1555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitpoints: 20
-  startingHitPoints: 0
+  hitpoints: 15
+  startingHitPoints: 15
 --- !u!114 &7752926489341606128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,7 +1569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicpoints: 100
+  magicpoints: 600
+  startingMagicPoints: 600
 --- !u!114 &-4784317565721846083
 MonoBehaviour:
   m_ObjectHideFlags: 0

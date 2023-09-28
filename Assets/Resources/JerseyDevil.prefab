@@ -2139,12 +2139,12 @@ MonoBehaviour:
   isAPlayer: 0
   Name: Jersey Devil
   CurrentMP: 30
-  startingMagic: 10
-  startingPhysical: 9
+  startingMagic: 14
+  startingPhysical: 8
   startingAgility: 15
   startingFinesse: 20
-  CurrentLevel: 3
-  currencyToGive: 8
+  CurrentLevel: 14
+  currencyToGive: 40
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
@@ -2209,12 +2209,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
   - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
   - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
-  currentLevel: 0
+  currentLevel: 14
   experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
-  magicEnhancementAmount: 0
-  physicalEnhancementAmount: 0
-  finesseEnhancementAmount: 0
-  agilityEnhancementAmount: 0
+  magicEnhancementAmount: 14
+  physicalEnhancementAmount: 8
+  finesseEnhancementAmount: 20
+  agilityEnhancementAmount: 15
   healthEnhancementAmount: 0
   enhancements: []
 --- !u!114 &7997488939868210290
@@ -2242,8 +2242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitpoints: 20
-  startingHitPoints: 0
+  hitpoints: 250
+  startingHitPoints: 250
 --- !u!114 &3969796964227295539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2256,8 +2256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicpoints: 100
-  startingMagicPoints: 20
+  magicpoints: 600
+  startingMagicPoints: 600
 --- !u!114 &8612981275791293313
 MonoBehaviour:
   m_ObjectHideFlags: 0

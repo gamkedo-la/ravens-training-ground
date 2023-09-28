@@ -7845,17 +7845,16 @@ MonoBehaviour:
   isAPlayer: 0
   Name: Pukwudgie
   CurrentMP: 30
-  startingMagic: 10
-  startingPhysical: 9
-  startingAgility: 15
-  startingFinesse: 20
+  startingMagic: 3
+  startingPhysical: 3
+  startingAgility: 5
+  startingFinesse: 10
   CurrentLevel: 3
+  currencyToGive: 12
   MagicEquipment: 10
   PhysicalEquipment: 10
   AgilityEquipment: 10
   FinesseEquipment: 10
-  leftUnit: {fileID: 0}
-  rightUnit: {fileID: 0}
   resistances:
   - {fileID: 11400000, guid: 0167df4f9063baa41b46df34b2da2e78, type: 2}
   weaknesses:
@@ -7875,6 +7874,7 @@ MonoBehaviour:
   deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
   targetParticle: {fileID: 3955729933635845421}
   canvas: {fileID: 8606632244713806473}
+  selectedAbility: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: 2aa710b8e25a76b4aa73ad4adf42d770, type: 2}
   - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
@@ -7890,6 +7890,10 @@ MonoBehaviour:
   victoryPlacement: {fileID: 0}
   objectToChangeMaterialOf: {fileID: 0}
   playerMaterial: []
+  hats: []
+  tops: []
+  pants: []
+  wands: []
   currentState: 0
 --- !u!114 &9210011690376775082
 MonoBehaviour:
@@ -7909,12 +7913,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
   - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
   - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
-  currentLevel: 0
+  currentLevel: 3
   experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
-  magicEnhancementAmount: 0
-  physicalEnhancementAmount: 0
-  finesseEnhancementAmount: 0
-  agilityEnhancementAmount: 0
+  magicEnhancementAmount: 4
+  physicalEnhancementAmount: 1
+  finesseEnhancementAmount: 10
+  agilityEnhancementAmount: 6
   healthEnhancementAmount: 0
   enhancements: []
 --- !u!114 &2683032318008896148
@@ -7929,7 +7933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28040d7fc3552da4380d6a16522ee2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  experience: 500
+  experience: 20
 --- !u!114 &5516891556711581842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7956,7 +7960,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicpoints: 100
+  magicpoints: 15
+  startingMagicPoints: 15
 --- !u!114 &-7122040956800397253
 MonoBehaviour:
   m_ObjectHideFlags: 0

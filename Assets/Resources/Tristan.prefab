@@ -759,11 +759,11 @@ MonoBehaviour:
   isAPlayer: 1
   Name: Tristan
   CurrentMP: 10
-  startingMagic: 2
-  startingPhysical: 9
-  startingAgility: 15
-  startingFinesse: 20
-  CurrentLevel: 1
+  startingMagic: 11
+  startingPhysical: 15
+  startingAgility: 10
+  startingFinesse: 10
+  CurrentLevel: 2
   currencyToGive: 8
   MagicEquipment: 10
   PhysicalEquipment: 10
@@ -853,12 +853,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
   - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
   - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
-  currentLevel: 0
+  currentLevel: 2
   experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
-  magicEnhancementAmount: 0
-  physicalEnhancementAmount: 0
-  finesseEnhancementAmount: 0
-  agilityEnhancementAmount: 0
+  magicEnhancementAmount: 11
+  physicalEnhancementAmount: 15
+  finesseEnhancementAmount: 10
+  agilityEnhancementAmount: 10
   healthEnhancementAmount: 0
   enhancements: []
 --- !u!114 &4752357220681098044
@@ -886,8 +886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitpoints: 80
-  startingHitPoints: 80
+  hitpoints: 60
+  startingHitPoints: 60
 --- !u!114 &4497717823535547333
 MonoBehaviour:
   m_ObjectHideFlags: 0
