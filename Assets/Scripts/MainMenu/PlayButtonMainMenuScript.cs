@@ -34,7 +34,7 @@ public class PlayButtonMainMenuScript : MonoBehaviour
         yield return new WaitForSeconds(timeToNextParticle);
         isFading = true;
         yield return new WaitForSeconds(timeToNextLevel);
-        SceneManager.LoadScene("Floor1");
+        SceneManager.LoadScene("IntroCutscene");
     }
 
     private void InstantiateRavens()
