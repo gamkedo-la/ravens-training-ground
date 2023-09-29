@@ -21,17 +21,20 @@ public class DamageNumberController : MonoBehaviour
         
     }
 
-    public void Create(string text,GameObject incomingGameObject)
+    private void Awake()
+    {
+        StartCoroutine(RunAnimation());
+    }
+
+    public IEnumerator Create(string text,GameObject incomingGameObject)
     {
         GameObject temp =Instantiate(this).gameObject;
         temp.transform.position = incomingGameObject.transform.position;
         temp.transform.LookAt(Camera.main.transform);
         SetText(text);
 
-    }
-    private void Awake()
-    {
-        PlayTextAnimation();
+        yield return new WaitForEndOfFrame();
+
     }
     public void PlayTextAnimation()
     {
@@ -53,14 +56,11 @@ public class DamageNumberController : MonoBehaviour
     {
         parent.position = Vector3.Lerp(startPosition.position, endPosition.position,positionAnimationCurve.Evaluate(progress));
     }
-    IEnumerator RunAnimation()
+    public IEnumerator RunAnimation()
     {
         float progress = 0;
 
         transform.position = Vector3.zero;
-
-
-        Color textColor = Color.white;
 
         while (progress <= 1f)
         {
