@@ -101,6 +101,10 @@ public class Unit : MonoBehaviour
     }
     private void Start()
     {
+
+        GetComponent<Health>().DamageTakenEvent += GetComponent<UIStatusController>().AddStatusChange;
+        GetComponent<BaseStats>().StatChanedEvent += GetComponent<UIStatusController>().AddStatusChange;
+
         if (aIBrain == null)
             aIBrain=GetComponent<AIBrain>();
 

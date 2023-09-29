@@ -166,8 +166,6 @@ public class Battle : MonoBehaviour
         {
             GameObject tempMember = Instantiate(Resources.Load<GameObject>(GameManager.inCurrentParty[spotIndex]));
 
-            tempMember.GetComponent<Health>().DamageTakenEvent += damageNumberController.Create;
-
             PlayerBattleStations[spotIndex].AddUnit(tempMember.GetComponent<Unit>());
 
             Combatants.Add(tempMember);
@@ -178,8 +176,6 @@ public class Battle : MonoBehaviour
         for (int i = 0; i<enemyCount;i++)
         {
             GameObject tempEnemy = Instantiate(Resources.Load<GameObject>(enemiesInThisFight[i]));
-
-            tempEnemy.GetComponent<Health>().DamageTakenEvent += damageNumberController.Create;
 
             EnemyBattleStations[i].AddUnit(tempEnemy.GetComponent<Unit>());
 
