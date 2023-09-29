@@ -8081,6 +8081,7 @@ GameObject:
   - component: {fileID: 2302896566899802666}
   - component: {fileID: 5679485312911254940}
   - component: {fileID: 2408060000417829530}
+  - component: {fileID: 8215717697947656712}
   m_Layer: 0
   m_Name: Salem
   m_TagString: Untagged
@@ -8276,6 +8277,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8215717697947656712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211877769021868284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706a753aaa007de44b0aa30ae0672325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageNumberController: {fileID: 2520865882135711900, guid: b5082831d75a5964694706a46773115a, type: 3}
+  waitTime: 0.5
+  statusChanges: []
 --- !u!1001 &2869807082286133517
 PrefabInstance:
   m_ObjectHideFlags: 0
