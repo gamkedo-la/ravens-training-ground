@@ -16,6 +16,9 @@ namespace Character.Stats
         [SerializeField] int currentLevel;
         [SerializeField] int[] experienceRequirements = new int[] { 100, 200, 300, 400, 500, 1000 };
 
+        public delegate void StatChaned(string statusChange);
+        public event StatChaned StatChanedEvent;
+
         public float magicEnhancementAmount;
         public float physicalEnhancementAmount;
         public float finesseEnhancementAmount;
@@ -103,6 +106,9 @@ namespace Character.Stats
         private void HandleNewStatEnhancement(object sender, EnhancementStatAmountArgs e) {
             Stat affectedStat = e.EffectedStat;
             float enhancementAmount = e.EnhancementAmount;
+
+            StatChanedEvent(affectedStat.ToString()+(enhancementAmount < 0 ? " Decreased" : " Increased"));
+
             print(enhancementAmount);
             switch (affectedStat) {
                 case Stat.Magic: {

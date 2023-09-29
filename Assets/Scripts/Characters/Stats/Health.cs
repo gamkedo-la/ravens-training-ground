@@ -25,7 +25,7 @@ namespace Character.Stats {
         public delegate void HealthChanged(int health);
         public event HealthChanged HealthChangedEvent;
 
-        public delegate void DamageTaken(string damage,GameObject gameObject);
+        public delegate void DamageTaken(string damage);
         public event DamageTaken DamageTakenEvent;
 
         private void Start()
@@ -64,7 +64,7 @@ namespace Character.Stats {
         public void TakeDamage(Unit damageSource, int damage) {
             HitPoints = Mathf.Max(HitPoints - damage, 0);
 
-            DamageTakenEvent(damage.ToString(),gameObject);
+            DamageTakenEvent(damage.ToString());
 
             Debug.Log("Damage Applied to: " + gameObject.name);
             if (!gameObject.GetComponent<Unit>().isAPlayer)
