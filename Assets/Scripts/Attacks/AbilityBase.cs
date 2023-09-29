@@ -97,6 +97,8 @@ public class AbilityBase : ScriptableObject
             Enhancement copy = Instantiate(enhancement);
             target.AddEnhancement(copy);
         }
+
+        target.StartCoroutine(target.GetComponent<UIStatusController>().ShowStatusEffects());
     }
     //Claculates all modifiers that comes from the targets attributes
     public float CalculateTargetModifiers(Unit target,float value)
