@@ -63,6 +63,19 @@ public class GameManager : MonoBehaviour
         colorsInParty.Clear();
         colorsNotInParty.Clear();
 
+        //Remove this before final build
+        inCurrentParty.Add("Dani");
+        inCurrentParty.Add("Erebus");
+        inCurrentParty.Add("Theo");
+        inCurrentParty.Add("Tristan");
+
+        colorsInParty.Add(new Color(255, 176, 0));
+        colorsInParty.Add(new Color(83, 0, 255));
+        colorsInParty.Add(new Color(0, 170, 255));
+        colorsInParty.Add(new Color(255, 0, 0));
+
+
+        /* For Final Build
         inCurrentParty.Add("Dani");
 
         charactersNotInParty.Add("Erebus");
@@ -78,6 +91,7 @@ public class GameManager : MonoBehaviour
         colorsNotInParty.Add(new Color(255, 0, 0));
         colorsNotInParty.Add(new Color(0, 0, 0));
         colorsNotInParty.Add(new Color(23, 183, 0));
+        */
     }
 
     public static void ClearGameManagerDataFromInventory()

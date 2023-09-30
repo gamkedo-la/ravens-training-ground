@@ -29,14 +29,11 @@ public class RoamingMonster : MonoBehaviour
 
     public bool frontContact, rearContact;
 
-    bool hasBeenTriggered;
+    public bool hasBeenTriggered;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (hasBeenTriggered)
-            this.gameObject.SetActive(false);
-
         nav = GetComponent<NavMeshAgent>();
         player = GameObject.Find("monsterTarget").transform;
 
@@ -63,6 +60,16 @@ public class RoamingMonster : MonoBehaviour
 
             totalLevel += enemiesInThisList[i].GetComponent<Unit>().CurrentLevel;
         } 
+    }
+
+    private void OnEnable()
+    {
+        if (hasBeenTriggered)
+            this.gameObject.SetActive(false);
+
+        frontContact = false;
+        rearContact = false;
+        isInArea = false;
     }
 
     private void Update()
@@ -200,6 +207,11 @@ public class RoamingMonster : MonoBehaviour
         frontContact = true;
     }
 
+    public void FrontLeft()
+    {
+        frontContact = false;
+    }
+
     public void RearEntered()
     {
         rearContact = true;
@@ -212,6 +224,9 @@ public class RoamingMonster : MonoBehaviour
 
     public void SavePlayerLocation()
     {
+        this.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        this.gameObject.transform.position += new Vector3(0, -20, 0);
+
         player.transform.parent.GetComponent<PlayerMovement>().PreserveLocationOfOverworld();
     }
 }
