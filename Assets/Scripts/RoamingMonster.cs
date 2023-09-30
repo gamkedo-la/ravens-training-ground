@@ -30,6 +30,7 @@ public class RoamingMonster : MonoBehaviour
     public bool frontContact, rearContact;
 
     public bool hasBeenTriggered;
+    bool gettingAwayfromCollision;
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +71,17 @@ public class RoamingMonster : MonoBehaviour
         frontContact = false;
         rearContact = false;
         isInArea = false;
+
+        print("OnEnable");
+
+        player = GameObject.Find("monsterTarget").transform;
+
+        float dist = Vector3.Distance(player.position, transform.position);
+
+        if (dist < 3)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Update()
@@ -138,6 +150,13 @@ public class RoamingMonster : MonoBehaviour
             if (isRotating)
                 transform.Rotate(0, Time.deltaTime * angleSpeed, 0, Space.Self);
         }
+
+        if(gettingAwayfromCollision)
+        {
+            this.transform.Rotate(0, Random.Range(-360, 360), 0, Space.Self);
+            transform.position += -transform.right * 10 * Time.deltaTime;
+        }
+
     }
 
     IEnumerator ShowAncientVision()
@@ -172,7 +191,10 @@ public class RoamingMonster : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            isInArea = false;    
+            isInArea = false;
+
+            if (gettingAwayfromCollision)
+                Destroy(this.gameObject);
         }
     }
 
@@ -197,7 +219,9 @@ public class RoamingMonster : MonoBehaviour
     IEnumerator Waiting(float loadTime)
     {
         hasBeenTriggered = true;
+
         yield return new WaitForSeconds(loadTime);
+        gettingAwayfromCollision = true;
         SavePlayerLocation();
     }
 
