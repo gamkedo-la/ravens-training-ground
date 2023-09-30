@@ -449,6 +449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 1719857952}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 1354741859}
   platformOffset: {x: 0, y: 0.45, z: 0}
@@ -1135,6 +1136,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &36146396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,6 +1313,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &45010777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2026,6 +2029,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &87480351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8863,6 +8867,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &170140331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9447,6 +9452,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &218116348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9745,6 +9751,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &235191843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12774,6 +12781,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &401248828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22804,6 +22812,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &615800809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23169,12 +23178,13 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
-  levelToLoad: Floor1
+  levelToLoad: Floor2
   tintImageOnHover: 0
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 1838846923}
+  specificCallOut: 0
 --- !u!114 &650540352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27054,6 +27064,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &835599550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27229,6 +27240,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &836128655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28412,6 +28424,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &892255478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28732,6 +28745,7 @@ MonoBehaviour:
   damageParticle: {fileID: 3974450424714125319, guid: 128033ce485f6e4468cd1f8927449d5f, type: 3}
   playerUIControllor: {fileID: 2115273563}
   battleCameraController: {fileID: 450659908}
+  damageNumberController: {fileID: 0}
 --- !u!4 &895548483
 Transform:
   m_ObjectHideFlags: 0
@@ -36062,6 +36076,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1241128857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37940,6 +37955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 365847329}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 1389849565}
   platformOffset: {x: 0, y: 0.45, z: 0}
@@ -38259,6 +38275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 92971066}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 8327968}
   - {fileID: 1498131376}
@@ -39174,6 +39191,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1384951381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39451,6 +39469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 2108125605}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 1344501641}
   - {fileID: 2142399463}
@@ -39832,6 +39851,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1413345618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40590,6 +40610,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1440790179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41378,6 +41399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 567583586}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 1915021460}
   - {fileID: 1354741859}
@@ -46734,6 +46756,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1726155011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48088,6 +48111,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1790526557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49400,6 +49424,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1847032606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49584,6 +49609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 121986462}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 2142399463}
   platformOffset: {x: 0, y: 0.45, z: 0}
@@ -55269,6 +55295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 1510594415}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 1498131376}
   platformOffset: {x: 0, y: 0.45, z: 0}
@@ -56964,6 +56991,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1984422576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57421,6 +57449,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &1991980411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58931,6 +58960,7 @@ MonoBehaviour:
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
   hoverTextColor: {r: 0, g: 0, b: 0, a: 1}
   toTurnOn: {fileID: 0}
+  specificCallOut: 0
 --- !u!114 &2055354198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61028,6 +61058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stationedUnit: {fileID: 0}
   perspectiveCamera: {fileID: 887539142}
+  offShoulderCam: {fileID: 0}
   neighborStations:
   - {fileID: 1879829144}
   - {fileID: 1389849565}

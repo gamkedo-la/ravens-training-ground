@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleSceneFloor3.unity
     guid: 49a86dc44f7df4b4395cbed8c20015a4
+  - enabled: 1
+    path: Assets/Scenes/EndCutScene.unity
+    guid: 5c093c9d60c037642bc6857c88d27ea3
   m_configObjects: {}
