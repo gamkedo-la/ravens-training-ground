@@ -19,10 +19,34 @@ public class IntroDialog : MonoBehaviour
 
     public GameObject[] deathParticle, players;
 
+    public bool isIntro;
+    public static bool hasSeenIntro;
+
     private void Start()
     {
         nameText.text = names[0].ToString();
         messageText.text = messages[0].ToString();
+
+        if (isIntro && hasSeenIntro)
+        {
+            this.gameObject.SetActive(false);
+        }
+        if (isIntro && !hasSeenIntro)
+        {
+            for (int i = 0; i < toToggleOff.Length; i++)
+            {
+                toToggleOff[i].GetComponent<Image>().enabled = true;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("Floor0");
+            print("reload");
+        }
     }
     public void NextButton()
     {
@@ -46,6 +70,20 @@ public class IntroDialog : MonoBehaviour
                     toToggleOffText[i].text = "";
                 }
                 StartCoroutine(Return());
+            }
+            if (isIntro && currentCount >= names.Length)
+            {
+                for (int i = 0; i < toToggleOff.Length; i++)
+                {
+                    toToggleOff[i].GetComponent<Image>().enabled = false;
+                }
+
+                for (int i = 0; i < toToggleOffText.Length; i++)
+                {
+                    toToggleOffText[i].text = "";
+                }
+                hasSeenIntro = true;
+                print(hasSeenIntro);
             }
 
             nameText.text = names[currentCount].ToString();

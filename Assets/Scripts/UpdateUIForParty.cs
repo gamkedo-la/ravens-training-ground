@@ -36,6 +36,12 @@ public class UpdateUIForParty : MonoBehaviour
             GameManager.colorsNotInParty.Remove(color);
         }
         this.gameObject.SetActive(false);
+
+        for (int i = 0; i < GameManager.inCurrentParty.Count; i++)
+        {
+            print(GameManager.inCurrentParty[i]);
+            print(GameManager.colorsInParty[i]);
+        }
     }
 
     public void LowerButton()
