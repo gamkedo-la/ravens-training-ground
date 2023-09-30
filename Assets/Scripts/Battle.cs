@@ -946,8 +946,13 @@ public class Battle : MonoBehaviour
                 //}
             }
 
-            movingCamera.transform.position = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.position;
-            movingCamera.transform.rotation = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.rotation;
+            int randomPlayer = Random.Range(0, GetPlayers().Count);
+
+            print(GetPlayers()[randomPlayer].GetComponent<Unit>().name);
+            print(GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform.position);
+
+            movingCamera.transform.position = GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform.position;
+            movingCamera.transform.rotation = GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform.rotation;
             battleCameraController.GetComponent<Animator>().SetTrigger("victory");
 
 
