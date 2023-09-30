@@ -98,6 +98,7 @@ public class AbilityBase : ScriptableObject
             target.AddEnhancement(copy);
         }
 
+        if(target.gameObject.activeSelf)
         target.StartCoroutine(target.GetComponent<UIStatusController>().ShowStatusEffects());
     }
     //Claculates all modifiers that comes from the targets attributes

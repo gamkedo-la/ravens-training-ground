@@ -15,6 +15,7 @@ public class Battle : MonoBehaviour
     public StateOfBattle state;
 
     //check for which setup to use
+    bool finishedSetup = false;
     public bool usesSetup2;
 
     bool unitCurrentlyTakingTurn;
@@ -190,6 +191,8 @@ public class Battle : MonoBehaviour
         OrderCombatants();
 
         StartCoroutine(ActivateNextUnit());
+
+        finishedSetup = true;
     }
     IEnumerator SetUpBattle()
     {
@@ -317,7 +320,7 @@ public class Battle : MonoBehaviour
         }
 
         //Pressing Space advances the turn - this is not permenant - just for testing
-        if (Input.GetKeyDown(KeyCode.Space) && !unitCurrentlyTakingTurn)
+        if (finishedSetup && !unitCurrentlyTakingTurn)
         {
             playerUICanvas.SetActive(false);
 

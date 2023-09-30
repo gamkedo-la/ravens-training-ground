@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIStatusController : MonoBehaviour
@@ -17,13 +18,15 @@ public class UIStatusController : MonoBehaviour
     }
     public IEnumerator ShowStatusEffects()
     {
-        while (statusChanges.Count != 0)
+        if (statusChanges.Count != 0)
         {
-            yield return StartCoroutine(damageNumberController.Create(statusChanges[0], gameObject));
-            yield return new WaitForSeconds(waitTime);
-            statusChanges.RemoveAt(0);  
+            while (statusChanges.Count > 0)
+            {
+                yield return StartCoroutine(damageNumberController.Create(statusChanges[0], gameObject));
+                yield return new WaitForSeconds(waitTime);
+                statusChanges.RemoveAt(0);
+            }
         }
-
     }
     public void AddStatusChange(string statusChange)
     {
