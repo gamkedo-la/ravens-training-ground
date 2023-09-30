@@ -61,7 +61,7 @@ ModelImporter:
       - path: 
         weight: 1
       - path: Body
-        weight: 0
+        weight: 1
       - path: metarig
         weight: 1
       - path: metarig/spine
