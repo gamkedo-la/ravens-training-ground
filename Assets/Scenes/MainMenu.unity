@@ -485,7 +485,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh124924
+  m_Name: pb_Mesh44374
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -19326,7 +19326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -20884,7 +20884,7 @@ PrefabInstance:
     - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 3021233044445248869}
+      objectReference: {fileID: 1563846258}
     - target: {fileID: 7774593961002743236, guid: 39ce003e466793f4f8cfaeb243b2ddf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -21382,7 +21382,7 @@ RectTransform:
   m_GameObject: {fileID: 8006939283687198653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1628123196969780151}
@@ -21410,7 +21410,7 @@ RectTransform:
   m_GameObject: {fileID: 3021233044445248869}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.9}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 189005305507197109}
@@ -21686,6 +21686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1628123196969780151}
   - component: {fileID: 2896801415255569423}
+  - component: {fileID: 3021233044445248870}
   m_Layer: 5
   m_Name: credits list
   m_TagString: Untagged
@@ -21693,6 +21694,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3021233044445248870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021233044445248869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7372549}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8006939283687198653
 GameObject:
   m_ObjectHideFlags: 0
@@ -21731,32 +21762,33 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cassidy: Project lead, core gameplay programming/design, character animations
-    & models (playable characters [Dani, Raven, Sophie primary model, Tristan, Theo,
-    Phoebe, Erebus], monsters [Cherufe, Miniwashitu and generic monster], all clothing),
-    initial iteration of battle system (attack system, damage system, resurrection
-    code, guard functionality, turn-based mechanics, UI, world & level design, scene
-    transitions, inventory [items, clothing, wands, hats, consumables]), cheats,
-    currency and store system, tuning, intro and ending cutscene, assorted integrations
-    and bug fixes\nChristian Gabbianelli: Full second iteration of battle system
-    - Targeting system, AoE attacks, battle logic, turns system, abilities enhancements,
-    dynamic AI component, event-driven mechanisms, attack animation hookups, character
-    state management, buffs/debuffs, ability usability from UI, dynamic magic point
-    updates, player targeting fixes, health system refinement, miscellaneous optimizations
-    and fixes\nPatrick J Thompson: Character models with rigging - Sophie variation,
-    generic/base woman, animated weapon connection, character details (glasses, cloth
-    sim, hair)\nMichael \"Misha\" Fewkes: Music (combat, exploration) and related
-    integration, sequencer setup, procedural dungeon generator, key pickup and door
-    unlock functionality and UI, door animation hookup\nChris Lange: Battle stats
-    (health, magic, agility, finesse) including related UI and framework, auto battle
-    spell support, state machine conflict fix, status effect improvement, combat
-    targeting, experience system\nChrister \"McFunkypants\" Kaitila: Night skybox,
-    moon with moonbeam effect, raven particles, lava falls, title screen decoration,
-    additional main menu functionality\nIan Cherabier: Pause menu \u2013 UI, animations,
-    volume controls\nStebs: Various main menu functionality (UI hover, button functionality,
-    help screen)\nGabriel Cornish: Lava improvements (lighting, particles, waterfall
-    layout)\nBrandon Paul: Sounds (rumble, shatter, and swoosh), main menu mute button\nNeil
-    Urwin: Player party duplicate entry fix"
+  m_text: "Cassidy Noble: Project lead, core gameplay programming/design, character
+    animations & models (playable characters [Dani, Raven, Sophie primary model,
+    Tristan, Theo, Phoebe, Erebus], monsters [Cherufe, Miniwashitu and generic monster],
+    all clothing), initial iteration of battle system (attack system, damage system,
+    resurrection code, guard functionality, turn-based mechanics, UI, world & level
+    design, scene transitions, inventory [items, clothing, wands, hats, consumables]),
+    cheats, currency and store system, tuning, intro and ending cutscene, assorted
+    integrations and bug fixes\n\nChristian Gabbianelli: Full second iteration of
+    battle system - Targeting system, AoE attacks, battle logic, turns system, abilities
+    enhancements, dynamic AI component, event-driven mechanisms, attack animation
+    hookups, character state management, buffs/debuffs, ability usability from UI,
+    dynamic magic point updates, player targeting fixes, health system refinement,
+    miscellaneous optimizations and fixes\n\nPatrick J Thompson: Character models
+    with rigging - Sophie variation, generic/base woman, animated weapon connection,
+    character details (glasses, cloth sim, hair)\n\nMichael \"Misha\" Fewkes: Music
+    (combat, exploration) and related integration, sequencer setup, procedural dungeon
+    generator, key pickup and door unlock functionality and UI, door animation hookup\n\nChris
+    Lange: Battle stats (health, magic, agility, finesse) including related UI and
+    framework, auto battle spell support, state machine conflict fix, status effect
+    improvement, combat targeting, experience system\n\nChrister \"McFunkypants\"
+    Kaitila: Night skybox, moon with moonbeam effect, raven particles, lava falls,
+    title screen decoration, additional main menu functionality\n\nIan Cherabier:
+    Pause menu \u2013 UI, animations, volume controls\n\nStebs: Various main menu
+    functionality (UI hover, button functionality, help screen)\n\nGabriel Cornish:
+    Lava improvements (lighting, particles, waterfall layout)\n\nBrandon Paul: Sounds
+    (rumble, shatter, and swoosh), main menu mute button\n\nNeil Urwin: Player party
+    duplicate entry fix"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2df2646f627bdc740a8b21593b3c88fa, type: 2}
   m_sharedMaterial: {fileID: 4184794397286623348, guid: 2df2646f627bdc740a8b21593b3c88fa, type: 2}
@@ -21783,11 +21815,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 12.9
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 10
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
