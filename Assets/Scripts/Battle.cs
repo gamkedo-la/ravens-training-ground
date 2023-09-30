@@ -76,6 +76,8 @@ public class Battle : MonoBehaviour
     public PlayerUIControllor playerUIControllor;
     public BattleCameraController battleCameraController;
 
+    public GameObject canvasToKill;
+
     GameObject generator;
 
     public DamageNumberController damageNumberController;
@@ -946,13 +948,23 @@ public class Battle : MonoBehaviour
                 //}
             }
 
+            canvasToKill.SetActive(false);
+
+            for (int i = 0; i < GetPlayers().Count; i++)
+            {
+                print(GetPlayers()[i].GetComponent<Unit>().victoryPlacement.transform.position);
+            }
             int randomPlayer = Random.Range(0, GetPlayers().Count);
 
-            print(GetPlayers()[randomPlayer].GetComponent<Unit>().name);
-            print(GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform.position);
-
-            movingCamera.transform.position = GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform.position;
+            movingCamera.transform.SetParent(GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform);
+            movingCamera.transform.position = new Vector3(0, 0, 0);
+            //movingCamera.transform.position = GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform.position;
             movingCamera.transform.rotation = GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform.rotation;
+
+
+            print(movingCamera.transform.localPosition);
+
+
             battleCameraController.GetComponent<Animator>().SetTrigger("victory");
 
 
