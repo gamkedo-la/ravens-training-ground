@@ -23,8 +23,11 @@ public class UIStatusController : MonoBehaviour
             while (statusChanges.Count > 0)
             {
                 yield return StartCoroutine(damageNumberController.Create(statusChanges[0], gameObject));
-                yield return new WaitForSeconds(waitTime);
+
+                print(statusChanges[0]);
                 statusChanges.RemoveAt(0);
+                
+                yield return new WaitForSeconds(waitTime);
             }
         }
     }
