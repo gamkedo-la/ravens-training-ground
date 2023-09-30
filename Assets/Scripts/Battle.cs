@@ -320,7 +320,7 @@ public class Battle : MonoBehaviour
         }
 
         //Pressing Space advances the turn - this is not permenant - just for testing
-        if (finishedSetup && !unitCurrentlyTakingTurn)
+        if (finishedSetup && !unitCurrentlyTakingTurn && currentCombatantUnit.GetComponent<Unit>().isOnAuto)
         {
             playerUICanvas.SetActive(false);
 
@@ -385,6 +385,7 @@ public class Battle : MonoBehaviour
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
         {
             unitCurrentlyTakingTurn= true;
+
             yield return StartCoroutine(currentCombatantUnit.TakingUnitTurn());
 
             UpdatePlayerHealthManaUI();
