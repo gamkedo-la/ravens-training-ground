@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Potion of Shielding
   Cost: 100
-  ravenStock: 6
-  playerStock: 3
+  ravenStock: 40
+  playerStock: 0
   whatDoesItDo: A one use potion to increase defense of the party
   solo: 0
   party: 1

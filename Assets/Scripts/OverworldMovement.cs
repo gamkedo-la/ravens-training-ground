@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverworldMovement : MonoBehaviour
 {
-    float speed = 2.5f;
+    float speed = 4f;
     bool cantMove;
     public Animator anim;
     public float turnSmoothTime = 0.1f;
