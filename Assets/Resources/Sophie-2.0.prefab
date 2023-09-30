@@ -9,6 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8829048129082528599}
+  - component: {fileID: 7244011605893299014}
+  - component: {fileID: 6918633064503414155}
+  - component: {fileID: 5157376654562092161}
+  - component: {fileID: 8290144062598531621}
+  - component: {fileID: 4740726602687951342}
+  - component: {fileID: 6737093571842519424}
+  - component: {fileID: 2515332533478325998}
   m_Layer: 0
   m_Name: Sophie-2.0
   m_TagString: Untagged
@@ -32,6 +39,195 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7244011605893299014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746558834680987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b88dc9f6aef5349bf729c40c5f0d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aIBrain: {fileID: 0}
+  stationController: {fileID: 0}
+  isOnAuto: 1
+  isAPlayer: 1
+  Name: Sophie
+  CurrentMP: 10
+  startingMagic: 2
+  startingPhysical: 9
+  startingAgility: 15
+  startingFinesse: 20
+  CurrentLevel: 2
+  currencyToGive: 8
+  MagicEquipment: 10
+  PhysicalEquipment: 10
+  AgilityEquipment: 10
+  FinesseEquipment: 10
+  resistances:
+  - {fileID: 11400000, guid: 0167df4f9063baa41b46df34b2da2e78, type: 2}
+  weaknesses:
+  - {fileID: 11400000, guid: 9fbfb035e54ff7e46af4b3e68577de2c, type: 2}
+  isASoloAttack: 0
+  isAGroupAttack: 0
+  isAHeal: 0
+  attackBonusTurnCount: 0
+  defenseBonusTurnCount: 0
+  attackMultiplier: 1
+  defenseMultiplier: 1
+  healthToRecover: 0
+  experienceEarned: 0
+  hasBeenKnockedDown: 0
+  anim: {fileID: 3484402040255959389, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  powerUpParticle: {fileID: 491456095014668867, guid: fc9be9f0eb25be64ebad166211496532, type: 3}
+  deathParticle: {fileID: 404851309595311486, guid: 71cb3334346d40043b9a1006e515e367, type: 3}
+  targetParticle: {fileID: 3077669558372391171, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  canvas: {fileID: 0}
+  selectedAbility: {fileID: 0}
+  abilities:
+  - {fileID: 11400000, guid: 31665f18404715242baf674235c5a116, type: 2}
+  - {fileID: 11400000, guid: 2aa710b8e25a76b4aa73ad4adf42d770, type: 2}
+  - {fileID: 11400000, guid: 8101291718b5b1c47ae7e0d1cb456e55, type: 2}
+  - {fileID: 11400000, guid: 56712b1160c18d746976fdf1f534d66c, type: 2}
+  - {fileID: 11400000, guid: d98a266f54c4f1547b35a590ad7d1479, type: 2}
+  - {fileID: 11400000, guid: 9d94ae56618c924428d1b315dd44b8fa, type: 2}
+  - {fileID: 11400000, guid: f33fc664ebbcd1c45b013ec1524d73ee, type: 2}
+  - {fileID: 11400000, guid: 095da59abaaa25c4b97f55464084fdbc, type: 2}
+  - {fileID: 11400000, guid: a400b13aa01717f4283ebefa251eff7e, type: 2}
+  characterName: {fileID: 0}
+  affinityText: {fileID: 0}
+  healthBar: {fileID: 0}
+  chanceOfMetallic: 75
+  isMetallic: 0
+  metallic: {fileID: 0}
+  canFlee: 0
+  randomAttack: 0
+  victoryPlacement: {fileID: 1584590050889509745, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  objectToChangeMaterialOf: {fileID: 7190880627019316226, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  playerMaterial:
+  - {fileID: 2100000, guid: 915f97c77cb6bcf489e3d0b76a7f7333, type: 2}
+  - {fileID: 2100000, guid: 915f97c77cb6bcf489e3d0b76a7f7333, type: 2}
+  - {fileID: 2100000, guid: 915f97c77cb6bcf489e3d0b76a7f7333, type: 2}
+  hats:
+  - {fileID: 7021643495928411350, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 1337415285496602805, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 4983753096916120728, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 1504094752026941666, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  tops:
+  - {fileID: 8273418720307532013, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 562709122488176739, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 7105013245123141494, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 7352051476460576641, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  pants:
+  - {fileID: 7988317404289391210, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 3324235844878215, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 8373423773877604056, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 8683107839183712570, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  wands:
+  - {fileID: 3059118206249374423, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 5847107075207072404, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 4369650763559406224, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 7431874086060005334, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 1103880509189003474, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  - {fileID: 5176641839087328795, guid: 7a3a20a7a6d96c148a6b13116e5b0610, type: 3}
+  currentState: 0
+--- !u!114 &6918633064503414155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746558834680987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1c5b87bdf685548815e651704f58b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statProgressions:
+  - {fileID: 11400000, guid: 2564e6c459745ef468bea05149321bad, type: 2}
+  - {fileID: 11400000, guid: 0a05e76a093d05c46a52daf6edccc8c1, type: 2}
+  - {fileID: 11400000, guid: 1faab66fe320512459acab3daa6d7dc3, type: 2}
+  - {fileID: 11400000, guid: d5bd8b01b9e38e047b4ce7e5ae796c0e, type: 2}
+  - {fileID: 11400000, guid: 3e95fa911db45ec4983a6919a67abf67, type: 2}
+  currentLevel: 2
+  experienceRequirements: 64000000c80000002c01000090010000f4010000e8030000
+  magicEnhancementAmount: 6
+  physicalEnhancementAmount: 4
+  finesseEnhancementAmount: 22
+  agilityEnhancementAmount: 15
+  healthEnhancementAmount: 0
+  enhancements: []
+--- !u!114 &5157376654562092161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746558834680987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28040d7fc3552da4380d6a16522ee2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experience: 0
+--- !u!114 &8290144062598531621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746558834680987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d62958d4f303d42be70fd32795c2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitpoints: 30
+  startingHitPoints: 65
+--- !u!114 &4740726602687951342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746558834680987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicpoints: 35
+  startingMagicPoints: 35
+--- !u!114 &6737093571842519424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746558834680987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5481bd2b78fed3f40bbf589c0eba8866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2515332533478325998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746558834680987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706a753aaa007de44b0aa30ae0672325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageNumberController: {fileID: 2520865882135711900, guid: b5082831d75a5964694706a46773115a, type: 3}
+  waitTime: 0.5
+  statusChanges: []
 --- !u!1001 &521436659056180877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,7 +316,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 790165c95d03aea488c09a2302d74e43, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

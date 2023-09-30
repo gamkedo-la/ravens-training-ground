@@ -5,8 +5,7 @@ public class Smb_OffSetAnimation : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // we want 
-        animator.SetFloat("OffsetBy", Random.Range(0, .95f));
+        animator.SetFloat("OffsetAnimation", Random.Range(0, .95f));
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
