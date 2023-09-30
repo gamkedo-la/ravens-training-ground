@@ -15,6 +15,7 @@ public class Battle : MonoBehaviour
     public StateOfBattle state;
 
     //check for which setup to use
+    bool finishedSetup = false;
     public bool usesSetup2;
 
     bool unitCurrentlyTakingTurn;
@@ -75,6 +76,8 @@ public class Battle : MonoBehaviour
 
     public PlayerUIControllor playerUIControllor;
     public BattleCameraController battleCameraController;
+
+    public GameObject canvasToKill;
 
     GameObject generator;
 
@@ -188,6 +191,8 @@ public class Battle : MonoBehaviour
         OrderCombatants();
 
         StartCoroutine(ActivateNextUnit());
+
+        finishedSetup = true;
     }
     IEnumerator SetUpBattle()
     {
@@ -315,7 +320,7 @@ public class Battle : MonoBehaviour
         }
 
         //Pressing Space advances the turn - this is not permenant - just for testing
-        if (Input.GetKeyDown(KeyCode.Space) && !unitCurrentlyTakingTurn)
+        if (finishedSetup && !unitCurrentlyTakingTurn && currentCombatantUnit.GetComponent<Unit>().isOnAuto)
         {
             playerUICanvas.SetActive(false);
 
@@ -380,6 +385,7 @@ public class Battle : MonoBehaviour
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
         {
             unitCurrentlyTakingTurn= true;
+
             yield return StartCoroutine(currentCombatantUnit.TakingUnitTurn());
 
             UpdatePlayerHealthManaUI();
@@ -946,8 +952,23 @@ public class Battle : MonoBehaviour
                 //}
             }
 
-            movingCamera.transform.position = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.position;
-            movingCamera.transform.rotation = Combatants[currentCombatant].GetComponent<Unit>().victoryPlacement.transform.rotation;
+            canvasToKill.SetActive(false);
+
+            for (int i = 0; i < GetPlayers().Count; i++)
+            {
+                print(GetPlayers()[i].GetComponent<Unit>().victoryPlacement.transform.position);
+            }
+            int randomPlayer = Random.Range(0, GetPlayers().Count);
+
+            movingCamera.transform.SetParent(GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform);
+            movingCamera.transform.position = new Vector3(0, 0, 0);
+            //movingCamera.transform.position = GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform.position;
+            movingCamera.transform.rotation = GetPlayers()[randomPlayer].GetComponent<Unit>().victoryPlacement.transform.rotation;
+
+
+            print(movingCamera.transform.localPosition);
+
+
             battleCameraController.GetComponent<Animator>().SetTrigger("victory");
 
 

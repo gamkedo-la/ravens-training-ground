@@ -9576,7 +9576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2260314726347872228, guid: 40a2ff4aa156379419f29d9cfcd59439, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25159,6 +25159,7 @@ MonoBehaviour:
   damageParticle: {fileID: 3974450424714125319, guid: 128033ce485f6e4468cd1f8927449d5f, type: 3}
   playerUIControllor: {fileID: 861098630}
   battleCameraController: {fileID: 963194230}
+  canvasToKill: {fileID: 1914878151}
   damageNumberController: {fileID: 2520865882135711900, guid: b5082831d75a5964694706a46773115a, type: 3}
 --- !u!114 &987575098
 MonoBehaviour:
@@ -37652,7 +37653,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1355244184
 PrefabInstance:
@@ -47396,7 +47397,7 @@ Transform:
   - {fileID: 1255360987}
   - {fileID: 1476025591}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1665840443
 GameObject:
@@ -48819,7 +48820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8672399301381300143, guid: 21fa0fb370c57604391bfde71388112a, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8672399301381300143, guid: 21fa0fb370c57604391bfde71388112a, type: 3}
       propertyPath: m_LocalScale.x
@@ -54050,7 +54051,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44bc6c0aced27e4795b717b9a3d62eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollRect: {fileID: 0}
 --- !u!1 &2034592637
 GameObject:
   m_ObjectHideFlags: 0
