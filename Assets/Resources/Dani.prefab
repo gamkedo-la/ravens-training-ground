@@ -905,7 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f80ed2503d97c146ac04727e06779df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicpoints: 15
+  magicpoints: 30
   startingMagicPoints: 30
 --- !u!114 &-1634876233654252861
 MonoBehaviour:

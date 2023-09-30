@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Transform cam;
+    Transform cam;
 
     public Animator anim;
     public CharacterController controller;
@@ -16,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     GameObject cameraEffect;
     bool cantMove;
     GameObject generate;
+
+    GameObject collidedWith;
 
     public string battleSceneToLoad = "BattleScene";
 
@@ -47,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         this.GetComponent<CapsuleCollider>().enabled = true;
+        cam = GameObject.Find("Main Camera").transform;
     }
     void Update()
     {
@@ -135,10 +139,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
+            if (other.GetComponent<SphereCollider>().GetType() == typeof(SphereCollider))
+            {
+                print("front exit");
+                other.gameObject.GetComponent<RoamingMonster>().FrontLeft();
+            }
+
             if (other.GetComponent<Collider>().GetType() == typeof(CapsuleCollider))
             {
-                print("rear");
-                other.gameObject.GetComponent<RoamingMonster>().RearEntered();
+                print("rear exit");
+                other.gameObject.GetComponent<RoamingMonster>().RearLeft();
             }
         }
     }
@@ -147,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
     {
         PreserveLocationOfOverworld();
         yield return new WaitForSeconds(loadTime);
-        SceneManager.LoadScene("BattleScene");
+        SceneManager.LoadScene(battleSceneToLoad);
     }
 
     public void PreserveLocationOfOverworld()

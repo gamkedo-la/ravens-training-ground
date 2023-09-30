@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Medicine
   Cost: 75
-  ravenStock: 6
-  playerStock: 3
+  ravenStock: 40
+  playerStock: 0
   whatDoesItDo: A dose of common medicine for minor ailments
   solo: 1
   party: 0

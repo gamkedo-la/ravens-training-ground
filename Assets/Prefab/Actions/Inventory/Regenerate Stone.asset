@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Regenerate Stone
   Cost: 200
-  ravenStock: 6
-  playerStock: 3
+  ravenStock: 40
+  playerStock: 0
   whatDoesItDo: A rare stone to bring a fallen player back at 10 HP
   solo: 1
   party: 0

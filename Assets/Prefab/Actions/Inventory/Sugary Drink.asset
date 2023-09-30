@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfItem: Sugary Drink
   Cost: 50
-  ravenStock: 6
-  playerStock: 3
+  ravenStock: 40
+  playerStock: 0
   whatDoesItDo: Sugar rush in a can to boost attack
   solo: 1
   party: 0

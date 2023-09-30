@@ -29,14 +29,12 @@ public class RoamingMonster : MonoBehaviour
 
     public bool frontContact, rearContact;
 
-    bool hasBeenTriggered;
+    public bool hasBeenTriggered;
+    bool gettingAwayfromCollision;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (hasBeenTriggered)
-            this.gameObject.SetActive(false);
-
         nav = GetComponent<NavMeshAgent>();
         player = GameObject.Find("monsterTarget").transform;
 
@@ -63,6 +61,27 @@ public class RoamingMonster : MonoBehaviour
 
             totalLevel += enemiesInThisList[i].GetComponent<Unit>().CurrentLevel;
         } 
+    }
+
+    private void OnEnable()
+    {
+        if (hasBeenTriggered)
+            this.gameObject.SetActive(false);
+
+        frontContact = false;
+        rearContact = false;
+        isInArea = false;
+
+        print("OnEnable");
+
+        player = GameObject.Find("monsterTarget").transform;
+
+        float dist = Vector3.Distance(player.position, transform.position);
+
+        if (dist < 3)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Update()
@@ -131,6 +150,13 @@ public class RoamingMonster : MonoBehaviour
             if (isRotating)
                 transform.Rotate(0, Time.deltaTime * angleSpeed, 0, Space.Self);
         }
+
+        if(gettingAwayfromCollision)
+        {
+            this.transform.Rotate(0, Random.Range(-360, 360), 0, Space.Self);
+            transform.position += -transform.right * 10 * Time.deltaTime;
+        }
+
     }
 
     IEnumerator ShowAncientVision()
@@ -165,7 +191,10 @@ public class RoamingMonster : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            isInArea = false;    
+            isInArea = false;
+
+            if (gettingAwayfromCollision)
+                Destroy(this.gameObject);
         }
     }
 
@@ -190,7 +219,9 @@ public class RoamingMonster : MonoBehaviour
     IEnumerator Waiting(float loadTime)
     {
         hasBeenTriggered = true;
+
         yield return new WaitForSeconds(loadTime);
+        gettingAwayfromCollision = true;
         SavePlayerLocation();
     }
 
@@ -198,6 +229,11 @@ public class RoamingMonster : MonoBehaviour
     public void FrontEntered()
     {
         frontContact = true;
+    }
+
+    public void FrontLeft()
+    {
+        frontContact = false;
     }
 
     public void RearEntered()
@@ -212,6 +248,9 @@ public class RoamingMonster : MonoBehaviour
 
     public void SavePlayerLocation()
     {
+        this.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        this.gameObject.transform.position += new Vector3(0, -20, 0);
+
         player.transform.parent.GetComponent<PlayerMovement>().PreserveLocationOfOverworld();
     }
 }

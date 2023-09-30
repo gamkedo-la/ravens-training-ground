@@ -10,6 +10,7 @@ public enum Direction { UP, RIGHT, DOWN, LEFT };
 
 public class DungeonGenerator : MonoBehaviour {
 
+	public GameObject player;
 	public bool isFloor1, isFloor2;
 		//generated is in GameManager
 
@@ -105,8 +106,12 @@ public class DungeonGenerator : MonoBehaviour {
 		}
 	}
 
+    private void OnEnable()
+    {
+		Instantiate(player, GameManager.player, Quaternion.identity);
+    }
 
-	public void TriggerBuild()
+    public void TriggerBuild()
 	{
 		surfaceToGenerate.BuildNavMesh();
 	}
