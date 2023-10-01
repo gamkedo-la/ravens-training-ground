@@ -16608,7 +16608,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fe714b69a47ca43959fade8a77028f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: []
+  playerInventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   playerClothes: []
 --- !u!4 &529463064
 Transform:

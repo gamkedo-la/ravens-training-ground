@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfItem: Tome of Raven
   Cost: 250
   ravenStock: 40
-  playerStock: 0
+  playerStock: 5
   whatDoesItDo: Using magic of the Raven, increase MP of all party members
   solo: 0
   party: 1

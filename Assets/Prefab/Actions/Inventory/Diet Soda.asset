@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfItem: Diet Soda
   Cost: 50
   ravenStock: 40
-  playerStock: 0
+  playerStock: 5
   whatDoesItDo: A calorie free drink to increase MP
   solo: 1
   party: 0

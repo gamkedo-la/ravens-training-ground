@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfItem: Medicine
   Cost: 75
   ravenStock: 40
-  playerStock: 0
+  playerStock: 5
   whatDoesItDo: A dose of common medicine for minor ailments
   solo: 1
   party: 0

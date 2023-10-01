@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfItem: Bandage
   Cost: 50
   ravenStock: 40
-  playerStock: 0
+  playerStock: 5
   whatDoesItDo: A small bandage for small injuries
   solo: 1
   party: 0
