@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         this.gameObject.transform.position = GameManager.player;
-        CreatePlayersInOverworld();
         cameraEffect = GameObject.Find("CameraEffect");
 
         yield return new WaitForSeconds(1);
@@ -92,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         GameManager.avgPlayerLevelPerPlayerInParty = totalPlayerLevel / GameManager.inCurrentParty.Count;
     }
 
-    void CreatePlayersInOverworld()
+    public void CreatePlayersInOverworld()
     {
         for (int i = 0; i < GameManager.inCurrentParty.Count; i++)
         {

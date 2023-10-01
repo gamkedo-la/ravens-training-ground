@@ -80,7 +80,7 @@ public class DungeonGenerator : MonoBehaviour {
 
 	void Start() {
 		keyNameIndex = Random.Range(0, keyNames.Count);
-		Invoke("TriggerBuild", 2);
+		Invoke("TriggerBuild", 1);
 		if (isFloor1 && !GameManager.floor1Generated)
 		{
 			Generate();
@@ -113,6 +113,7 @@ public class DungeonGenerator : MonoBehaviour {
 
     public void TriggerBuild()
 	{
+		player.GetComponent<PlayerMovement>().CreatePlayersInOverworld();
 		surfaceToGenerate.BuildNavMesh();
 	}
 
