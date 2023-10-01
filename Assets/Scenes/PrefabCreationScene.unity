@@ -775,6 +775,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LavaFall
       objectReference: {fileID: 0}
+    - target: {fileID: 7708166694304694607, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7947435391876986450, guid: 8f0ae4dc64e535d4a8b7b65eaf4af521, type: 3}
       propertyPath: m_Mesh
       value: 
