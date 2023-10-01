@@ -84,6 +84,8 @@ public class Battle : MonoBehaviour
 
     public DamageNumberController damageNumberController;
 
+    bool allAuto;
+
     void Start()
     {
         Invoke("TurnOffGenerator", 1f);
@@ -273,9 +275,31 @@ public class Battle : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            allAuto = !allAuto;
+            print(allAuto);
+
+            if (allAuto)
+            {
+                for (int i = 0; i < GetPlayers().Count; i++)
+                {
+                    GetPlayers()[i].GetComponent<Unit>().isOnAuto = true;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < GetPlayers().Count; i++)
+                {
+                    GetPlayers()[i].GetComponent<Unit>().isOnAuto = false;
+                }
+            }
+        }
+        #region CHEATS REMOVE ONCE TESTING IS FINISHED
+        
         if (selectingOneTarget)
         {
-
+           
             if (Input.GetKeyDown(KeyCode.A))
             {
                 for (int i = 0; i < GetEnemies().Count; i++)
@@ -309,7 +333,7 @@ public class Battle : MonoBehaviour
             GetEnemies()[currentlySelectedEnemy].GetComponent<Unit>().canvas.SetActive(true);
             GetEnemies()[currentlySelectedEnemy].GetComponent<Unit>().targetParticle.SetActive(true);          
         }
-        #region CHEATS REMOVE ONCE TESTING IS FINISHED
+        /*
         if (Input.GetKeyDown(KeyCode.K))
         {
             //knock down all enemies
@@ -320,7 +344,7 @@ public class Battle : MonoBehaviour
             }
             CheckIfAllMembersKnockedDown();
         }
-
+        */
         //Pressing Space advances the turn - this is not permenant - just for testing
         if (finishedSetup && !unitCurrentlyTakingTurn && currentCombatantUnit.GetComponent<Unit>().isOnAuto)
         {
@@ -329,21 +353,21 @@ public class Battle : MonoBehaviour
             if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Dead || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Fled)
                 StartCoroutine(NextTurn());
         }
-
+        /*
         if (Input.GetKeyDown(KeyCode.V))
         {
             //this enters a victory state, TESTING, REMOVE EVENTUALLY
             /* state = StateOfBattle.WON;
              EndBattle();*/
 
-            GetEnemies()[0].GetComponent<Health>().TakeDamage(GetPlayers()[0].GetComponent<Unit>(), 9999);
+        // GetEnemies()[0].GetComponent<Health>().TakeDamage(GetPlayers()[0].GetComponent<Unit>(), 9999);
 
-            /*for (int i = 0; i < GetEnemies().Count; i++)
-            {
-                print(GetEnemies()[i].name);
-                GetEnemies()[i].GetComponent<Health>().TakeDamage(GetPlayers()[0].GetComponent<Unit>(), 9999);     
-            }*/
+        /*for (int i = 0; i < GetEnemies().Count; i++)
+        {
+            print(GetEnemies()[i].name);
+            GetEnemies()[i].GetComponent<Health>().TakeDamage(GetPlayers()[0].GetComponent<Unit>(), 9999);     
         }
+        }*/
         #endregion
     }
     IEnumerator ActivateNextUnit()
