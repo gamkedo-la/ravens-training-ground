@@ -85,6 +85,7 @@ public class Battle : MonoBehaviour
     public DamageNumberController damageNumberController;
 
     bool allAuto;
+    public GameObject FailureMenu;
 
     void Start()
     {
@@ -353,6 +354,8 @@ public class Battle : MonoBehaviour
             if(currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Dead || currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Fled)
                 StartCoroutine(NextTurn());
         }
+
+
         /*
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -372,6 +375,12 @@ public class Battle : MonoBehaviour
     }
     IEnumerator ActivateNextUnit()
     {
+        if (Combatants[currentCombatant].GetComponent<Health>().HitPoints <= 0)
+        {
+            currentCombatant += 1;
+            StartCoroutine(ActivateNextUnit());
+        }
+
         if (currentCombatant >= Combatants.Count)
         {
             Combatants = Combatants.OrderByDescending(x => x.GetComponent<BaseStats>().GetStat(Stat.Agility) + x.GetComponent<BaseStats>().GetStat(Stat.Agility)).ToList();
@@ -410,7 +419,7 @@ public class Battle : MonoBehaviour
 
         if (currentCombatantUnit.GetComponent<Unit>().currentState != Unit.UnitState.Unconscious)
         {
-            unitCurrentlyTakingTurn= true;
+            unitCurrentlyTakingTurn = true;
 
             yield return StartCoroutine(currentCombatantUnit.TakingUnitTurn());
 
@@ -418,6 +427,12 @@ public class Battle : MonoBehaviour
             Debug.LogWarning("finished turn");
             unitCurrentlyTakingTurn = false;
             playerUICanvas.SetActive(true);
+        }
+
+        else
+        {
+            unitCurrentlyTakingTurn = true;
+            yield return StartCoroutine(currentCombatantUnit.TakingUnitTurn());
         }
     }
 
@@ -823,10 +838,24 @@ public class Battle : MonoBehaviour
 
         //Current structure is to not remove players from the PlayersInThisFight list as they can be called back
         //So right now, if the number of deadPlayers equals the number of players in the fight - everyone has been killed and the player loses
-        if (GetUnconciousPlayers().Count >= GetPlayers().Count)
+        if (GetUnconciousPlayers().Count >= GetPlayers().Count || GetPlayers()[0].GetComponent<Health>().HitPoints <= 0)
         {
             state = StateOfBattle.LOST;
             EndBattle();
+        }
+    }
+
+    public void GameOver()
+    {
+        if (GetUnconciousPlayers().Count >= GetPlayers().Count || GetPlayers()[0].GetComponent<Health>().HitPoints <= 0)
+        {
+            state = StateOfBattle.LOST;
+            EndBattle();
+        }
+
+        else
+        {
+            StartCoroutine(NextTurn());
         }
     }
 
@@ -964,6 +993,7 @@ public class Battle : MonoBehaviour
         {
             print("Player Lost");
             StartCoroutine("WaitAfterLoss");
+            FailureMenu.SetActive(true);
         }
         else
         {

@@ -208,13 +208,24 @@ public class Unit : MonoBehaviour
 
         }
 
-        yield return StartCoroutine(UseAbility());
+        if (!this.gameObject.activeSelf)
+        {
+            battle.GameOver();
+        }
+        else
+            yield return StartCoroutine(UseAbility());
         
         battle.targetingSystem.CurrentUnit = null;
 
         yield return new WaitForEndOfFrame();
 
-        StartCoroutine(battle.CombatantFinishedTurn());
+        print(name + " current turn");
+        if (name == "Dani" && this.GetComponent<Health>().HitPoints <= 0)
+        {
+            battle.GameOver();
+        }
+        else
+            StartCoroutine(battle.CombatantFinishedTurn());
 
         yield return new WaitForSeconds(1);
         // DetermineAttack();
