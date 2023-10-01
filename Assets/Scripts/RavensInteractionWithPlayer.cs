@@ -17,7 +17,7 @@ public class RavensInteractionWithPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        generate = GameObject.Find("generate");
+        generate = GameObject.Find("Generator");
 
         if (generate != null)
         {

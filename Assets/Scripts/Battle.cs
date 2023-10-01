@@ -986,6 +986,11 @@ public class Battle : MonoBehaviour
     }
     void EndBattle()
     {
+        for (int i = 0; i < GetPlayers().Count; i++)
+        {
+            GetPlayers()[i].GetComponent<Unit>().isOnAuto = false;
+        }
+
         playerUICanvas.SetActive(false);
         ClearGameManager();
         //this just prints states, but will be used for triggering Experience windows (if won) or losing screen (if lost)

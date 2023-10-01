@@ -28,9 +28,13 @@ public class LoadScene : MonoBehaviour
         if (other.tag == "Player")
         {
             if (isFloor1)
+            {
                 GameManager.floor2Unlocked = true;
+            }
             if (isFloor2)
+            {
                 GameManager.floor3Unlocked = true;
+            }
             LevelToLoad();
         }
     }
