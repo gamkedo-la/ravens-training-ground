@@ -755,7 +755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aIBrain: {fileID: 0}
   stationController: {fileID: 0}
-  isOnAuto: 1
+  isOnAuto: 0
   isAPlayer: 1
   Name: Tristan
   CurrentMP: 10
