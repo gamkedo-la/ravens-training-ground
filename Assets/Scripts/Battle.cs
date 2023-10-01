@@ -777,14 +777,14 @@ public class Battle : MonoBehaviour
 
     IEnumerator ClearInformationText(float timer, string message)
     {
-        informationTextHolder.SetActive(true);
-        informationText.text = message;
+       // informationTextHolder.SetActive(true);
+      //  informationText.text = message;
         yield return new WaitForSeconds(timer);
 
         characterNameHolder.SetActive(false);
         characterNameText.text = "";
         informationText.text = "";
-        informationTextHolder.SetActive(false);
+       // informationTextHolder.SetActive(false);
     }
 
     public void ExperienceAndDeathCollection()
