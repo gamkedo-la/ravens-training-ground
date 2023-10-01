@@ -810,6 +810,7 @@ public class Battle : MonoBehaviour
     public void MoveCamera()
     {
         battleCameraController.SetBattleCameraTransform(currentCombatantUnit.stationController.perspectiveCamera.transform);
+
         battleCameraController.SetBattleCameraRotation(new Vector3(currentCombatantUnit.stationController.perspectiveCamera.transform.rotation.x, currentCombatantUnit.stationController.perspectiveCamera.transform.rotation.y, currentCombatantUnit.stationController.perspectiveCamera.transform.rotation.z));
         if (currentCombatantUnit.isAPlayer)
         {
