@@ -17988,7 +17988,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 141.52338}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &638478662
@@ -25507,7 +25507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Space to advance turn
+  m_text: Press Space to turn on auto battle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d197cfb9180427d499defc380939493e, type: 2}
   m_sharedMaterial: {fileID: 9024743969796584795, guid: d197cfb9180427d499defc380939493e, type: 2}
@@ -45746,7 +45746,7 @@ MonoBehaviour:
   percentMax: 1.05
   multiplier: 4
   isFlee: 0
-  levelToLoad: Floor1
+  levelToLoad: Floor2
   tintImageOnHover: 0
   outlineImageColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundImageColor: {r: 1, g: 1, b: 1, a: 1}
@@ -48791,11 +48791,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3059fc8ff1288746a88c6a7fd5201b3, type: 2}
   - {fileID: 11400000, guid: e76fea4e42d65d848885e59295d626a0, type: 2}
   victoryItemText: {fileID: 444648226}
+  victoryMenuText: {fileID: 1898405112}
   groupAttackHappening: 0
   damageParticle: {fileID: 3974450424714125319, guid: 128033ce485f6e4468cd1f8927449d5f, type: 3}
   playerUIControllor: {fileID: 1919433750}
   battleCameraController: {fileID: 959011898}
   canvasToKill: {fileID: 1303642521}
+  overlayCanvas: {fileID: 1303642521}
   damageNumberController: {fileID: 2520865882135711900, guid: b5082831d75a5964694706a46773115a, type: 3}
 --- !u!4 &1648417328
 Transform:
@@ -54823,7 +54825,7 @@ GameObject:
   - component: {fileID: 1898405113}
   - component: {fileID: 1898405112}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Victory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

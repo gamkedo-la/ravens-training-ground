@@ -1590,7 +1590,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 95730939}
   m_OnClick:
     m_PersistentCalls:
@@ -5876,7 +5876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Space to advance turn
+  m_text: Press Space to turn on auto battle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d197cfb9180427d499defc380939493e, type: 2}
   m_sharedMaterial: {fileID: 9024743969796584795, guid: d197cfb9180427d499defc380939493e, type: 2}
@@ -82346,11 +82346,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3059fc8ff1288746a88c6a7fd5201b3, type: 2}
   - {fileID: 11400000, guid: e76fea4e42d65d848885e59295d626a0, type: 2}
   victoryItemText: {fileID: 860688622}
+  victoryMenuText: {fileID: 0}
   groupAttackHappening: 0
   damageParticle: {fileID: 3974450424714125319, guid: 128033ce485f6e4468cd1f8927449d5f, type: 3}
   playerUIControllor: {fileID: 162882738}
   battleCameraController: {fileID: 98073596}
   canvasToKill: {fileID: 75350868}
+  overlayCanvas: {fileID: 75350868}
   damageNumberController: {fileID: 2520865882135711900, guid: b5082831d75a5964694706a46773115a, type: 3}
 --- !u!4 &1855283531
 Transform:
@@ -82757,7 +82759,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Flee
+  m_text: CANT FLEE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d197cfb9180427d499defc380939493e, type: 2}
   m_sharedMaterial: {fileID: 9024743969796584795, guid: d197cfb9180427d499defc380939493e, type: 2}
@@ -82784,10 +82786,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 43.15
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -82820,7 +82822,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -94.73737, y: 6.712797, z: -97.74589, w: -24.173681}
+  m_margin: {x: 19.45237, y: 6.712797, z: 5.7198725, w: -24.173681}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

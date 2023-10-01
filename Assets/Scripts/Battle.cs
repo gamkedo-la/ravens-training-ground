@@ -70,7 +70,7 @@ public class Battle : MonoBehaviour
     public TMP_Text victoryCurrencyText;
     public Expendable[] InventoryPool;
     GameManager gameManager;
-    public TMP_Text victoryItemText;
+    public TMP_Text victoryItemText, victoryMenuText;
     public bool groupAttackHappening;
     public GameObject damageParticle;
 
@@ -79,9 +79,11 @@ public class Battle : MonoBehaviour
 
     public GameObject canvasToKill;
 
+    public GameObject overlayCanvas;
     GameObject generator;
 
     public DamageNumberController damageNumberController;
+
     void Start()
     {
         Invoke("TurnOffGenerator", 1f);
@@ -674,13 +676,15 @@ public class Battle : MonoBehaviour
     //Player has a chance to flee if they press the 'flee option'. This is done by taking a random # 0-100. For each downed enemy, add 25, then add agility and equipment. If chanceToLeave<=sum, leave
     public void FleeChance()
     {
-        int percentToLeave = Random.Range(0, 100);
+        int percentToLeave = 0;
 
         for (int i = 0; i < GetEnemies().Count; i++)
         {
             if (GetEnemies()[i].GetComponent<Unit>().hasBeenKnockedDown)
                 chanceToLeave += 25;
         }
+
+        hasFled = true;
 
         if (percentToLeave <= chanceToLeave + currentCombatantUnit.GetComponent<BaseStats>().GetStat(Stat.Agility) + currentCombatantUnit.AgilityEquipment)
         {
@@ -697,6 +701,7 @@ public class Battle : MonoBehaviour
             chanceToLeave = 0;
             StartCoroutine(ClearInformationText(2f, "Party escaped"));
             StartCoroutine(BattleCleanUp());
+            StartCoroutine(OpenVictoryMenu());
         }
         else
         {
@@ -926,7 +931,6 @@ public class Battle : MonoBehaviour
         //currentCombatant = (currentCombatant + 1) % Combatants.Count;
         //NextTurn();
     }
-
     void EndBattle()
     {
         playerUICanvas.SetActive(false);
@@ -992,29 +996,38 @@ public class Battle : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         victoryMenu.SetActive(true);
+        overlayCanvas.SetActive(false);
 
-        //randomly select inventory item
-        int randomlySelect = Random.Range(0, InventoryPool.Length);
-
-        if (gameManager.GetComponent<GameManager>().playerInventory.Contains(InventoryPool[randomlySelect]))
+        if (hasFled)
         {
-            InventoryPool[randomlySelect].playerStock += 1;
+            victoryMenuText.text = "Escaped";
         }
 
         else
-            gameManager.GetComponent<GameManager>().playerInventory.Add(InventoryPool[randomlySelect]);
+        {
+            //randomly select inventory item
+            int randomlySelect = Random.Range(0, InventoryPool.Length);
 
-        //add to inventory
-        string split = InventoryPool[randomlySelect].ToString();
+            if (gameManager.GetComponent<GameManager>().playerInventory.Contains(InventoryPool[randomlySelect]))
+            {
+                InventoryPool[randomlySelect].playerStock += 1;
+            }
 
-        split = split.Replace("(Expendable)", "");
+            else
+                gameManager.GetComponent<GameManager>().playerInventory.Add(InventoryPool[randomlySelect]);
 
-        //display item
-        victoryItemText.text = split;
+            //add to inventory
+            string split = InventoryPool[randomlySelect].ToString();
 
-        GameManager.shinyThings += victoryCurrency;
-        print(GameManager.shinyThings);
-        victoryCurrencyText.text = victoryCurrency.ToString("F0");
+            split = split.Replace("(Expendable)", "");
+
+            //display item
+            victoryItemText.text = split;
+
+            GameManager.shinyThings += victoryCurrency;
+            print(GameManager.shinyThings);
+            victoryCurrencyText.text = victoryCurrency.ToString("F0");
+        }
     }
 
     //This clears any leftover data from GameManager picked up from 'RoamingMonster.cs' or weird data from the fight
