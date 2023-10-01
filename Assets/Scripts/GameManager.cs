@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         colorsInParty.Clear();
         colorsNotInParty.Clear();
 
-        //Remove this before final build
+        //Remove this before final build - second thought - keep this in, players can change this, but we'll start with 4
         inCurrentParty.Add("Dani");
         inCurrentParty.Add("Erebus");
         inCurrentParty.Add("Theo");

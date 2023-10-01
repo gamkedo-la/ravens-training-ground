@@ -124,6 +124,6 @@ public class Pause : MonoBehaviour
     public void QuitGame()
     {
         UnFreezeGame();
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Floor0");
     }
 }
